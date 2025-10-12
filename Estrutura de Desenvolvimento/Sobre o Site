@@ -1,0 +1,184 @@
+# 🎨 BRIEFING DE IDENTIDADE VISUAL - PRIME SDR
+
+---
+
+## 📋 NOME E TAGLINE
+
+**Nome:** Prime SDR  
+**Tagline sugerido:** *LinkedIn que converte em reuniões.*  
+**Tagline alternativo:** *Prospecção B2B previsível.*
+
+---
+
+## 🎨 PALETA DE CORES
+
+### **Cores Primárias:**
+- **Azul Prime** (#0066CC / RGB 0, 102, 204)
+  - Uso: Logo, CTAs principais, destaques, ícones
+  - Representa: Confiança, tecnologia, profissionalismo (alinhado ao LinkedIn)
+
+- **Branco** (#FFFFFF)
+  - Uso: Fundos principais, textos em fundos escuros, logo negativa
+  - Representa: Clareza, simplicidade, espaço
+
+### **Cores Secundárias:**
+- **Azul Claro** (#4D94FF / RGB 77, 148, 255)
+  - Uso: Hovers, gradientes, elementos secundários
+  
+- **Cinza Escuro** (#1A1A1A / RGB 26, 26, 26)
+  - Uso: Textos principais, fundos alternativos
+  
+- **Cinza Médio** (#808080 / RGB 128, 128, 128)
+  - Uso: Textos secundários, labels, bordas
+
+### **Cores de Ação:**
+- **Verde Sucesso** (#00CC6A / RGB 0, 204, 106)
+  - Uso: Badges de prova ("MAIS ESCOLHIDO"), métricas positivas, checkmarks
+  
+- **Vermelho Alerta** (#FF3366 / RGB 255, 51, 102)
+  - Uso: Urgência, escassez (raramente usado)
+
+---
+
+## 🔤 TIPOGRAFIA
+
+### **Primária (Títulos/Headlines):**
+**Inter Bold/Black** ou **Poppins Bold**  
+- Peso: 700–900
+- Uso: H1, H2, números grandes, CTAs
+- Características: Moderna, geométrica, alta legibilidade
+
+### **Secundária (Corpo de texto):**
+**Inter Regular/Medium** ou **Poppins Regular**  
+- Peso: 400–500
+- Uso: Parágrafos, bullets, labels
+- Características: Clean, espaçamento confortável, web-safe
+
+### **Hierarquia de tamanhos:**
+- H1: 48–64px (Hero)
+- H2: 36–48px (Seções)
+- H3: 24–32px (Cards)
+- Body: 16–18px (Leitura confortável)
+- Small: 14px (Labels, footnotes)
+
+---
+
+## 🎯 LOGO - APLICAÇÕES
+
+### **Versão Principal:**
+Ícone (círculos conectados em azul) + Logotipo "PrimeSDR" (texto preto/branco)
+
+### **Variações:**
+1. **Horizontal** (para header/menu): Ícone à esquerda + texto à direita
+2. **Vertical** (para mobile/redes sociais): Ícone acima + texto abaixo
+3. **Negativa** (fundo azul): Ícone branco + texto branco
+4. **Monocromática** (fundo branco): Ícone azul + texto preto
+
+### **Área de Respiro:**
+Mínimo 20px de espaço ao redor da logo em todas as direções
+
+### **Tamanho Mínimo:**
+- Web: 120px de largura (horizontal)
+- Mobile: 80px de largura
+- Favicon: 32x32px (apenas o ícone)
+
+---
+
+## 🎨 ELEMENTOS VISUAIS
+
+### **Ícone da marca:**
+- **Conceito:** Círculos conectados (representam rede, conexões, LinkedIn, automação)
+- **Estilo:** Geométrico, moderno, tech
+- **Uso:** Sozinho em favicons, app icons, redes sociais
+
+### **Padrões gráficos:**
+- **Gradientes sutis:** Azul Prime → Azul Claro (botões, cards em destaque)
+- **Sombras:** Sutis, difusas (0 4px 12px rgba(0,102,204,0.15))
+- **Bordas:** Arredondadas (8–16px border-radius)
+- **Linhas:** Finas (1–2px), pontilhadas para separadores
+
+### **Ilustrações/Ícones:**
+- **Estilo:** Line icons, minimalistas
+- **Biblioteca sugerida:** Lucide Icons, Heroicons
+- **Cor:** Azul Prime ou Cinza Médio
+
+---
+
+## 📱 APLICAÇÕES
+
+### **Website:**
+- Fundo branco predominante
+- Cards com fundo cinza claro (#F5F5F5)
+- CTAs em Azul Prime com hover em Azul Claro
+- Seções alternadas (branco/cinza claro) para quebrar monotonia
+
+### **Redes Sociais:**
+- **LinkedIn:** Logo branca sobre fundo azul (alinhado ao branding LinkedIn)
+- **Instagram (se houver):** Cards quadrados com fundo branco + azul como destaque
+- **Posts:** Templates com logo no canto + gradiente azul sutil
+
+### **Materiais:**
+- **PDFs/Playbooks:** Header azul + corpo branco
+- **Slides:** Fundo branco com elementos em azul
+- **E-mail signature:** Logo pequena + texto azul para links
+
+---
+
+## 🔍 SEO & ACESSIBILIDADE
+
+### **Alt text padrão para logo:**
+"Prime SDR - Prospecção B2B automatizada com LinkedIn + IA"
+
+### **Meta description padrão:**
+"Prime SDR transforma LinkedIn em motor de reuniões previsíveis. 112 reuniões em 45 dias com automação + IA + SDR humano. Teste 90 dias sem risco."
+
+### **Contraste (WCAG AA):**
+- ✅ Azul Prime (#0066CC) sobre branco: 4.8:1 (aprovado)
+- ✅ Cinza Escuro (#1A1A1A) sobre branco: 16.7:1 (excelente)
+- ✅ Branco sobre Azul Prime: 4.8:1 (aprovado)
+
+### **Keywords visuais (para alt text de imagens):**
+- "Dashboard Prime SDR métricas LinkedIn"
+- "Reuniões agendadas prospecção B2B"
+- "Pipeline gerado LinkedIn automação"
+- "Sequência de mensagens LinkedIn personalizada"
+
+---
+
+## 🎯 TOM VISUAL (Brand Personality)
+
+**Palavras-chave:**
+- **Confiável** (não é só mais uma ferramenta)
+- **Tech/Moderno** (IA, automação, mas não robótico)
+- **Profissional** (B2B, sério, sem exageros)
+- **Acessível** (não intimida, convida a testar)
+- **Orientado a Resultado** (números grandes, provas visuais)
+
+**O que evitar:**
+- ❌ Gradientes exagerados (muito 2010)
+- ❌ Sombras pesadas (parece amador)
+- ❌ Muitas cores competindo (mantém paleta enxuta)
+- ❌ Ilustrações infantis (público é decisor B2B)
+- ❌ Animações excessivas (distrai do conteúdo)
+
+---
+
+## 📦 CHECKLIST DE CONSISTÊNCIA
+
+Antes de publicar qualquer material, verificar:
+- [ ] Logo na versão correta (horizontal/vertical, cor certa pro fundo)
+- [ ] Paleta de cores respeitada (sem tons fora da marca)
+- [ ] Tipografia consistente (Inter/Poppins, pesos corretos)
+- [ ] CTAs sempre em Azul Prime
+- [ ] Espaçamento adequado (não apertado)
+- [ ] Contraste acessível (textos legíveis)
+- [ ] Imagens com alt text otimizado
+
+---
+
+## 🚀 RESUMO EXECUTIVO (1 parágrafo)
+
+A identidade visual da Prime SDR comunica **confiança tecnológica com resultado tangível**. O azul primário (#0066CC) ancora a marca no universo LinkedIn enquanto transmite profissionalismo B2B. A logo (círculos conectados) representa rede e automação inteligente. Tipografia moderna (Inter/Poppins), cantos arredondados e sombras sutis criam uma estética tech-friendly sem ser fria. Verde para provas sociais (#00CC6A) e gradientes discretos adicionam dinamismo sem comprometer seriedade. O resultado: uma marca que parece **robusta o suficiente pra confiar, mas acessível o suficiente pra testar**.
+
+---
+
