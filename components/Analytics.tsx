@@ -35,7 +35,7 @@ export function Analytics() {
       {/* Consent Mode v2 */}
       <Script
         id="consent-mode"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -91,6 +91,7 @@ declare global {
     dataLayer: any[];
   }
 }
+
 
 
 

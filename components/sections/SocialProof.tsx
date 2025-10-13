@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
@@ -73,9 +74,11 @@ function LogoCarousel() {
               whileHover={{ scale: 1.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <img
+              <Image
                 src={logo.src}
                 alt={logo.name}
+                width={96}
+                height={96}
                 className="h-24 w-auto transition-all duration-300 hover:drop-shadow-xl"
               />
             </motion.div>
