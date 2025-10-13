@@ -12,8 +12,7 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "analyze": "ANALYZE=true next build",
-    "clean": "rm -rf .next out",
-    "postbuild": "next-sitemap"
+    "clean": "rm -rf .next out"
   },
   "dependencies": {
     "next": "14.0.4",
