@@ -265,7 +265,7 @@ export function TermsOfUsePage() {
             <h4 className="text-lg font-semibold text-gray-900 mb-3">7.1. Cancelamento pelo cliente:</h4>
             <p className="mb-3">Você pode cancelar sua assinatura a qualquer momento através de:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Painel da plataforma (área "Configurações" > "Cancelar assinatura").</li>
+              <li>Painel da plataforma (área "Configurações" {'>'} "Cancelar assinatura").</li>
               <li>Email: contato@primesdr.com.</li>
               <li>WhatsApp: +55 11 94502-2847.</li>
             </ul>

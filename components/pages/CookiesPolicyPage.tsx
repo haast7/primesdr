@@ -461,7 +461,7 @@ export function CookiesPolicyPage() {
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h5 className="font-semibold text-gray-900 mb-2">Google Chrome:</h5>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
-                  <li>Configurações > Privacidade e segurança > Cookies e outros dados do site</li>
+                  <li>Configurações {'>'} Privacidade e segurança {'>'} Cookies e outros dados do site</li>
                   <li>Escolha "Bloquear cookies de terceiros" ou "Bloquear todos os cookies"</li>
                 </ol>
               </div>
