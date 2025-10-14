@@ -469,7 +469,7 @@ export function CookiesPolicyPage() {
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h5 className="font-semibold text-gray-900 mb-2">Mozilla Firefox:</h5>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
-                  <li>Configurações > Privacidade e Segurança > Cookies e dados de sites</li>
+                  <li>Configurações &gt; Privacidade e Segurança &gt; Cookies e dados de sites</li>
                   <li>Escolha o nível de bloqueio desejado</li>
                 </ol>
               </div>
@@ -477,7 +477,7 @@ export function CookiesPolicyPage() {
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h5 className="font-semibold text-gray-900 mb-2">Safari (Mac/iOS):</h5>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
-                  <li>Preferências > Privacidade</li>
+                  <li>Preferências &gt; Privacidade</li>
                   <li>Marque "Bloquear todos os cookies"</li>
                 </ol>
               </div>
@@ -485,7 +485,7 @@ export function CookiesPolicyPage() {
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h5 className="font-semibold text-gray-900 mb-2">Microsoft Edge:</h5>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
-                  <li>Configurações > Cookies e permissões do site</li>
+                  <li>Configurações &gt; Cookies e permissões do site</li>
                   <li>Escolha "Bloquear cookies de terceiros"</li>
                 </ol>
               </div>
