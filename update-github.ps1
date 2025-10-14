@@ -25,13 +25,19 @@ if ($changes.Count -eq 0) {
 }
 
 # Fazer commit com mensagem descritiva
-$commitMessage = "feat: Update project with new pages and components
+$commitMessage = "feat: Add complete Resources page with interactive tools and content
 
-- Add Contact, Privacy Policy, Terms of Use, Cookies Policy, and About pages
-- Update components with improved styling and functionality
-- Add new UI components and forms
-- Update .gitignore to exclude Copy do Site and Estrutura de Desenvolvimento folders
-- Improve project structure and organization"
+- Add comprehensive Resources page (/recursos) with hero, search, and filters
+- Add interactive tools: ROI Calculator, Profile Analyzer, Headline Generator, Quiz
+- Add Guides & Playbooks section with downloadable PDFs
+- Add Videos & Webinars section with educational content
+- Add Success Cases section with real metrics and testimonials
+- Add Comparisons section (SDR Internal vs Prime SDR vs Agency)
+- Add Prospecting Glossary with 20+ terms and search functionality
+- Remove templates section as requested
+- Update i18n system with resources translations
+- Add .gitignore to exclude system files
+- Update sitemap with resources page"
 
 Write-Host "💾 Fazendo commit das alterações..." -ForegroundColor Cyan
 git commit -m $commitMessage
@@ -61,6 +67,8 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 Write-Host "🏁 Processo concluído!" -ForegroundColor Green
+
+
 
 
 

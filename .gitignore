@@ -7,8 +7,8 @@ yarn-error.log*
 # Production builds
 .next/
 out/
-build/
 dist/
+build/
 
 # Environment variables
 .env
@@ -89,6 +89,20 @@ jspm_packages/
 tmp/
 temp/
 
-# Project specific folders
-Copy do Site/
-Estrutura de Desenvolvimento/
+# System files
+AppData/
+.cache/
+.config/
+.cursor/
+.ssh/
+.windsurf/
+Downloads/
+Favorites/
+Links/
+Music/
+OneDrive/
+Saved Games/
+Searches/
+Videos/
+ntuser.dat*
+*.ini

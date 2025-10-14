@@ -11,7 +11,6 @@ export interface Translations {
   // Navigation
   nav: {
     howItWorks: string;
-    cases: string;
     pricing: string;
     resources: string;
   };
@@ -164,6 +163,101 @@ export interface Translations {
     };
   };
 
+  // Resources
+  resources: {
+    hero: {
+      title: string;
+      subtitle: string;
+      searchPlaceholder: string;
+    };
+    filters: {
+      all: string;
+      tools: string;
+      guides: string;
+      videos: string;
+      cases: string;
+    };
+    tools: {
+      roiCalculator: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      profileAnalyzer: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      headlineGenerator: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      qualificationQuiz: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+    };
+    guides: {
+      completePlaybook: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      fatalErrors: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      decisionMakers: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+    };
+    videos: {
+      webinar100Meetings: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      fiveMessages: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      behindScenes: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+    };
+    cases: {
+      saasCase: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      agencyCase: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+      techCase: {
+        title: string;
+        description: string;
+        cta: string;
+      };
+    };
+    finalCta: {
+      title: string;
+      subtitle: string;
+      primaryCta: string;
+      secondaryCta: string;
+    };
+  };
+
   // Footer
   footer: {
     company: {
@@ -193,7 +287,6 @@ export const translations: Record<Language, Translations> = {
     },
     nav: {
       howItWorks: 'Como Funciona',
-      cases: 'Cases',
       pricing: 'Preços',
       resources: 'Recursos'
     },
@@ -479,6 +572,99 @@ export const translations: Record<Language, Translations> = {
         submit: 'Agendar reunião'
       }
     },
+    resources: {
+      hero: {
+        title: 'Aprenda a dominar prospecção B2B no LinkedIn.',
+        subtitle: 'Ferramentas gratuitas, playbooks testados e casos reais. Tudo o que você precisa para encher sua agenda de reuniões qualificadas.',
+        searchPlaceholder: 'Buscar recursos... ex: "sequência de mensagens", "taxa de conversão"'
+      },
+      filters: {
+        all: 'Todos',
+        tools: 'Ferramentas',
+        guides: 'Guias',
+        videos: 'Vídeos',
+        cases: 'Cases'
+      },
+      tools: {
+        roiCalculator: {
+          title: 'Calculadora de ROI de Prospecção',
+          description: 'Descubra quantas reuniões e quanto pipeline você pode gerar investindo em prospecção no LinkedIn.',
+          cta: 'Calcular meu ROI'
+        },
+        profileAnalyzer: {
+          title: 'Analisador de Perfil LinkedIn',
+          description: 'Cole a URL do seu perfil e receba análise instantânea com pontos de melhoria.',
+          cta: 'Analisar meu perfil'
+        },
+        headlineGenerator: {
+          title: 'Gerador de Headline de LinkedIn',
+          description: 'Responda 3 perguntas e receba 5 opções de headline testadas.',
+          cta: 'Gerar minha headline'
+        },
+        qualificationQuiz: {
+          title: 'Quiz de Qualificação',
+          description: '5 perguntas, 60 segundos, resultado personalizado com plano de ação.',
+          cta: 'Fazer o quiz'
+        }
+      },
+      guides: {
+        completePlaybook: {
+          title: 'O Playbook Completo de Prospecção no LinkedIn (2025)',
+          description: 'Método passo a passo para gerar 100+ reuniões/mês usando LinkedIn. ICP, mensagens, cadências, métricas e automação segura.',
+          cta: 'Baixar guia grátis'
+        },
+        fatalErrors: {
+          title: '7 Erros Fatais que Matam Sua Taxa de Resposta no LinkedIn',
+          description: 'Descubra os erros mais comuns (e como corrigi-los) que fazem decisores ignorarem suas mensagens.',
+          cta: 'Baixar checklist'
+        },
+        decisionMakers: {
+          title: 'Como Acessar Decisores que Não Atendem Cold Call',
+          description: 'CEOs, Diretores e VPs não atendem telefone. Mas eles respondem no LinkedIn — se você souber como.',
+          cta: 'Baixar guia'
+        }
+      },
+      videos: {
+        webinar100Meetings: {
+          title: 'Como Gerar 100+ Reuniões/Mês no LinkedIn (sem ser chato)',
+          description: 'Método completo (ICP → mensagem → follow-up) com demonstração ao vivo da plataforma.',
+          cta: 'Assistir agora'
+        },
+        fiveMessages: {
+          title: '5 Mensagens que Decisores SEMPRE Respondem',
+          description: 'Análise de mensagens com maior taxa de resposta e por que funcionam.',
+          cta: 'Assistir'
+        },
+        behindScenes: {
+          title: 'Bastidores: Como Geramos R$ 6,3M em Pipeline em 60 Dias',
+          description: 'Case real com métricas, estratégias e lições aprendidas.',
+          cta: 'Assistir'
+        }
+      },
+      cases: {
+        saasCase: {
+          title: 'SaaS B2B → R$ 6,3M em pipeline (60 dias)',
+          description: 'Como transformamos o LinkedIn em máquina de leads para uma SaaS de gestão.',
+          cta: 'Ver case completo'
+        },
+        agencyCase: {
+          title: 'Agência → 403 leads em 90 dias',
+          description: 'Estratégia de prospecção para agência de marketing digital.',
+          cta: 'Ver case completo'
+        },
+        techCase: {
+          title: 'Tech → 87 reuniões em 30 dias',
+          description: 'Prospecção para empresa de tecnologia com ticket alto.',
+          cta: 'Ver case completo'
+        }
+      },
+      finalCta: {
+        title: 'Pronto para colocar em prática?',
+        subtitle: 'Você tem o conhecimento. Agora falta a execução. A Prime SDR faz isso por você.',
+        primaryCta: 'Agendar demonstração (15 min)',
+        secondaryCta: 'Testar 30 dias sem risco'
+      }
+    },
     footer: {
       company: {
         title: 'Prime SDR',
@@ -505,7 +691,6 @@ export const translations: Record<Language, Translations> = {
     },
     nav: {
       howItWorks: 'Cómo funciona',
-      cases: 'Casos',
       pricing: 'Precios',
       resources: 'Recursos'
     },
@@ -817,7 +1002,6 @@ export const translations: Record<Language, Translations> = {
     },
     nav: {
       howItWorks: 'How It Works',
-      cases: 'Cases',
       pricing: 'Pricing',
       resources: 'Resources'
     },

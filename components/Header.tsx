@@ -39,7 +39,6 @@ export function Header() {
 
   const navigation = [
     { name: t.nav.howItWorks, href: '/como-funciona' },
-    { name: t.nav.cases, href: '/cases' },
     { name: t.nav.pricing, href: '/precos' },
     { name: t.nav.resources, href: '/recursos' },
   ];
