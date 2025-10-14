@@ -55,7 +55,7 @@ export function Pricing() {
         '7 dias grátis'
       ],
       idealFor: 'Fundadores e pequenos times testando prospecção sistemática',
-      proof: 'Payback em 18 dias. ROI de 2.143% em 60 dias.',
+      proof: 'Payback no primeiro mês. Ou reembolso integral.',
       cta: {
         primary: 'Começar teste grátis',
         secondary: 'Falar com especialista'
@@ -83,7 +83,7 @@ export function Pricing() {
         'Onboarding guiado (7 dias)'
       ],
       idealFor: 'Operações comerciais que precisam encher agenda todo mês',
-      proof: 'Cliente com 6 usuários: 112 reuniões em 45 dias, R$ 6,3M em pipeline',
+      proof: 'Cliente agência: R$ 480k em pipeline, 8 clientes, ticket R$ 5k/mês',
       cta: {
         primary: 'Começar teste grátis',
         secondary: 'Ver cases do meu segmento'
@@ -189,7 +189,7 @@ export function Pricing() {
               <span className={`text-lg font-semibold transition-colors ${billingCycle === 'yearly' ? 'text-gray-900' : 'text-gray-400'}`}>
                 {t.pricing.toggle.annual}
                 <span className="ml-2 text-sm bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full font-medium">
-                  -25%
+                  -20%
                 </span>
               </span>
             </div>

@@ -165,8 +165,7 @@ export function CaseStudy() {
                   Como conseguimos isso?
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  <span className="font-semibold text-gray-900">Linkedin + Automação + SDR.</span> Cadência configurada, 
-                  Automação roda 24/7, SDR real entra quando o lead responde e agenda no seu CRM.
+                  <span className="font-semibold text-gray-900">Você monta, a gente executa ➡️ SDR fecha.</span> Você configura a cadência (mensagens, timing, ações). Nossa automação roda 24/7 com precisão. Lead respondeu? Pausa automática e SDR humano qualifica e agenda no seu CRM.
                 </p>
               </div>
 

@@ -40,7 +40,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: 'E se não funcionar?',
-    answer: '30 dias de teste. Sem ROAS (Retorno sobre o Investimento em Mídia Paga)? Reembolso integral. Simples assim.'
+    answer: '30 dias de teste. Sem ROI (Retorno sobre o Investimento)? Reembolso integral. Simples assim.'
   },
   {
     question: 'Preciso de Sales Navigator?',
@@ -56,7 +56,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: 'O que acontece se alguém reclamar de spam?',
-    answer: 'Raramente acontece (taxa <0,1%), mas se acontecer, pausamos a campanha e ajustamos a abordagem. Além disso, sempre que alguém responde ainda que de forma negativa, a cadência é pausada automaticamente.'
+    answer: 'Raramente acontece (taxa  de 0,1%), mas se acontecer, pausamos a campanha e ajustamos a abordagem. Além disso, sempre que alguém responde ainda que de forma negativa, a cadência é pausada automaticamente.'
   }
 ];
 
@@ -147,24 +147,7 @@ export function FAQ() {
 
           {/* Additional Help */}
           <motion.div variants={fadeInUp} className="text-center">
-            <Card className="bg-primary-50 border-primary-200 max-w-2xl mx-auto">
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-gray-900">
-                  Ainda tem dúvidas?
-                </h3>
-                <p className="text-gray-600">
-                  Nossa equipe está pronta para esclarecer qualquer questão sobre nossa operação
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="px-6 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors">
-                    Falar com especialista
-                  </button>
-                  <button className="px-6 py-3 bg-white text-primary-600 border border-primary-200 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
-                    Agendar demonstração
-                  </button>
-                </div>
-              </div>
-            </Card>
+            
           </motion.div>
         </motion.div>
       </Container>

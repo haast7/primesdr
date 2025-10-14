@@ -76,7 +76,7 @@ export function Guarantee() {
               Garantia Brutal
             </div>
             <h2 className="text-display font-bold text-gray-900 mb-6">
-              Teste 30 dias. Se não tiver ROAS, você não paga nada.
+              Teste 30 dias. Se não tiver ROI, você não paga nada.
             </h2>
             <p className="text-body text-gray-600 leading-relaxed">
               Por que fazemos isso? Porque sabemos que funciona. E se não funcionar pra você, 

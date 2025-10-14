@@ -10,6 +10,7 @@ const footerLinks = {
     { name: 'Contato', href: '/contato' },
     { name: 'Termos de Uso', href: '/termos' },
     { name: 'Política de Privacidade', href: '/privacidade' },
+    { name: 'Cookies', href: '/cookies' },
   ],
   recursos: [
     { name: 'Blog', href: '/blog' },
@@ -45,7 +46,7 @@ export function Footer() {
                 Automação inteligente + SDR humano = resultados garantidos.
               </p>
               <Button size="sm" className="bg-primary-600 hover:bg-primary-700">
-                Teste 90 dias sem risco
+                Teste 30 dias sem risco
               </Button>
             </div>
 
@@ -117,7 +118,7 @@ export function Footer() {
               © {new Date().getFullYear()} Prime SDR. Todos os direitos reservados.
             </div>
             <div className="text-sm text-gray-400">
-              CNPJ: 00.000.000/0001-00
+              CNPJ: 60.782.822/0001-01
             </div>
           </div>
         </div>
@@ -125,6 +126,8 @@ export function Footer() {
     </footer>
   );
 }
+
+
 
 
 

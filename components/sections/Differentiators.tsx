@@ -72,7 +72,7 @@ export function Differentiators() {
     {
       icon: Shield,
       title: 'Garantia total',
-      description: '30 dias de teste. Sem ROAS? Reembolso integral.'
+      description: '30 dias de teste. Sem ROI? Reembolso integral.'
     }
   ];
 

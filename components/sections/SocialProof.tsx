@@ -174,7 +174,7 @@ export function SocialProof() {
               Empresas reais enchendo suas agendas com o Prime SDR agora.
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Mais de 2.000 perfis ativos gerando reuniões todos os dias — de startups a grandes corporações.
+              Mais de 2.000 perfis ativos gerando reuniões todos os dias, de startups a grandes corporações.
             </p>
           </motion.div>
 
