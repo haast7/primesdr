@@ -9,10 +9,11 @@ import { GoogleAnalytics } from './tracking/GoogleAnalytics';
 import { AutoTracking } from './tracking/AutoTracking';
 import { WhatsAppTracking } from './tracking/WhatsAppTracking';
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-N7FSD6VV';
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '1831229621093127';
-const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || 'AW-17655843732';
-const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || 'G-LT6R7TDXHW';
+// IDs fixos para garantir funcionamento no Vercel
+const GTM_ID = 'GTM-N7FSD6VV';
+const META_PIXEL_ID = '1831229621093127';
+const GOOGLE_ADS_ID = 'AW-17655843732';
+const GA4_ID = 'G-LT6R7TDXHW';
 
 export function Analytics() {
   const { consent } = useCookieConsent();

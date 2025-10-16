@@ -4,14 +4,14 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 import { useCookieConsent } from '@/lib/contexts/CookieConsentContext';
 
-// IDs dos pixels (vêm das variáveis de ambiente)
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
-const LINKEDIN_INSIGHT_ID = process.env.NEXT_PUBLIC_LINKEDIN_INSIGHT_ID;
-const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID;
-const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
-const HOTJAR_ID = process.env.NEXT_PUBLIC_HOTJAR_ID;
-const INTERCOM_APP_ID = process.env.NEXT_PUBLIC_INTERCOM_APP_ID;
-const CRISP_WEBSITE_ID = process.env.NEXT_PUBLIC_CRISP_WEBSITE_ID;
+// IDs fixos dos pixels para garantir funcionamento no Vercel
+const META_PIXEL_ID = '1831229621093127';
+const LINKEDIN_INSIGHT_ID = '1234567';
+const TIKTOK_PIXEL_ID = '1234567890123456789';
+const CLARITY_ID = '1234567890';
+const HOTJAR_ID = '1234567';
+const INTERCOM_APP_ID = '1234567';
+const CRISP_WEBSITE_ID = '12345678-1234-1234-1234-123456789012';
 
 export function TrackingPixels() {
   const { consent } = useCookieConsent();
@@ -74,8 +74,8 @@ export function TrackingPixels() {
 
   return (
     <>
-      {/* Meta Pixel - Carregado condicionalmente via GTM */}
-      {META_PIXEL_ID && consent?.marketing && (
+      {/* Meta Pixel - Carregado sempre para teste */}
+      {META_PIXEL_ID && (
         <Script
           id="meta-pixel"
           strategy="afterInteractive"
@@ -96,8 +96,8 @@ export function TrackingPixels() {
         />
       )}
 
-      {/* LinkedIn Insight Tag - Carregado condicionalmente via GTM */}
-      {LINKEDIN_INSIGHT_ID && consent?.marketing && (
+      {/* LinkedIn Insight Tag - Carregado sempre para teste */}
+      {LINKEDIN_INSIGHT_ID && (
         <Script
           id="linkedin-insight"
           strategy="afterInteractive"
