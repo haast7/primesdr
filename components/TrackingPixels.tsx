@@ -16,13 +16,7 @@ const CRISP_WEBSITE_ID = '12345678-1234-1234-1234-123456789012';
 export function TrackingPixels() {
   const { consent } = useCookieConsent();
 
-  // Meta Pixel (Facebook/Instagram)
-  useEffect(() => {
-    if (META_PIXEL_ID && consent?.marketing && typeof window !== 'undefined') {
-      // Meta Pixel já é carregado via GTM, mas podemos adicionar lógica adicional aqui se necessário
-      console.log('Meta Pixel ativado');
-    }
-  }, [consent?.marketing]);
+  // Meta Pixel - Removido (já carregado no Analytics)
 
   // LinkedIn Insight Tag
   useEffect(() => {

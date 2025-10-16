@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
-import { MessageCircle } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
 
 interface WhatsAppButtonProps {
@@ -50,7 +50,14 @@ export function WhatsAppButton({
       `}
       aria-label="Falar no WhatsApp"
     >
-      <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+      <Image
+        src="/icons/whatsapp.png"
+        alt="WhatsApp"
+        width={24}
+        height={24}
+        className="w-6 h-6 group-hover:scale-110 transition-transform duration-200"
+        unoptimized
+      />
       
       {/* Tooltip */}
       <div className="absolute right-16 top-1/2 transform -translate-y-1/2 
