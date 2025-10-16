@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
 import { trackEvent } from '@/components/Analytics';
 
 interface WhatsAppButtonProps {
@@ -34,30 +33,29 @@ export function WhatsAppButton({
   };
 
   return (
-    <Button
-      onClick={handleWhatsAppClick}
-      className={`
-        fixed bottom-6 right-6 z-50 
-        bg-green-500 hover:bg-green-600 
-        text-white 
-        rounded-full 
-        w-14 h-14 
-        shadow-lg hover:shadow-xl 
-        transition-all duration-300 
-        flex items-center justify-center
-        group
-        ${className}
-      `}
-      aria-label="Falar no WhatsApp"
-    >
-      <Image
-        src="/icons/whatsapp.png"
-        alt="WhatsApp"
-        width={24}
-        height={24}
-        className="w-6 h-6 group-hover:scale-110 transition-transform duration-200"
-        unoptimized
-      />
+    <div className="fixed bottom-6 right-6 z-50 group">
+      <button
+        onClick={handleWhatsAppClick}
+        className="
+          w-14 h-14 
+          rounded-full 
+          shadow-lg hover:shadow-xl 
+          transition-all duration-300 
+          hover:scale-110
+          focus:outline-none focus:ring-4 focus:ring-green-300
+          cursor-pointer
+        "
+        aria-label="Falar no WhatsApp"
+      >
+        <Image
+          src="/icons/whatsapp.png"
+          alt="WhatsApp"
+          width={56}
+          height={56}
+          className="w-full h-full rounded-full object-cover"
+          unoptimized
+        />
+      </button>
       
       {/* Tooltip */}
       <div className="absolute right-16 top-1/2 transform -translate-y-1/2 
@@ -69,6 +67,6 @@ export function WhatsAppButton({
                         w-0 h-0 border-l-4 border-l-gray-900 border-t-4 border-t-transparent 
                         border-b-4 border-b-transparent"></div>
       </div>
-    </Button>
+    </div>
   );
 }
