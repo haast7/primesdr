@@ -5,6 +5,10 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Analytics } from '@/components/Analytics';
 import { LanguageProvider } from '@/lib/contexts/LanguageContext';
+import { TypeformProvider } from '@/components/TypeformProvider';
+import { CookieConsentProvider } from '@/lib/contexts/CookieConsentContext';
+import { CookieBanner } from '@/components/CookieBanner';
+import { TrackingPixels } from '@/components/TrackingPixels';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -88,14 +92,20 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <LanguageProvider>
-          <Analytics />
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </LanguageProvider>
+        <CookieConsentProvider>
+          <LanguageProvider>
+            <TypeformProvider>
+              <Analytics />
+              <TrackingPixels />
+              <Header />
+              <main className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+              <CookieBanner />
+            </TypeformProvider>
+          </LanguageProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );

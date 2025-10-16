@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
-import { Shield, Mail, Phone, MapPin, Clock, FileText, Users, Lock, Eye, Database, Globe, AlertCircle } from 'lucide-react';
+import { Shield, Mail, Phone, MapPin, Clock, FileText, Users, Lock, Eye, Database, Globe, AlertCircle, BarChart3, Target, Settings } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -155,8 +155,110 @@ export function PrivacyPolicyPage() {
       )
     },
     {
+      id: 'tracking-cookies',
+      title: '5. TRACKING, COOKIES E TECNOLOGIAS SIMILARES',
+      icon: BarChart3,
+      content: (
+        <div className="space-y-6">
+          <p>
+            Utilizamos cookies, pixels de rastreamento e outras tecnologias similares para melhorar sua experiência, 
+            analisar o uso do site e personalizar conteúdo e anúncios.
+          </p>
+          
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">5.1. Cookies essenciais:</h4>
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <li><strong>Funcionamento do site:</strong> Sessão de login, segurança, preferências básicas.</li>
+              <li><strong>Base legal:</strong> Legítimo interesse (Art. 7º, IX da LGPD).</li>
+              <li><strong>Retenção:</strong> Durante a sessão ou conforme necessário para funcionalidade.</li>
+            </ul>
+            <div className="mt-3 p-3 bg-red-50 border-l-4 border-red-500 rounded">
+              <p className="text-red-800">
+                <strong>Estes cookies são obrigatórios e não podem ser desativados.</strong>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">5.2. Cookies de análise:</h4>
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <li><strong>Google Analytics:</strong> Métricas de tráfego, comportamento de usuários, origem do tráfego.</li>
+              <li><strong>Microsoft Clarity:</strong> Mapas de calor, gravações de sessão (anonimizadas).</li>
+              <li><strong>Hotjar:</strong> Análise de comportamento e feedback de usuários.</li>
+              <li><strong>Base legal:</strong> Consentimento (Art. 7º, I da LGPD).</li>
+              <li><strong>Retenção:</strong> Até 2 anos ou conforme política do provedor.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">5.3. Cookies de marketing:</h4>
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <li><strong>Meta Pixel (Facebook/Instagram):</strong> Rastreamento de conversões, remarketing.</li>
+              <li><strong>Google Ads:</strong> Remarketing, medição de campanhas publicitárias.</li>
+              <li><strong>LinkedIn Insight Tag:</strong> Análise de conversões B2B, remarketing.</li>
+              <li><strong>TikTok Pixel:</strong> Rastreamento de conversões em campanhas.</li>
+              <li><strong>Base legal:</strong> Consentimento (Art. 7º, I da LGPD).</li>
+              <li><strong>Retenção:</strong> Até 13 meses ou conforme política do provedor.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">5.4. Cookies funcionais:</h4>
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <li><strong>Chat de suporte:</strong> Intercom, Crisp (lembrar conversas anteriores).</li>
+              <li><strong>Preferências:</strong> Configurações de conta, preferências de visualização.</li>
+              <li><strong>Base legal:</strong> Consentimento (Art. 7º, I da LGPD).</li>
+              <li><strong>Retenção:</strong> Até 6 meses ou conforme necessário.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">5.5. Dados coletados via tracking:</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h5 className="font-semibold text-blue-900 mb-2">Dados técnicos:</h5>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>• Endereço IP (anonimizado)</li>
+                  <li>• User Agent (navegador/dispositivo)</li>
+                  <li>• Páginas visitadas</li>
+                  <li>• Tempo de permanência</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h5 className="font-semibold text-green-900 mb-2">Dados comportamentais:</h5>
+                <ul className="text-sm text-green-800 space-y-1">
+                  <li>• Cliques e interações</li>
+                  <li>• Scroll e movimento do mouse</li>
+                  <li>• Formulários preenchidos</li>
+                  <li>• Downloads realizados</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">5.6. Gerenciamento de consentimento:</h4>
+            <p className="mb-3">Você pode gerenciar suas preferências de cookies:</p>
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <li><strong>Banner de consentimento:</strong> Aparece na primeira visita ao site.</li>
+              <li><strong>Configurações granulares:</strong> Escolha quais categorias aceitar.</li>
+              <li><strong>Alteração posterior:</strong> Acesse nossa <a href="/cookies" className="text-primary-600 hover:text-primary-700 underline">Política de Cookies</a>.</li>
+              <li><strong>Navegador:</strong> Configure diretamente nas configurações do seu navegador.</li>
+            </ul>
+          </div>
+
+          <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+            <p className="text-yellow-800">
+              <strong>Importante:</strong> Desativar cookies não essenciais pode afetar algumas funcionalidades do site. 
+              Cookies essenciais são sempre necessários para o funcionamento básico.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
       id: 'base-legal',
-      title: '5. BASE LEGAL PARA O TRATAMENTO',
+      title: '6. BASE LEGAL PARA O TRATAMENTO',
       icon: Shield,
       content: (
         <div className="space-y-4">
@@ -182,7 +284,7 @@ export function PrivacyPolicyPage() {
     },
     {
       id: 'compartilhamento',
-      title: '6. COMPARTILHAMENTO DE DADOS',
+      title: '7. COMPARTILHAMENTO DE DADOS',
       icon: Globe,
       content: (
         <div className="space-y-6">
@@ -191,7 +293,7 @@ export function PrivacyPolicyPage() {
           </p>
           
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">6.1. Com prestadores de serviço (operadores):</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">7.1. Com prestadores de serviço (operadores):</h4>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
               <li><strong>Processadores de pagamento:</strong> Stripe, PayPal, PagSeguro, Mercado Pago.</li>
               <li><strong>Provedores de infraestrutura:</strong> AWS, Google Cloud, Vercel (hospedagem e armazenamento).</li>
@@ -218,17 +320,17 @@ export function PrivacyPolicyPage() {
     },
     {
       id: 'seguranca',
-      title: '7. ARMAZENAMENTO E SEGURANÇA DOS DADOS',
+      title: '8. ARMAZENAMENTO E SEGURANÇA DOS DADOS',
       icon: Lock,
       content: (
         <div className="space-y-6">
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">7.1. Localização dos dados:</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">8.1. Localização dos dados:</h4>
             <p>Os dados são armazenados em servidores localizados no <strong>Brasil</strong> e/ou em países que ofereçam nível adequado de proteção de dados conforme a LGPD.</p>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">7.2. Medidas de segurança:</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">8.2. Medidas de segurança:</h4>
             <p>Adotamos medidas técnicas e administrativas para proteger seus dados, incluindo:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 mt-3">
               <li>Criptografia de dados em trânsito (SSL/TLS) e em repouso.</li>
@@ -245,7 +347,7 @@ export function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">7.3. Prazo de retenção:</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">8.3. Prazo de retenção:</h4>
             <p>Mantemos seus dados pelo período necessário para cumprir as finalidades descritas nesta política, incluindo:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 mt-3">
               <li><strong>Durante a vigência do contrato:</strong> Enquanto você for cliente ativo.</li>
@@ -313,7 +415,7 @@ export function PrivacyPolicyPage() {
     },
     {
       id: 'contato',
-      title: '15. CONTATO',
+      title: '10. CONTATO',
       icon: Mail,
       content: (
         <div className="space-y-6">
@@ -448,6 +550,8 @@ export function PrivacyPolicyPage() {
     </>
   );
 }
+
+
 
 
 

@@ -27,6 +27,7 @@ import {
   Users,
   Database
 } from 'lucide-react';
+import { CookieManager } from '@/components/CookieManager';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -719,6 +720,23 @@ export function CookiesPolicyPage() {
                   <span>Última atualização: 13 de outubro de 2025</span>
                 </div>
               </div>
+            </motion.div>
+          </motion.div>
+        </Container>
+      </Section>
+
+      {/* Cookie Manager */}
+      <Section background="white" padding="xl">
+        <Container>
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: '-100px' }}
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div variants={fadeInUp}>
+              <CookieManager />
             </motion.div>
           </motion.div>
         </Container>

@@ -1,10 +1,37 @@
 'use client';
 
 import Script from 'next/script';
+import { useEffect } from 'react';
+import { useCookieConsent } from '@/lib/contexts/CookieConsentContext';
+import { MetaPixel } from './tracking/MetaPixel';
+import { GoogleAds } from './tracking/GoogleAds';
+import { GoogleAnalytics } from './tracking/GoogleAnalytics';
+import { AutoTracking } from './tracking/AutoTracking';
+import { WhatsAppTracking } from './tracking/WhatsAppTracking';
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-XXXXXXX';
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-N7FSD6VV';
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 export function Analytics() {
+  const { consent } = useCookieConsent();
+
+  // Aplicar consentimento quando disponível
+  useEffect(() => {
+    if (consent && typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'consent_update',
+        ad_storage: consent.marketing ? 'granted' : 'denied',
+        analytics_storage: consent.analytics ? 'granted' : 'denied',
+        functionality_storage: consent.functional ? 'granted' : 'denied',
+        personalization_storage: consent.marketing ? 'granted' : 'denied',
+        security_storage: 'granted', // Sempre concedido para cookies essenciais
+        cookie_consent: consent
+      });
+    }
+  }, [consent]);
+
   return (
     <>
       {/* Google Tag Manager */}
@@ -32,7 +59,7 @@ export function Analytics() {
         />
       </noscript>
 
-      {/* Consent Mode v2 */}
+      {/* Consent Mode v2 - Default Denied */}
       <Script
         id="consent-mode"
         strategy="afterInteractive"
@@ -43,12 +70,28 @@ export function Analytics() {
             gtag('consent', 'default', {
               'ad_storage': 'denied',
               'analytics_storage': 'denied',
-              'ad_user_data': 'denied',
-              'ad_personalization': 'denied'
+              'functionality_storage': 'denied',
+              'personalization_storage': 'denied',
+              'security_storage': 'granted'
             });
           `,
         }}
       />
+
+      {/* Meta Pixel */}
+      {META_PIXEL_ID && <MetaPixel pixelId={META_PIXEL_ID} />}
+
+      {/* Google Ads */}
+      {GOOGLE_ADS_ID && <GoogleAds googleAdsId={GOOGLE_ADS_ID} />}
+
+      {/* Google Analytics 4 */}
+      {GA4_ID && <GoogleAnalytics ga4Id={GA4_ID} />}
+
+      {/* Auto Tracking */}
+      <AutoTracking />
+
+      {/* WhatsApp Tracking */}
+      <WhatsAppTracking />
     </>
   );
 }

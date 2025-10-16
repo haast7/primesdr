@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -24,8 +25,25 @@ import {
   ArrowRight,
   Filter,
   Grid,
-  List
+  List,
+  Sparkles,
+  Download,
+  Clock,
+  Award
 } from 'lucide-react';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 export function ResourcesPage() {
   const { t } = useLanguage();
@@ -228,79 +246,161 @@ export function ResourcesPage() {
     console.log('Resource clicked:', resource);
   };
 
+  const resourceStats = [
+    { number: '25.000+', label: 'Downloads totais', icon: Download, color: 'from-blue-500 to-blue-600' },
+    { number: '42', label: 'Páginas no playbook', icon: BookOpen, color: 'from-green-500 to-green-600' },
+    { number: '100%', label: 'Recursos gratuitos', icon: Award, color: 'from-purple-500 to-purple-600' },
+    { number: '24/7', label: 'Acesso disponível', icon: Clock, color: 'from-orange-500 to-orange-600' }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <Section background="gradient" padding="lg">
+      <Section background="gradient" padding="xl" className="relative overflow-hidden min-h-screen flex items-center">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900" />
+        <div className="absolute top-20 right-20 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl" />
+        
         <Container size="lg">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="relative z-10 text-center max-w-6xl mx-auto"
+          >
+            {/* Badge */}
+            <motion.div
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-semibold text-sm mb-8 border border-white/20"
+            >
+              <Sparkles className="w-5 h-5 mr-2" />
+              Recursos Gratuitos
+            </motion.div>
+
+            {/* Título Principal */}
+            <motion.h1
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight"
+            >
               Aprenda a dominar{' '}
-              <span className="text-primary-600">prospecção B2B</span>{' '}
-              no LinkedIn.
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
+                prospecção B2B
+              </span>{' '}
+              no LinkedIn
+            </motion.h1>
+
+            {/* Subtítulo */}
+            <motion.p
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+              className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-12 leading-relaxed max-w-5xl mx-auto"
+            >
               Ferramentas gratuitas, playbooks testados, templates prontos e casos reais. 
               Tudo o que você precisa para encher sua agenda de reuniões qualificadas.
-            </p>
+            </motion.p>
+
+            {/* Resource Stats */}
+            <motion.div
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 max-w-6xl mx-auto"
+            >
+              {resourceStats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                    <stat.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-white/80 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
             
             {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto mb-8">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            <motion.div
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+              className="relative max-w-3xl mx-auto mb-8"
+            >
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/60 h-6 w-6" />
               <input
                 type="text"
                 placeholder="Buscar recursos... ex: 'sequência de mensagens', 'taxa de conversão'"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+                className="w-full pl-16 pr-6 py-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl focus:ring-2 focus:ring-white/30 focus:border-white/30 text-lg text-white placeholder-white/60 transition-all duration-300"
               />
-            </div>
+            </motion.div>
 
             {/* Quick Filters */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <motion.div
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.25 }}
+              className="flex flex-wrap justify-center gap-3 mb-8"
+            >
               {filters.map((filter) => {
                 const Icon = filter.icon;
                 return (
-                  <button
+                  <motion.button
                     key={filter.id}
                     onClick={() => setActiveFilter(filter.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all ${
+                    className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 ${
                       activeFilter === filter.id
-                        ? 'bg-primary-600 text-white border-primary-600'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-primary-300'
+                        ? 'bg-white/20 backdrop-blur-sm text-white border-white/30 shadow-lg'
+                        : 'bg-white/5 backdrop-blur-sm text-white/80 border-white/20 hover:bg-white/10 hover:border-white/30'
                     }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-5 w-5" />
                     {filter.label}
-                  </button>
+                  </motion.button>
                 );
               })}
-            </div>
+            </motion.div>
 
             {/* View Mode Toggle */}
-            <div className="flex justify-center gap-2">
-              <button
+            <motion.div
+              variants={fadeInUp}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+              className="flex justify-center gap-3"
+            >
+              <motion.button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-lg border ${
+                className={`p-3 rounded-xl border transition-all duration-300 ${
                   viewMode === 'grid'
-                    ? 'bg-primary-600 text-white border-primary-600'
-                    : 'bg-white text-gray-700 border-gray-300'
+                    ? 'bg-white/20 backdrop-blur-sm text-white border-white/30 shadow-lg'
+                    : 'bg-white/5 backdrop-blur-sm text-white/80 border-white/20 hover:bg-white/10'
                 }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Grid className="h-5 w-5" />
-              </button>
-              <button
+                <Grid className="h-6 w-6" />
+              </motion.button>
+              <motion.button
                 onClick={() => setViewMode('list')}
-                className={`p-2 rounded-lg border ${
+                className={`p-3 rounded-xl border transition-all duration-300 ${
                   viewMode === 'list'
-                    ? 'bg-primary-600 text-white border-primary-600'
-                    : 'bg-white text-gray-700 border-gray-300'
+                    ? 'bg-white/20 backdrop-blur-sm text-white border-white/30 shadow-lg'
+                    : 'bg-white/5 backdrop-blur-sm text-white/80 border-white/20 hover:bg-white/10'
                 }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <List className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
+                <List className="h-6 w-6" />
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </Container>
       </Section>
 

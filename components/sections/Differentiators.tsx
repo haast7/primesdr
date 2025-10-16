@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
+import { TypeformButton } from '@/components/ui/TypeformButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -23,13 +23,6 @@ const staggerContainer = {
 };
 
 export function Differentiators() {
-  const handleCTAClick = () => {
-    trackEvent('cta_click', {
-      cta_type: 'differentiators',
-      cta_location: 'differentiators_section',
-      cta_text: 'Agendar demonstração (15 min)'
-    });
-  };
 
   const differentiators = [
     {
@@ -169,25 +162,28 @@ export function Differentiators() {
               
               
               {/* Botão principal */}
-              <motion.button
-                onClick={handleCTAClick}
-                className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
+              <motion.div
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Efeito de brilho interno */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                
-                {/* Conteúdo do botão */}
-                <span className="relative flex items-center justify-center">
-                  <span className="mr-3">🚀</span>
-                  Agendar demonstração (15 min)
-                  <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                </span>
-              </motion.button>
+                <TypeformButton
+                  source="differentiators-cta"
+                  className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
+                >
+                  {/* Efeito de brilho interno */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  
+                  {/* Conteúdo do botão */}
+                  <span className="relative flex items-center justify-center">
+                    <span className="mr-3">🚀</span>
+                    Agendar demonstração (15 min)
+                    <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+                  </span>
+                </TypeformButton>
+              </motion.div>
               
               {/* Texto de urgência */}
               <motion.div 

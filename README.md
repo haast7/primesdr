@@ -42,7 +42,7 @@ cp .env.example .env.local
 
 Edite o arquivo `.env.local` com suas configurações:
 ```env
-NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_GTM_ID=GTM-N7FSD6VV
 NEXT_PUBLIC_SITE_URL=https://primesdr.com
 NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_META_PIXEL_ID=1234567890123456

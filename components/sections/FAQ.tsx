@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
+import { TypeformButton } from '@/components/ui/TypeformButton';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -185,24 +186,28 @@ export function FAQ() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="flex justify-center"
             >
-              <motion.button
-                className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white font-bold text-lg px-12 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
+              <motion.div
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Efeito de brilho interno */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                
-                {/* Conteúdo do botão */}
-                <span className="relative flex items-center justify-center">
-                  <span className="mr-3">🚀</span>
-                  Começar agora
-                  <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                </span>
-              </motion.button>
+                <TypeformButton
+                  source="faq-cta"
+                  className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white font-bold text-lg px-12 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
+                >
+                  {/* Efeito de brilho interno */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  
+                  {/* Conteúdo do botão */}
+                  <span className="relative flex items-center justify-center">
+                    <span className="mr-3">🚀</span>
+                    Começar agora
+                    <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+                  </span>
+                </TypeformButton>
+              </motion.div>
             </motion.div>
           </div>
         </motion.div>
