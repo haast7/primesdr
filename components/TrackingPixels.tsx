@@ -74,27 +74,7 @@ export function TrackingPixels() {
 
   return (
     <>
-      {/* Meta Pixel - Carregado sempre para teste */}
-      {META_PIXEL_ID && (
-        <Script
-          id="meta-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '${META_PIXEL_ID}');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-      )}
+      {/* Meta Pixel - Removido para evitar duplicação (já carregado no Analytics) */}
 
       {/* LinkedIn Insight Tag - Carregado sempre para teste */}
       {LINKEDIN_INSIGHT_ID && (
@@ -119,8 +99,8 @@ export function TrackingPixels() {
         />
       )}
 
-      {/* TikTok Pixel - Carregado condicionalmente via GTM */}
-      {TIKTOK_PIXEL_ID && consent?.marketing && (
+      {/* TikTok Pixel - Desabilitado temporariamente */}
+      {false && TIKTOK_PIXEL_ID && consent?.marketing && (
         <Script
           id="tiktok-pixel"
           strategy="afterInteractive"
@@ -173,8 +153,8 @@ export function TrackingPixels() {
         />
       )}
 
-      {/* Intercom - Carregado condicionalmente via GTM */}
-      {INTERCOM_APP_ID && consent?.functional && (
+      {/* Intercom - Desabilitado temporariamente */}
+      {false && INTERCOM_APP_ID && consent?.functional && (
         <Script
           id="intercom"
           strategy="afterInteractive"
@@ -186,8 +166,8 @@ export function TrackingPixels() {
         />
       )}
 
-      {/* Crisp Chat - Carregado condicionalmente via GTM */}
-      {CRISP_WEBSITE_ID && consent?.functional && (
+      {/* Crisp Chat - Desabilitado temporariamente */}
+      {false && CRISP_WEBSITE_ID && consent?.functional && (
         <Script
           id="crisp"
           strategy="afterInteractive"

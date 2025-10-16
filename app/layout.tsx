@@ -9,6 +9,7 @@ import { TypeformProvider } from '@/components/TypeformProvider';
 import { CookieConsentProvider } from '@/lib/contexts/CookieConsentContext';
 import { CookieBanner } from '@/components/CookieBanner';
 import { TrackingPixels } from '@/components/TrackingPixels';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -86,8 +87,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
-        <link rel="icon" href="/faviconazul.png" />
-        <link rel="apple-touch-icon" href="/faviconazul.png" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -103,6 +104,10 @@ export default function RootLayout({
               </main>
               <Footer />
               <CookieBanner />
+              <WhatsAppButton 
+                phone="+5511932001771" 
+                message="Olá! Gostaria de saber mais sobre o Prime SDR."
+              />
             </TypeformProvider>
           </LanguageProvider>
         </CookieConsentProvider>
