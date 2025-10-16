@@ -8,6 +8,7 @@ import { Container } from '@/components/ui/Container';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
+import { IMAGES } from '@/lib/images';
 
 export function Header() {
   const { language, setLanguage, t, availableLanguages } = useLanguage();
@@ -56,7 +57,7 @@ export function Header() {
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative">
               <Image
-                src="/logoazul.png"
+                src={IMAGES.logo}
                 alt="Prime SDR"
                 width={40}
                 height={40}

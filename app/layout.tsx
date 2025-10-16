@@ -10,6 +10,7 @@ import { CookieConsentProvider } from '@/lib/contexts/CookieConsentContext';
 import { CookieBanner } from '@/components/CookieBanner';
 import { TrackingPixels } from '@/components/TrackingPixels';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { IMAGES } from '@/lib/images';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -87,8 +88,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="icon" href={IMAGES.favicon} />
+        <link rel="apple-touch-icon" href={IMAGES.favicon} />
         <meta name="theme-color" content="#2563eb" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>

@@ -14,6 +14,14 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: true, // Força imagens não otimizadas para evitar problemas de case sensitivity
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'primesdr.vercel.app',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   
   // Compression
@@ -44,6 +52,15 @@ const nextConfig = {
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on',
+          },
+        ],
+      },
+      {
+        source: '/:path*\\.(png|jpg|jpeg|gif|webp|svg|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

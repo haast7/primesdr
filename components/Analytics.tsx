@@ -3,7 +3,6 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { useCookieConsent } from '@/lib/contexts/CookieConsentContext';
-import { MetaPixel } from './tracking/MetaPixel';
 import { GoogleAds } from './tracking/GoogleAds';
 import { GoogleAnalytics } from './tracking/GoogleAnalytics';
 import { AutoTracking } from './tracking/AutoTracking';
@@ -79,8 +78,7 @@ export function Analytics() {
         }}
       />
 
-      {/* Meta Pixel - Sempre carregado, mas com consentimento */}
-      {META_PIXEL_ID && <MetaPixel pixelId={META_PIXEL_ID} />}
+      {/* Meta Pixel - Carregado via GTM para evitar duplicação */}
 
       {/* Google Ads - Sempre carregado, mas com consentimento */}
       {GOOGLE_ADS_ID && <GoogleAds googleAdsId={GOOGLE_ADS_ID} />}

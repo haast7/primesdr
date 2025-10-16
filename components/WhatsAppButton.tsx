@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { trackEvent } from '@/components/Analytics';
+import { IMAGES } from '@/lib/images';
 
 interface WhatsAppButtonProps {
   phone: string;
@@ -47,14 +48,14 @@ export function WhatsAppButton({
         "
         aria-label="Falar no WhatsApp"
       >
-        <Image
-          src="/icons/whatsapp.png"
-          alt="WhatsApp"
-          width={56}
-          height={56}
-          className="w-full h-full rounded-full object-cover"
-          unoptimized
-        />
+            <Image
+              src={IMAGES.whatsapp}
+              alt="WhatsApp"
+              width={56}
+              height={56}
+              className="w-full h-full rounded-full object-cover"
+              unoptimized
+            />
       </button>
       
       {/* Tooltip */}

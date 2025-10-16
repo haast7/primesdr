@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { IMAGES } from '@/lib/images';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ArrowRight, TrendingUp, Users, Calendar, DollarSign } from 'lucide-react';
@@ -183,7 +184,7 @@ export function CaseStudy() {
                   <div className="flex items-center space-x-4">
                     <div className="w-16 h-16 rounded-2xl overflow-hidden">
                       <Image
-                        src="/per.png"
+                        src={IMAGES.profile}
                         alt="Erick Oliveira"
                         width={64}
                         height={64}

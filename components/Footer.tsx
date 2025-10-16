@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { IMAGES } from '@/lib/images';
 
 const footerLinks = {
   institucional: [
@@ -34,7 +35,7 @@ export function Footer() {
             <div className="lg:col-span-1">
               <Link href="/" className="flex items-center space-x-2 mb-4">
                 <Image
-                  src="/logocompletabranca.png"
+                  src={IMAGES.logoWhite}
                   alt="Prime SDR"
                   width={120}
                   height={40}

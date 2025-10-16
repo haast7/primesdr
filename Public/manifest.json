@@ -1,0 +1,16 @@
+{
+  "name": "Prime SDR",
+  "short_name": "Prime SDR",
+  "description": "Sistema de Prospecção Inteligente para Vendas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
