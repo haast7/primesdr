@@ -490,6 +490,7 @@ export function ContactPage() {
                          >
                            <Image
                              src="/icons/linkedin.png"
+                            unoptimized
                              alt="LinkedIn"
                              width={32}
                              height={32}
@@ -504,11 +505,12 @@ export function ContactPage() {
                            onClick={() => trackEvent('social_click', { platform: 'instagram' })}
                          >
                            <Image
-                             src="/icons/instagram.png"
-                             alt="Instagram"
-                             width={32}
-                             height={32}
-                             className="w-8 h-8 object-contain"
+                            src="/icons/instagram.png"
+                            alt="Instagram"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 object-contain"
+                            unoptimized
                            />
                          </a>
                          <a 
@@ -519,11 +521,12 @@ export function ContactPage() {
                            onClick={() => trackEvent('social_click', { platform: 'facebook' })}
                          >
                            <Image
-                             src="/icons/facebook.png"
-                             alt="Facebook"
-                             width={32}
-                             height={32}
-                             className="w-8 h-8 object-contain"
+                            src="/icons/facebook.png"
+                            alt="Facebook"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 object-contain"
+                            unoptimized
                            />
                          </a>
                          <a 
@@ -534,11 +537,12 @@ export function ContactPage() {
                            onClick={() => trackEvent('social_click', { platform: 'twitter' })}
                          >
                            <Image
-                             src="/icons/twitter.png"
-                             alt="Twitter"
-                             width={32}
-                             height={32}
-                             className="w-8 h-8 object-contain"
+                            src="/icons/twitter.png"
+                            alt="Twitter"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 object-contain"
+                            unoptimized
                            />
                          </a>
                          <a 
@@ -549,11 +553,12 @@ export function ContactPage() {
                            onClick={() => trackEvent('social_click', { platform: 'youtube' })}
                          >
                            <Image
-                             src="/icons/youtube.png"
-                             alt="YouTube"
-                             width={32}
-                             height={32}
-                             className="w-8 h-8 object-contain"
+                            src="/icons/youtube.png"
+                            alt="YouTube"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 object-contain"
+                            unoptimized
                            />
                          </a>
                          <a 
@@ -564,11 +569,12 @@ export function ContactPage() {
                            onClick={() => trackEvent('social_click', { platform: 'tiktok' })}
                          >
                            <Image
-                             src="/icons/tik-tok.png"
-                             alt="TikTok"
-                             width={32}
-                             height={32}
-                             className="w-8 h-8 object-contain"
+                            src="/icons/tik-tok.png"
+                            alt="TikTok"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 object-contain"
+                            unoptimized
                            />
                          </a>
                        </div>

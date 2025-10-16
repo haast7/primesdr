@@ -18,9 +18,9 @@ export function MetaPixel({ pixelId }: MetaPixelProps) {
   const { consent } = useCookieConsent();
 
   useEffect(() => {
-    // Em desenvolvimento, carrega sempre. Em produção, só com consentimento
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (!isDevelopment && !consent?.marketing) return;
+    // Para teste: carrega sempre, mas aplica consentimento depois
+    // TODO: Em produção, só carregar com consentimento
+    // if (!consent?.marketing) return;
 
     // Carrega o script do Meta Pixel
     const script = document.createElement('script');

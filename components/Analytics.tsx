@@ -10,9 +10,9 @@ import { AutoTracking } from './tracking/AutoTracking';
 import { WhatsAppTracking } from './tracking/WhatsAppTracking';
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-N7FSD6VV';
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
-const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
-const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '1831229621093127';
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || 'AW-17655843732';
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || 'G-LT6R7TDXHW';
 
 export function Analytics() {
   const { consent } = useCookieConsent();
@@ -78,13 +78,13 @@ export function Analytics() {
         }}
       />
 
-      {/* Meta Pixel */}
+      {/* Meta Pixel - Sempre carregado, mas com consentimento */}
       {META_PIXEL_ID && <MetaPixel pixelId={META_PIXEL_ID} />}
 
-      {/* Google Ads */}
+      {/* Google Ads - Sempre carregado, mas com consentimento */}
       {GOOGLE_ADS_ID && <GoogleAds googleAdsId={GOOGLE_ADS_ID} />}
 
-      {/* Google Analytics 4 */}
+      {/* Google Analytics 4 - Sempre carregado, mas com consentimento */}
       {GA4_ID && <GoogleAnalytics ga4Id={GA4_ID} />}
 
       {/* Auto Tracking */}

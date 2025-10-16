@@ -61,6 +61,8 @@ export function Header() {
                 width={40}
                 height={40}
                 className="h-8 w-auto transition-transform duration-200 group-hover:scale-105"
+                priority
+                unoptimized
               />
             </div>
             <span className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-200">
