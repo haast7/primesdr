@@ -22,7 +22,7 @@ export function useAutoTracking() {
 
   // Rastreamento automático de scroll
   useEffect(() => {
-    let scrollEvents = new Set<number>();
+    const scrollEvents = new Set<number>();
     
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;

@@ -1,19 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { google } from 'googleapis';
 import { getVendedorById } from '@/lib/vendedores';
 
-// Configuração do Google Calendar
-const getCalendarClient = () => {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    },
-    scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
-  });
-
-  return google.calendar({ version: 'v3', auth });
-};
+// TODO: Implementar integração com Google Calendar quando necessário
+// const { google } = require('googleapis');
 
 export async function POST(request: NextRequest) {
   try {
@@ -42,19 +31,8 @@ export async function POST(request: NextRequest) {
     const endOfDay = new Date(date);
     endOfDay.setHours(23, 59, 59, 999);
 
-    // Consultar disponibilidade
-    const calendar = getCalendarClient();
-    const response = await calendar.freebusy.query({
-      requestBody: {
-        timeMin: startOfDay.toISOString(),
-        timeMax: endOfDay.toISOString(),
-        items: [{ id: vendedor.calendarId }],
-        timeZone: vendedor.timezone,
-      },
-    });
-
-    // Processar horários ocupados
-    const busyTimes = response.data.calendars?.[vendedor.calendarId]?.busy || [];
+    // Mock: Gerar horários disponíveis sem integração com Google Calendar
+    const busyTimes: any[] = []; // Por enquanto, sem horários ocupados
     
     // Gerar horários disponíveis
     const availableSlots = generateAvailableSlots(

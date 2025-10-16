@@ -1,19 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { google } from 'googleapis';
 import { getVendedorById } from '@/lib/vendedores';
 
-// Configuração do Google Calendar
-const getCalendarClient = () => {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    },
-    scopes: ['https://www.googleapis.com/auth/calendar'],
-  });
-
-  return google.calendar({ version: 'v3', auth });
-};
+// TODO: Implementar integração com Google Calendar quando necessário
+// const { google } = require('googleapis');
 
 export async function POST(request: NextRequest) {
   try {
@@ -47,55 +36,18 @@ export async function POST(request: NextRequest) {
     const end = new Date(start);
     end.setMinutes(end.getMinutes() + vendedor.meetingDuration);
 
-    // Criar evento no Google Calendar
-    const calendar = getCalendarClient();
-    const event = await calendar.events.insert({
-      calendarId: vendedor.calendarId,
-      requestBody: {
+    // Mock: Simular criação de evento (implementar integração real depois)
+    const event = {
+      data: {
+        id: `mock-event-${Date.now()}`,
         summary: `${meetingType} - ${clientName}`,
-        description: `
-Cliente: ${clientName}
-Email: ${clientEmail}
-Telefone: ${clientPhone || 'Não informado'}
-
-Reunião agendada através do formulário Prime SDR.
-        `,
-        start: {
-          dateTime: start.toISOString(),
-          timeZone: vendedor.timezone,
-        },
-        end: {
-          dateTime: end.toISOString(),
-          timeZone: vendedor.timezone,
-        },
-        attendees: [
-          {
-            email: vendedor.email,
-            displayName: vendedor.name,
-            organizer: true,
-          },
-          {
-            email: clientEmail,
-            displayName: clientName,
-          },
-        ],
-        reminders: {
-          useDefault: false,
-          overrides: [
-            { method: 'email', minutes: 24 * 60 }, // 1 dia antes
-            { method: 'popup', minutes: 30 }, // 30 minutos antes
-          ],
-        },
+        start: { dateTime: start.toISOString() },
+        end: { dateTime: end.toISOString() },
         conferenceData: {
-          createRequest: {
-            requestId: `prime-sdr-${Date.now()}`,
-            conferenceSolutionKey: {
-              type: 'hangoutsMeet',
-            },
-          },
-        },
-      },
-    });
+          entryPoints: [{ uri: `https://meet.google.com/mock-${Date.now()}` }]
+        }
+      }
+    };
 
     return NextResponse.json({
       success: true,

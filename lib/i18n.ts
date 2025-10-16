@@ -976,6 +976,99 @@ export const translations: Record<Language, Translations> = {
         submit: 'Agendar reunión'
       }
     },
+    resources: {
+      hero: {
+        title: 'Aprende a dominar prospección B2B en LinkedIn.',
+        subtitle: 'Herramientas gratuitas, playbooks probados y casos reales. Todo lo que necesitas para llenar tu agenda de reuniones calificadas.',
+        searchPlaceholder: 'Buscar recursos... ej: "secuencia de mensajes", "tasa de conversión"'
+      },
+      filters: {
+        all: 'Todos',
+        tools: 'Herramientas',
+        guides: 'Guías',
+        videos: 'Videos',
+        cases: 'Casos'
+      },
+      tools: {
+        roiCalculator: {
+          title: 'Calculadora de ROI de Prospección',
+          description: 'Descubre cuántas reuniones y cuánto pipeline puedes generar invirtiendo en prospección en LinkedIn.',
+          cta: 'Calcular mi ROI'
+        },
+        profileAnalyzer: {
+          title: 'Analizador de Perfil LinkedIn',
+          description: 'Pega la URL de tu perfil y recibe análisis instantáneo con puntos de mejora.',
+          cta: 'Analizar mi perfil'
+        },
+        headlineGenerator: {
+          title: 'Generador de Headline de LinkedIn',
+          description: 'Responde 3 preguntas y recibe 5 opciones de headline probadas.',
+          cta: 'Generar mi headline'
+        },
+        qualificationQuiz: {
+          title: 'Quiz de Calificación',
+          description: '5 preguntas, 60 segundos, resultado personalizado con plan de acción.',
+          cta: 'Hacer el quiz'
+        }
+      },
+      guides: {
+        completePlaybook: {
+          title: 'El Playbook Completo de Prospección en LinkedIn (2025)',
+          description: 'Método paso a paso para generar 100+ reuniones/mes usando LinkedIn. ICP, mensajes, cadencias, métricas y automatización segura.',
+          cta: 'Descargar guía gratis'
+        },
+        fatalErrors: {
+          title: '7 Errores Fatales que Matan Tu Tasa de Respuesta en LinkedIn',
+          description: 'Descubre los errores más comunes (y cómo corregirlos) que hacen que los decisores ignoren tus mensajes.',
+          cta: 'Descargar checklist'
+        },
+        decisionMakers: {
+          title: 'Cómo Acceder a Decisores que No Atienden Cold Call',
+          description: 'CEOs, Directores y VPs no atienden teléfono. Pero responden en LinkedIn — si sabes cómo.',
+          cta: 'Descargar guía'
+        }
+      },
+      videos: {
+        webinar100Meetings: {
+          title: 'Cómo Generar 100+ Reuniones/Mes en LinkedIn (sin ser molesto)',
+          description: 'Método completo (ICP → mensaje → follow-up) con demostración en vivo de la plataforma.',
+          cta: 'Ver ahora'
+        },
+        fiveMessages: {
+          title: '5 Mensajes que Decisores SIEMPRE Responden',
+          description: 'Análisis de mensajes con mayor tasa de respuesta y por qué funcionan.',
+          cta: 'Ver'
+        },
+        behindScenes: {
+          title: 'Bastidores: Cómo Generamos R$ 6,3M en Pipeline en 60 Días',
+          description: 'Proceso completo desde la configuración hasta los resultados finales.',
+          cta: 'Ver caso completo'
+        }
+      },
+      cases: {
+        saasCase: {
+          title: 'SaaS: 89 Reuniones en 30 Días',
+          description: 'Cómo una startup de SaaS logró 89 reuniones calificadas en su primer mes.',
+          cta: 'Ver caso'
+        },
+        agencyCase: {
+          title: 'Agencia: R$ 2,1M em Pipeline',
+          description: 'Agencia de marketing digital que generó R$ 2,1M em pipeline em 45 días.',
+          cta: 'Ver caso'
+        },
+        techCase: {
+          title: 'Tech: 156 Reuniones em 60 Días',
+          description: 'Empresa de tecnologia que transformou LinkedIn em sua principal fonte de leads.',
+          cta: 'Ver caso'
+        }
+      },
+      finalCta: {
+        title: 'Listo para generar 100+ reuniones calificadas?',
+        subtitle: 'Tienes el conocimiento. Ahora falta la ejecución. Prime SDR lo hace por ti.',
+        primaryCta: 'Agendar demostración (15 min)',
+        secondaryCta: 'Probar 30 días sin riesgo'
+      }
+    },
     footer: {
       company: {
         title: 'Prime SDR',
@@ -1285,6 +1378,99 @@ export const translations: Record<Language, Translations> = {
         phone: 'Phone',
         company: 'Company',
         submit: 'Schedule meeting'
+      }
+    },
+    resources: {
+      hero: {
+        title: 'Learn to master B2B prospecting on LinkedIn.',
+        subtitle: 'Free tools, tested playbooks and real cases. Everything you need to fill your calendar with qualified meetings.',
+        searchPlaceholder: 'Search resources... ex: "message sequence", "conversion rate"'
+      },
+      filters: {
+        all: 'All',
+        tools: 'Tools',
+        guides: 'Guides',
+        videos: 'Videos',
+        cases: 'Cases'
+      },
+      tools: {
+        roiCalculator: {
+          title: 'Prospecting ROI Calculator',
+          description: 'Discover how many meetings and how much pipeline you can generate by investing in LinkedIn prospecting.',
+          cta: 'Calculate my ROI'
+        },
+        profileAnalyzer: {
+          title: 'LinkedIn Profile Analyzer',
+          description: 'Paste your profile URL and get instant analysis with improvement points.',
+          cta: 'Analyze my profile'
+        },
+        headlineGenerator: {
+          title: 'LinkedIn Headline Generator',
+          description: 'Answer 3 questions and get 5 tested headline options.',
+          cta: 'Generate my headline'
+        },
+        qualificationQuiz: {
+          title: 'Qualification Quiz',
+          description: '5 questions, 60 seconds, personalized result with action plan.',
+          cta: 'Take the quiz'
+        }
+      },
+      guides: {
+        completePlaybook: {
+          title: 'The Complete LinkedIn Prospecting Playbook (2025)',
+          description: 'Step-by-step method to generate 100+ meetings/month using LinkedIn. ICP, messages, cadences, metrics and safe automation.',
+          cta: 'Download free guide'
+        },
+        fatalErrors: {
+          title: '7 Fatal Errors That Kill Your Response Rate on LinkedIn',
+          description: 'Discover the most common errors (and how to fix them) that make decision makers ignore your messages.',
+          cta: 'Download checklist'
+        },
+        decisionMakers: {
+          title: 'How to Access Decision Makers Who Don\'t Answer Cold Calls',
+          description: 'CEOs, Directors and VPs don\'t answer the phone. But they respond on LinkedIn — if you know how.',
+          cta: 'Download guide'
+        }
+      },
+      videos: {
+        webinar100Meetings: {
+          title: 'How to Generate 100+ Meetings/Month on LinkedIn (without being annoying)',
+          description: 'Complete method (ICP → message → follow-up) with live platform demonstration.',
+          cta: 'Watch now'
+        },
+        fiveMessages: {
+          title: '5 Messages That Decision Makers ALWAYS Respond To',
+          description: 'Analysis of messages with highest response rate and why they work.',
+          cta: 'Watch'
+        },
+        behindScenes: {
+          title: 'Behind the Scenes: How We Generated R$ 6.3M in Pipeline in 60 Days',
+          description: 'Complete process from setup to final results.',
+          cta: 'Watch full case'
+        }
+      },
+      cases: {
+        saasCase: {
+          title: 'SaaS: 89 Meetings in 30 Days',
+          description: 'How a SaaS startup achieved 89 qualified meetings in their first month.',
+          cta: 'View case'
+        },
+        agencyCase: {
+          title: 'Agency: R$ 2.1M in Pipeline',
+          description: 'Digital marketing agency that generated R$ 2.1M in pipeline in 45 days.',
+          cta: 'View case'
+        },
+        techCase: {
+          title: 'Tech: 156 Meetings in 60 Days',
+          description: 'Technology company that transformed LinkedIn into their main lead source.',
+          cta: 'View case'
+        }
+      },
+      finalCta: {
+        title: 'Ready to generate 100+ qualified meetings?',
+        subtitle: 'You have the knowledge. Now you need execution. Prime SDR does it for you.',
+        primaryCta: 'Schedule demo (15 min)',
+        secondaryCta: 'Try 30 days risk-free'
       }
     },
     footer: {

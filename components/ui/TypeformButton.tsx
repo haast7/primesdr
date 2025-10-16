@@ -8,7 +8,7 @@ import { trackEvent } from '@/components/Analytics';
 interface TypeformButtonProps {
   children: React.ReactNode;
   source: string;
-  variant?: 'default' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   onClick?: () => void;
@@ -17,7 +17,7 @@ interface TypeformButtonProps {
 export function TypeformButton({ 
   children, 
   source, 
-  variant = 'default',
+  variant = 'primary',
   size = 'md',
   className = '',
   onClick

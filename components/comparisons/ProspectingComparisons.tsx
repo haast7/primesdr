@@ -28,7 +28,7 @@ interface ComparisonOption {
 }
 
 export function ProspectingComparisons() {
-  const [activeComparison, setActiveComparison] = useState<'sdr' | 'agency' | 'primesdr'>('sdr');
+  const [activeComparison, setActiveComparison] = useState<'sdr'>('sdr');
 
   const comparisons = {
     sdr: {
