@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { IMAGES } from '@/lib/images';
+import { IMAGE_URLS } from '@/lib/imageLoader';
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
 const footerLinks = {
   institucional: [
@@ -34,13 +34,14 @@ export function Footer() {
             {/* Logo and Description */}
             <div className="lg:col-span-1">
               <Link href="/" className="flex items-center space-x-2 mb-4">
-                <Image
-                  src={IMAGES.logoWhite}
+                <ImageWithFallback
+                  src={IMAGE_URLS.logoWhite}
                   alt="Prime SDR"
                   width={120}
                   height={40}
                   className="h-8 w-auto"
                   unoptimized
+                  fallback="/logocompletabranca.png"
                 />
               </Link>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
-import { IMAGES } from '@/lib/images';
+import { IMAGE_URLS } from '@/lib/imageLoader';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ArrowRight, TrendingUp, Users, Calendar, DollarSign } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -183,13 +183,14 @@ export function CaseStudy() {
                   
                   <div className="flex items-center space-x-4">
                     <div className="w-16 h-16 rounded-2xl overflow-hidden">
-                      <Image
-                        src={IMAGES.profile}
+                      <ImageWithFallback
+                        src={IMAGE_URLS.profile}
                         alt="Erick Oliveira"
                         width={64}
                         height={64}
                         className="w-full h-full object-cover"
                         unoptimized
+                        fallback="/per.png"
                       />
                     </div>
                     <div>

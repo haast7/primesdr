@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
-import { IMAGES } from '@/lib/images';
+import { IMAGE_URLS } from '@/lib/imageLoader';
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
 export function Header() {
   const { language, setLanguage, t, availableLanguages } = useLanguage();
@@ -56,14 +56,15 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <Image
-                src={IMAGES.logo}
+              <ImageWithFallback
+                src={IMAGE_URLS.logo}
                 alt="Prime SDR"
                 width={40}
                 height={40}
                 className="h-8 w-auto transition-transform duration-200 group-hover:scale-105"
                 priority
                 unoptimized
+                fallback="/logoazul.png"
               />
             </div>
             <span className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-200">

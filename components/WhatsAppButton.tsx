@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { trackEvent } from '@/components/Analytics';
-import { IMAGES } from '@/lib/images';
+import { IMAGE_URLS } from '@/lib/imageLoader';
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
 interface WhatsAppButtonProps {
   phone: string;
@@ -48,13 +48,14 @@ export function WhatsAppButton({
         "
         aria-label="Falar no WhatsApp"
       >
-            <Image
-              src={IMAGES.whatsapp}
+            <ImageWithFallback
+              src={IMAGE_URLS.whatsapp}
               alt="WhatsApp"
               width={56}
               height={56}
               className="w-full h-full rounded-full object-cover"
               unoptimized
+              fallback="/icons/whatsapp.png"
             />
       </button>
       

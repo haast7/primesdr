@@ -106,3 +106,7 @@ Searches/
 Videos/
 ntuser.dat*
 *.ini
+
+# Project specific folders
+Copy do Site/
+Estrutura de Desenvolvimento/
