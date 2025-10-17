@@ -74,3 +74,4 @@ function getLocationFromElement(element: HTMLElement): string {
   return 'page';
 }
 
+

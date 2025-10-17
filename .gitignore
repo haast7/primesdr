@@ -107,6 +107,9 @@ Videos/
 ntuser.dat*
 *.ini
 
-# Project specific folders
-Copy do Site/
-Estrutura de Desenvolvimento/
+# Project specific folders - Documentation
+"Copy do Site/"
+"Estrutura de Desenvolvimento/"
+
+# Vercel specific
+.vercel

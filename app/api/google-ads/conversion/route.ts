@@ -112,3 +112,4 @@ function hashString(str: string): string {
   return crypto.createHash('sha256').update(str.toLowerCase().trim()).digest('hex');
 }
 
+

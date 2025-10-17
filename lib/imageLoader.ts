@@ -1,28 +1,15 @@
 // Sistema de carregamento de imagens otimizado para Vercel
 import { StaticImageData } from 'next/image';
 
-// URLs base para diferentes ambientes
-const getBaseUrl = () => {
-  if (typeof window !== 'undefined') {
-    return window.location.origin;
-  }
-  return process.env.NEXT_PUBLIC_SITE_URL || 'https://primesdr.vercel.app';
-};
-
-// Função para carregar imagens com fallback
+// Função para carregar imagens - usa paths relativos para melhor performance
 export const loadImage = (src: string): string => {
-  const baseUrl = getBaseUrl();
-  
   // Se já é uma URL completa, retorna como está
   if (src.startsWith('http')) {
     return src;
   }
   
-  // Remove barra inicial se existir
-  const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
-  
-  // Retorna URL completa
-  return `${baseUrl}/${cleanSrc}`;
+  // Garante que o path comece com /
+  return src.startsWith('/') ? src : `/${src}`;
 };
 
 // Função para verificar se a imagem existe
@@ -57,20 +44,20 @@ export const loadImageWithFallback = async (src: string, fallback?: string): Pro
   return imageUrl;
 };
 
-// URLs das imagens principais com fallbacks
+// URLs das imagens principais - paths relativos para melhor performance
 export const IMAGE_URLS = {
-  logo: loadImage('logoazul.png'),
-  logoWhite: loadImage('logocompletabranca.png'),
-  logoBlack: loadImage('logocompletapreta.png'),
-  favicon: loadImage('favicon.ico'),
-  profile: loadImage('per.png'),
-  whatsapp: loadImage('icons/whatsapp.png'),
-  linkedin: loadImage('icons/linkedin.png'),
-  instagram: loadImage('icons/instagram.png'),
-  facebook: loadImage('icons/facebook.png'),
-  twitter: loadImage('icons/twitter.png'),
-  youtube: loadImage('icons/youtube.png'),
-  tiktok: loadImage('icons/tik-tok.png'),
-  email: loadImage('icons/e-mail.png'),
-  call: loadImage('icons/call.png'),
+  logo: '/logoazul.png',
+  logoWhite: '/logocompletabranca.png',
+  logoBlack: '/logocompletapreta.png',
+  favicon: '/favicon.ico',
+  profile: '/per.png',
+  whatsapp: '/icons/whatsapp.png',
+  linkedin: '/icons/linkedin.png',
+  instagram: '/icons/instagram.png',
+  facebook: '/icons/facebook.png',
+  twitter: '/icons/twitter.png',
+  youtube: '/icons/youtube.png',
+  tiktok: '/icons/tik-tok.png',
+  email: '/icons/e-mail.png',
+  call: '/icons/call.png',
 } as const;

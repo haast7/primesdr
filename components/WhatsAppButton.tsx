@@ -54,7 +54,6 @@ export function WhatsAppButton({
               width={56}
               height={56}
               className="w-full h-full rounded-full object-cover"
-              unoptimized
               fallback="/icons/whatsapp.png"
             />
       </button>

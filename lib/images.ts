@@ -1,26 +1,23 @@
-// Configuração de URLs para imagens
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://primesdr.vercel.app';
-
+// Configuração de URLs para imagens - paths relativos para melhor performance
 export const getImageUrl = (path: string): string => {
-  // Remove barra inicial se existir
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return `${SITE_URL}/${cleanPath}`;
+  // Garante que o path comece com /
+  return path.startsWith('/') ? path : `/${path}`;
 };
 
-// URLs das imagens principais
+// URLs das imagens principais - paths relativos
 export const IMAGES = {
-  logo: getImageUrl('logoazul.png'),
-  logoWhite: getImageUrl('logocompletabranca.png'),
-  logoBlack: getImageUrl('logocompletapreta.png'),
-  favicon: getImageUrl('favicon.ico'),
-  profile: getImageUrl('per.png'),
-  whatsapp: getImageUrl('icons/whatsapp.png'),
-  linkedin: getImageUrl('icons/linkedin.png'),
-  instagram: getImageUrl('icons/instagram.png'),
-  facebook: getImageUrl('icons/facebook.png'),
-  twitter: getImageUrl('icons/twitter.png'),
-  youtube: getImageUrl('icons/youtube.png'),
-  tiktok: getImageUrl('icons/tik-tok.png'),
-  email: getImageUrl('icons/e-mail.png'),
-  call: getImageUrl('icons/call.png'),
+  logo: '/logoazul.png',
+  logoWhite: '/logocompletabranca.png',
+  logoBlack: '/logocompletapreta.png',
+  favicon: '/favicon.ico',
+  profile: '/per.png',
+  whatsapp: '/icons/whatsapp.png',
+  linkedin: '/icons/linkedin.png',
+  instagram: '/icons/instagram.png',
+  facebook: '/icons/facebook.png',
+  twitter: '/icons/twitter.png',
+  youtube: '/icons/youtube.png',
+  tiktok: '/icons/tik-tok.png',
+  email: '/icons/e-mail.png',
+  call: '/icons/call.png',
 } as const;
