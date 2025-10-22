@@ -31,13 +31,6 @@ export function CalendarScheduler({ formData, onSchedule, onClose }: CalendarSch
   // Definir data mínima (hoje)
   const today = new Date().toISOString().split('T')[0];
 
-  // Buscar disponibilidade quando vendedor e data forem selecionados
-  useEffect(() => {
-    if (selectedVendedor && selectedDate) {
-      fetchAvailability();
-    }
-  }, [selectedVendedor, selectedDate, fetchAvailability]);
-
   const fetchAvailability = useCallback(async () => {
     if (!selectedVendedor || !selectedDate) return;
 
@@ -86,6 +79,13 @@ export function CalendarScheduler({ formData, onSchedule, onClose }: CalendarSch
       setLoading(false);
     }
   }, [selectedVendedor, selectedDate]);
+
+  // Buscar disponibilidade quando vendedor e data forem selecionados
+  useEffect(() => {
+    if (selectedVendedor && selectedDate) {
+      fetchAvailability();
+    }
+  }, [selectedVendedor, selectedDate, fetchAvailability]);
 
   const handleSchedule = async () => {
     if (!selectedVendedor || !selectedSlot) return;
