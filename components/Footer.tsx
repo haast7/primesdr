@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { IMAGE_URLS } from '@/lib/imageLoader';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
@@ -22,6 +23,10 @@ const footerLinks = {
   social: [
     { name: 'LinkedIn', href: 'https://linkedin.com/company/prime-sdr', external: true },
     { name: 'YouTube', href: 'https://youtube.com/@prime-sdr', external: true },
+    { name: 'Instagram', href: 'https://instagram.com/primesdr', external: true },
+    { name: 'Facebook', href: 'https://facebook.com/primesdr', external: true },
+    { name: 'Twitter', href: 'https://twitter.com/primesdr', external: true },
+    { name: 'TikTok', href: 'https://tiktok.com/@primesdr', external: true },
   ],
 };
 
@@ -47,9 +52,13 @@ export function Footer() {
                 Transformamos LinkedIn em motor de receita previsível para empresas B2B. 
                 Automação inteligente + SDR humano = resultados garantidos.
               </p>
-              <Button size="sm" className="bg-primary-600 hover:bg-primary-700">
-                Teste 30 dias sem risco
-              </Button>
+              <ContactButton 
+                source="footer-test-90-days"
+                size="sm" 
+                className="bg-primary-600 hover:bg-primary-700"
+              >
+                Teste 90 dias sem risco
+              </ContactButton>
             </div>
 
             {/* Institucional */}

@@ -64,9 +64,6 @@ export function PricingPage() {
       name: 'Starter',
       badge: 'PARA COMEÇAR',
       description: 'Para quem quer provar que funciona antes de escalar.',
-      monthlyPrice: 134,
-      yearlyPrice: 1.365,
-      yearlyDiscount: 15,
       features: [
         'Até 3 perfis LinkedIn ativos',
         '2 campanhas simultâneas por perfil',
@@ -91,9 +88,6 @@ export function PricingPage() {
       badge: 'MELHOR CUSTO-BENEFÍCIO',
       popular: true,
       description: 'Para times que querem resultados previsíveis sem depender de mídia paga.',
-      monthlyPrice: 115,
-      yearlyPrice: 1.115,
-      yearlyDiscount: 20,
       features: [
         'Tudo do Starter, mais:',
         'Até 10 perfis LinkedIn ativos',
@@ -106,7 +100,7 @@ export function PricingPage() {
         'Onboarding guiado (7 dias)'
       ],
       idealFor: 'Operações comerciais que precisam encher agenda todo mês',
-      proof: 'Cliente agência: R$ 480k em pipeline, 8 clientes, ticket R$ 5k/mês',
+      proof: 'Cliente agência: 480k em pipeline, 8 clientes, ticket alto/mês',
       cta: {
         primary: 'Começar teste grátis',
         secondary: 'Ver cases do meu segmento'
@@ -222,30 +216,6 @@ export function PricingPage() {
             viewport={{ once: true, margin: '-100px' }}
             className="space-y-20 relative z-10"
           >
-            {/* Billing Toggle */}
-            <motion.div variants={fadeInUp} className="text-center">
-              <div className="flex items-center justify-center space-x-6">
-                <span className={`text-lg font-semibold transition-colors ${billingCycle === 'monthly' ? 'text-gray-900' : 'text-gray-400'}`}>
-                  Mensal
-                </span>
-                <button
-                  onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-                  className="relative inline-flex h-8 w-14 items-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20 shadow-lg"
-                >
-                  <span
-                    className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-all duration-300 ${
-                      billingCycle === 'yearly' ? 'translate-x-7' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-                <span className={`text-lg font-semibold transition-colors ${billingCycle === 'yearly' ? 'text-gray-900' : 'text-gray-400'}`}>
-                  Anual
-                  <span className="ml-2 text-sm bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full font-medium">
-                    -20%
-                  </span>
-                </span>
-              </div>
-            </motion.div>
 
             {/* Pricing Cards */}
             <motion.div
@@ -304,24 +274,7 @@ export function PricingPage() {
                                 </div>
                               </div>
                             </div>
-                          ) : (
-                            <>
-                              <div className="flex items-baseline justify-center">
-                                <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                  R$ {billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
-                                </span>
-                                <span className="text-gray-600 ml-2 text-lg">/usuário/mês</span>
-                              </div>
-                              {billingCycle === 'yearly' && (
-                                <div className="flex items-center justify-center space-x-3 mt-3">
-                                  <span className="text-lg text-gray-500 line-through">R$ {plan.monthlyPrice}</span>
-                                  <span className="text-lg text-green-600 font-bold">
-                                    Economize {plan.yearlyDiscount}%
-                                  </span>
-                                </div>
-                              )}
-                            </>
-                          )}
+                          ) : null}
                         </div>
 
                         {/* Features */}

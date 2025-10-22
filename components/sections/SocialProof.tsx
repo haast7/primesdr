@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
@@ -26,10 +27,31 @@ const staggerContainer = {
 // Componente para animação de números
 function AnimatedNumber({ value, suffix = '', prefix = '' }: { value: number; suffix?: string; prefix?: string }) {
   const [displayValue, setDisplayValue] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const duration = 2000; // 2 segundos
-    const steps = 60;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const element = document.getElementById(`animated-number-${value}`);
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, [value, isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const duration = 2500; // 2.5 segundos para animação mais suave
+    const steps = 100; // Mais steps para animação mais fluida
     const increment = value / steps;
     let current = 0;
 
@@ -44,10 +66,13 @@ function AnimatedNumber({ value, suffix = '', prefix = '' }: { value: number; su
     }, duration / steps);
 
     return () => clearInterval(timer);
-  }, [value]);
+  }, [value, isVisible]);
 
   return (
-    <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
+    <span 
+      id={`animated-number-${value}`}
+      className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg"
+    >
       {prefix}{displayValue.toLocaleString()}{suffix}
     </span>
   );
@@ -112,8 +137,8 @@ export function SocialProof() {
     },
     {
       icon: Calendar,
-      number: 37000,
-      prefix: '+',
+      number: 37148,
+      prefix: '',
       title: 'Reuniões agendadas com decisores B2B',
       color: 'text-white',
       bgGradient: 'from-emerald-500 to-emerald-600',
@@ -130,7 +155,7 @@ export function SocialProof() {
     },
     {
       icon: Shield,
-      number: 30,
+      number: 90,
       suffix: ' dias',
       title: 'Garantia de reembolso total se não gerar resultado',
       color: 'text-white',
@@ -248,7 +273,7 @@ export function SocialProof() {
                   whileHover={{ scale: 1.05 }}
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  +200 empresas confiam na Prime SDR
+                  +2.000 empresas confiam na Prime SDR
                 </motion.span>
               </div>
             </div>
@@ -276,7 +301,7 @@ export function SocialProof() {
               </div>
               
               <h3 className="text-3xl md:text-4xl font-bold leading-tight">
-                🛡️ Garantia Prime: resultados em 30 dias ou reembolso total.
+                🛡️ Garantia Prime: resultados em 90 dias ou reembolso total.
               </h3>
               
               <p className="text-xl md:text-2xl text-white/90 font-medium">
@@ -288,14 +313,14 @@ export function SocialProof() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button
+                  <ContactButton
+                    source="social-proof-cta"
                     size="lg"
                     className="bg-white text-primary-600 hover:bg-gray-50 group text-xl px-12 py-6 shadow-2xl font-bold rounded-2xl"
-                    onClick={handleCTAClick}
                   >
                     Conversar com especialista
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                  </Button>
+                  </ContactButton>
                 </motion.div>
               </div>
             </div>

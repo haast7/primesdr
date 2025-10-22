@@ -49,7 +49,7 @@ export const IMAGE_URLS = {
   logo: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/so%20logo%20azul.png?alt=media&token=98e81c21-5aff-4f1a-abc5-014a581cfcaa',
   logoWhite: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/logo_light.png?alt=media&token=4a6699f4-f27c-422e-a7dd-38056b04e128',
   logoBlack: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/logo_full_light.png?alt=media&token=a1e5fb66-e3d2-4a6c-ae9f-f3750c38353d',
-  favicon: '/favicon.ico', // Mantém local
+  favicon: '/faviconazul.png',
   profile: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/per.png?alt=media&token=0b386c22-6c2e-4dc3-8e06-8cf5350910b5',
   whatsapp: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/whatsapp.png?alt=media&token=d6aafa59-870f-4613-981a-6c91c4e3a7a6',
   linkedin: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/linkedin.png?alt=media&token=d88c4827-58a6-412e-ac0b-1517d2416125',

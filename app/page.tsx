@@ -44,22 +44,16 @@ export default function HomePage() {
       {
         '@type': 'Offer',
         name: 'Plano Starter',
-        price: '79',
-        priceCurrency: 'USD',
         description: 'Para quem quer provar que funciona antes de escalar'
       },
       {
         '@type': 'Offer',
         name: 'Plano Growth',
-        price: '59',
-        priceCurrency: 'USD',
         description: 'Para times que querem resultados previsíveis sem depender de mídia paga'
       },
       {
         '@type': 'Offer',
         name: 'Plano Scale',
-        price: '39',
-        priceCurrency: 'USD',
         description: 'Para quem quer ser inevitável no mercado'
       }
     ]

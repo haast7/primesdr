@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
-import { TypeformButton } from '@/components/ui/TypeformButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: 'E se não funcionar?',
-    answer: '30 dias de teste. Sem ROI (Retorno sobre o Investimento)? Reembolso integral. Simples assim.'
+    answer: '90 dias de teste. Sem ROI (Retorno sobre o Investimento)? Reembolso integral. Simples assim.'
   },
   {
     question: 'Preciso de Sales Navigator?',
@@ -193,7 +193,7 @@ export function FAQ() {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <TypeformButton
+                <ContactButton
                   source="faq-cta"
                   className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white font-bold text-lg px-12 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
                 >
@@ -206,7 +206,7 @@ export function FAQ() {
                     Começar agora
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
-                </TypeformButton>
+                </ContactButton>
               </motion.div>
             </motion.div>
           </div>

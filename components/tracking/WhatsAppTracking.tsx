@@ -36,6 +36,7 @@ function isWhatsAppLink(href: string): boolean {
   return href.includes('wa.me') || 
          href.includes('whatsapp.com') || 
          href.includes('api.whatsapp.com') ||
+         href.includes('w.app') ||
          href.startsWith('whatsapp://');
 }
 
@@ -73,5 +74,9 @@ function getLocationFromElement(element: HTMLElement): string {
   
   return 'page';
 }
+
+
+
+
 
 

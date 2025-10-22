@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { IMAGE_URLS } from '@/lib/imageLoader';
 import { Section } from '@/components/ui/Section';
@@ -221,14 +222,14 @@ export function CaseStudy() {
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
             60 segundos pra saber se sua operação pode gerar 100+ reuniões por mês no LinkedIn.
             </p>
-            <Button
+            <ContactButton
+              source="case-study-cta"
               size="lg"
               className="group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 text-white shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 text-lg px-8 py-4"
-              onClick={handleCTAClick}
             >
               Começar agora
               <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            </ContactButton>
           </div>
         </div>
       </motion.div>

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -41,9 +42,6 @@ export function Pricing() {
       name: 'Starter',
       badge: 'PARA COMEÇAR',
       description: 'Para quem quer provar que funciona antes de escalar.',
-      monthlyPrice: 134,
-      yearlyPrice: 1.365,
-      yearlyDiscount: 15,
       features: [
         'Até 3 perfis LinkedIn ativos',
         '2 campanhas simultâneas por perfil',
@@ -68,9 +66,6 @@ export function Pricing() {
       badge: 'MELHOR CUSTO-BENEFÍCIO',
       popular: true,
       description: 'Para times que querem resultados previsíveis sem depender de mídia paga.',
-      monthlyPrice: 115,
-      yearlyPrice: 1.115,
-      yearlyDiscount: 20,
       features: [
         'Tudo do Starter, mais:',
         'Até 10 perfis LinkedIn ativos',
@@ -83,7 +78,7 @@ export function Pricing() {
         'Onboarding guiado (7 dias)'
       ],
       idealFor: 'Operações comerciais que precisam encher agenda todo mês',
-      proof: 'Cliente agência: R$ 480k em pipeline, 8 clientes, ticket R$ 5k/mês',
+      proof: 'Cliente agência: 480k em pipeline, 8 clientes, ticket alto/mês',
       cta: {
         primary: 'Começar teste grátis',
         secondary: 'Ver cases do meu segmento'
@@ -171,28 +166,6 @@ export function Pricing() {
               {t.pricing.subtitle}
             </p>
 
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center space-x-6">
-              <span className={`text-lg font-semibold transition-colors ${billingCycle === 'monthly' ? 'text-gray-900' : 'text-gray-400'}`}>
-                {t.pricing.toggle.monthly}
-              </span>
-              <button
-                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-                className="relative inline-flex h-8 w-14 items-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20 shadow-lg"
-              >
-                <span
-                  className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-all duration-300 ${
-                    billingCycle === 'yearly' ? 'translate-x-7' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <span className={`text-lg font-semibold transition-colors ${billingCycle === 'yearly' ? 'text-gray-900' : 'text-gray-400'}`}>
-                {t.pricing.toggle.annual}
-                <span className="ml-2 text-sm bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full font-medium">
-                  -20%
-                </span>
-              </span>
-            </div>
           </motion.div>
 
           {/* Pricing Cards */}
@@ -253,24 +226,7 @@ export function Pricing() {
                             </div>
                           </div>
                         </div>
-                      ) : (
-                        <>
-                      <div className="flex items-baseline justify-center">
-                        <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                          ${billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
-                        </span>
-                        <span className="text-gray-600 ml-2 text-lg">/usuário/mês</span>
-                      </div>
-                      {billingCycle === 'yearly' && (
-                        <div className="flex items-center justify-center space-x-3 mt-3">
-                          <span className="text-lg text-gray-500 line-through">${plan.monthlyPrice}</span>
-                          <span className="text-lg text-green-600 font-bold">
-                            Economize {plan.yearlyDiscount}%
-                          </span>
-                        </div>
-                          )}
-                        </>
-                      )}
+                      ) : null}
                     </div>
 
                     {/* Features */}
@@ -306,11 +262,9 @@ export function Pricing() {
                     <div className="mt-8 space-y-4">
                       {plan.isCustom ? (
                         <>
-                          <motion.button
+                          <ContactButton
+                            source={`pricing-${plan.name.toLowerCase()}-primary`}
                             className="w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-700 hover:via-indigo-700 hover:to-purple-700 text-white font-bold text-lg py-4 px-6 rounded-xl shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 group relative overflow-hidden"
-                            onClick={() => handleCTAClick(plan.name, 'primary')}
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
                           >
                             {/* Efeito de brilho interno */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -320,19 +274,17 @@ export function Pricing() {
                               {plan.cta.primary}
                               <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                             </span>
-                          </motion.button>
+                          </ContactButton>
                           
-                          <motion.button
+                          <ContactButton
+                            source={`pricing-${plan.name.toLowerCase()}-secondary`}
                             className="w-full bg-white border-2 border-purple-200 hover:border-purple-300 hover:bg-purple-50 text-purple-700 font-semibold text-base py-3 px-6 rounded-xl transition-all duration-300 group"
-                            onClick={() => handleCTAClick(plan.name, 'secondary')}
-                            whileHover={{ scale: 1.01, y: -1 }}
-                            whileTap={{ scale: 0.99 }}
                           >
                             <span className="flex items-center justify-center">
                               <Calendar className="w-5 h-5 mr-2" />
                               {plan.cta.secondary}
                             </span>
-                          </motion.button>
+                          </ContactButton>
                           
                           {/* Trust Indicators */}
                           <div className="text-center space-y-2 pt-2">
@@ -353,26 +305,26 @@ export function Pricing() {
                         </>
                       ) : (
                         <>
-                      <Button
+                      <ContactButton
+                        source={`pricing-${plan.name.toLowerCase()}-primary`}
                         size="lg"
                         className={`w-full text-lg font-bold py-4 ${
                           plan.popular 
                             ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl' 
                             : 'bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white shadow-lg hover:shadow-xl'
                         }`}
-                        onClick={() => handleCTAClick(plan.name, 'primary')}
                       >
                         {plan.cta.primary}
                         <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                      <Button
-                        variant="ghost"
+                      </ContactButton>
+                      <ContactButton
+                        source={`pricing-${plan.name.toLowerCase()}-secondary`}
+                        variant="outline"
                         size="lg"
                         className="w-full text-base font-semibold py-3 border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-                        onClick={() => handleCTAClick(plan.name, 'secondary')}
                       >
                         {plan.cta.secondary}
-                      </Button>
+                      </ContactButton>
                         </>
                       )}
                     </div>
@@ -455,16 +407,16 @@ export function Pricing() {
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">R$ 5.000–8.000</span>
+                            <span className="text-gray-600 font-medium">Custo alto</span>
                           </div>
                           <p className="text-xs text-gray-500 mt-1">por pessoa</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">R$ 1.318</span>
+                            <span className="text-green-600 font-bold">Economia significativa</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">6 usuários</p>
+                          <p className="text-xs text-gray-500 mt-1">com Prime SDR</p>
                         </div>
                       </motion.div>
 
@@ -629,7 +581,7 @@ export function Pricing() {
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
                       <div className="bg-white/10 rounded-xl p-4">
-                        <div className="text-3xl font-bold mb-1">R$ 6.000–10.000</div>
+                        <div className="text-3xl font-bold mb-1">Economia significativa</div>
                         <div className="text-green-100">Economia mensal</div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-4">

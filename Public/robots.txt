@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://primesdr.vercel.app/sitemap.xml
+Sitemap: https://www.primesdr.com/sitemap.xml

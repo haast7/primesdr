@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { ArrowRight, Calendar, Clock, Target, Zap, Sparkles, CheckCircle, Users, TrendingUp } from 'lucide-react';
@@ -117,15 +118,17 @@ export function HowItWorksHero() {
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
             className="mb-12"
           >
-            <motion.button
-              onClick={handleCTAClick}
-              className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-500 hover:via-purple-500 hover:to-indigo-500 text-white font-bold text-xl px-16 py-6 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
+            <motion.div
               whileHover={{ 
                 scale: 1.05,
                 boxShadow: "0 25px 50px rgba(59, 130, 246, 0.4)"
               }}
               whileTap={{ scale: 0.95 }}
             >
+              <ContactButton
+                source="how-it-works-hero-cta"
+                className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-500 hover:via-purple-500 hover:to-indigo-500 text-white font-bold text-xl px-16 py-6 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
+              >
               {/* Efeito de brilho interno */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               
@@ -135,7 +138,8 @@ export function HowItWorksHero() {
                 Agendar demonstração (15 min)
                 <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
               </span>
-            </motion.button>
+              </ContactButton>
+            </motion.div>
           </motion.div>
 
           {/* Trust Indicators */}

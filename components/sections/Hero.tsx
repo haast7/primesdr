@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { TypeformButton } from '@/components/ui/TypeformButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 
 export function Hero() {
@@ -54,13 +54,13 @@ export function Hero() {
               </li>
             </ul>
           </div>
-          <TypeformButton
+          <ContactButton
             source="hero-main"
             size="lg"
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
           >
             Quero 100+ reuniões em 45 dias
-          </TypeformButton>
+          </ContactButton>
         </div>
       </Container>
     </section>

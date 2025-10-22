@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
-import { TypeformButton } from '@/components/ui/TypeformButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { 
   Target, 
   Users, 
@@ -107,7 +107,7 @@ export function AboutPage() {
     },
     {
       other: '"Resultados podem variar" (sem garantia)',
-      prime: '30 dias de garantia: não funcionar? Reembolso total',
+      prime: '90 dias de garantia: não funcionar? Reembolso total',
       icon: Shield
     },
     {
@@ -150,7 +150,7 @@ export function AboutPage() {
     { icon: Shield, title: 'Conformidade com LGPD', description: 'Tratamos dados pessoais com responsabilidade. Política de privacidade clara, sem letra miúda.' },
     { icon: CheckCircle, title: 'Segurança no LinkedIn', description: 'Respeitamos todos os limites (30-40 convites/dia), variamos cadências, aquecemos perfis. Zero risco de ban.' },
     { icon: Phone, title: 'Suporte real', description: 'Gente de verdade respondendo, ajustando campanhas, otimizando resultados. Não é chatbot, é parceria.' },
-    { icon: Award, title: 'Garantia de 30 dias', description: 'Não gerou reuniões qualificadas? Reembolso integral. Sem burocracia, sem desculpas.' }
+    { icon: Award, title: 'Garantia de 90 dias', description: 'Não gerou reuniões qualificadas? Reembolso integral. Sem burocracia, sem desculpas.' }
   ];
 
   return (
@@ -572,7 +572,7 @@ export function AboutPage() {
                     
                     <div className="flex items-center space-x-3">
                       <Phone className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">+55 11 94502-2847 (WhatsApp)</span>
+                      <span className="text-gray-700">+55 11 93200-1771 (WhatsApp)</span>
                     </div>
                     
                     <div className="flex items-center space-x-3">
@@ -603,25 +603,25 @@ export function AboutPage() {
               </h2>
               
               <p className="text-xl text-primary-100 leading-relaxed">
-                Mais de 2.000 perfis já estão gerando reuniões com a Prime SDR. Teste 30 dias sem risco.
+                Mais de 2.000 perfis já estão gerando reuniões com a Prime SDR. Teste 90 dias sem risco.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <TypeformButton 
+                <ContactButton 
                   source="about-cta-primary"
                   size="lg" 
                   className="bg-white text-primary-600 hover:bg-gray-100"
                 >
                   Agendar demonstração (15 min)
-                </TypeformButton>
-                <TypeformButton 
+                </ContactButton>
+                <ContactButton 
                   source="about-cta-secondary"
                   size="lg" 
                   variant="outline" 
                   className="border-white text-white hover:bg-white hover:text-primary-600"
                 >
                   Ver casos de sucesso
-                </TypeformButton>
+                </ContactButton>
               </div>
             </motion.div>
           </motion.div>

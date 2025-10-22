@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer';
 import { Analytics } from '@/components/Analytics';
 import { LanguageProvider } from '@/lib/contexts/LanguageContext';
 import { TypeformProvider } from '@/components/TypeformProvider';
+import { ContactModalProvider } from '@/lib/contexts/ContactModalContext';
 import { CookieConsentProvider } from '@/lib/contexts/CookieConsentContext';
 import { CookieBanner } from '@/components/CookieBanner';
 import { TrackingPixels } from '@/components/TrackingPixels';
@@ -78,6 +79,16 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
   },
+  icons: {
+    icon: [
+      { url: '/faviconazul.png', sizes: '32x32', type: 'image/png' },
+      { url: '/faviconazul.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/faviconazul.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/faviconazul.png',
+  },
 };
 
 export default function RootLayout({
@@ -88,8 +99,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
-        <link rel="icon" href={IMAGE_URLS.favicon} />
-        <link rel="apple-touch-icon" href={IMAGE_URLS.favicon} />
+        <link rel="icon" href="/faviconazul.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/faviconazul.png" />
+        <link rel="shortcut icon" href="/faviconazul.png" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -97,6 +109,7 @@ export default function RootLayout({
         <CookieConsentProvider>
           <LanguageProvider>
             <TypeformProvider>
+              <ContactModalProvider>
               <Analytics />
               <TrackingPixels />
               <Header />
@@ -106,9 +119,10 @@ export default function RootLayout({
               <Footer />
               <CookieBanner />
               <WhatsAppButton 
-                phone="+5511932001771" 
+                phone="5511932001771" 
                 message="Olá! Gostaria de saber mais sobre o Prime SDR."
               />
+              </ContactModalProvider>
             </TypeformProvider>
           </LanguageProvider>
         </CookieConsentProvider>

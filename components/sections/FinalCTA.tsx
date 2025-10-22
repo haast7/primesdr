@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { 
   ArrowRight, 
   Calendar, 
@@ -204,14 +205,9 @@ export function FinalCTA() {
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
               {/* Primary CTA */}
-              <motion.button
-                onClick={handleCTAClick}
+              <ContactButton
+                source="final-cta-primary"
                 className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-500 hover:via-purple-500 hover:to-indigo-500 text-white font-bold text-xl px-20 py-6 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 25px 50px rgba(59, 130, 246, 0.4)"
-                }}
-                whileTap={{ scale: 0.95 }}
               >
                 {/* Efeito de brilho interno */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -222,18 +218,16 @@ export function FinalCTA() {
                   Agendar demonstração (15 min)
                   <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
-              </motion.button>
+              </ContactButton>
 
               {/* Secondary CTA */}
-              <motion.button
-                onClick={handleSecondaryCTAClick}
+              <ContactButton
+                source="final-cta-secondary"
                 className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold text-lg px-12 py-6 rounded-2xl border border-white/20 transition-all duration-300 hover:scale-105"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 <Star className="w-5 h-5 mr-2 inline" />
                 Ver casos de sucesso
-              </motion.button>
+              </ContactButton>
             </div>
           </motion.div>
 

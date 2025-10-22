@@ -27,7 +27,7 @@ export function WhatsAppButton({
 
     // Create WhatsApp URL
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodedMessage}`;
+    const whatsappUrl = `https://w.app/primesdr?text=${encodedMessage}`;
     
     // Open WhatsApp
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');

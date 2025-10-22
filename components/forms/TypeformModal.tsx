@@ -8,8 +8,8 @@ import { trackEvent } from '@/components/Analytics';
 import { trackMetaLead, trackMetaSchedule } from '../tracking/MetaPixel';
 import { trackGoogleAdsLead, trackGoogleAdsSchedule } from '../tracking/GoogleAds';
 import { trackGA4Lead, trackGA4Schedule } from '../tracking/GoogleAnalytics';
-import { CalendlyWidget } from './CalendlyWidget';
-import { CalendarScheduler } from '../calendar/CalendarScheduler';
+import { ThankYouScreen } from './ThankYouScreen';
+import { sendToWebhook, formatPhoneForWebhook, getCurrentDateTime } from '@/lib/webhook';
 
 // Lista de países com códigos telefônicos (sem duplicatas)
 const countryCodes = [
@@ -104,8 +104,8 @@ const questions = [
     title: 'Qual é o modelo de negócio da sua empresa?',
     type: 'multiple',
     options: [
-      { value: 'b2b-consultivo', label: 'B2B com venda consultiva (ticket > R$ 3k, ciclo de venda)' },
-      { value: 'b2b-transacional', label: 'B2B transacional (venda rápida, ticket < R$ 3k)' },
+      { value: 'b2b-consultivo', label: 'B2B com venda consultiva (ticket mais alto com ciclo de venda)' },
+      { value: 'b2b-transacional', label: 'B2B transacional (venda rápida, ticket menor)' },
       { value: 'b2c', label: 'B2C (vendo para consumidor final)' },
       { value: 'validando', label: 'Ainda não vendo (estou validando o negócio)' }
     ],
@@ -188,7 +188,7 @@ const questions = [
       { id: 'phone', label: 'WhatsApp', type: 'phone', required: true },
       { id: 'company', label: 'Empresa', type: 'text', required: true },
       { id: 'role', label: 'Cargo', type: 'text', required: true },
-      { id: 'linkedin', label: 'LinkedIn (opcional)', type: 'url', required: false }
+      { id: 'linkedin', label: 'Domínio/site', type: 'url', required: true }
     ]
   }
 ];
@@ -224,10 +224,8 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
     linkedin: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showResult, setShowResult] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
   const [fitScore, setFitScore] = useState(0);
-  const [showCalendly, setShowCalendly] = useState(false);
-  const [showCalendarScheduler, setShowCalendarScheduler] = useState(false);
 
   // Reset form when modal opens
   useEffect(() => {
@@ -250,10 +248,8 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
         role: '',
         linkedin: ''
       });
-      setShowResult(false);
+      setShowThankYou(false);
       setFitScore(0);
-      setShowCalendly(false);
-      setShowCalendarScheduler(false);
     }
   }, [isOpen]);
 
@@ -380,7 +376,7 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
 
     const finalScore = Math.round((score / totalQuestions) * 100);
     setFitScore(finalScore);
-    setShowResult(true);
+    setShowThankYou(true);
 
     // Track completion
     trackEvent('typeform_completed', {
@@ -450,68 +446,35 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
       // Here you would integrate with your backend/CRM
       console.log('Form submitted:', { formData, fitScore });
       
+      // Enviar para webhook do Make.com
+      const { data, horario } = getCurrentDateTime();
+      const webhookData = {
+        nome: formData.name,
+        email: formData.email,
+        whatsapp: formatPhoneForWebhook(formData.phone),
+        empresa: formData.company,
+        cargo: formData.role,
+        dominio: formData.linkedin,
+        data_entrada: data,
+        horario_entrada: horario,
+        fonte: 'Formulário A (Quiz)'
+      };
+      
+      try {
+        await sendToWebhook(webhookData);
+        console.log('Dados enviados para webhook com sucesso');
+      } catch (error) {
+        console.error('Erro ao enviar para webhook:', error);
+      }
+      
     } catch (error) {
       console.error('Submission error:', error);
     } finally {
       setIsSubmitting(false);
+      setShowThankYou(true);
     }
   };
 
-  const handleScheduleCall = () => {
-    setShowCalendarScheduler(true);
-    trackEvent('schedule_call', {
-      fit_score: fitScore,
-      company: formData.company,
-      role: formData.role
-    });
-  };
-
-  const handleScheduleSuccess = (eventData: any) => {
-    setShowCalendarScheduler(false);
-    setShowResult(true);
-    trackEvent('meeting_scheduled', {
-      vendedor: eventData.vendedor.name,
-      event_id: eventData.event.id,
-      meet_link: eventData.event.meetLink
-    });
-
-    // Enviar para Meta Pixel
-    trackMetaSchedule({ ...formData, vendedor: eventData.vendedor.name });
-
-    // Enviar para Google Ads
-    trackGoogleAdsSchedule({ ...formData, vendedor: eventData.vendedor.name });
-
-    // Enviar para Google Analytics 4
-    trackGA4Schedule({ ...formData, vendedor: eventData.vendedor.name });
-
-    // Enviar para Meta Conversions API
-    fetch('/api/meta/lead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        formData: { ...formData, vendedor: eventData.vendedor.name },
-        eventType: 'Schedule'
-      }),
-    }).catch(error => {
-      console.error('Erro ao enviar agendamento para Meta API:', error);
-    });
-
-    // Enviar para Google Ads Conversions API
-    fetch('/api/google-ads/conversion', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        formData: { ...formData, vendedor: eventData.vendedor.name },
-        eventType: 'Schedule'
-      }),
-    }).catch(error => {
-      console.error('Erro ao enviar agendamento para Google Ads API:', error);
-    });
-  };
 
   const getResultType = () => {
     if (fitScore >= 75) return 'perfect';
@@ -593,7 +556,7 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
               <X className="w-6 h-6" />
             </button>
             
-            {!showResult && (
+            {!showThankYou && (
               <>
                 <h2 className="text-2xl font-bold mb-2">
                   Vamos ver se a Prime SDR é pra você
@@ -617,7 +580,7 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
 
           {/* Content */}
           <div className="p-8 max-h-[calc(90vh-120px)] overflow-y-auto">
-            {!showResult ? (
+            {!showThankYou ? (
               <QuestionStep
                 question={questions[currentStep]}
                 formData={formData}
@@ -631,11 +594,10 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
                 totalSteps={questions.length}
                 isContactFormValid={isContactFormValid}
               />
-            ) : showCalendarScheduler ? (
-              <CalendarScheduler
+            ) : showThankYou ? (
+              <ThankYouScreen
                 formData={formData}
-                onSchedule={handleScheduleSuccess}
-                onClose={() => setShowCalendarScheduler(false)}
+                onClose={onClose}
               />
             ) : (
               <ResultScreen
@@ -644,7 +606,7 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
                 formData={formData}
                 onSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
-                onShowCalendly={handleScheduleCall}
+                onShowCalendly={() => {}}
               />
             )}
           </div>
@@ -990,7 +952,7 @@ function QuestionStep({
                       type={field.type}
                       value={value}
                       onChange={handleFieldChange}
-                      placeholder={field.type === 'url' ? 'https://linkedin.com/in/seu-perfil' : ''}
+                      placeholder={field.type === 'url' ? 'https://suaempresa.com.br' : ''}
                       className={`w-full p-3 border-2 rounded-lg focus:outline-none transition-colors ${
                         showError 
                           ? 'border-red-500 focus:border-red-500' 

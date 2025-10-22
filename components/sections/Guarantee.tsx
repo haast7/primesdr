@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -198,8 +199,8 @@ export function Guarantee() {
               <div className="absolute -inset-1 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 rounded-2xl blur opacity-75 animate-pulse"></div>
               
               {/* Botão principal */}
-              <motion.button
-                onClick={handleCTAClick}
+              <ContactButton
+                source="guarantee-cta"
                 className="relative bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 hover:from-green-500 hover:via-emerald-500 hover:to-teal-500 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-green-500/50 group overflow-hidden"
                 whileHover={{ 
                   scale: 1.05,
@@ -216,7 +217,7 @@ export function Guarantee() {
                   Começar teste de 30 dias
                   <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
-              </motion.button>
+              </ContactButton>
             </div>
           </motion.div>
         </motion.div>

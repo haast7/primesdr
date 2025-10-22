@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TypeformButton } from '@/components/ui/TypeformButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -169,7 +169,7 @@ export function Differentiators() {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <TypeformButton
+                <ContactButton
                   source="differentiators-cta"
                   className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
                 >
@@ -182,7 +182,7 @@ export function Differentiators() {
                     Agendar demonstração (15 min)
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
-                </TypeformButton>
+                </ContactButton>
               </motion.div>
               
               {/* Texto de urgência */}

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -123,12 +124,21 @@ export function Header() {
               )}
             </div>
 
-            <Button variant="ghost" size="sm" className="hover:bg-primary-50 hover:text-primary-600">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="hover:bg-primary-50 hover:text-primary-600"
+              onClick={() => window.open('https://sales.backlinksglobal.com/auth/login', '_blank')}
+            >
               {t.header.login}
             </Button>
-            <Button size="sm" className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transition-all duration-200">
+            <ContactButton 
+              source="header-test-free"
+              size="sm" 
+              className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transition-all duration-200"
+            >
               {t.header.startFree}
-            </Button>
+            </ContactButton>
           </div>
 
           {/* Mobile menu button */}
@@ -189,12 +199,21 @@ export function Header() {
 
             {/* Mobile Actions */}
             <div className="mt-6 px-4 space-y-3">
-              <Button variant="ghost" size="sm" className="w-full justify-center hover:bg-primary-50 hover:text-primary-600">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full justify-center hover:bg-primary-50 hover:text-primary-600"
+                onClick={() => window.open('https://sales.backlinksglobal.com/auth/login', '_blank')}
+              >
                 {t.header.login}
               </Button>
-              <Button size="sm" className="w-full justify-center bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg">
+              <ContactButton 
+                source="header-mobile-test-free"
+                size="sm" 
+                className="w-full justify-center bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg"
+              >
                 {t.header.startFree}
-              </Button>
+              </ContactButton>
             </div>
           </div>
         )}
