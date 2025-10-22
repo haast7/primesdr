@@ -81,13 +81,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/faviconazul.png', sizes: '32x32', type: 'image/png' },
-      { url: '/faviconazul.png', sizes: '16x16', type: 'image/png' },
+      { url: '/faviconazul.png?v=2', sizes: '32x32', type: 'image/png' },
+      { url: '/faviconazul.png?v=2', sizes: '16x16', type: 'image/png' },
     ],
     apple: [
-      { url: '/faviconazul.png', sizes: '180x180', type: 'image/png' },
+      { url: '/faviconazul.png?v=2', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/faviconazul.png',
+    shortcut: '/faviconazul.png?v=2',
   },
 };
 
@@ -99,9 +99,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
-        <link rel="icon" href="/faviconazul.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/faviconazul.png" />
-        <link rel="shortcut icon" href="/faviconazul.png" />
+        <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon" />
+        <link rel="icon" href="/faviconazul.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/faviconazul.png?v=2" />
+        <link rel="shortcut icon" href="/favicon.ico?v=2" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
