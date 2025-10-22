@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import { Vendedor } from '@/lib/vendedores';
@@ -36,9 +36,9 @@ export function CalendarScheduler({ formData, onSchedule, onClose }: CalendarSch
     if (selectedVendedor && selectedDate) {
       fetchAvailability();
     }
-  }, [selectedVendedor, selectedDate]);
+  }, [selectedVendedor, selectedDate, fetchAvailability]);
 
-  const fetchAvailability = async () => {
+  const fetchAvailability = useCallback(async () => {
     if (!selectedVendedor || !selectedDate) return;
 
     setLoading(true);
@@ -85,7 +85,7 @@ export function CalendarScheduler({ formData, onSchedule, onClose }: CalendarSch
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedVendedor, selectedDate]);
 
   const handleSchedule = async () => {
     if (!selectedVendedor || !selectedSlot) return;

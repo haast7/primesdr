@@ -104,7 +104,7 @@ export default function NotFound() {
             className="text-6xl font-bold text-gray-900 mb-4"
           >
             🚧
-          </motion.h1> */}
+          </motion.h1>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
