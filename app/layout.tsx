@@ -81,13 +81,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico?v=2', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/favicon.ico?v=2', sizes: '16x16', type: 'image/x-icon' },
+      { url: '/favicon.ico?v=3', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.ico?v=3', sizes: '16x16', type: 'image/x-icon' },
     ],
     apple: [
-      { url: '/favicon.ico?v=2', sizes: '180x180', type: 'image/x-icon' },
+      { url: '/favicon.ico?v=3', sizes: '180x180', type: 'image/x-icon' },
     ],
-    shortcut: '/favicon.ico?v=2',
+    shortcut: '/favicon.ico?v=3',
   },
 };
 
@@ -99,9 +99,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
-        <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/favicon.ico?v=2" />
-        <link rel="shortcut icon" href="/favicon.ico?v=2" />
+        <link rel="icon" href="/favicon.ico?v=3" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/favicon.ico?v=3" />
+        <link rel="shortcut icon" href="/favicon.ico?v=3" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
