@@ -1,10 +1,11 @@
 import { useEffect, useRef, useCallback } from 'react';
 
 interface PartialFormData {
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | undefined;
 }
 
-interface EnrichedFormData extends PartialFormData {
+interface EnrichedFormData {
+  [key: string]: string | number | boolean | undefined;
   formId: string;
   timestamp: string;
   timeOnForm: number;
