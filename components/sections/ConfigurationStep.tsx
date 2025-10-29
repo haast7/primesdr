@@ -168,7 +168,7 @@ export function ConfigurationStep() {
       day: 'Dia 6',
       action: 'Follow-up 1',
       description: 'Se não responder',
-      note: `"{{firstName}}, vale 15 min pra te mostrar como colocamos 100+ reuniões no calendário do seu time?"`
+      note: `"{{firstName}}, vale 15 min pra te mostrar como colocamos 30+ reuniões no calendário do seu time?"`
     },
     {
       day: 'Dia 10',

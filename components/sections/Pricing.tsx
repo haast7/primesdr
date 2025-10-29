@@ -7,7 +7,7 @@ import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
-import { ArrowRight, Check, Star, Users, Zap, Crown, MessageCircle, Sparkles, TrendingUp, Clock, Target, DollarSign, UserCheck, Calendar, Shield, X, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Check, Star, Users, Zap, Crown, MessageCircle, Sparkles, TrendingUp, Clock, Target, DollarSign, UserCheck, Calendar, Shield, X, CheckCircle2, Linkedin, BarChart3, Settings } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 
@@ -43,14 +43,13 @@ export function Pricing() {
       badge: 'PARA COMEÇAR',
       description: 'Para quem quer provar que funciona antes de escalar.',
       features: [
-        'Até 3 perfis LinkedIn ativos',
+        'Até 2 perfis LinkedIn ativos',
         '2 campanhas simultâneas por perfil',
-        'IA de personalização por cargo/setor',
-        'Templates prontos (10+ indústrias)',
+        'Templates prontos (5+ indústrias)',
         'Dashboard com métricas em tempo real',
-        'Integração CRM (HubSpot, Pipedrive, RD)',
+        'Integração via webhook',
         'Suporte via chat (resposta em 24h)',
-        '7 dias grátis'
+        'Teste de 90 dias'
       ],
       idealFor: 'Fundadores e pequenos times testando prospecção sistemática',
       proof: 'Payback no primeiro mês. Ou reembolso integral.',
@@ -62,20 +61,19 @@ export function Pricing() {
       icon: Users
     },
     {
-      name: 'Growth',
+      name: 'Growth 20%OFF',
       badge: 'MELHOR CUSTO-BENEFÍCIO',
       popular: true,
       description: 'Para times que querem resultados previsíveis sem depender de mídia paga.',
       features: [
         'Tudo do Starter, mais:',
         'Até 10 perfis LinkedIn ativos',
-        '4 campanhas simultâneas por perfil',
-        'SDR compartilhado (qualifica e agenda reuniões)',
+        'Campanhas ilimitadas simultâneas por perfil',
         'Revisão quinzenal de performance',
         'Testes A/B automatizados',
-        'Relatórios executivos semanais',
+        'Relatórios executivos semanais (em breve)',
         'Suporte prioritário (resposta em 6h)',
-        'Onboarding guiado (7 dias)'
+        'Onboarding guiado'
       ],
       idealFor: 'Operações comerciais que precisam encher agenda todo mês',
       proof: 'Cliente agência: 480k em pipeline, 8 clientes, ticket alto/mês',
@@ -95,7 +93,7 @@ export function Pricing() {
       features: [
         'Tudo do Growth, mais:',
         'Perfis LinkedIn ilimitados',
-        '8+ campanhas simultâneas por perfil',
+        'Campanhas ilimitadas simultâneas por perfil',
         'SDR dedicado (exclusivo pra sua operação)',
         'Copy personalizada por ICP',
         'Listas curadas + enriquecimento de dados',
@@ -365,7 +363,7 @@ export function Pricing() {
               <div className="overflow-x-auto">
                   <div className="min-w-full">
                     {/* Table Header */}
-                    <div className="grid grid-cols-3 gap-6 mb-6">
+                    <div className="grid grid-cols-4 gap-6 mb-6">
                       <div className="text-center">
                         <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-500 rounded-xl flex items-center justify-center mx-auto mb-3">
                           <UserCheck className="w-6 h-6 text-white" />
@@ -379,6 +377,13 @@ export function Pricing() {
                         </div>
                         <h4 className="text-lg font-bold text-gray-900">SDR Interno</h4>
                         <p className="text-sm text-gray-500">Método tradicional</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center mx-auto mb-3">
+                          <Linkedin className="w-6 h-6 text-white" />
+                        </div>
+                        <h4 className="text-lg font-bold text-gray-900">Sales Navigator</h4>
+                        <p className="text-sm text-gray-500">Ferramenta LinkedIn</p>
                       </div>
                       <div className="text-center">
                         <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-3">
@@ -396,7 +401,7 @@ export function Pricing() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300"
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center">
@@ -414,6 +419,13 @@ export function Pricing() {
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <span className="text-green-600 font-medium">Custo baixo</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">(~R$ 640)</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-500" />
                             <span className="text-green-600 font-bold">Economia significativa</span>
                           </div>
                           <p className="text-xs text-gray-500 mt-1">com Prime SDR</p>
@@ -425,7 +437,7 @@ export function Pricing() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300"
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
@@ -441,8 +453,14 @@ export function Pricing() {
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium">1 perfil</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">6 perfis simultâneos</span>
+                            <span className="text-green-600 font-bold">Sem limite de perfis ativos</span>
                           </div>
                         </div>
                       </motion.div>
@@ -452,7 +470,7 @@ export function Pricing() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 hover:shadow-lg transition-all duration-300"
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -470,6 +488,13 @@ export function Pricing() {
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <span className="text-green-600 font-medium">Imediato</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">(mas manual)</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-500" />
                             <span className="text-green-600 font-bold">7 dias</span>
                           </div>
                           <p className="text-xs text-gray-500 mt-1">ativo</p>
@@ -481,7 +506,7 @@ export function Pricing() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
-                        className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl border border-indigo-100 hover:shadow-lg transition-all duration-300"
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl border border-indigo-100 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
@@ -497,10 +522,17 @@ export function Pricing() {
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">50 msg/mês</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">(LIMITE!)</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
                             <span className="text-green-600 font-bold text-sm">Automação + inteligência</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">100+ empresas</p>
+                          <p className="text-xs text-gray-500 mt-1">1.200+ msg/mês</p>
                         </div>
                       </motion.div>
 
@@ -509,7 +541,7 @@ export function Pricing() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.5 }}
-                        className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100 hover:shadow-lg transition-all duration-300"
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
@@ -526,6 +558,13 @@ export function Pricing() {
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium">5–10</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">(manual)</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
                             <span className="text-green-600 font-bold">80–120</span>
                           </div>
@@ -538,7 +577,7 @@ export function Pricing() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.6 }}
-                        className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100 hover:shadow-lg transition-all duration-300"
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center">
@@ -555,9 +594,115 @@ export function Pricing() {
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <span className="text-green-600 font-medium">24/7</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">mas sem automação real</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-500" />
                             <span className="text-green-600 font-bold">24/7</span>
                           </div>
                           <p className="text-xs text-gray-500 mt-1">ininterrupta</p>
+                        </div>
+                      </motion.div>
+
+                      {/* Dashboard */}
+                      <motion.div 
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 }}
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border border-orange-100 hover:shadow-lg transition-all duration-300"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+                            <BarChart3 className="w-5 h-5 text-white" />
+                          </div>
+                          <span className="font-semibold text-gray-900">Dashboard</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">❌ Sem dashboard</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">❌ Sem dashboard</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <span className="text-green-600 font-bold text-sm">✅ Dashboard completo</span>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      {/* Dados Proprietários */}
+                      <motion.div 
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.8 }}
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-pink-50 to-rose-50 rounded-2xl border border-pink-100 hover:shadow-lg transition-all duration-300"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
+                            <MessageCircle className="w-5 h-5 text-white" />
+                          </div>
+                          <span className="font-semibold text-gray-900">Dados proprietários</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">❌ Sem dados proprietários</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">❌ Sem dados proprietários</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <span className="text-green-600 font-bold text-sm">✅ Dados proprietários</span>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      {/* Cadências */}
+                      <motion.div 
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.9 }}
+                        className="grid grid-cols-4 gap-6 p-6 bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl border border-teal-100 hover:shadow-lg transition-all duration-300"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl flex items-center justify-center">
+                            <Settings className="w-5 h-5 text-white" />
+                          </div>
+                          <span className="font-semibold text-gray-900">Cadências</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">❌ Cadências manuais ↓</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <X className="w-5 h-5 text-red-500" />
+                            <span className="text-gray-600 font-medium text-sm">❌ Cadências manuais ↓</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <span className="text-green-600 font-bold text-sm">✅ Cadências automatizadas</span>
+                          </div>
                         </div>
                       </motion.div>
                     </div>

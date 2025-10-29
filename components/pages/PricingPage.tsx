@@ -160,7 +160,7 @@ export function PricingPage() {
     { icon: Shield, title: 'Conformidade com LGPD', description: 'Tratamos dados pessoais com responsabilidade. Política de privacidade clara, sem letra miúda.' },
     { icon: CheckCircle2, title: 'Segurança no LinkedIn', description: 'Respeitamos todos os limites (30-40 convites/dia), variamos cadências, aquecemos perfis. Zero risco de ban.' },
     { icon: Phone, title: 'Suporte real', description: 'Gente de verdade respondendo, ajustando campanhas, otimizando resultados. Não é chatbot, é parceria.' },
-    { icon: Award, title: 'Garantia de 30 dias', description: 'Não gerou reuniões qualificadas? Reembolso integral. Sem burocracia, sem desculpas.' }
+    { icon: Award, title: 'Garantia de 90 dias', description: 'Não gerou reuniões qualificadas? Reembolso integral. Sem burocracia, sem desculpas.' }
   ];
 
   const getBadgeColor = (color: string) => {
@@ -199,7 +199,7 @@ export function PricingPage() {
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-                Garantia de 30 dias, sem taxa de setup e ROI positivo em até 90 dias. Teste sem risco.
+                Garantia de 90 dias, sem taxa de setup e ROI positivo em até 90 dias. Teste sem risco.
               </p>
             </motion.div>
           </motion.div>
@@ -512,7 +512,7 @@ export function PricingPage() {
               </h2>
               
               <p className="text-xl text-primary-100 leading-relaxed">
-                Mais de 2.000 perfis já estão gerando reuniões com a Prime SDR. Teste 30 dias sem risco.
+                Mais de 2.000 perfis já estão gerando reuniões com a Prime SDR. Teste 90 dias sem risco.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -10,6 +10,7 @@ import { trackGoogleAdsLead, trackGoogleAdsSchedule } from '../tracking/GoogleAd
 import { trackGA4Lead, trackGA4Schedule } from '../tracking/GoogleAnalytics';
 import { ThankYouScreen } from './ThankYouScreen';
 import { sendToWebhook, formatPhoneForWebhook, getCurrentDateTime } from '@/lib/webhook';
+import { usePartialFormCapture } from '@/lib/hooks/usePartialFormCapture';
 
 // Lista de países com códigos telefônicos (sem duplicatas)
 const countryCodes = [
@@ -227,6 +228,35 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
   const [showThankYou, setShowThankYou] = useState(false);
   const [fitScore, setFitScore] = useState(0);
 
+  // Hook para captura de dados parciais
+  const { updateFormData, markFormSubmitted } = usePartialFormCapture({
+    formId: 'typeform-modal',
+    debounceMs: 2000,
+    minFieldsToCapture: 3,
+    onPartialData: async (data) => {
+      try {
+        await fetch('/api/forms/partial-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Erro ao enviar dados parciais:', error);
+      }
+    },
+    onFormAbandon: async (data) => {
+      try {
+        await fetch('/api/forms/partial-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Erro ao enviar dados de abandono:', error);
+      }
+    }
+  });
+
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
@@ -254,7 +284,11 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
   }, [isOpen]);
 
   const handleAnswer = (questionId: string, answer: string) => {
-    setFormData(prev => ({ ...prev, [questionId]: answer }));
+    const newFormData = { ...formData, [questionId]: answer };
+    setFormData(newFormData);
+    
+    // Captura dados parciais em tempo real
+    updateFormData(newFormData);
     
     // Track answer
     trackEvent('typeform_answer', {
@@ -309,7 +343,11 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
   };
 
   const handleContactFieldChange = (fieldId: string, value: string) => {
-    setFormData(prev => ({ ...prev, [fieldId]: value }));
+    const newFormData = { ...formData, [fieldId]: value };
+    setFormData(newFormData);
+    
+    // Captura dados parciais em tempo real
+    updateFormData(newFormData);
   };
 
   const handleNext = () => {
@@ -392,6 +430,9 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    
+    // Marca o formulário como submetido para evitar captura de abandono
+    markFormSubmitted();
     
     try {
       // Simulate API call
@@ -1016,7 +1057,7 @@ function ResultScreen({ fitScore, resultType, formData, onSubmit, isSubmitting, 
     switch (resultType) {
       case 'perfect':
         return {
-          title: 'Perfeito! Você tem tudo pra gerar 100+ reuniões/mês.',
+          title: 'Perfeito! Você tem tudo pra gerar 30+ reuniões/mês.',
           description: `${formData.name}, com base nas suas respostas:`,
           points: [
             `Modelo: B2B consultivo ✅`,

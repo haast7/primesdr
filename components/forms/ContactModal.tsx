@@ -10,6 +10,7 @@ import { trackGoogleAdsLead, trackGoogleAdsSchedule } from '../tracking/GoogleAd
 import { trackGA4Lead, trackGA4Schedule } from '../tracking/GoogleAnalytics';
 import { ThankYouScreen } from './ThankYouScreen';
 import { sendToWebhook, formatPhoneForWebhook, getCurrentDateTime } from '@/lib/webhook';
+import { usePartialFormCapture } from '@/lib/hooks/usePartialFormCapture';
 
 // Lista de países com códigos telefônicos (sem duplicatas)
 const countryCodes = [
@@ -102,6 +103,35 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
 
+  // Hook para captura de dados parciais
+  const { updateFormData, markFormSubmitted } = usePartialFormCapture({
+    formId: 'contact-modal',
+    debounceMs: 1500,
+    minFieldsToCapture: 2,
+    onPartialData: async (data) => {
+      try {
+        await fetch('/api/forms/partial-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Erro ao enviar dados parciais:', error);
+      }
+    },
+    onFormAbandon: async (data) => {
+      try {
+        await fetch('/api/forms/partial-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Erro ao enviar dados de abandono:', error);
+      }
+    }
+  });
+
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
@@ -120,16 +150,24 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   }, [isOpen]);
 
   const handleFieldChange = (fieldId: string, value: string) => {
-    setFormData(prev => ({ ...prev, [fieldId]: value }));
+    const newFormData = { ...formData, [fieldId]: value };
+    setFormData(newFormData);
+    
+    // Captura dados parciais em tempo real
+    updateFormData(newFormData);
   };
 
   const handlePhoneChange = (value: string) => {
     const formatted = formatPhoneNumber(value);
-    setFormData(prev => ({ 
-      ...prev, 
+    const newFormData = { 
+      ...formData, 
       phone: formatted,
       phoneNumber: formatted.replace(/\D/g, '')
-    }));
+    };
+    setFormData(newFormData);
+    
+    // Captura dados parciais em tempo real
+    updateFormData(newFormData);
   };
 
   const formatPhoneNumber = (value: string) => {
@@ -152,6 +190,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    
+    // Marca o formulário como submetido para evitar captura de abandono
+    markFormSubmitted();
     
     try {
       // Simulate API call

@@ -220,7 +220,7 @@ export function CaseStudy() {
               Saiba se o Prime SDR é para você
             </h3>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            60 segundos pra saber se sua operação pode gerar 100+ reuniões por mês no LinkedIn.
+            60 segundos pra saber se sua operação pode gerar 30+ reuniões por mês no LinkedIn.
             </p>
             <ContactButton
               source="case-study-cta"

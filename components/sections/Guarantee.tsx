@@ -28,7 +28,7 @@ export function Guarantee() {
     trackEvent('cta_click', {
       cta_type: 'guarantee',
       cta_location: 'guarantee_section',
-      cta_text: 'Começar teste de 30 dias'
+      cta_text: 'Começar teste de 90 dias'
     });
   };
 
@@ -41,7 +41,7 @@ export function Guarantee() {
     },
     {
       icon: Clock,
-      title: 'Rodamos a operação por 30 dias',
+      title: 'Rodamos a operação por 90 dias',
       description: 'Automação + SDR humano trabalhando',
       step: '2'
     },
@@ -77,7 +77,7 @@ export function Guarantee() {
               Garantia Brutal
             </div>
             <h2 className="text-display font-bold text-gray-900 mb-6">
-              Teste 30 dias. Se não tiver ROI, você não paga nada.
+              Teste 90 dias. Se não tiver ROI, você não paga nada.
             </h2>
             <p className="text-body text-gray-600 leading-relaxed">
               Por que fazemos isso? Porque sabemos que funciona. E se não funcionar pra você, 
@@ -209,7 +209,7 @@ export function Guarantee() {
                 {/* Conteúdo do botão */}
                 <span className="relative flex items-center justify-center">
                   <span className="mr-3">🚀</span>
-                  Começar teste de 30 dias
+                  Começar teste de 90 dias
                   <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </ContactButton>

@@ -176,7 +176,7 @@ export function FAQ() {
                 Saiba se o Prime SDR é para você
               </h2>
               <p className="text-xl text-white/90 leading-relaxed">
-                60 segundos pra saber se sua operação pode gerar 100+ reuniões por mês no LinkedIn.
+                60 segundos pra saber se sua operação pode gerar 30+ reuniões por mês no LinkedIn.
               </p>
             </motion.div>
 

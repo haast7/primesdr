@@ -19,7 +19,7 @@ export function Hero() {
           
           <div className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto">
             <p className="mb-6">
-              112 reuniões qualificadas em 45 dias no seu comercial.
+              112 reuniões qualificadas em 90 dias no seu comercial.
             </p>
             
             {/* Desktop: tópicos lado a lado */}
@@ -59,7 +59,7 @@ export function Hero() {
             size="lg"
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
           >
-            Quero 100+ reuniões em 45 dias
+            Quero 30+ reuniões por mês
           </ContactButton>
         </div>
       </Container>

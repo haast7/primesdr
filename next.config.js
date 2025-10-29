@@ -68,11 +68,28 @@ const nextConfig = {
         ],
       },
       {
-        source: '/:path*\\.(png|jpg|jpeg|gif|webp|svg|ico)',
+        source: '/:path*\\.(png|jpg|jpeg|gif|webp|svg)',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+          {
+            key: 'Expires',
+            value: '0',
           },
         ],
       },

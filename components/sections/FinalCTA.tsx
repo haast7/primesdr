@@ -99,7 +99,7 @@ export function FinalCTA() {
     { icon: CheckCircle, text: 'Demonstração gratuita', highlight: 'Sem custo' },
     { icon: Clock, text: 'Sem compromisso', highlight: 'Flexível' },
     { icon: Target, text: 'Resultados em 7 dias', highlight: 'Rápido' },
-    { icon: Award, text: 'Garantia de 30 dias', highlight: 'Seguro' }
+    { icon: Award, text: 'Garantia de 90 dias', highlight: 'Seguro' }
   ];
 
   return (

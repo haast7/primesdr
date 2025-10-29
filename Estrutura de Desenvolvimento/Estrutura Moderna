@@ -1,215 +1,174 @@
-Perfeito! Aqui vai o **Manual de Regras de Estrutura para Modernidade, Efeitos e Animações** — pensado para entregar **efeito UAU** sem quebrar performance nem usabilidade.
-Use como *guia de projeto* para designers e devs (independe da stack, mas casa muito bem com Next.js + Tailwind + Framer Motion/GSAP).
+Bora desenhar “o site dos sonhos”: **belíssimo, tecnológico, com efeitos que arrepiam — e ainda assim leve, rápido e SEO-forte**.
+Abaixo vai meu blueprint prático: **o que ter, como orquestrar e onde cada efeito entra** sem matar Core Web Vitals.
 
 ---
 
-# 0) Princípios-guia (decisões rápidas)
+# 🎯 Princípio-mãe
 
-* **Conteúdo manda, efeito serve.** Se o efeito não ajuda a entender/agir, corta.
-* **GPU only.** Anime **apenas** `transform` e `opacity`. Evite `top/left/width/height`.
-* **Peso leve.** Orçamento de motion **≤ 250KB JS** extra por página; 1 canvas WebGL por página.
-* **Tempo curto.** Durações padrão: **80 / 160 / 240 / 320 ms** (use a menor possível).
-* **Acessível.** Respeite `prefers-reduced-motion`; mantenha foco visível e contraste AA.
-* **Mobile primeiro.** Efeitos pesados = **desktop-only** + *fallback* estático no mobile.
+> **Encantar sem atrapalhar.** Efeitos existem para **guiar a atenção** e **comunicar valor** — nunca para competir com o conteúdo.
 
 ---
 
-# 1) Sistema de Motion (tokens e presets)
+# 🧱 Base da estrutura (arquitetura de UX + performance)
 
-## 1.1 Tokens (padronize no design system)
+## 1) Hierarquia visual impecável
 
-* **Durations:** `motion-xxs:80ms`, `xs:120ms`, `sm:160ms`, `md:240ms`, `lg:320ms`, `xl:480ms`.
-* **Easing:** `standard: cubic-bezier(.2,.8,.2,1)` • `decelerate: cubic-bezier(0,0,.2,1)` • `accelerate: cubic-bezier(.4,0,1,1)`.
-* **Stagger:** `children: 60–90ms`, máximo de 6 itens por sequência.
-* **Parallax:** amplitude **±10–20px** (ou **±2–4%**), **desktop-only**.
-* **Depth (elevations):** `e1: 0 2px 8px`, `e2: 0 6px 18px`, `e3: 0 12px 32px` (ajuste a opacidade).
+* **Hero** com promessa clara, CTA único e imagem/vídeo otimizado.
+* **Seções em “blocos respiráveis”**: valor → prova → produto/serviço → diferenciais → CTA → FAQ → rodapé.
+* **Ritmo de leitura** (tipografia grande 18–20px, altura de linha 1.6, grid de 8/12 colunas).
+* **Contraste alto** e foco visível (acessibilidade = UX e SEO).
 
-## 1.2 Estados e transições padrão (componentes)
+## 2) Sistema de design (tokens)
 
-* **Hover (botões/cards):** `scale(1.02)`, `translateY(-2px)`, sombra `e2`, **80–120ms**.
-* **Active/press:** volta “para dentro” (`scale(0.98)`) **80ms**.
-* **Focus:** **outline visível** + leve glow (não só cor).
-* **Aparecer (reveal):** `opacity 0→1` + `translateY(12px→0)` em **160–240ms**.
-* **Saída:** **mais rápida** que a entrada (80–160ms).
+* **Cores**, **tipografia**, **espaçamento**, **raios**, **shadows**, **timings de animação** (motion ramp: 80/160/240/320ms).
+* **Componentes atômicos**: botões, cards, badges, chips, avatares, steps, accordions.
 
-## 1.3 Regras de orquestração
+## 3) Stack técnico leve e moderno
 
-* **1 efeito por vez** no mesmo elemento (ex.: tilt *ou* parallax, nunca os dois fortes).
-* **Sem loop infinito** (a não ser indicadores sutis).
-* **Limite de elementos animando simultaneamente:** **≤ 8** no viewport.
+* **Next.js (App Router)** + **Vercel**.
+* **Tailwind** para velocidade e consistência.
+* **Framer Motion** para microinterações e transições simples.
+* **GSAP/Lenis** (opcional) para scroll refinado.
+* **Three.js**/**Rive/Lottie** com **progressive enhancement** (carrega só em desktops potentes).
+* **next/image** (WebP/AVIF), **fontes locais** (WOFF2, subset).
+* **ISR/SSG** + **CDN** (TTFB baixo, cache bom).
 
----
+## 4) Performance budget (guarda-chuva)
 
-# 2) Padrões de Efeito por Seção (site moderno)
-
-## 2.1 Hero (dobrada 1)
-
-* **Entrada:** headline `fade+lift 160ms`, subhead **+60ms**, CTA **+120ms**.
-* **Background vivo (opcional):** gradiente animado **muito sutil** ou vídeo curto (≤1.5s loop), **desktop-only**.
-* **CTA:** hover com **glow** suave e *magnetic* leve (cursor aproxima 4–8px).
-
-## 2.2 Prova social (logos)
-
-* **Marquee** horizontal **lento**, pausa no hover.
-* **Desfoque** nas bordas (mask) para não “cortar” abrupto.
-
-## 2.3 Sessões de features/benefícios
-
-* **Cards** com ícone SVG animado (Lottie leve) **on view**.
-* **Stagger** em linha (60–90ms).
-* **Tilt** até 2–3° em desktop; **sem tilt** no mobile.
-
-## 2.4 Cases/demonstrações
-
-* **Before/After slider** com transição suave (`transform` no handle).
-* **Counters** até 1s (sem contar “devagar demais”).
-* **Shared transition**: thumbnail → modal (suave, 160–240ms).
-
-## 2.5 Planos/oferta
-
-* **Card recomendado** com **pulse** único no load (80ms), sem repetir.
-* **Hover CTA** com *lift* e sombra e2.
-
-## 2.6 FAQ
-
-* **Accordion** com altura medida (sem “pulo”): abre em **160–200ms**; seta rotaciona `90°`.
-
-## 2.7 Navegação global
-
-* **Header** ganha sombra `e1` após 24px de scroll (indicador de stickiness).
-* **Scroll progress** (barra fina no topo) opcional em páginas longas.
+* **Tamanho inicial** ≤ **200–250KB** gz (sem imagens).
+* **Requests iniciais** ≤ **25**.
+* **LCP < 2,5s**, **CLS < 0,1**, **INP < 200ms** (mobile).
+* **JS por rota**: code-splitting + lazy dos “efeitos premium”.
 
 ---
 
-# 3) Transições de Página
+# ✨ Catálogo de efeitos que encantam (e quando usar)
 
-## 3.1 Regra de ouro
+> Regra: **GPU-friendly** (`transform/opacity`), **curvas suaves** (ease-out/standard), **prefers-reduced-motion** respeitado.
 
-* **Rápidas** (≤ 240ms) e **contextuais**: da lista para o detalhe, destaque o elemento compartilhado.
-* Use **View Transitions API** (quando possível) ou **Framer Motion** com `layoutId`.
+1. **Microinterações de toque/hover (sempre on)**
 
-## 3.2 Padrões
+   * *Magnetic buttons* (atração leve do cursor).
+   * *Hover depth* (elevations, tilt 1–3°) com `transform` e `will-change`.
+   * *Ripple/ink* sutil em cliques (mobile-friendly).
 
-* **Fade slide**: opacidade + `translateY(8px)` na entrada/saída.
-* **Shared element**: imagem/card mantém continuidade.
-* **Sem telas de loading falsas** (só skeleton/blur up real).
+2. **Transições de página / View Transitions**
 
----
+   * **Fade + slide** de seções, preservando o **estado do scroll**.
+   * *Shared element transitions* (imagem/thumbnail que se expande para case).
 
-# 4) Scroll & Parallax
+3. **Parallax sutil** (scroll)
 
-* **Só desktop** e **leve** (±20px).
-* Trave em **seções** (pinned) apenas se contar uma história curta (1–2 pins).
-* Desligue com `prefers-reduced-motion`.
-* **Never** parallax no texto principal (prejudica leitura).
+   * Camadas **leves** (SVGs/PNGs comprimidos) movendo 10–20% do scroll, só acima da dobra.
+   * **Desligar em mobile** se custar FPS.
 
----
+4. **Tipografia viva**
 
-# 5) 3D, WebGL, Rive/Lottie (efeito UAU, com responsabilidade)
+   * *Split text* com **reveal** linha a linha (IntersectionObserver).
+   * *Number counters* (de 0 ao valor) com duração ≤ 1s.
 
-* **Um** canvas 3D por página.
-* **Lazy-load** após interação ou quando 100% visível.
-* **Fallback estático** no mobile e máquinas fracas.
-* Tamanho de asset **otimizado** (texturas comprimidas).
-* Lottie: **SVG** quando pequeno; **Bodymovin** otimizado, sem loops longos.
+5. **SVG & Lottie**
 
----
+   * Ícones animados **inline SVG** (stroke-dasharray) ou **Lottie** com **lazy**.
+   * Evitar loops longos; gatilhos por visibilidade.
 
-# 6) Microinterações “peso-pena” (recomendadas sempre)
+6. **WebGL/Three.js (efeito “wow” opcional)**
 
-* **Links** com sublinhado que cresce do centro (80ms).
-* **Botões** com *ink ripple* discreto (mobile).
-* **Inputs**: borda muda de cor + *glow* leve no foco.
-* **Toasts**: entram por `translateY(8px)+fade` (160ms), saem em 120ms.
+   * *Shader transitions* ou *displacement* em banner **somente em desktop** e **sob demanda** (click “ativar 3D”).
+   * **Fallback** estático para mobile/low-end.
+   * **Hard limit**: 1 canvas WebGL por página.
 
----
+7. **Scroll-driven animations nativas**
 
-# 7) Acessibilidade e Preferências
+   * `@scroll-timeline` (quando suportado) com *progress bars* e *pinned sections* leves.
 
-* **`prefers-reduced-motion`**: desabilite parallax, counters e transições longas (mantenha **fade** curto).
-* **Foco visível** sempre (outline 2px).
-* **Alvos ≥ 44×44px** (mobile).
-* **Dark/Light**: ajustes de contraste nas sombras e contornos (efeitos visíveis em ambos).
+8. **Som ambiente (raríssimo)**
+
+   * Apenas aceitável se **mute-default** e **relevante ao produto** (ex.: sound brand).
+
 
 ---
 
-# 8) Performance & Qualidade (anti-regressão)
+# 🧩 SEO + efeitos: como casar sem brigar
 
-* **FPS alvo:** 60; **queda tolerável:** > 45 por < 100ms.
-* **CLS 0,00** causado por animação (reserve espaços).
-* **Total de animáveis simultâneos:** ≤ 8 no viewport.
-* **JS pesado** (GSAP/Three) **dinâmico/lazy** e **apenas** nas páginas que usam.
-* **Testes**: mobile real (Android médio + iPhone), 4G; Chrome Performance; Lighthouse Acessibilidade ≥ 90.
-
----
-
-# 9) DOs & DON’Ts (resumo prático)
-
-**DO**
-
-* Use **transform/opacity**, durações curtas, **stagger leve**, `prefers-reduced-motion`, lazy-load de pesos, **shared transitions** em navegação, microinterações claras.
-
-**DON’Ts**
-
-* Animar `top/left/width/height`; loops infinitos; parallax pesado; 3D por padrão no mobile; loaders falsos; mais de 1 efeito forte no mesmo elemento.
+* **SSR/SSG**: conteúdo **real no HTML** (nada de “tudo vem da API depois”).
+* **Head completo**: title/description únicos, **canonical**, OG/Twitter, **JSON-LD** (Organization, Service, FAQ, Article, Breadcrumb).
+* **Hreflang** se multi-idioma.
+* **Imagens** com `alt` descritivo, **legendas opcionais**.
+* **Links internos** de verdade (sem onClick-only).
+* **Acessibilidade**: `aria-*`, foco visível, **skip to content**, **prefers-reduced-motion**.
 
 ---
 
-# 10) Snippets base (genéricos, só para nortear)
+# ⚙️ Implementação (receita técnica rápida)
 
-### 10.1 CSS tokens
+**Front**
 
-```css
-:root{
-  --dur-xxs:80ms; --dur-xs:120ms; --dur-sm:160ms; --dur-md:240ms; --dur-lg:320ms;
-  --ease-std:cubic-bezier(.2,.8,.2,1);
-}
-*[data-reveal]{
-  opacity:0; transform:translateY(12px); transition:opacity var(--dur-sm) var(--ease-std),
-                                             transform var(--dur-sm) var(--ease-std);
-}
-*[data-reveal].in{ opacity:1; transform:none; }
-```
+* Next.js App Router • Tailwind • Framer Motion • Lenis/GSAP (opcional) • Three.js (opcional) • Lottie/Rive (opcional).
+* **Componentização**: `<Section> <Container> <Heading> <Copy> <Button> <Card> <Testimonial> <Feature> <FAQ>`.
+* **Motion utilities**: `fadeIn`, `slideUp`, `staggerChildren`, `inView` (IO), `prefersReducedMotion()`.
 
-### 10.2 Framer Motion (card simples)
+**Imagens & Mídia**
 
-```tsx
-<motion.div
-  initial={{ opacity: 0, y: 12 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, amount: 0.3 }}
-  transition={{ duration: 0.16, ease: [0.2, 0.8, 0.2, 1] }}
-  whileHover={{ y: -2, scale: 1.02 }}
-/>
-```
+* `next/image` com WebP/AVIF, `priority` só no hero, `sizes` corretos.
+* **Sprites SVG** para ícones (um request).
+* Vídeos curtos → MP4 H.265/VP9, *poster*, lazy, sem áudio por padrão.
 
-### 10.3 Respeito a `prefers-reduced-motion`
+**Fonts**
 
-```css
-@media (prefers-reduced-motion: reduce){
-  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
-}
-```
+* Self-hosted WOFF2, subset, 2–3 pesos no máximo; `preload` das críticas; `font-display: swap`.
+
+**JS & CSS**
+
+* Code-splitting por rota; importar libs pesadas **dinamicamente** (`next/dynamic`).
+* CSS crítico minimalista; evitar libs gigantes (usar Tailwind + poucos utilitários).
+
+**Acessibilidade & preferências**
+
+* `prefers-reduced-motion: reduce` → desativa parallax e longas transições.
+* `prefers-color-scheme` (dark/light) sem reflow (usar classes no server).
 
 ---
 
-## Checklist de implementação (para aprovar “efeito UAU”)
+# 🧪 QA do encanto (antes do go-live)
 
-* [ ] Tokens de motion aplicados (durations/easings/stagger).
-* [ ] Hero com reveal curto + CTA com hover premium.
-* [ ] Marquee de logos suave (pausa no hover).
-* [ ] Cards/benefícios com reveals e ícones animados **on view**.
-* [ ] Cases com counter (≤1s) e before/after fluido.
-* [ ] Accordion/FAQ sem “pulo” de layout.
-* [ ] Transição de página rápida (fade/slide) + shared element onde faz sentido.
-* [ ] Parallax **leve** e **desktop-only** (desativado com reduced-motion).
-* [ ] 3D/Lottie apenas onde agrega valor (lazy + fallback).
-* [ ] FPS OK, CLS 0.00, mobile testado, acessibilidade preservada.
+* **FPS estável** (Chrome Performance): animações ≥ 50–60fps.
+* **Layout**: **sem CLS** (reserve dimensões, use `transform`/`opacity`).
+* **Mobile first**: testar em **3 dispositivos reais** (Android médio, iPhone, tablet).
+* **CWV**: PSI mobile “verde”.
+* **A11y**: Lighthouse > 90; teclado-only navega tudo.
+* **SEO**: Rich Results Test (FAQ/Article/Org ok), links rastreáveis.
 
 ---
 
-### TL;DR
+# 🧰 Efeitos “peso-pena” prontos para usar (sem dor de cabeça)
 
-**Moderno = ritmo + microdetalhe + suavidade.**
-Curto, sutil, consistente — e sempre **a serviço da mensagem**.
+* **Botões magnéticos** (transform + pointer tracking).
+* **Cards com *depth* e *tilt*** (perspective + rotateX/Y 1–3°).
+* **Parallax leve** (tradução Y ±20px ao entrar no viewport).
+* **Split text reveal** (IntersectionObserver + `transition-delay`).
+* **Counters** (requestAnimationFrame, ≤1s).
+* **Accordion com height auto** (medir altura, animar para valor fixo, depois `auto`).
+
+> Se algo cair FPS, **corta** ou **degrada** para estático no mobile. Priorize **clareza**.
+
+---
+
+# 📊 Métricas de encantamento (sem vaidade)
+
+* **Scroll depth** por seção (25/50/75/100%).
+* **Tempo engajado** (10s+ com atividade).
+* **Interações em componentes** (accordion aberto, case visto, vídeo tocado, CTA hover/click).
+* **Rage clicks/ dead clicks** (Clarity/Hotjar) — sinais de atrito.
+
+---
+
+# 🧠 Resumo executivo para o dev/time
+
+1. **Conteúdo SSR + Head completo + JSON-LD.**
+2. **Motion system** com rampa de tempos (80/160/240ms) e **GPU-only props**.
+3. **Efeitos sob demanda** (lazy/dynamic; desktop-first para os pesados).
+4. **Performance budget** e **Core Web Vitals verdes**.
+5. **Acessibilidade** e **prefers-reduced-motion** sempre respeitados.
+6. **Observabilidade** (RUM + heatmaps) para iterar com dados.
+

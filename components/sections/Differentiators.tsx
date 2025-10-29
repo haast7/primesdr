@@ -6,7 +6,7 @@ import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
-import { ArrowRight, Linkedin, Brain, UserCheck, Shield, Zap, Target } from 'lucide-react';
+import { ArrowRight, Linkedin, Brain, UserCheck, Shield, Zap, Target, BarChart3 } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
 
 const fadeInUp = {
@@ -48,6 +48,14 @@ export function Differentiators() {
       features: ['Resposta em tempo real', 'Qualificação humana', 'Agendamento direto', 'Sem bots'],
       color: 'text-green-600',
       bgColor: 'bg-green-50'
+    },
+    {
+      icon: BarChart3,
+      title: 'Você no controle. Sempre.',
+      description: 'Pare de mandar mensagem no escuro sem saber o que funciona.',
+      features: ['Dashboard em tempo real', 'Testes A/B automatizados', 'Métricas que importam (não vaidade)', 'Decisões baseadas em dados'],
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50'
     }
   ];
 
@@ -65,7 +73,7 @@ export function Differentiators() {
     {
       icon: Shield,
       title: 'Garantia total',
-      description: '30 dias de teste. Sem ROI? Reembolso integral.'
+      description: '90 dias de teste. Sem ROI? Reembolso integral.'
     }
   ];
 
@@ -82,7 +90,7 @@ export function Differentiators() {
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto">
             <h2 className="text-display font-bold text-gray-900 mb-6">
-              A tríade que ninguém mais tem
+              Os diferenciais que ninguém mais tem
             </h2>
             <p className="text-body text-gray-600 leading-relaxed">
               Por que só a Prime SDR consegue resultados consistentes e escaláveis no LinkedIn
@@ -92,7 +100,7 @@ export function Differentiators() {
           {/* Differentiators Grid */}
           <motion.div
             variants={fadeInUp}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {differentiators.map((item, index) => (
               <motion.div

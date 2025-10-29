@@ -1,0 +1,112 @@
+Perfeito. Aqui está o **checklist “base do projeto”** para você exigir do dev e lançar um site com **SEO completo + altíssima performance**. É o que eu uso como *Definition of Done* técnico.
+
+---
+
+# ✅ Fundamentos de SEO (obrigatórios em TODA página)
+
+* [ ] **Title único (≤60c)** e **Meta description (≤155c)** por página.
+* [ ] **H1 único** e hierarquia correta de H2/H3.
+* [ ] **Canonical absoluto** em todas as páginas.
+* [ ] **Open Graph + Twitter** (og:title, og:description, og:image 1200×630, twitter:card).
+* [ ] **URLs limpas** (kebab-case, sem IDs/utm; trailing slash consistente).
+* [ ] **Links internos**: pilar → clusters → related; **breadcrumbs** visíveis.
+
+---
+
+# 🗺️ Descoberta & Indexação
+
+* [ ] **/robots.txt** liberando CSS/JS e apontando todos os sitemaps.
+* [ ] **/sitemap.xml** (de preferência **índice** + sitemaps por tipo: páginas, blog, produtos).
+* [ ] **Hreflang** (se multi-idioma/país) com pares bidirecionais + `x-default`.
+* [ ] **Redirecionamentos 301** mapeados (www↔sem www, http→https, URLs antigas).
+* [ ] **404 custom** e **410** para removidos definitivos (sem correntes de 301).
+* [ ] **Search Console & Bing Webmaster** verificados e sitemaps enviados.
+
+---
+
+# 🧾 Dados Estruturados (JSON-LD)
+
+* [ ] **Organization/LocalBusiness** (home) com logo, NAP, sameAs (redes).
+* [ ] **Website + SearchAction** (barra de busca no SERP).
+* [ ] **BreadcrumbList** (rotas profundas).
+* [ ] **Service/Product** (páginas de oferta: price/availability se aplicável).
+* [ ] **Article/BlogPosting** (autor, `datePublished/Modified`, imagem).
+* [ ] **FAQPage** (FAQs reais) e **VideoObject** (se tiver vídeo).
+* [ ] **Validação** no Rich Results Test sem erros críticos.
+
+---
+
+# ⚡ Performance (Core Web Vitals – metas de produção)
+
+* [ ] **LCP < 2,5s**, **CLS < 0,10**, **INP < 200ms** (mobile).
+* [ ] **Imagens**: WebP/AVIF, dimensões fixas, `srcset/sizes`, **lazy** fora do hero.
+* [ ] **Fontes locais** (subset WOFF2) + **preload** das críticas; `font-display: swap`.
+* [ ] **CSS/JS**: crítico inline mínimo; split por rota; remover não usado.
+* [ ] **CDN/Cache**: headers `Cache-Control` corretos; **ISR/SSG** (Next) quando possível.
+* [ ] **Preconnect/Preload** apenas do essencial (fonts/hero).
+* [ ] **Testes**: Lighthouse/PSI mobile, WebPageTest; monitorar **CrUX** no GSC.
+
+---
+
+# 🧭 Conteúdo & EEAT
+
+* [ ] **Páginas pilar** por serviço/produto, com **links** para conteúdos de suporte.
+* [ ] **Autor e bio** (credenciais), **Sobre**, **Contato**, **Políticas** (priv, cookies, termos).
+* [ ] **Imagens originais** com `alt` descritivo; nomes de arquivo descritivos.
+* [ ] **Headings com perguntas** e respostas diretas (40–60 palavras) para rich snippets.
+* [ ] **Links externos** para fontes confiáveis quando usar dados/estudos.
+
+---
+
+# 📏 Medição, Consentimento & Ads (essencial para SEO + tráfego)
+
+* [ ] **GTM** (um contêiner) + **Consent Mode v2** (banner aceitar/recusar/configurar).
+* [ ] **GA4**: tag config + eventos (scroll, outbound_click, `form_submit`, `purchase/lead`).
+* [ ] **Google Ads Tag** (Conversions + **Enhanced Conversions** se aplicável).
+* [ ] **Meta Pixel + CAPI** com **`event_id`** para dedup; `value`/`currency` nas conversões.
+* [ ] **UTMs padrão** em todos os links de campanha; rotas internas preservam UTMs (WhatsApp com redirecionamento próprio).
+* [ ] **Debug** antes do go-live: Tag Assistant, Pixel Helper, GA4 DebugView **sem duplicidade**.
+
+---
+
+# 🔐 Segurança & Acessibilidade
+
+* [ ] **HTTPS/SSL** válido (sem mixed content).
+* [ ] **2FA** nas plataformas (host, DNS, CMS, GSC, Ads, CRM).
+* [ ] **Headers**: HSTS, X-Content-Type-Options, X-Frame-Options, CSP (quando possível).
+* [ ] **Acessibilidade**: H1 único, ordem semântica, contraste AA, foco visível, `aria-label` útil.
+
+---
+
+# 🧩 E-commerce (se houver) - Nesse caso, não tem.
+
+* [ ] **GA4 e-commerce** completo (`items[]`, `purchase` com `transaction_id`).
+* [ ] **Product schema** (price/availability/rating) + **BreadcrumbList**.
+* [ ] **Paginação/facetas**: canonical para página 1; facetas/ordenações `noindex,follow`.
+* [ ] **Checkout**: cross-domain linker (se externo) + webhooks para conversões server-side.
+
+---
+
+# 🗂️ Entregáveis que peço ao dev (pacote mínimo)
+
+1. **`app/robots.ts` e `app/sitemap.ts`** (ou arquivos equivalentes) prontos.
+2. **Componente de `metadata`** por rota (title/description/canonical/OG/Twitter/hreflang).
+3. **Componentes JSON-LD** por tipo (Organization, Service, Article, FAQ, Breadcrumb, Video).
+4. **Middleware/redirects** com todos os **301** mapeados.
+5. **Imagem OG padrão** (1200×630) + variações por página importante.
+6. **Fontes self-hosted** com preload; **next/image** (ou equivalente) implementado.
+7. **GTM + Consent** instalados e documentados (ordem de disparo/consent).
+8. **Planilha** de QA (links, formulários, eventos, CWV, schema) com print dos testes.
+
+---
+
+# 🧪 Go-Live & Pós-Go-Live (2–4 semanas)
+
+* [ ] Publicar **redirects 301** e validar amostra (10–20 URLs).
+* [ ] Enviar sitemaps no **GSC**; **Inspeção de URL** nas páginas-chave.
+* [ ] Monitorar **Cobertura** (indexação/erros), **CWV** (CrUX), 404/500.
+* [ ] Ajustar titles/links internos conforme **CTR/posições** iniciais.
+* [ ] Publicar 1–3 conteúdos do cluster prioritário no primeiro mês.
+
+---
+

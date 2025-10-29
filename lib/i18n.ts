@@ -662,7 +662,7 @@ export const translations: Record<Language, Translations> = {
         title: 'Pronto para colocar em prática?',
         subtitle: 'Você tem o conhecimento. Agora falta a execução. A Prime SDR faz isso por você.',
         primaryCta: 'Agendar demonstração (15 min)',
-        secondaryCta: 'Testar 30 dias sem risco'
+        secondaryCta: 'Testar 90 dias sem risco'
       }
     },
     footer: {

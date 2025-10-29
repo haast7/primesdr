@@ -1,0 +1,220 @@
+Perfeito! Aqui vai o **checklist “base do projeto” de TRACKEAMENTO** para você exigir do dev e lançar qualquer site com **mensuração impecável** — GA4, GTM, Consent Mode, Meta Pixel + CAPI, Google Ads (Enhanced Conversions), UTMs, CRM, WhatsApp e e-commerce. É o meu **Definition of Done** técnico.
+
+---
+
+# ✅ Fundamentos (obrigatórios em TODO projeto)
+
+* [ ] **Uma única instância do GTM** no site (sem pixels hardcoded fora do GTM).
+* [ ] **Padrão de eventos** (nomes/params) documentado e compartilhado com dev + mídia.
+* [ ] **UTMs padrão** definidas e replicadas em todos os CTAs de campanha.
+* [ ] **Campos ocultos nos formulários** para guardar `utm_*`, `gclid/gbraid/wbraid`, `fbclid`, `ttclid`, `landing_page`, `timestamp`.
+* [ ] **Banner de cookies + Consent Mode v2** (carrega ANTES de qualquer tag).
+* [ ] **Política de privacidade** atualizada (LGPD) descrevendo coleta/uso de dados.
+
+---
+
+# 🧠 GTM (Client-Side) — orquestração
+
+* [ ] **Ordem de disparo**: *Consent Initialization* → *Initialization* → *DOM Ready* → *Window Loaded* → *Custom Events*.
+* [ ] **dataLayer global** iniciado cedo (`<head>`) e **push** de eventos no momento certo.
+* [ ] **Tags base**:
+
+  * [ ] GA4 Configuration (em Initialization)
+  * [ ] Scroll, Outbound Click, File Download (se aplicável)
+* [ ] **Triggers** por `Custom Event` (nada de CSS selectors frágeis)
+* [ ] **Variáveis**: UTM source/medium/campaign/content/term; click IDs; page data; consent state.
+* [ ] **Ambientes**: DEV/QA/PROD (GTM Environments) e **versionamento**.
+* [ ] **Debug** pelo Preview + Tag Assistant (sem duplicidade).
+
+**Exemplo de push (lead):**
+
+```html
+<script>
+window.dataLayer = window.dataLayer || [];
+dataLayer.push({
+  event: 'lead_submit',
+  lead: { name: 'João', email: 'joao@ex.com' },
+  attribution: {
+    utm_source: 'meta', utm_medium: 'paid_social', utm_campaign: 'oferta_x',
+    gclid: new URLSearchParams(location.search).get('gclid') || null,
+    fbclid: new URLSearchParams(location.search).get('fbclid') || null
+  },
+  event_id: crypto.randomUUID()
+});
+</script>
+```
+
+---
+
+# 📈 GA4
+
+* [ ] **GA4 Config** via GTM + *Enhanced Measurement* calibrado (ativar só o que fizer sentido).
+* [ ] **Eventos personalizados** mapeados via GTM: `lead`, `click_whatsapp`, `begin_checkout`, `purchase` (com `value`, `currency`, `transaction_id`, `items[]` quando e-com).
+* [ ] **Conversões** marcadas no GA4 (não só no Google Ads).
+* [ ] **Cross-domain linker** (checkout externo / subdomínios).
+* [ ] **DebugView** mostra todos eventos com parâmetros corretos.
+
+**Measurement Protocol (server) — quando precisar:**
+
+```json
+POST /mp/collect?measurement_id=G-XXXX&api_secret=YYYY
+{
+  "client_id": "12345.67890",
+  "timestamp_micros": "1739030400000000",
+  "events": [{
+    "name": "purchase",
+    "params": {
+      "currency": "BRL", "value": 297.00,
+      "transaction_id": "ORD-9987",
+      "items": [{"item_id":"sku-1","item_name":"Curso X","price":297,"quantity":1}]
+    }
+  }]
+}
+```
+
+---
+
+# 🎯 Google Ads (Conversões + Enhanced Conversions)
+
+* [ ] **Conversion Tag** via GTM para cada ação macro (lead/purchase).
+* [ ] **Conversion Linker** ativo.
+* [ ] **Enhanced Conversions**: enviar e-mail/telefone **hash SHA-256** (client ou server) junto à conversão.
+* [ ] **Upload Offline** (se venda finaliza no CRM): armazenar `gclid/gbraid/wbraid` e subir no ganho.
+
+---
+
+# 📣 Meta Pixel + **CAPI** (dedup perfeito)
+
+* [ ] **Pixel** via GTM (com **Advanced Matching**).
+* [ ] **CAPI (server-side)** enviando os mesmos eventos com **`event_id`** idêntico ao do browser (deduplicação).
+* [ ] **Parâmetros** padronizados: `event_name`, `event_time`, `event_id`, `event_source_url`, `action_source`, `custom_data{value,currency,content_ids}`, `user_data{em,ph,fbp,fbc,...}` (hash SHA-256 quando PII).
+* [ ] **Test Events** no Events Manager (sem duplicidade, qualidade alta).
+
+**Payload CAPI (exemplo Lead):**
+
+```json
+POST /{pixel_id}/events
+{
+ "data": [{
+  "event_name":"Lead","event_time":1739030400,
+  "event_source_url":"https://site.com/obrigado",
+  "action_source":"website","event_id":"<GUID>",
+  "user_data":{"em":["<sha256(email)>"],"fbp":"fb.1.1695...","fbc":"fb.1.1695..."},
+  "custom_data":{"currency":"BRL","value":0}
+ }]
+}
+```
+
+---
+
+# ☁️ GTM **Server-Side** (recomendado)
+
+* [ ] **Container server** (App Engine/Cloud Run/Stape) em subdomínio 1P (`gtm.seudominio.com`).
+* [ ] **Roteamento 1P** para GA4/Ads/Meta (menos bloqueio/ad-block).
+* [ ] **Logs/monitoramento** e custos estimados sob controle.
+
+---
+
+# 🏷️ UTMs + Click IDs (origem preservada)
+
+* [ ] **Padrão UTM** (minúsculas): `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`.
+* [ ] **Propagar** UTMs em redirects/links (incl. WhatsApp, checkout, hubspot forms).
+* [ ] **Capturar e persistir** `gclid/gbraid/wbraid`, `fbclid`, `ttclid` em **cookie 1P** e nos **campos ocultos** dos formulários.
+
+---
+
+# 🤝 CRM & Automação
+
+* [ ] **Campos custom** no CRM para `utm_*`, click IDs, `landing_page`, `first_touch`, `last_touch`.
+* [ ] **SLA de 1º contato ≤5 min** (workflow D0/D1/D3/D7).
+* [ ] **Sincronização** lead → negócio (pipeline) preservando origem.
+* [ ] **Webhooks** do checkout para notificar `purchase` server-side (se e-com).
+
+---
+
+# 💬 WhatsApp com rastreio perfeito
+
+* [ ] CTAs apontam para **rota própria** `/w?to=55...&utm_*...` (não direto o `wa.me`).
+* [ ] Na rota:
+
+  1. loga UTM e click IDs,
+  2. (opcional) dispara evento server-side (GA4/Meta),
+  3. redireciona para `https://wa.me/55...?text=...` **preservando contexto**.
+
+---
+
+# 🛒 E-commerce (extras)
+
+* [ ] **GA4 e-commerce** completo (`view_item`, `add_to_cart`, `begin_checkout`, `purchase` com `items[]` e `transaction_id`).
+* [ ] **Meta Purchase** com `content_ids`, `value`, `currency` (Pixel + CAPI).
+* [ ] **Google Ads** conversões de compra + **Enhanced Conversions**.
+* [ ] **Cross-domain** (loja ↔ gateway) + linker; **webhooks** para postback server-side.
+
+---
+
+# 🧩 Nomeação de eventos (padrão ouro)
+
+* [ ] **Nomes**: snake_case ou lowerCamelCase e estáveis (`lead`, `generate_lead`, `purchase`).
+* [ ] **Parâmetros mínimos** em TODO evento:
+
+  * `event_id` (GUID), `value`, `currency`, `page_path`, `page_title`, `utm_*`.
+* [ ] **E-com**: sempre `items[]` com `item_id`, `item_name`, `price`, `quantity`.
+
+---
+
+# 🔐 Consentimento & Privacidade (LGPD)
+
+* [ ] **Banner** com aceitar/recusar/configurar (cookies por categoria).
+* [ ] **Consent Mode v2** mapeado: `ad_storage`, `analytics_storage`, `ad_user_data`, `ad_personalization`.
+* [ ] **Tags respeitam consent** (sem disparar antes).
+* [ ] **Opt-out** funcional (e-mail/WhatsApp) e registro de consent no CRM (quando cabível).
+
+---
+
+# 🧪 QA de Medição (pré-go-live)
+
+* [ ] **Tag Assistant**: GA4/Ads ok **sem duplicidades**.
+* [ ] **Pixel Helper**: Meta events + dedup (CAPI) ok.
+* [ ] **GA4 DebugView**: todos eventos com params e valores corretos.
+* [ ] **UTMs** chegam ao GA4 e **ao CRM** (valide 1 lead real).
+* [ ] **Eventos críticos** com `value/currency` (purchase) e `transaction_id` único.
+* [ ] **Consent** bloqueia/permite tags conforme escolha (testar aceitar/recusar).
+
+---
+
+# 📊 Dashboards & Alertas
+
+* [ ] **Looker Studio** consolidando GA4 + Ads + CRM (Métricas: Gasto, Receita, ROAS, MER, CAC, LTV, CPL).
+* [ ] **Coortes** D0/D7/D30 + criativos vencedores.
+* [ ] **Alertas** (ex.: 0 conversões 6h / variação >30% no CPA/ROAS).
+
+---
+
+# 🛡️ Segurança & Governança
+
+* [ ] **2FA** em Ads, GA4, GSC, CRM, Vercel, DNS.
+* [ ] **Perfis por função** (sem compartilhamento de senha).
+* [ ] **Backup** das configs GTM/GA4 (export JSON) e **documentação** do mapeamento de eventos.
+
+---
+
+# 📦 Entregáveis que eu exijo do cursor
+
+1. **GTM instalado** (IDs e ambientes) + planilha de variáveis/triggers/tags.
+2. **Arquivo de eventos** (documento) com nomes, parâmetros e onde são disparados.
+3. **Rota WhatsApp** `/w` implementada (log + redirect).
+4. **Campos ocultos** em todos os formulários (UTMs/click IDs) e teste de ponta a ponta (CRM).
+5. **CAPI + Enhanced Conversions** implementados e validados (print dos testes).
+6. **Relatório de QA** (Tag Assistant, Pixel Helper, DebugView com prints) antes do go-live.
+
+---
+
+# 🚀 Pós-Lançamento (D+30)
+
+* [ ] Enviar **sitemap** no GSC e validar cobertura (indireto, mas afeta tracking por indexação).
+* [ ] Monitorar **conversões por canal** (ads/GA4/CRM) — divergência aceitável ≤10–15%.
+* [ ] Auditar **deduplicação** (Meta CAPI vs Pixel) e **Enhanced Conversions** (match rate).
+* [ ] Revisar **Consent Mode** e taxas de modelagem.
+* [ ] Ajustar **eventos/valor** conforme funil real (ex.: MQL/SQL).
+
+---

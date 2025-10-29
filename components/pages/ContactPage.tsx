@@ -183,7 +183,7 @@ export function ContactPage() {
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-                Converse com nossos especialistas e descubra como gerar 100+ reuniões qualificadas por mês no LinkedIn.
+                Converse com nossos especialistas e descubra como gerar 30+ reuniões qualificadas por mês no LinkedIn.
               </p>
             </motion.div>
           </motion.div>

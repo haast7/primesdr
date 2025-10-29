@@ -1,0 +1,130 @@
+perfeito! adiciono um tópico só de **idiomas (UI/UX)** — focado no **visual** e na experiência de troca de língua, sem entrar em SEO/trackeamento.
+
+---
+
+# 🌍 Idiomas (seleção visual e experiência)
+
+## 1) Padrão visual do seletor
+
+* **Localização**: canto superior direito do header (área padrão); repetir no rodapé.
+* **Formato**:
+
+  * **Desktop**: botão compacto com **bandeira + sigla** (`PT`, `ES`, `EN`) → abre **dropdown** com as 3 opções.
+  * **Mobile**: no menu “hambúrguer”, o seletor aparece **fixo no topo** da lista.
+* **Indicadores**:
+
+  * Idioma ativo com **realce** (badge/outline) e `aria-current="true"`.
+  * Cada item com **bandeira + rótulo no idioma nativo** (ex.: “Português (BR)”, “Español (ES)”, “English (US)”).
+* **Acessibilidade**:
+
+  * O botão do seletor com `aria-label="Trocar idioma"`.
+  * Em cada opção, `lang="pt-BR" | "es-ES" | "en-US"` e texto em **sua própria língua**.
+* **Observação de UX**: bandeira = país, não idioma. Como você quer **bandeiras**, mantenha **também a sigla e o nome** para evitar ambiguidade.
+
+## 2) Estados e microdetalhes
+
+* **Hover/Focus**: realce claro (outline visível) e leve “lift” (sem animações pesadas).
+* **Dark/Light**: ícones de bandeira devem ter **versões que contrastem** nos dois temas.
+* **Persistência**: após trocar, **manter escolha** do usuário (cookie/localStorage) e retornar ao **mesmo caminho** na outra língua.
+
+## 3) Regras de conteúdo por idioma (visuais)
+
+* **Quebras de linha**: títulos podem alongar em ES/EN; use **tipografia fluida (`clamp()`)** e grade elástica.
+* **Botões**: reserve espaço para textos maiores (ex.: “Comenzar ahora” > “Start”).
+* **Ícones/ilustrações**: nunca colocar **texto dentro de imagem**; use camadas separadas para cada idioma.
+
+---
+
+## ✅ Checklist de idiomas (para você enviar ao dev/designer)
+
+### A) Escopo
+
+* [ ] Idiomas: **PT-BR**, **ES-ES**, **EN-US**
+* [ ] **Bandeiras**: 🇧🇷, 🇪🇸, 🇺🇸 (versões SVG otimizadas light/dark)
+* [ ] **Siglas** nos botões: `PT`, `ES`, `EN`
+* [ ] Nome exibido em cada idioma: “Português (BR)”, “Español (ES)”, “English (US)”
+
+### B) Componentes & Estados
+
+* [ ] **Seletor de idioma (Header)**: botão + dropdown (desktop) / entrada no menu (mobile)
+* [ ] **Seletor no Rodapé** (mesma lógica)
+* [ ] Estados: **default/hover/focus/active/disabled**
+* [ ] Tema: **light/dark** com contraste AA
+
+### C) Comportamento
+
+* [ ] Ao clicar em um idioma, **manter a rota** e apenas trocar a língua (ex.: `/pt/servicos` → `/es/servicios`)
+* [ ] **Persistir** escolha (cookie/localStorage)
+* [ ] **Fallback visual** se a rota não existir no outro idioma (avisar e mandar para a home daquele idioma)
+* [ ] **Atalhos**: no mobile, o seletor deve estar **sempre visível** no menu
+
+### D) Tipografia & Layout
+
+* [ ] Títulos com **`clamp()`** para expandir/contrair em ES/EN
+* [ ] Botões com **largura mínima elástica** (evitar quebra feia)
+* [ ] Componentes que aceitam **rótulos longos** (cards, tabs, steps)
+
+### E) Assets
+
+* [ ] **SVGs das bandeiras** otimizados (≤2KB cada), com `role="img"` e `aria-label` (“Brasil”, “España”, “United States”)
+* [ ] **Sprite** de ícones (opção) para reduzir requests
+* [ ] Tabela de **tokens**: rótulos (PT/ES/EN) para botões/nav/rodapé
+
+---
+
+## 🧩 Exemplo visual (HTML/CSS neutro)
+
+```html
+<!-- Botão do seletor -->
+<button class="lang-switch" aria-haspopup="listbox" aria-expanded="false" aria-label="Trocar idioma">
+  <img src="/flags/br.svg" alt="" width="18" height="18" />
+  <span>PT</span>
+</button>
+
+<!-- Dropdown -->
+<ul class="lang-menu" role="listbox">
+  <li role="option" aria-selected="true">
+    <a href="/pt/" lang="pt-BR">
+      <img src="/flags/br.svg" alt="" width="18" height="18" />
+      <span>Português (BR)</span>
+    </a>
+  </li>
+  <li role="option">
+    <a href="/es/" lang="es-ES">
+      <img src="/flags/es.svg" alt="" width="18" height="18" />
+      <span>Español (ES)</span>
+    </a>
+  </li>
+  <li role="option">
+    <a href="/en/" lang="en-US">
+      <img src="/flags/us.svg" alt="" width="18" height="18" />
+      <span>English (US)</span>
+    </a>
+  </li>
+</ul>
+```
+
+```css
+.lang-switch{ display:flex; align-items:center; gap:.5rem; padding:.5rem .75rem;
+  border-radius:12px; border:1px solid var(--border); background:var(--bg);
+}
+.lang-menu{ position:absolute; margin-top:.5rem; padding:.5rem; border-radius:12px;
+  border:1px solid var(--border); background:var(--bg); box-shadow: var(--shadow-2);
+  display:none;
+}
+.lang-switch[aria-expanded="true"] + .lang-menu{ display:block; }
+.lang-menu a{ display:flex; align-items:center; gap:.5rem; padding:.5rem .75rem; border-radius:10px; }
+.lang-menu a:hover, .lang-menu a:focus{ background: var(--hover); }
+```
+
+> **Nota**: este é só o **visual/comportamento**. O dev pode plugar na i18n da stack que vocês usam.
+
+---
+
+## 🔧 Dica de implementação (Next.js — só o essencial do visual)
+
+* Rotas por idioma (ex.: `/pt`, `/es`, `/en`) e **componente de seletor** que monta o **link equivalente** mantendo o path.
+* Salvar escolha no **cookie `NEXT_LOCALE`** (ou localStorage) para lembrar no retorno.
+* Trocar **`lang` no `<html>`** de acordo com a escolha para tipografia e hifenização corretas (impacta leitura).
+
+

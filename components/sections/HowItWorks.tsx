@@ -547,7 +547,7 @@ export function HowItWorks() {
                         
                         <div className="mb-6">
                           <h4 className="text-xl font-bold text-gray-900 mb-3">Mês 2–3</h4>
-                          <p className="text-gray-600 leading-relaxed">Escala e otimização (80–120 reuniões/mês no Growth)</p>
+                          <p className="text-gray-600 leading-relaxed">Escala e otimização (25–40 reuniões/mês no Growth)</p>
                         </div>
 
                         {/* Progress Indicator */}
@@ -573,15 +573,15 @@ export function HowItWorks() {
                   className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
                 >
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white transition-all duration-300 hover:shadow-xl">
-                    <div className="text-3xl font-bold text-gray-900 mb-2">20-30</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">10-15</div>
                     <div className="text-gray-600 text-sm">Reuniões/mês inicial</div>
                   </div>
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white transition-all duration-300 hover:shadow-xl">
-                    <div className="text-3xl font-bold text-gray-900 mb-2">50-80</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">15-25</div>
                     <div className="text-gray-600 text-sm">Reuniões/mês estável</div>
                   </div>
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white transition-all duration-300 hover:shadow-xl">
-                    <div className="text-3xl font-bold text-gray-900 mb-2">80-120</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">25-40</div>
                     <div className="text-gray-600 text-sm">Reuniões/mês otimizado</div>
                   </div>
                 </motion.div>

@@ -217,7 +217,7 @@ export function TermsOfUsePage() {
     },
     {
       id: 'garantia',
-      title: '6. GARANTIA DE SATISFAÇÃO (30 DIAS)',
+      title: '6. GARANTIA DE SATISFAÇÃO (90 DIAS)',
       icon: Shield,
       content: (
         <div className="space-y-6">
@@ -225,7 +225,7 @@ export function TermsOfUsePage() {
             <h4 className="text-lg font-semibold text-gray-900 mb-3">6.1. Condições da garantia:</h4>
             <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
               <p className="text-green-800">
-                Oferecemos <strong>30 dias de garantia de satisfação</strong> a partir da data de contratação:
+                Oferecemos <strong>90 dias de garantia de satisfação</strong> a partir da data de contratação:
               </p>
               <ul className="list-disc list-inside space-y-2 text-green-700 mt-3">
                 <li>Se você não estiver satisfeito com os resultados ou serviços prestados, pode solicitar reembolso integral dentro desse prazo.</li>
@@ -249,8 +249,8 @@ export function TermsOfUsePage() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">6.4. Após 30 dias:</h4>
-            <p>Cancelamentos solicitados após 30 dias <strong>não geram direito a reembolso</strong>, mas a conta permanecerá ativa até o fim do período pago.</p>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">6.4. Após 90 dias:</h4>
+            <p>Cancelamentos solicitados após 90 dias <strong>não geram direito a reembolso</strong>, mas a conta permanecerá ativa até o fim do período pago.</p>
           </div>
         </div>
       )
@@ -274,8 +274,8 @@ export function TermsOfUsePage() {
           <div>
             <h4 className="text-lg font-semibold text-gray-900 mb-3">7.2. Efeitos do cancelamento:</h4>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li><strong>Dentro de 30 dias:</strong> Reembolso integral conforme garantia.</li>
-              <li><strong>Após 30 dias:</strong> Conta permanece ativa até o fim do período pago, sem reembolso proporcional.</li>
+              <li><strong>Dentro de 90 dias:</strong> Reembolso integral conforme garantia.</li>
+              <li><strong>Após 90 dias:</strong> Conta permanece ativa até o fim do período pago, sem reembolso proporcional.</li>
               <li><strong>Dados:</strong> Seus dados serão mantidos por 5 anos para fins legais e fiscais, podendo ser excluídos mediante solicitação expressa (conforme LGPD).</li>
             </ul>
           </div>

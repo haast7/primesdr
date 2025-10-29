@@ -1,0 +1,169 @@
+Boa! Pensa em “site responsivo” como um conjunto de **regras de decisão**, não só media queries. Aqui vai um **mapa mental + padrões de código** que você pode adotar como “regra da casa”.
+
+---
+
+## 🎯 Regra-mãe
+
+> **Mobile-first, conteúdo-first, fluido por padrão, ajustes por exceção.**
+> Comece simples (coluna única), deixe tudo fluido, e **só** adicione *breakpoints* quando algo quebrar a leitura ou o layout.
+
+---
+
+## 1) Grid e Layout
+
+* **Mobile-first**: 1 coluna → expande para 2/3 quando houver espaço.
+* **Fluido por padrão**: largura em `%`/`fr`, não em `px` fixo.
+* **Container** centralizador com largura máxima (ex.: 1200–1320px).
+* **Gutters** consistentes (ex.: 16–24px mobile / 24–32px desktop).
+* **Regra prática**: primeiro faça funcionar “sem media query”; depois ajuste.
+
+```css
+.container { max-width: 72rem; margin-inline: auto; padding-inline: clamp(1rem, 3vw, 2rem); }
+
+.grid { display: grid; gap: clamp(.75rem, 2vw, 1.5rem); }
+.grid--auto { grid-template-columns: 1fr; }
+@media (min-width: 48rem) { .grid--auto { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .grid--auto { grid-template-columns: repeat(3, 1fr); } }
+```
+
+---
+
+## 2) Tipografia e espaçamento fluidos
+
+* **Use `clamp()`** para tamanhos que crescem suavemente.
+* **Line-height generoso** (1.5–1.7) em telas pequenas.
+
+```css
+:root{
+  --fs-hero: clamp(1.75rem, 3vw + 1rem, 3rem); /* ~28→48px */
+  --fs-body: clamp(1rem, .4vw + .9rem, 1.125rem); /* 16→18px */
+  --space: clamp(.75rem, 2vw, 1.5rem);
+}
+h1 { font-size: var(--fs-hero); line-height: 1.15; }
+p  { font-size: var(--fs-body); line-height: 1.65; margin-block: var(--space); }
+```
+
+---
+
+## 3) Imagens e mídia (sem “quebrar” o layout)
+
+* **Sempre** largura máxima 100% e **altura automática**.
+* **Aspect-ratio** para evitar “saltos” (CLS).
+* **`srcset` + `sizes`** para baixar a imagem certa por viewport.
+
+```css
+img, video { max-width: 100%; height: auto; display: block; }
+.media-cover { aspect-ratio: 16/9; object-fit: cover; border-radius: 12px; }
+```
+
+```html
+<img
+  src="hero-800.webp"
+  srcset="hero-480.webp 480w, hero-800.webp 800w, hero-1280.webp 1280w"
+  sizes="(max-width: 640px) 95vw, (max-width: 1024px) 90vw, 1200px"
+  alt="Descrição"
+/>
+```
+
+---
+
+## 4) Componentes “que respiram”
+
+* **Botões e inputs** com **alvos de toque ≥ 44×44px**.
+* **Cards** empilham no mobile; ganham colunas no desktop.
+* **Tabelas**: viram **lista empilhada** ou têm **scroll horizontal** sutil no mobile.
+
+```css
+button { padding: .75rem 1rem; min-height: 44px; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+```
+
+---
+
+## 5) Navegação inteligente
+
+* **Header fixo?** Só se for leve e não ocupar muita altura.
+* **Menu**: hambúrguer no mobile, barra completa no desktop.
+* **Regra do polegar**: itens importantes ao alcance (inferior/direita em mobile).
+
+---
+
+## 6) Breakpoints (pense em conteúdo, não em aparelhos)
+
+* Comece com **2–3 pontos**:
+
+  * `sm` ~ 480–576px (melhorias iniciais)
+  * `md` ~ 768px (tablets / 2 colunas)
+  * `lg` ~ 1024–1280px (desktop / 3 colunas)
+* **Só crie um novo** quando um bloco **precisar** (ex.: headline estoura).
+
+---
+
+## 7) Ícones, ilustrações e vídeo
+
+* **SVG** sempre que possível (escala perfeito).
+* Ícones herdam a cor do texto (não “rasterize” ícone colorido).
+* Vídeo: **poster** + `controls` no mobile; **sem autoplay** em 3G.
+
+---
+
+## 8) Dark mode (se houver)
+
+* Planeje **paleta própria**, não só inverter.
+* Teste contraste **AA** (texto sobre fundo escuro precisa de mais contraste).
+
+```css
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; }
+  body { background: #0B0B0F; color: #EDEDED; }
+  .card { background: #15151B; }
+}
+```
+
+---
+
+## 9) Acessibilidade visual (responsivo de verdade)
+
+* **Contraste AA** mínimo.
+* **Foco visível** (outline).
+* **Fonte base** nunca menor que 16px.
+* **Sem textos em imagem** sem alternativa.
+
+```css
+:focus-visible { outline: 2px solid #5B8CFF; outline-offset: 2px; }
+```
+
+---
+
+## 10) Teste rápido (o triângulo do responsivo)
+
+1. **Layout**: nada vaza da tela (sem scroll horizontal), tudo legível.
+2. **Toque**: alvos grandes, navegação sem esforço com o polegar.
+3. **Carga**: hero abre rápido, imagens corretas por viewport.
+
+> Matriz rápida: iPhone pequeno, Android médio, tablet, laptop. Rede: 3G/4G.
+
+---
+
+## Bônus: container queries (quando o componente dita a regra)
+
+Quando o **componente** precisa mudar ao invés do viewport inteiro:
+
+```css
+.card { container-type: inline-size; }
+@container (min-width: 28rem) {
+  .card { display: grid; grid-template-columns: 1fr 1.2fr; }
+}
+```
+
+---
+
+### TL;DR (cola no monitor)
+
+* **Faça fluido.**
+* **Quebrou a leitura?** Adicione 1 media query.
+* **Tipografia e espaços com `clamp()`.**
+* **Imagens com `srcset/sizes` e `aspect-ratio`.**
+* **Alvos 44px+, foco visível, contraste AA.**
+* **Teste em 4 devices e 2 redes.**
+

@@ -43,7 +43,7 @@ export function HeadlineGenerator() {
           conversionRate: '15%'
         },
         {
-          text: `Gero 100+ reuniões/mês para ${targetAudience} via LinkedIn | ${role}`,
+          text: `Gero 30+ reuniões/mês para ${targetAudience} via LinkedIn | ${role}`,
           type: 'Métrica',
           conversionRate: '25%'
         },
