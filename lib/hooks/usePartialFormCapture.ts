@@ -1,14 +1,23 @@
 import { useEffect, useRef, useCallback } from 'react';
 
 interface PartialFormData {
-  [key: string]: string;
+  [key: string]: string | number | boolean;
+}
+
+interface EnrichedFormData extends PartialFormData {
+  formId: string;
+  timestamp: string;
+  timeOnForm: number;
+  fieldsCompleted: number;
+  isPartial?: boolean;
+  isAbandoned?: boolean;
 }
 
 interface UsePartialFormCaptureOptions {
   formId: string;
   debounceMs?: number;
-  onPartialData?: (data: PartialFormData) => void;
-  onFormAbandon?: (data: PartialFormData) => void;
+  onPartialData?: (data: EnrichedFormData) => void | Promise<void>;
+  onFormAbandon?: (data: EnrichedFormData) => void | Promise<void>;
   minFieldsToCapture?: number;
 }
 
