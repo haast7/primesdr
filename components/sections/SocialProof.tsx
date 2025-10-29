@@ -81,36 +81,66 @@ function AnimatedNumber({ value, suffix = '', prefix = '' }: { value: number; su
 // Componente do carrossel de logos
 function LogoCarousel() {
   const logos = [
-    { name: 'LABO', src: '/clientes/1-removebg-preview (1).png' },
-    { name: 'cicatriclin', src: '/clientes/2-removebg-preview (1).png' },
-    { name: 'owempay', src: '/clientes/3-removebg-preview (1).png' },
-    { name: 'Backlinks', src: '/clientes/4-removebg-preview (1).png' },
-    { name: 'Microlins', src: '/clientes/5-removebg-preview (1).png' },
+    { name: 'Cliente 1', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/1.png?alt=media&token=e5ff13f9-d2ad-422f-94db-d6d80b297caa' },
+    { name: 'Cliente 2', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/2.png?alt=media&token=78d45119-6f39-4ddc-b90e-3d3d8a2426a9' },
+    { name: 'Cliente 3', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/3.png?alt=media&token=68721a73-d1b8-4af2-865a-29e376b98b89' },
+    { name: 'Cliente 4', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/4.png.webp?alt=media&token=e0bc679b-d2bb-4336-b719-7f12a2e461a8' },
+    { name: 'Cliente 5', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/5.png?alt=media&token=2521dce8-2667-4cf6-9c85-0ff3369aa809' },
+    { name: 'Cliente 6', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/6.jpg?alt=media&token=6974823e-c6ca-4120-b5e3-0e32893c9b47' },
+    { name: 'Cliente 7', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/7.jpg?alt=media&token=1ffd07c1-c5a2-4190-9ae8-8744a5c1631e' },
+    { name: 'Cliente 8', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/8.png?alt=media&token=4bfe0d81-bd3b-48ad-a112-49de2cccde40' },
+    { name: 'Cliente 9', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/9.png?alt=media&token=b26d6c7b-67f7-4b1f-9f35-3da7aef0e637' },
+    { name: 'Cliente 10', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/10.png?alt=media&token=65e6a3a5-7fde-4a04-bfc7-4929ae99f825' },
+    { name: 'Cliente 11', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/11.png?alt=media&token=1cd560df-07eb-4f0b-9f64-96f1812848d1' },
+    { name: 'Cliente 12', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/12.png?alt=media&token=90c1af78-4935-4abb-b67a-cde62a0d350d' },
+    { name: 'Cliente 13', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/13.png?alt=media&token=aabb4da4-e105-40d9-b7c6-e1358d1bc53f' },
+    { name: 'Cliente 14', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/14.png?alt=media&token=8b017220-8ff8-4770-99ff-eec9b40c6c2d' },
+    { name: 'Cliente 15', src: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/15.png?alt=media&token=96f100f9-051e-468e-8fcb-7fe670d0515f' },
   ];
 
   return (
-    <div className="relative overflow-hidden w-full">
-      <div className="flex animate-scroll space-x-16">
-        {/* Múltiplas passadas para loop infinito suave */}
-        {[...Array(6)].map((_, pass) =>
-          logos.map((logo, index) => (
-            <motion.div 
-              key={`${pass}-${index}`} 
-              className="flex-shrink-0"
-              whileHover={{ scale: 1.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <ImageWithFallback
-                src={logo.src}
-                alt={logo.name}
-                width={96}
-                height={96}
-                className="h-24 w-auto transition-all duration-300 hover:drop-shadow-xl"
-                fallback="/clientes/1-removebg-preview (1).png"
-              />
-            </motion.div>
-          ))
-        )}
+    <div className="relative overflow-hidden w-full bg-white rounded-2xl p-6 shadow-md">
+      <div 
+        className="flex space-x-12"
+        style={{
+          animation: 'logoScroll 15s linear infinite',
+          willChange: 'transform'
+        }}
+      >
+        {/* Primeira passada */}
+        {logos.map((logo, index) => (
+          <div 
+            key={`first-${index}`}
+            className="flex-shrink-0 flex items-center justify-center"
+          >
+            <Image
+              src={logo.src}
+              alt={logo.name}
+              width={80}
+              height={80}
+              className="h-12 w-auto md:h-16 object-contain"
+              quality={90}
+              unoptimized={false}
+            />
+          </div>
+        ))}
+        {/* Segunda passada para loop */}
+        {logos.map((logo, index) => (
+          <div 
+            key={`second-${index}`}
+            className="flex-shrink-0 flex items-center justify-center"
+          >
+            <Image
+              src={logo.src}
+              alt={logo.name}
+              width={80}
+              height={80}
+              className="h-12 w-auto md:h-16 object-contain"
+              quality={90}
+              unoptimized={false}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -328,18 +358,14 @@ export function SocialProof() {
         </motion.div>
       </Container>
 
-      <style jsx>{`
-        @keyframes scroll {
+      <style jsx global>{`
+        @keyframes logoScroll {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-16.66%);
+            transform: translateX(-50%);
           }
-        }
-        
-        .animate-scroll {
-          animation: scroll 50s linear infinite;
         }
       `}</style>
     </Section>
