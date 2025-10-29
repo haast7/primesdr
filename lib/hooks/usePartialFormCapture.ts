@@ -38,7 +38,7 @@ export function usePartialFormCapture({
   const capturePartialData = useCallback((formData: PartialFormData) => {
     // Filtra apenas campos que têm valor
     const filledFields = Object.entries(formData).filter(([_, value]) => 
-      value && value.trim() !== ''
+      value && (typeof value === 'string' ? value.trim() !== '' : value !== '')
     );
 
     // Só captura se tiver pelo menos o mínimo de campos preenchidos
