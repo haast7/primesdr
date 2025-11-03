@@ -430,6 +430,7 @@ export interface Translations {
         stable: string;
         optimized: string;
       };
+      processLabel?: string;
     };
     cta?: {
       button: string;
@@ -1446,7 +1447,8 @@ export const translations: Record<Language, Translations> = {
           initial: 'Reuniões/mês inicial',
           stable: 'Reuniões/mês estável',
           optimized: 'Reuniões/mês otimizado'
-        }
+        },
+        processLabel: 'do processo'
       },
       cta: {
         button: 'Ver demonstração',
@@ -1559,7 +1561,13 @@ export const translations: Record<Language, Translations> = {
         }
       ],
       notFound: 'Não encontrou sua resposta?',
-      contact: 'Fale com a gente'
+      contact: 'Fale com a gente',
+      badge: 'FAQ',
+      ctaSection: {
+        title: 'Saber se Prime SDR é para você',
+        subtitle: '60 segundos para saber se sua operação pode gerar 30+ reuniões por mês no LinkedIn.',
+        button: 'Começar agora'
+      }
     },
     finalCta: {
       badge: 'Pronto para Começar?',
@@ -2624,7 +2632,37 @@ export const translations: Record<Language, Translations> = {
             'Optimizaciones continuas'
           ]
         }
-      ]
+      ],
+      timeline: {
+        title: 'Resultado Esperado',
+        subtitle: 'Evolución de la performance a lo largo del tiempo',
+        week1to2: {
+          title: 'Semana 1–2',
+          description: 'Primeras respuestas y reuniones'
+        },
+        week3to6: {
+          title: 'Semana 3–6',
+          description: 'Ritmo estable (20–30 reuniones/mes por perfil activo)'
+        },
+        month2to3: {
+          title: 'Mes 2–3',
+          description: 'Escala y optimización (25–40 reuniones/mes en Growth)'
+        },
+        stats: {
+          initial: 'Reuniones/mes inicial',
+          stable: 'Reuniones/mes estable',
+          optimized: 'Reuniones/mes optimizado'
+        },
+        processLabel: 'del proceso'
+      },
+      cta: {
+        button: 'Ver demostración',
+        trust: {
+          demo: 'Demostración gratuita',
+          noCommitment: 'Sin compromiso',
+          results: 'Resultados en 7 días'
+        }
+      }
     },
     faq: {
       headline: 'Preguntas que todos hacen',
@@ -3727,7 +3765,37 @@ export const translations: Record<Language, Translations> = {
             'Continuous optimizations'
           ]
         }
-      ]
+      ],
+      timeline: {
+        title: 'Expected Result',
+        subtitle: 'Performance evolution over time',
+        week1to2: {
+          title: 'Week 1–2',
+          description: 'First responses and meetings'
+        },
+        week3to6: {
+          title: 'Week 3–6',
+          description: 'Stable pace (20–30 meetings/month per active profile)'
+        },
+        month2to3: {
+          title: 'Month 2–3',
+          description: 'Scale and optimization (25–40 meetings/month in Growth)'
+        },
+        stats: {
+          initial: 'Initial meetings/month',
+          stable: 'Stable meetings/month',
+          optimized: 'Optimized meetings/month'
+        },
+        processLabel: 'of process'
+      },
+      cta: {
+        button: 'View demo',
+        trust: {
+          demo: 'Free demo',
+          noCommitment: 'No commitment',
+          results: 'Results in 7 days'
+        }
+      }
     },
     faq: {
       headline: 'Questions everyone asks',
