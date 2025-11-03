@@ -81,13 +81,25 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/favicon.ico', sizes: '16x16', type: 'image/x-icon' },
+      { 
+        url: process.env.NEXT_PUBLIC_FAVICON_URL || 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/favicon.ico.png?alt=media&token=9a716efd-67d9-4aa1-9688-abad42c347dd', 
+        sizes: '32x32', 
+        type: 'image/png' 
+      },
+      { 
+        url: process.env.NEXT_PUBLIC_FAVICON_URL || 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/favicon.ico.png?alt=media&token=9a716efd-67d9-4aa1-9688-abad42c347dd', 
+        sizes: '16x16', 
+        type: 'image/png' 
+      },
     ],
     apple: [
-      { url: '/favicon.ico', sizes: '180x180', type: 'image/x-icon' },
+      { 
+        url: process.env.NEXT_PUBLIC_FAVICON_URL || 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/favicon.ico.png?alt=media&token=9a716efd-67d9-4aa1-9688-abad42c347dd', 
+        sizes: '180x180', 
+        type: 'image/png' 
+      },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: process.env.NEXT_PUBLIC_FAVICON_URL || 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/favicon.ico.png?alt=media&token=9a716efd-67d9-4aa1-9688-abad42c347dd',
   },
   themeColor: '#2563eb',
   viewport: {
