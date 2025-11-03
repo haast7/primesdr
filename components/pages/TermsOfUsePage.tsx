@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -42,6 +43,7 @@ const staggerContainer = {
 };
 
 export function TermsOfUsePage() {
+  const { t } = useLanguage();
   const sections = [
     {
       id: 'aceitacao',
@@ -573,21 +575,21 @@ export function TermsOfUsePage() {
             <motion.div variants={fadeInUp} className="space-y-6">
               <div className="inline-flex items-center px-6 py-3 bg-primary-100 rounded-full text-primary-700 font-semibold text-sm mb-6">
                 <FileText className="w-5 h-5 mr-2" />
-                Termos e Condições
+                {t.termsOfUsePage.hero.badge}
               </div>
               
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Termos de Uso
+                {t.termsOfUsePage.hero.title}
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed">
-                Conheça as condições e regras para utilização de nossa plataforma de automação de prospecção no LinkedIn.
+                {t.termsOfUsePage.hero.subtitle}
               </p>
               
               <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
                 <div className="flex items-center space-x-2">
                   <FileText className="w-4 h-4" />
-                  <span>Última atualização: 13 de outubro de 2025</span>
+                  <span>{t.termsOfUsePage.hero.lastUpdate}</span>
                 </div>
               </div>
             </motion.div>

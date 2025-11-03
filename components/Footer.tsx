@@ -1,36 +1,36 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { ContactButton } from '@/components/ui/ContactButton';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { IMAGE_URLS } from '@/lib/imageLoader';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
-const footerLinks = {
-  institucional: [
-    { name: 'Sobre', href: '/sobre' },
-    { name: 'Contato', href: '/contato' },
-    { name: 'Termos de Uso', href: '/termos' },
-    { name: 'Política de Privacidade', href: '/privacidade' },
-    { name: 'Cookies', href: '/cookies' },
-  ],
-  recursos: [
-    { name: 'Blog', href: '/blog' },
-    { name: 'Cases', href: '/cases' },
-    { name: 'Playbooks', href: '/playbooks' },
-    { name: 'FAQ', href: '/faq' },
-  ],
-  social: [
-    { name: 'LinkedIn', href: 'https://linkedin.com/company/prime-sdr', external: true },
-    { name: 'YouTube', href: 'https://youtube.com/@prime-sdr', external: true },
-    { name: 'Instagram', href: 'https://instagram.com/primesdr', external: true },
-    { name: 'Facebook', href: 'https://facebook.com/primesdr', external: true },
-    { name: 'Twitter', href: 'https://twitter.com/primesdr', external: true },
-    { name: 'TikTok', href: 'https://tiktok.com/@primesdr', external: true },
-  ],
-};
-
 export function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks = {
+    institucional: t.footer.sections.company.map((name, index) => ({
+      name,
+      href: ['/sobre', '/contato', '/termos', '/privacidade', '/cookies'][index] || '#'
+    })),
+    recursos: t.footer.sections.resources.map((name, index) => ({
+      name,
+      href: ['/blog', '/cases', '/playbooks', '/faq'][index] || '#'
+    })),
+    social: [
+      { name: 'LinkedIn', href: 'https://linkedin.com/company/prime-sdr', external: true },
+      { name: 'YouTube', href: 'https://youtube.com/@prime-sdr', external: true },
+      { name: 'Instagram', href: 'https://instagram.com/primesdr', external: true },
+      { name: 'Facebook', href: 'https://facebook.com/primesdr', external: true },
+      { name: 'Twitter', href: 'https://twitter.com/primesdr', external: true },
+      { name: 'TikTok', href: 'https://tiktok.com/@primesdr', external: true },
+    ],
+  };
+
   return (
     <footer className="bg-gray-900 text-white">
       <Container>
@@ -49,22 +49,21 @@ export function Footer() {
                 />
               </Link>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Transformamos LinkedIn em motor de receita previsível para empresas B2B. 
-                Automação inteligente + SDR humano = resultados garantidos.
+                {t.footer.company.description}
               </p>
               <ContactButton 
                 source="footer-test-90-days"
                 size="sm" 
                 className="bg-primary-600 hover:bg-primary-700"
               >
-                Teste 90 dias sem risco
+                {t.footer.cta}
               </ContactButton>
             </div>
 
             {/* Institucional */}
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                Institucional
+                {t.footer.links.company}
               </h3>
               <ul className="space-y-3">
                 {footerLinks.institucional.map((link) => (
@@ -83,7 +82,7 @@ export function Footer() {
             {/* Recursos */}
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                Recursos
+                {t.footer.links.resources}
               </h3>
               <ul className="space-y-3">
                 {footerLinks.recursos.map((link) => (
@@ -102,7 +101,7 @@ export function Footer() {
             {/* Social */}
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                Social
+                {t.footer.social || 'Social'}
               </h3>
               <ul className="space-y-3">
                 {footerLinks.social.map((link) => (
@@ -126,7 +125,7 @@ export function Footer() {
         <div className="border-t border-gray-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Prime SDR. Todos os direitos reservados.
+              {t.footer.copyright}
             </div>
             <div className="text-sm text-gray-400">
               CNPJ: 60.782.822/0001-01

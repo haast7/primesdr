@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
@@ -36,6 +37,7 @@ const staggerContainer = {
 };
 
 export function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -77,27 +79,27 @@ export function ContactPage() {
   const contactMethods = [
     {
       icon: '/icons/e-mail.png',
-      title: 'E-mail',
-      description: 'Resposta em até 24 horas',
-      action: 'Enviar e-mail',
+      title: t.contactPage.methods.email.title,
+      description: t.contactPage.methods.email.description,
+      action: t.contactPage.methods.email.action,
       color: 'from-blue-500 to-blue-600',
       bgColor: 'bg-blue-50',
       iconBg: 'bg-blue-100'
     },
     {
       icon: '/icons/whatsapp.png',
-      title: 'WhatsApp',
-      description: 'Fale direto com especialista',
-      action: 'Chamar no WhatsApp',
+      title: t.contactPage.methods.whatsapp.title,
+      description: t.contactPage.methods.whatsapp.description,
+      action: t.contactPage.methods.whatsapp.action,
       color: 'from-green-500 to-green-600',
       bgColor: 'bg-green-50',
       iconBg: 'bg-green-100'
     },
     {
       icon: '/icons/call.png',
-      title: 'Agendar Call',
-      description: 'Reunião de 15 minutos',
-      action: 'Agendar agora',
+      title: t.contactPage.methods.call.title,
+      description: t.contactPage.methods.call.description,
+      action: t.contactPage.methods.call.action,
       color: 'from-purple-500 to-purple-600',
       bgColor: 'bg-purple-50',
       iconBg: 'bg-purple-100'
@@ -107,18 +109,18 @@ export function ContactPage() {
   const benefits = [
     {
       icon: Users,
-      title: 'Especialistas dedicados',
-      description: 'Equipe com +5 anos de experiência em prospecção B2B'
+      title: t.contactPage.benefits.specialists.title,
+      description: t.contactPage.benefits.specialists.description
     },
     {
       icon: Zap,
-      title: 'Resposta rápida',
-      description: 'Atendimento em até 2 minutos via whatsapp'
+      title: t.contactPage.benefits.fast.title,
+      description: t.contactPage.benefits.fast.description
     },
     {
       icon: Shield,
-      title: 'Sem compromisso',
-      description: 'Conversa inicial gratuita e sem pressão'
+      title: t.contactPage.benefits.noCommitment.title,
+      description: t.contactPage.benefits.noCommitment.description
     }
   ];
 
@@ -136,18 +138,18 @@ export function ContactPage() {
               <CheckCircle className="w-10 h-10 text-green-600" />
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-6">
-              Mensagem enviada com sucesso!
+              {t.contactPage.success.title}
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Nossa equipe entrará em contato em até 2 horas. Enquanto isso, que tal conhecer nossos cases de sucesso?
+              {t.contactPage.success.message}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-primary-600 hover:bg-primary-700">
-                Ver cases de sucesso
+                {t.contactPage.success.primaryButton}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button size="lg" variant="outline">
-                Voltar ao início
+                {t.contactPage.success.secondaryButton}
               </Button>
             </div>
           </motion.div>
@@ -175,15 +177,15 @@ export function ContactPage() {
             <motion.div variants={fadeInUp} className="space-y-8">
               <div className="inline-flex items-center px-6 py-3 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
                 <Headphones className="w-5 h-5 mr-2" />
-                Fale com especialistas
+                {t.contactPage.hero.badge}
               </div>
               
               <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
-                Pronto para encher sua agenda de reuniões?
+                {t.contactPage.hero.title}
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-                Converse com nossos especialistas e descubra como gerar 30+ reuniões qualificadas por mês no LinkedIn.
+                {t.contactPage.hero.subtitle}
               </p>
             </motion.div>
           </motion.div>
@@ -203,10 +205,10 @@ export function ContactPage() {
             {/* Header */}
             <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto">
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Escolha como prefere conversar
+                {t.contactPage.methods.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Nossa equipe está pronta para te ajudar a transformar o LinkedIn em sua principal fonte de leads.
+                {t.contactPage.methods.subtitle}
               </p>
             </motion.div>
 
@@ -272,10 +274,10 @@ export function ContactPage() {
                 <Card className="p-8">
                   <div className="mb-8">
                     <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                      Ou preencha o formulário
+                      {t.contactPage.form.title}
                     </h3>
                     <p className="text-gray-600">
-                      Conte-nos sobre seu negócio e objetivos. Retornaremos em até 2 horas.
+                      {t.contactPage.form.subtitle}
                     </p>
                   </div>
 
@@ -283,7 +285,7 @@ export function ContactPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                          Nome completo *
+                          {t.contactPage.form.fields.name}
                         </label>
                         <input
                           type="text"
@@ -299,7 +301,7 @@ export function ContactPage() {
                       
                       <div>
                         <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                          Email *
+                          {t.contactPage.form.fields.email}
                         </label>
                         <input
                           type="email"
@@ -317,7 +319,7 @@ export function ContactPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                          WhatsApp *
+                          {t.contactPage.form.fields.phone}
                         </label>
                         <input
                           type="tel"
@@ -333,7 +335,7 @@ export function ContactPage() {
                       
                       <div>
                         <label htmlFor="company" className="block text-sm font-semibold text-gray-700 mb-2">
-                          Empresa *
+                          {t.contactPage.form.fields.company}
                         </label>
                         <input
                           type="text"
@@ -351,7 +353,7 @@ export function ContactPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="role" className="block text-sm font-semibold text-gray-700 mb-2">
-                          Seu cargo
+                          {t.contactPage.form.fields.role}
                         </label>
                         <select
                           id="role"
@@ -360,19 +362,19 @@ export function ContactPage() {
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                         >
-                          <option value="">Selecione seu cargo</option>
-                          <option value="ceo">CEO/Founder</option>
-                          <option value="cmo">CMO</option>
-                          <option value="vendas">Diretor de Vendas</option>
-                          <option value="marketing">Diretor de Marketing</option>
-                          <option value="comercial">Diretor Comercial</option>
-                          <option value="outro">Outro</option>
+                          <option value="">{t.contactPage.form.roleOptions.select}</option>
+                          <option value="ceo">{t.contactPage.form.roleOptions.ceo}</option>
+                          <option value="cmo">{t.contactPage.form.roleOptions.cmo}</option>
+                          <option value="vendas">{t.contactPage.form.roleOptions.sales}</option>
+                          <option value="marketing">{t.contactPage.form.roleOptions.marketing}</option>
+                          <option value="comercial">{t.contactPage.form.roleOptions.commercial}</option>
+                          <option value="outro">{t.contactPage.form.roleOptions.other}</option>
                         </select>
                       </div>
                       
                       <div>
                         <label htmlFor="budget" className="block text-sm font-semibold text-gray-700 mb-2">
-                          Orçamento mensal
+                          {t.contactPage.form.fields.budget}
                         </label>
                         <select
                           id="budget"
@@ -381,19 +383,19 @@ export function ContactPage() {
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                         >
-                          <option value="">Selecione seu orçamento</option>
-                          <option value="5k-10k">R$ 0 - R$ 5k</option>
-                          <option value="5k-10k">R$ 5k - R$ 10k</option>
-                          <option value="10k-20k">R$ 10k - R$ 20k</option>
-                          <option value="20k-50k">R$ 20k - R$ 50k</option>
-                          <option value="50k+">R$ 50k+</option>
+                          <option value="">{t.contactPage.form.budgetOptions.select}</option>
+                          <option value="5k-10k">{t.contactPage.form.budgetOptions.range1}</option>
+                          <option value="5k-10k">{t.contactPage.form.budgetOptions.range2}</option>
+                          <option value="10k-20k">{t.contactPage.form.budgetOptions.range3}</option>
+                          <option value="20k-50k">{t.contactPage.form.budgetOptions.range4}</option>
+                          <option value="50k+">{t.contactPage.form.budgetOptions.range5}</option>
                         </select>
                       </div>
                     </div>
 
                     <div>
                       <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Conte-nos sobre seu negócio e objetivos
+                        {t.contactPage.form.fields.message}
                       </label>
                       <textarea
                         id="message"
@@ -402,7 +404,7 @@ export function ContactPage() {
                         onChange={handleInputChange}
                         rows={4}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none"
-                        placeholder="Ex: Somos uma agência de marketing digital com 15 funcionários. Queremos gerar mais leads qualificados para nossos clientes..."
+                        placeholder={t.contactPage.form.messagePlaceholder}
                       />
                     </div>
 
@@ -415,12 +417,12 @@ export function ContactPage() {
                       {isSubmitting ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                          Enviando...
+                          {t.contactPage.form.submitting}
                         </>
                       ) : (
                         <>
                           <Send className="w-5 h-5 mr-2" />
-                          Enviar mensagem
+                          {t.contactPage.form.submit}
                         </>
                       )}
                     </Button>
@@ -433,7 +435,7 @@ export function ContactPage() {
                 {/* Benefits */}
                 <Card className="p-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                    Por que falar conosco?
+                    {t.contactPage.benefits.title}
                   </h3>
                   <div className="space-y-6">
                     {benefits.map((benefit, index) => (
@@ -457,29 +459,29 @@ export function ContactPage() {
                 {/* Contact Info */}
                 <Card className="p-8 bg-gradient-to-br from-primary-50 to-accent-50 border-primary-200">
                   <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                    Informações de contato
+                    {t.contactPage.contactInfo.title}
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">contato@primesdr.com</span>
+                      <span className="text-gray-700">{t.contactPage.contactInfo.email}</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Phone className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">+55 (11) 94502-2847</span>
+                      <span className="text-gray-700">{t.contactPage.contactInfo.phone}</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <MapPin className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">São Paulo, SP - Brasil</span>
+                      <span className="text-gray-700">{t.contactPage.contactInfo.address}</span>
                     </div>
                      <div className="flex items-center space-x-3">
                        <Clock className="w-5 h-5 text-primary-600" />
-                       <span className="text-gray-700">Seg - Sex: 9h às 18h</span>
+                       <span className="text-gray-700">{t.contactPage.contactInfo.schedule}</span>
                      </div>
                      
                      {/* Social Media Icons */}
                      <div className="pt-4 border-t border-gray-200">
-                       <p className="text-sm font-semibold text-gray-700 mb-3">Siga-nos nas redes sociais:</p>
+                       <p className="text-sm font-semibold text-gray-700 mb-3">{t.contactPage.contactInfo.socialMedia}</p>
                        <div className="flex space-x-3">
                          <a 
                            href="https://linkedin.com/company/primesdr" 

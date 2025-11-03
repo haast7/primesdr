@@ -11,6 +11,7 @@ import { trackGA4Lead, trackGA4Schedule } from '../tracking/GoogleAnalytics';
 import { ThankYouScreen } from './ThankYouScreen';
 import { sendToWebhook, formatPhoneForWebhook, getCurrentDateTime } from '@/lib/webhook';
 import { usePartialFormCapture } from '@/lib/hooks/usePartialFormCapture';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 // Lista de países com códigos telefônicos (sem duplicatas)
 const countryCodes = [
@@ -52,14 +53,7 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
-const contactFields = [
-  { id: 'name', label: 'Nome e sobrenome *', type: 'text', required: true },
-  { id: 'email', label: 'Email profissional *', type: 'email', required: true },
-  { id: 'phone', label: 'WhatsApp *', type: 'phone', required: true },
-  { id: 'company', label: 'Empresa *', type: 'text', required: true },
-  { id: 'role', label: 'Cargo *', type: 'text', required: true },
-  { id: 'linkedin', label: 'Domínio/site *', type: 'url', required: true }
-];
+// contactFields será criado dinamicamente com traduções dentro do componente
 
 // Funções de validação
 const validateEmail = (email: string) => {
@@ -90,6 +84,7 @@ const validateURL = (url: string) => {
 };
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -301,10 +296,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               {!showThankYou && (
                 <>
                   <h2 className="text-2xl font-bold mb-2">
-                    Vamos agendar uma conversa estratégica
+                    {t.contactModal.title}
                   </h2>
                   <p className="text-blue-100">
-                    Preencha seus dados e escolha o melhor horário para você
+                    {t.contactModal.subtitle}
                   </p>
                 </>
               )}
@@ -352,6 +347,7 @@ function ContactForm({
   isSubmitting,
   isFormValid
 }: ContactFormProps) {
+  const { t } = useLanguage();
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
 
@@ -361,6 +357,15 @@ function ContactForm({
     setShowCountryDropdown(false);
   };
 
+  const contactFields = [
+    { id: 'name', label: `${t.contactModal.form.name} *`, type: 'text', required: true },
+    { id: 'email', label: `${t.contactModal.form.email} *`, type: 'email', required: true },
+    { id: 'phone', label: `${t.contactModal.form.phone} *`, type: 'phone', required: true },
+    { id: 'company', label: `${t.contactModal.form.company} *`, type: 'text', required: true },
+    { id: 'role', label: `${t.contactModal.form.role} *`, type: 'text', required: true },
+    { id: 'linkedin', label: `${t.contactModal.form.linkedin} *`, type: 'url', required: true }
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -369,10 +374,10 @@ function ContactForm({
     >
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          Quase lá! Onde te encontramos?
+          {t.contactModal.form.heading}
         </h3>
         <p className="text-gray-600">
-          Preencha seus dados para agendarmos uma conversa estratégica
+          {t.contactModal.form.description}
         </p>
       </div>
 
@@ -417,7 +422,7 @@ function ContactForm({
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => onPhoneChange(e.target.value)}
-                  placeholder="(11) 99999-9999"
+                  placeholder={t.contactModal.form.phone}
                   className="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
                 />
               </div>
@@ -426,7 +431,7 @@ function ContactForm({
                 type={field.type}
                 value={formData[field.id as keyof FormData]}
                 onChange={(e) => onFieldChange(field.id, e.target.value)}
-                placeholder={field.type === 'url' ? 'https://suaempresa.com.br' : ''}
+                placeholder={field.type === 'url' ? t.contactModal.form.linkedinPlaceholder : ''}
                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
               />
             )}
@@ -443,11 +448,11 @@ function ContactForm({
           {isSubmitting ? (
             <>
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span>Enviando...</span>
+              <span>{t.contactModal.form.submitting}</span>
             </>
           ) : (
             <>
-              <span>Finalizar</span>
+              <span>{t.contactModal.form.submit}</span>
               <ArrowRight className="w-4 h-4" />
             </>
           )}

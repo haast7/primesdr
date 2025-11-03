@@ -25,88 +25,50 @@ const staggerContainer = {
 };
 
 export function Pricing() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
-
-  const handleCTAClick = (plan: string, ctaType: string) => {
-    trackEvent('cta_click', {
-      cta_type: ctaType,
-      cta_location: 'pricing_section',
-      cta_text: ctaType === 'primary' ? t.pricing.plans.starter.cta : t.pricing.plans.growth.cta,
-      plan_name: plan
-    });
-  };
 
   const plans = [
     {
-      name: 'Starter',
-      badge: 'PARA COMEÇAR',
-      description: 'Para quem quer provar que funciona antes de escalar.',
-      features: [
-        'Até 2 perfis LinkedIn ativos',
-        '2 campanhas simultâneas por perfil',
-        'Templates prontos (5+ indústrias)',
-        'Dashboard com métricas em tempo real',
-        'Integração via webhook',
-        'Suporte via chat (resposta em 24h)',
-        'Teste de 90 dias'
-      ],
-      idealFor: 'Fundadores e pequenos times testando prospecção sistemática',
-      proof: 'Payback no primeiro mês. Ou reembolso integral.',
+      name: t.pricing.plans.starter.name,
+      badge: t.pricing.plans.starter.badge,
+      description: t.pricing.plans.starter.description,
+      features: t.pricing.plans.starter.features,
+      idealFor: t.pricing.plans.starter.idealFor,
+      proof: t.pricing.plans.starter.proof,
       cta: {
-        primary: 'Começar teste grátis',
-        secondary: 'Falar com especialista'
+        primary: t.pricing.plans.starter.cta.primary,
+        secondary: t.pricing.plans.starter.cta.secondary
       },
       color: 'blue',
       icon: Users
     },
     {
-      name: 'Growth 20%OFF',
-      badge: 'MELHOR CUSTO-BENEFÍCIO',
+      name: t.pricing.plans.growth.name,
+      badge: t.pricing.plans.growth.badge,
       popular: true,
-      description: 'Para times que querem resultados previsíveis sem depender de mídia paga.',
-      features: [
-        'Tudo do Starter, mais:',
-        'Até 10 perfis LinkedIn ativos',
-        'Campanhas ilimitadas simultâneas por perfil',
-        'Revisão quinzenal de performance',
-        'Testes A/B automatizados',
-        'Relatórios executivos semanais (em breve)',
-        'Suporte prioritário (resposta em 6h)',
-        'Onboarding guiado'
-      ],
-      idealFor: 'Operações comerciais que precisam encher agenda todo mês',
-      proof: 'Cliente agência: 480k em pipeline, 8 clientes, ticket alto/mês',
+      description: t.pricing.plans.growth.description,
+      features: t.pricing.plans.growth.features,
+      idealFor: t.pricing.plans.growth.idealFor,
+      proof: t.pricing.plans.growth.proof,
       cta: {
-        primary: 'Começar teste grátis',
-        secondary: 'Ver cases do meu segmento'
+        primary: t.pricing.plans.growth.cta.primary,
+        secondary: t.pricing.plans.growth.cta.secondary
       },
       color: 'green',
       icon: Zap
     },
     {
-      name: 'Scale',
-      badge: 'SOLUÇÃO CUSTOMIZADA',
-      description: 'Para empresas que precisam de uma solução sob medida.',
+      name: t.pricing.plans.scale.name,
+      badge: t.pricing.plans.scale.badge,
+      description: t.pricing.plans.scale.description,
       isCustom: true,
-      customMessage: 'Plano personalizado',
-      features: [
-        'Tudo do Growth, mais:',
-        'Perfis LinkedIn ilimitados',
-        'Campanhas ilimitadas simultâneas por perfil',
-        'SDR dedicado (exclusivo pra sua operação)',
-        'Copy personalizada por ICP',
-        'Listas curadas + enriquecimento de dados',
-        'Playbooks avançados do seu segmento',
-        'Garantia de X reuniões/mês (definida no kickoff)',
-        'Account Manager dedicado',
-        'Onboarding VIP (3 dias + consultoria estratégica)',
-        'Acesso antecipado a novos recursos'
-      ],
-      idealFor: 'Empresas que querem transformar LinkedIn em motor de receita previsível',
+      customMessage: t.pricing.plans.scale.customMessage,
+      features: t.pricing.plans.scale.features,
+      idealFor: t.pricing.plans.scale.idealFor,
       cta: {
-        primary: 'Falar com consultor',
-        secondary: 'Agendar reunião estratégica'
+        primary: t.pricing.plans.scale.cta.primary,
+        secondary: t.pricing.plans.scale.cta.secondary
       },
       color: 'purple',
       icon: Crown
@@ -219,7 +181,7 @@ export function Pricing() {
                             <div className="flex items-center justify-center space-x-2 mt-4">
                               <Sparkles className="w-5 h-5 text-purple-500" />
                               <span className="text-purple-600 font-semibold">
-                                Consultoria gratuita incluída
+                                {t.pricing.plans.scale.freeConsultation}
                               </span>
                             </div>
                           </div>
@@ -242,7 +204,7 @@ export function Pricing() {
                     {/* Ideal For */}
                     <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-6 border border-gray-100">
                       <p className="text-base text-gray-700 leading-relaxed">
-                        <strong className="text-gray-900">Ideal para:</strong> {plan.idealFor}
+                        <strong className="text-gray-900">{t.pricing?.plans?.starter?.idealFor ? (language === 'pt' ? 'Ideal para:' : language === 'es' ? 'Ideal para:' : 'Ideal for:') : ''}</strong> {plan.idealFor}
                       </p>
                     </div>
 
@@ -289,15 +251,15 @@ export function Pricing() {
                             <div className="flex items-center justify-center space-x-4 text-sm text-gray-600">
                               <div className="flex items-center space-x-1">
                                 <Shield className="w-4 h-4 text-green-500" />
-                                <span>Consultoria gratuita</span>
+                                <span>{t.pricing.plans.scale.trustIndicators.freeConsultation}</span>
                               </div>
                               <div className="flex items-center space-x-1">
                                 <Clock className="w-4 h-4 text-blue-500" />
-                                <span>Resposta em 2h</span>
+                                <span>{t.pricing.plans.scale.trustIndicators.fastResponse}</span>
                               </div>
                             </div>
                             <p className="text-xs text-gray-500">
-                              Sem compromisso • Sem cartão • Sem pegadinhas
+                              {t.pricing.plans.scale.trustIndicators.noCommitment}
                             </p>
                           </div>
                         </>
@@ -350,10 +312,10 @@ export function Pricing() {
                     <TrendingUp className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold text-white mb-3">
-                    SDR Interno vs Prime SDR
+                    {t.pricing.comparison.title}
                 </h3>
                   <p className="text-blue-100 text-lg">
-                    Veja os números que fazem a diferença
+                    {t.pricing.comparison.subtitle}
                   </p>
                 </div>
               </div>
@@ -368,29 +330,29 @@ export function Pricing() {
                         <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-500 rounded-xl flex items-center justify-center mx-auto mb-3">
                           <UserCheck className="w-6 h-6 text-white" />
                         </div>
-                        <h4 className="text-lg font-bold text-gray-900">Estratégia</h4>
-                        <p className="text-sm text-gray-500">Despesas fixas</p>
+                        <h4 className="text-lg font-bold text-gray-900">{t.pricing.comparison.columns.strategy.title}</h4>
+                        <p className="text-sm text-gray-500">{t.pricing.comparison.columns.strategy.subtitle}</p>
                       </div>
                       <div className="text-center">
                         <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3">
                           <Zap className="w-6 h-6 text-white" />
                         </div>
-                        <h4 className="text-lg font-bold text-gray-900">SDR Interno</h4>
-                        <p className="text-sm text-gray-500">Método tradicional</p>
+                        <h4 className="text-lg font-bold text-gray-900">{t.pricing.comparison.columns.internalSdr.title}</h4>
+                        <p className="text-sm text-gray-500">{t.pricing.comparison.columns.internalSdr.subtitle}</p>
                       </div>
                       <div className="text-center">
                         <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center mx-auto mb-3">
                           <Linkedin className="w-6 h-6 text-white" />
                         </div>
-                        <h4 className="text-lg font-bold text-gray-900">Sales Navigator</h4>
-                        <p className="text-sm text-gray-500">Ferramenta LinkedIn</p>
+                        <h4 className="text-lg font-bold text-gray-900">{t.pricing.comparison.columns.salesNavigator.title}</h4>
+                        <p className="text-sm text-gray-500">{t.pricing.comparison.columns.salesNavigator.subtitle}</p>
                       </div>
                       <div className="text-center">
                         <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-3">
                           <Target className="w-6 h-6 text-white" />
                         </div>
-                        <h4 className="text-lg font-bold text-gray-900">Prime SDR</h4>
-                        <p className="text-sm text-gray-500">Método inteligente</p>
+                        <h4 className="text-lg font-bold text-gray-900">{t.pricing.comparison.columns.primeSdr.title}</h4>
+                        <p className="text-sm text-gray-500">{t.pricing.comparison.columns.primeSdr.subtitle}</p>
                       </div>
                     </div>
 
@@ -407,28 +369,27 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center">
                             <DollarSign className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Custo mensal</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.monthlyCost.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">Custo alto</span>
+                            <span className="text-gray-600 font-medium">{t.pricing.comparison.rows.monthlyCost.internalSdr}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">por pessoa</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-medium">Custo baixo</span>
+                            <span className="text-green-600 font-medium">{t.pricing.comparison.rows.monthlyCost.salesNavigator.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">(~R$ 640)</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.monthlyCost.salesNavigator.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">Economia significativa</span>
+                            <span className="text-green-600 font-bold">{t.pricing.comparison.rows.monthlyCost.primeSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">com Prime SDR</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.monthlyCost.primeSdr.detail}</p>
                         </div>
                       </motion.div>
 
@@ -443,24 +404,24 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
                             <Users className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Perfis ativos</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.activeProfiles.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">1 perfil</span>
+                            <span className="text-gray-600 font-medium">{t.pricing.comparison.rows.activeProfiles.internalSdr}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">1 perfil</span>
+                            <span className="text-gray-600 font-medium">{t.pricing.comparison.rows.activeProfiles.salesNavigator}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">Sem limite de perfis ativos</span>
+                            <span className="text-green-600 font-bold">{t.pricing.comparison.rows.activeProfiles.primeSdr}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -476,28 +437,28 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
                             <Clock className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Tempo de setup</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.setupTime.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">3–6 meses</span>
+                            <span className="text-gray-600 font-medium">{t.pricing.comparison.rows.setupTime.internalSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">ramp-up</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.setupTime.internalSdr.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-medium">Imediato</span>
+                            <span className="text-green-600 font-medium">{t.pricing.comparison.rows.setupTime.salesNavigator.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">(mas manual)</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.setupTime.salesNavigator.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">7 dias</span>
+                            <span className="text-green-600 font-bold">{t.pricing.comparison.rows.setupTime.primeSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">ativo</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.setupTime.primeSdr.detail}</p>
                         </div>
                       </motion.div>
 
@@ -512,27 +473,27 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
                             <Target className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Método</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.method.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">Depende da disciplina</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.method.internalSdr}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">50 msg/mês</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.method.salesNavigator.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">(LIMITE!)</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.method.salesNavigator.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold text-sm">Automação + inteligência</span>
+                            <span className="text-green-600 font-bold text-sm">{t.pricing.comparison.rows.method.primeSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">1.200+ msg/mês</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.method.primeSdr.detail}</p>
                         </div>
                       </motion.div>
 
@@ -547,28 +508,28 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
                             <Calendar className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Reuniões/mês</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.meetingsPerMonth.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">20–30</span>
+                            <span className="text-gray-600 font-medium">{t.pricing.comparison.rows.meetingsPerMonth.internalSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">se rodar bem</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.meetingsPerMonth.internalSdr.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium">5–10</span>
+                            <span className="text-gray-600 font-medium">{t.pricing.comparison.rows.meetingsPerMonth.salesNavigator.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">(manual)</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.meetingsPerMonth.salesNavigator.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">80–120</span>
+                            <span className="text-green-600 font-bold">{t.pricing.comparison.rows.meetingsPerMonth.primeSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">histórico real</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.meetingsPerMonth.primeSdr.detail}</p>
                         </div>
                       </motion.div>
 
@@ -583,27 +544,27 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center">
                             <Shield className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Disponibilidade</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.availability.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">Férias, turnover</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.availability.internalSdr}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-medium">24/7</span>
+                            <span className="text-green-600 font-medium">{t.pricing.comparison.rows.availability.salesNavigator.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">mas sem automação real</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.availability.salesNavigator.detail}</p>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold">24/7</span>
+                            <span className="text-green-600 font-bold">{t.pricing.comparison.rows.availability.primeSdr.value}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">ininterrupta</p>
+                          <p className="text-xs text-gray-500 mt-1">{t.pricing.comparison.rows.availability.primeSdr.detail}</p>
                         </div>
                       </motion.div>
 
@@ -618,24 +579,24 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
                             <BarChart3 className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Dashboard</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.dashboard.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">❌ Sem dashboard</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.dashboard.internalSdr}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">❌ Sem dashboard</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.dashboard.salesNavigator}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold text-sm">✅ Dashboard completo</span>
+                            <span className="text-green-600 font-bold text-sm">{t.pricing.comparison.rows.dashboard.primeSdr}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -651,24 +612,24 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
                             <MessageCircle className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Dados proprietários</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.proprietaryData.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">❌ Sem dados proprietários</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.proprietaryData.internalSdr}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">❌ Sem dados proprietários</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.proprietaryData.salesNavigator}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold text-sm">✅ Dados proprietários</span>
+                            <span className="text-green-600 font-bold text-sm">{t.pricing.comparison.rows.proprietaryData.primeSdr}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -684,24 +645,24 @@ export function Pricing() {
                           <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl flex items-center justify-center">
                             <Settings className="w-5 h-5 text-white" />
                           </div>
-                          <span className="font-semibold text-gray-900">Cadências</span>
+                          <span className="font-semibold text-gray-900">{t.pricing.comparison.rows.cadences.label}</span>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">❌ Cadências manuais ↓</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.cadences.internalSdr}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <X className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600 font-medium text-sm">❌ Cadências manuais ↓</span>
+                            <span className="text-gray-600 font-medium text-sm">{t.pricing.comparison.rows.cadences.salesNavigator}</span>
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="flex items-center justify-center space-x-2">
                             <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            <span className="text-green-600 font-bold text-sm">✅ Cadências automatizadas</span>
+                            <span className="text-green-600 font-bold text-sm">{t.pricing.comparison.rows.cadences.primeSdr}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -722,16 +683,16 @@ export function Pricing() {
                       <TrendingUp className="w-8 h-8 text-white" />
                     </div>
                     <h4 className="text-2xl font-bold text-white mb-3">
-                      Resultado Final
+                      {t.pricing.comparison.result.title}
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
                       <div className="bg-white/10 rounded-xl p-4">
-                        <div className="text-3xl font-bold mb-1">Economia significativa</div>
-                        <div className="text-green-100">Economia mensal</div>
+                        <div className="text-3xl font-bold mb-1">{t.pricing.comparison.result.savings.value}</div>
+                        <div className="text-green-100">{t.pricing.comparison.result.savings.label}</div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-4">
-                        <div className="text-3xl font-bold mb-1">3x mais</div>
-                        <div className="text-green-100">Reuniões geradas</div>
+                        <div className="text-3xl font-bold mb-1">{t.pricing.comparison.result.meetings.value}</div>
+                        <div className="text-green-100">{t.pricing.comparison.result.meetings.label}</div>
                       </div>
                     </div>
                   </div>
@@ -747,7 +708,7 @@ export function Pricing() {
             className="text-center"
           >
             <p className="text-gray-700 font-semibold mb-8 text-lg">
-              "Não sabe qual plano escolher?" Fale com um especialista (2 min)
+              {t.pricing.finalCta.question}
             </p>
             <motion.button
               className="bg-white border-2 border-blue-500 hover:border-blue-600 hover:bg-blue-50 text-blue-600 hover:text-blue-700 font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
@@ -759,7 +720,7 @@ export function Pricing() {
               
               <span className="relative flex items-center justify-center">
                 <MessageCircle className="w-6 h-6 mr-3" />
-              Falar com especialista
+              {t.pricing.finalCta.button}
                 <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
               </span>
             </motion.button>

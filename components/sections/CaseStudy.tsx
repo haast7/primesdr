@@ -11,6 +11,7 @@ import { Card } from '@/components/ui/Card';
 import { ArrowRight, TrendingUp, Users, Calendar, DollarSign } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -26,48 +27,38 @@ const staggerContainer = {
 };
 
 export function CaseStudy() {
+  const { t } = useLanguage();
+  
   const handleCTAClick = () => {
     trackEvent('cta_click', {
       cta_type: 'case_study',
       cta_location: 'case_study_section',
-      cta_text: 'Replicar isso no meu negócio'
+      cta_text: t.caseStudy.cta.button
     });
   };
 
   const metrics = [
     {
       icon: Calendar,
-      value: '112',
-      label: 'Reuniões qualificadas',
-      period: '403 MQLs gerados',
-      extraText: 'Taxa de aceitação: 35%',
+      metric: t.caseStudy.metrics.qualifiedMeetings,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50'
     },
     {
       icon: DollarSign,
-      value: 'R$ 480 mil',
-      label: 'de Pipeline',
-      period: '90 dias de operação',
-      extraText: '8 clientes X R$60k/ano',
+      metric: t.caseStudy.metrics.pipeline,
       color: 'text-green-600',
       bgColor: 'bg-green-50'
     },
     {
       icon: Users,
-      value: 'Clientes',
-      label: 'Fechando agora',
-      period: 'Contrato de 12 meses',
-      extraText: 'Ticket médio: R$ 5k/mês',
+      metric: t.caseStudy.metrics.closingClients,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50'
     },
     {
       icon: TrendingUp,
-      value: 'Payback',
-      label: 'no primeiro mês',
-      period: 'ROI de 4.066% sobre o valor anual dos contratos',
-      extraText: 'Em 90 dias de operação',
+      metric: t.caseStudy.metrics.payback,
       color: 'text-orange-600',
       bgColor: 'bg-orange-50'
     }
@@ -92,35 +83,34 @@ export function CaseStudy() {
           <motion.div variants={fadeInUp} className="text-center max-w-5xl mx-auto">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200/50 mb-8">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-              <span className="text-sm font-semibold text-gray-700">Caso Real • Agência de Marketing</span>
+              <span className="text-sm font-semibold text-gray-700">{t.caseStudy.badge}</span>
             </div>
             
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                R$ 480 mil
+                {t.caseStudy.metrics.pipeline.value}
               </span>
               <br />
-              <span className="text-gray-800">em pipeline</span>
+              <span className="text-gray-800">{t.caseStudy.metrics.pipeline.label}</span>
             </h2>
             
             <div className="flex flex-wrap justify-center gap-8 mb-8 text-lg font-semibold text-gray-700">
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                112 reuniões
+                {t.caseStudy.metrics.qualifiedMeetings.value} {t.caseStudy.stats.meetings.split(' ').slice(-1)[0]}
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
-                90 dias
+                {t.caseStudy.metrics.pipeline.period.split(' ')[0]} {t.caseStudy.metrics.pipeline.period.split(' ')[1]}
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                payback no primeiro mês
+                {t.caseStudy.metrics.payback.label}
               </div>
             </div>
             
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Uma agência de marketing digital vivia com o time apagando incêndio, zero tempo pra prospectar. 
-              <span className="font-semibold text-gray-800"> Rodamos a operação da Prime SDR:</span>
+              {t.caseStudy.description}
             </p>
           </motion.div>
 
@@ -129,9 +119,9 @@ export function CaseStudy() {
             variants={fadeInUp}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
-            {metrics.map((metric, index) => (
+            {metrics.map((item, index) => (
               <motion.div
-                key={metric.label}
+                key={item.metric.label}
                 variants={fadeInUp}
                 transition={{ delay: index * 0.1 }}
                 className="group"
@@ -141,13 +131,13 @@ export function CaseStudy() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   <div className="relative">
-                    <div className={`w-16 h-16 ${metric.bgColor} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <metric.icon className={`w-8 h-8 ${metric.color}`} />
+                    <div className={`w-16 h-16 ${item.bgColor} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <item.icon className={`w-8 h-8 ${item.color}`} />
                     </div>
-                    <div className="text-4xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{metric.value}</div>
-                    <div className="text-base font-semibold text-gray-700 mb-2">{metric.label}</div>
-                    <div className="text-sm text-gray-500 font-medium mb-1">{metric.period}</div>
-                    <div className="text-sm text-gray-600 font-semibold">{metric.extraText}</div>
+                    <div className="text-4xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{item.metric.value}</div>
+                    <div className="text-base font-semibold text-gray-700 mb-2">{item.metric.label}</div>
+                    <div className="text-sm text-gray-500 font-medium mb-1">{item.metric.period}</div>
+                    <div className="text-sm text-gray-600 font-semibold">{item.metric.extraText}</div>
                   </div>
                 </div>
               </motion.div>
@@ -164,10 +154,10 @@ export function CaseStudy() {
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mr-4">
                     <span className="text-white text-sm font-bold">?</span>
                   </div>
-                  Como conseguimos isso?
+                  {t.caseStudy.methodology.title}
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  <span className="font-semibold text-gray-900">Você monta, a gente executa ➡️ SDR fecha.</span> Você configura a cadência (mensagens, timing, ações). Nossa automação roda 24/7 com precisão. Lead respondeu? Pausa automática e SDR humano qualifica e agenda no seu CRM.
+                  {t.caseStudy.methodology.description}
                 </p>
               </div>
 
@@ -179,14 +169,14 @@ export function CaseStudy() {
                   </div>
                   
                   <blockquote className="text-xl text-gray-800 leading-relaxed mb-8 font-medium">
-                    "Antes do Prime SDR, a gente vivia correndo atrás de lead. Agora é o contrário: os leads é que correm atrás da gente. A agenda tá lotada pelas próximas três semanas. Mudou completamente o jogo."
+                    "{t.caseStudy.testimonial.quote}"
                   </blockquote>
                   
                   <div className="flex items-center space-x-4">
                     <div className="w-16 h-16 rounded-2xl overflow-hidden">
                       <ImageWithFallback
                         src={IMAGE_URLS.profile}
-                        alt="Erick Oliveira"
+                        alt={t.caseStudy.testimonial.author}
                         width={64}
                         height={64}
                         className="w-full h-full object-cover"
@@ -194,9 +184,9 @@ export function CaseStudy() {
                       />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 text-lg">Erick Oliveira</div>
-                      <div className="text-sm text-gray-600 font-medium">Dono de Agência</div>
-                      <div className="text-xs text-blue-600 font-semibold mt-1">Haast - Marketing Digital</div>
+                      <div className="font-bold text-gray-900 text-lg">{t.caseStudy.testimonial.author}</div>
+                      <div className="text-sm text-gray-600 font-medium">{t.caseStudy.testimonial.role}</div>
+                      <div className="text-xs text-blue-600 font-semibold mt-1">{t.caseStudy.testimonial.company}</div>
                     </div>
                   </div>
                 </div>
@@ -217,17 +207,17 @@ export function CaseStudy() {
           
           <div className="relative">
             <h3 className="text-3xl font-bold text-white mb-6">
-              Saiba se o Prime SDR é para você
+              {t.caseStudy.cta.title}
             </h3>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            60 segundos pra saber se sua operação pode gerar 30+ reuniões por mês no LinkedIn.
+              {t.caseStudy.cta.subtitle}
             </p>
             <ContactButton
               source="case-study-cta"
               size="lg"
               className="group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 text-white shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 text-lg px-8 py-4"
             >
-              Começar agora
+              {t.caseStudy.cta.button}
               <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
             </ContactButton>
           </div>

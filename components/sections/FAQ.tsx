@@ -7,6 +7,7 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
 import { ContactButton } from '@/components/ui/ContactButton';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -21,47 +22,8 @@ const staggerContainer = {
   }
 };
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-const faqs: FAQItem[] = [
-  {
-    question: 'Isso viola as regras do LinkedIn?',
-    answer: 'Não. Respeitamos todos os limites, variamos cadência e nunca disparamos spam. Operamos há anos sem um único ban.'
-  },
-  {
-    question: 'Funciona pro meu nicho?',
-    answer: 'Atendemos qualquer negócio que precise gerar reuniões qualificadas e previsíves. Única pergunta que você deve se fazer é: seu público alvo está no linkedin?'
-  },
-  {
-    question: 'Quanto tempo até ver resultado?',
-    answer: 'Respostas na 1ª semana. Reuniões a partir da 2ª–3ª semana. O payback vem no primeiro mês de operação.'
-  },
-  {
-    question: 'E se não funcionar?',
-    answer: '90 dias de teste. Sem ROI (Retorno sobre o Investimento)? Reembolso integral. Simples assim.'
-  },
-  {
-    question: 'Preciso de Sales Navigator?',
-    answer: 'Não. O Prime SDR vai além: além de encontrar os decisores, automatiza todo o processo, coletando respostas, qualificando e agendando reuniões para você.'
-  },
-  {
-    question: 'Quantos perfis devo conectar?',
-    answer: 'Mínimo 1, ideal 3–6 (depende do tamanho do time). Quanto mais perfis, mais escala.'
-  },
-  {
-    question: 'Meu LinkedIn pode ser banido?',
-    answer: 'Não. Respeitamos todos os limites (30–40 convites/dia, variação de cadência, aquecimento). Operamos há anos sem um único ban.'
-  },
-  {
-    question: 'O que acontece se alguém reclamar de spam?',
-    answer: 'Raramente acontece (taxa  de 0,1%), mas se acontecer, pausamos a campanha e ajustamos a abordagem. Além disso, sempre que alguém responde ainda que de forma negativa, a cadência é pausada automaticamente.'
-  }
-];
-
 export function FAQ() {
+  const { t } = useLanguage();
   const [openItems, setOpenItems] = useState<number[]>([]);
 
   const toggleItem = (index: number) => {
@@ -87,20 +49,20 @@ export function FAQ() {
           <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 text-sm font-medium mb-6">
               <HelpCircle className="w-4 h-4 mr-2" />
-              FAQ
+              {t.faq.badge}
             </div>
             <h2 className="text-display font-bold text-gray-900 mb-6">
-              Perguntas que todo mundo faz
+              {t.faq.headline}
             </h2>
             <p className="text-body text-gray-600 leading-relaxed">
-              As respostas diretas para as dúvidas mais comuns sobre nossa operação
+              {t.faq.subtitle}
             </p>
           </motion.div>
 
           {/* FAQ Grid */}
           <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
             <div className="space-y-4">
-              {faqs.map((faq, index) => (
+              {t.faq.questions.map((faq, index) => (
                 <motion.div
                   key={index}
                   variants={fadeInUp}
@@ -173,10 +135,10 @@ export function FAQ() {
             {/* Header */}
             <motion.div variants={fadeInUp} transition={{ duration: 0.6, ease: 'easeOut' }} className="space-y-6">
               <h2 className="text-display font-bold text-white leading-tight">
-                Saiba se o Prime SDR é para você
+                {t.faq.ctaSection?.title || 'Find out if Prime SDR is for you'}
               </h2>
               <p className="text-xl text-white/90 leading-relaxed">
-                60 segundos pra saber se sua operação pode gerar 30+ reuniões por mês no LinkedIn.
+                {t.faq.ctaSection?.subtitle || '60 seconds to know if your operation can generate 30+ meetings per month on LinkedIn.'}
               </p>
             </motion.div>
 
@@ -203,7 +165,7 @@ export function FAQ() {
                   {/* Conteúdo do botão */}
                   <span className="relative flex items-center justify-center">
                     <span className="mr-3">🚀</span>
-                    Começar agora
+                    {t.faq.ctaSection?.button || 'Start now'}
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </ContactButton>

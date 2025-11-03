@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { trackEvent } from '@/components/Analytics';
+import { trackMetaEvent } from '@/components/tracking/MetaPixel';
+import { useCookieConsent } from '@/lib/contexts/CookieConsentContext';
 import { IMAGE_URLS } from '@/lib/imageLoader';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
@@ -16,18 +18,27 @@ export function WhatsAppButton({
   message = "Olá! Gostaria de saber mais sobre o Prime SDR.",
   className = ""
 }: WhatsAppButtonProps) {
+  const { consent } = useCookieConsent();
   
   const handleWhatsAppClick = () => {
-    // Track the WhatsApp click event
+    // Track the WhatsApp click event (GA4/GTM)
     trackEvent('whatsapp_click', {
       phone: phone,
       message: message,
       source: 'floating_button'
     });
 
-    // Create WhatsApp URL
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://w.app/primesdr?text=${encodedMessage}`;
+    // Track Meta Pixel Contact event (se consentimento marketing estiver ativo)
+    if (consent?.marketing && typeof window !== 'undefined' && window.fbq) {
+      trackMetaEvent('Contact', {
+        content_name: 'WhatsApp - Botão Flutuante',
+        content_category: 'WhatsApp Click',
+        source: 'floating_button'
+      });
+    }
+
+    // Create WhatsApp URL - Novo formato
+    const whatsappUrl = `https://api.whatsapp.com/send/?phone=5511932001771&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
     
     // Open WhatsApp
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');

@@ -24,6 +24,7 @@ import {
   Shield
 } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -39,11 +40,12 @@ const staggerContainer = {
 };
 
 export function FinalCTA() {
+  const { t } = useLanguage();
   const handleCTAClick = () => {
     trackEvent('cta_click', {
       cta_type: 'schedule_demo',
       cta_location: 'how_it_works_final',
-      cta_text: 'Agendar demonstração'
+      cta_text: t.finalCta.primaryButton
     });
   };
 
@@ -51,56 +53,35 @@ export function FinalCTA() {
     trackEvent('cta_click', {
       cta_type: 'view_cases',
       cta_location: 'how_it_works_final',
-      cta_text: 'Ver casos de sucesso'
+      cta_text: t.finalCta.secondaryButton
     });
   };
 
-  const demoFeatures = [
-    {
-      icon: Eye,
-      title: 'Interface completa em funcionamento',
-      description: 'Veja o dashboard real com métricas ao vivo',
-      highlight: 'Tempo real'
-    },
-    {
-      icon: MessageSquare,
-      title: 'Como criar uma campanha do zero',
-      description: 'Processo completo de configuração passo a passo',
-      highlight: 'Passo a passo'
-    },
-    {
-      icon: BarChart3,
-      title: 'Exemplos de mensagens que convertem',
-      description: 'Templates testados e otimizados por segmento',
-      highlight: 'Comprovado'
-    },
-    {
-      icon: Users,
-      title: 'Dashboard com métricas reais',
-      description: 'Dados reais de clientes (anônimos)',
-      highlight: 'Dados reais'
-    },
-    {
-      icon: Zap,
-      title: 'Calculadora de ROI com seus números',
-      description: 'Projeção personalizada para seu negócio',
-      highlight: 'Personalizado'
-    }
-  ];
+  const demoFeatures = t.finalCta.demoFeatures.map((feature, index) => {
+    const icons = [Eye, MessageSquare, BarChart3, Users, Zap];
+    return {
+      icon: icons[index] || Eye,
+      title: feature.title,
+      description: feature.description,
+      highlight: feature.highlight
+    };
+  });
 
   const finalStats = [
-    { number: '2.000+', label: 'Perfis ativos', icon: Users, color: 'from-blue-500 to-blue-600' },
-    { number: '112', label: 'Reuniões em 45 dias', icon: Calendar, color: 'from-green-500 to-green-600' },
-    { number: '39%', label: 'Taxa de aceitação', icon: TrendingUp, color: 'from-purple-500 to-purple-600' },
-    { number: '0', label: 'Bans em 2+ anos', icon: Shield, color: 'from-orange-500 to-orange-600' }
+    { number: '2.000+', label: t.finalCta.stats.activeProfiles, icon: Users, color: 'from-blue-500 to-blue-600' },
+    { number: '112', label: t.finalCta.stats.meetings45Days, icon: Calendar, color: 'from-green-500 to-green-600' },
+    { number: '39%', label: t.finalCta.stats.acceptanceRate, icon: TrendingUp, color: 'from-purple-500 to-purple-600' },
+    { number: '0', label: t.finalCta.stats.bans, icon: Shield, color: 'from-orange-500 to-orange-600' }
   ];
 
-  const guarantees = [
-    { icon: CheckCircle, text: 'Demonstração gratuita', highlight: 'Sem custo' },
-    { icon: Clock, text: 'Sem compromisso', highlight: 'Flexível' },
-    { icon: Target, text: 'Resultados em 7 dias', highlight: 'Rápido' },
-    { icon: Award, text: 'Garantia de 90 dias', highlight: 'Seguro' }
-  ];
+  const guarantees = t.finalCta.guarantees.map((guarantee, index) => {
+    const icons = [CheckCircle, Clock, Target, Award];
+    return {
+      icon: icons[index] || CheckCircle,
+      text: guarantee.text,
+      highlight: guarantee.highlight
+    };
+  });
 
   return (
     <Section background="gradient" padding="xl" className="relative overflow-hidden">
@@ -126,18 +107,15 @@ export function FinalCTA() {
           >
             <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-semibold text-sm mb-8 border border-white/20">
               <Sparkles className="w-5 h-5 mr-2" />
-              Pronto para Começar?
+              {t.finalCta.badge}
             </div>
             
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
-              Transforme seu LinkedIn em um{' '}
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
-                motor de reuniões
-              </span>
+              {t.finalCta.headline}
             </h2>
             
             <p className="text-xl md:text-2xl lg:text-3xl text-white/90 leading-relaxed max-w-5xl mx-auto">
-              Veja a Prime SDR funcionando ao vivo em uma demonstração de 15 minutos.
+              {t.finalCta.subtitle}
             </p>
           </motion.div>
 
@@ -170,7 +148,7 @@ export function FinalCTA() {
             className="mb-16"
           >
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-12">
-              Na demo, você vai ver:
+              {t.finalCta.demoTitle}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {demoFeatures.map((feature, index) => (
@@ -215,7 +193,7 @@ export function FinalCTA() {
                 {/* Conteúdo do botão */}
                 <span className="relative flex items-center justify-center">
                   <span className="mr-3 text-2xl">🚀</span>
-                  Agendar demonstração (15 min)
+                  {t.finalCta.primaryButton}
                   <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </ContactButton>
@@ -226,7 +204,7 @@ export function FinalCTA() {
                 className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold text-lg px-12 py-6 rounded-2xl border border-white/20 transition-all duration-300 hover:scale-105"
               >
                 <Star className="w-5 h-5 mr-2 inline" />
-                Ver casos de sucesso
+                {t.finalCta.secondaryButton}
               </ContactButton>
             </div>
           </motion.div>
@@ -265,10 +243,10 @@ export function FinalCTA() {
               <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center">
                 <Zap className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Da configuração a resultados em apenas 7 dias</h3>
+              <h3 className="text-2xl font-bold text-white">{t.finalCta.finalMessage.title}</h3>
             </div>
             <p className="text-white/90 text-lg leading-relaxed">
-              Junte-se a mais de <span className="font-bold text-yellow-400">2.000 perfis LinkedIn</span> que já transformaram sua prospecção em um motor de reuniões previsíveis e escaláveis.
+              {t.finalCta.finalMessage.description}
             </p>
           </motion.div>
         </motion.div>

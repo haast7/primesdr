@@ -10,6 +10,7 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ArrowRight, Target, Settings, Rocket, BarChart3, Clock, CheckCircle, Send, Users, MessageSquare, Bell, Calendar, Zap, Brain, TrendingUp } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -25,127 +26,42 @@ const staggerContainer = {
 };
 
 export function HowItWorks() {
+  const { t } = useLanguage();
+  
   const handleCTAClick = () => {
     trackEvent('cta_click', {
       cta_type: 'how_it_works',
       cta_location: 'how_it_works_section',
-      cta_text: 'Ver demonstração'
+      cta_text: t.howItWorks.cta?.button || 'View demo'
     });
   };
 
-  const timeline = [
-    {
-      icon: Target,
-      title: 'Kickoff (Dia 1–7)',
-      subtitle: 'Entendemos seu negócio a fundo',
-      description: 'Reunião de 60 min com você para mapear ICP, definir metas e criar mensagens personalizadas.',
-      deliverables: [
-        'Documento de ICP validado',
-        '3–4 listas segmentadas (1.000+ prospects cada)',
-        'Sequências de mensagens prontas (A/B test)',
-        'Cronograma dos primeiros 90 dias'
-      ],
-      color: 'blue'
-    },
-    {
-      icon: Settings,
-      title: 'Setup Técnico (Dia 7–10)',
-      subtitle: 'Conectamos tudo com segurança',
-      description: 'Conectamos perfis LinkedIn, ativamos aquecimento automático e integramos com seu CRM.',
-      deliverables: [
-        'Perfis conectados e aquecidos',
-        'Integração CRM ativa',
-        'Dashboard de métricas configurado',
-        'Notificações (Slack, e-mail) ativas'
-      ],
-      color: 'green'
-    },
-    {
-      icon: Rocket,
-      title: 'Go-live (Dia 10+)',
-      subtitle: 'Automação roda 24/7. SDR entra quando lead responde',
-      description: 'Sistema detecta respostas positivas em tempo real e SDR humano qualifica e agenda reuniões.',
-      deliverables: [
-        'Automação enviando convites e follow-ups',
-        'IA personalizando mensagens',
-        'SDR qualificando leads em tempo real',
-        'Reuniões aparecendo no seu calendário'
-      ],
-      color: 'purple'
-    },
-    {
-      icon: BarChart3,
-      title: 'Otimização (Contínua)',
-      subtitle: 'Testamos, ajustamos, melhoramos',
-      description: 'Reuniões semanais de review, testes A/B e refinamento contínuo para maximizar resultados.',
-      deliverables: [
-        'Dashboard atualizado semanalmente',
-        'Relatório de performance',
-        'Recomendações de otimização',
-        'Novos testes rodando'
-      ],
-      color: 'orange'
-    }
+  const dailyFlowData = t.howItWorks.flowchart ? [
+    t.howItWorks.flowchart.dailyFlow.d1,
+    t.howItWorks.flowchart.dailyFlow.d3,
+    t.howItWorks.flowchart.dailyFlow.d5,
+    t.howItWorks.flowchart.dailyFlow.d7,
+    t.howItWorks.flowchart.dailyFlow.instant,
+    t.howItWorks.flowchart.dailyFlow.d10,
+    t.howItWorks.flowchart.dailyFlow.conversion
+  ] : [
+    { time: 'D1', action: 'Automation sends 120 invitations', detail: '3 profiles x 40/day' },
+    { time: 'D3', action: '49 acceptances arrive', detail: 'Acceptance rate: 49%' },
+    { time: 'D5', action: 'Post-acceptance message', detail: 'Via Automation' },
+    { time: 'D7', action: '20 leads respond', detail: 'With real interest - 33.9% of connected responded.' },
+    { time: 'Now', action: 'SDR enters conversation', detail: 'Instant notification' },
+    { time: 'D10', action: 'SDR schedules 8 meetings', detail: '40% of those who responded scheduled meeting.' },
+    { time: 'Conversion', action: 'You Close!', detail: 'The conversion rate is yours, but the qualified lead is with us!' }
   ];
 
-  const dailyFlow = [
-    { 
-      time: 'D1', 
-      action: 'Automação envia 120 convites', 
-      detail: '3 perfis x 40/dia',
-      icon: Send,
-      color: 'blue',
-      type: 'automation'
-    },
-    { 
-      time: 'D3', 
-      action: '49 aceitações chegam', 
-      detail: 'Taxa de aceitação: 49%',
-      icon: Users,
-      color: 'green',
-      type: 'response'
-    },
-    { 
-      time: 'D5', 
-      action: 'Mensagem pós-aceite', 
-      detail: 'Via Automação',
-      icon: MessageSquare,
-      color: 'purple',
-      type: 'automation'
-    },
-    { 
-      time: 'D7', 
-      action: '20 leads respondem', 
-      detail: 'Com interesse real - 33,9% dos conectados responderam.',
-      icon: Brain,
-      color: 'orange',
-      type: 'response'
-    },
-    { 
-      time: 'Na hora', 
-      action: 'SDR entra na conversa', 
-      detail: 'Notificação instantânea',
-      icon: Bell,
-      color: 'red',
-      type: 'human'
-    },
-    { 
-      time: 'D10', 
-      action: 'SDR agenda 8 reuniões', 
-      detail: '40% dos que responderam marcaram reunião.',
-      icon: Calendar,
-      color: 'emerald',
-      type: 'human'
-    },
-    { 
-      time: 'Conversão', 
-      action: 'Você Fecha!', 
-      detail: 'A taxa de conversão é sua, mas o lead qualificaso é com a gente!',
-      icon: TrendingUp,
-      color: 'indigo',
-      type: 'result'
-    }
-  ];
+  const dailyFlow = dailyFlowData.map((item, index) => ({
+    time: item.time,
+    action: item.action,
+    detail: item.detail,
+    icon: [Send, Users, MessageSquare, Brain, Bell, Calendar, TrendingUp][index],
+    color: ['blue', 'green', 'purple', 'orange', 'red', 'emerald', 'indigo'][index],
+    type: index < 3 ? 'automation' : index < 5 ? 'response' : index < 6 ? 'human' : 'result'
+  }));
 
   const getColorClasses = (color: string) => {
     const colors = {
@@ -236,7 +152,7 @@ export function HowItWorks() {
               className="text-center max-w-4xl mx-auto"
             >
               <p className="text-body text-gray-900 font-bold leading-relaxed">
-                Veja exatamente como transformamos seu LinkedIn em um motor de reuniões previsíveis
+                {t.howItWorks.subtitle}
               </p>
             </motion.div>
 
@@ -254,10 +170,10 @@ export function HowItWorks() {
                       <Zap className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-3xl font-bold text-white mb-3">
-                      Fluxo de Automação Inteligente
+                      {t.howItWorks.flowchart?.title || 'Intelligent Automation Flow'}
                     </h3>
                     <p className="text-blue-100 text-lg">
-                      Veja na prática, como o Prime trabalha 24/7 para gerar reuniões
+                      {t.howItWorks.flowchart?.subtitle || 'See in practice how Prime works 24/7 to generate meetings'}
                     </p>
                   </div>
                 </div>
@@ -314,8 +230,9 @@ export function HowItWorks() {
                                   flow.type === 'human' ? 'bg-yellow-100 text-yellow-700' :
                                   'bg-green-100 text-green-700'
                                 }`}>
-                                  {flow.type === 'automation' ? '🤖 IA' : 
-                                   flow.type === 'human' ? '👤 SDR' : '📊 Resultado'}
+                                  {flow.type === 'automation' ? (t.howItWorks.flowchart?.typeLabels?.automation || '🤖 IA') : 
+                                   flow.type === 'human' ? (t.howItWorks.flowchart?.typeLabels?.human || '👤 SDR') : 
+                                   (t.howItWorks.flowchart?.typeLabels?.result || '📊 Resultado')}
                                 </span>
                               </div>
 
@@ -353,7 +270,7 @@ export function HowItWorks() {
                                 {/* Progress Indicator */}
                                 <div className="mt-4">
                                   <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
-                                    <span>Progresso</span>
+                                    <span>{t.howItWorks.flowchart?.progressLabel || 'Progresso'}</span>
                                     <span>{Math.round(((index + 1) / dailyFlow.length) * 100)}%</span>
                                   </div>
                                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -387,28 +304,28 @@ export function HowItWorks() {
                         whileHover={{ scale: 1.05, y: -5 }}
                       >
                         <div className="text-3xl font-bold mb-2">120</div>
-                        <div className="text-blue-100">Convites enviados</div>
+                        <div className="text-blue-100">{t.howItWorks.flowchart?.summary?.invites || 'Invitations sent'}</div>
                       </motion.div>
                       <motion.div 
                         className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 text-white text-center shadow-lg hover:shadow-xl transition-all duration-300"
                         whileHover={{ scale: 1.05, y: -5 }}
                       >
                         <div className="text-3xl font-bold mb-2">49</div>
-                        <div className="text-green-100">Aceitações</div>
+                        <div className="text-green-100">{t.howItWorks.flowchart?.summary?.acceptances || 'Acceptances'}</div>
                       </motion.div>
                       <motion.div 
                         className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 text-white text-center shadow-lg hover:shadow-xl transition-all duration-300"
                         whileHover={{ scale: 1.05, y: -5 }}
                       >
                         <div className="text-3xl font-bold mb-2">20</div>
-                        <div className="text-orange-100">Respostas</div>
+                        <div className="text-orange-100">{t.howItWorks.flowchart?.summary?.responses || 'Responses'}</div>
                       </motion.div>
                       <motion.div 
                         className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl p-6 text-white text-center shadow-lg hover:shadow-xl transition-all duration-300"
                         whileHover={{ scale: 1.05, y: -5 }}
                       >
                         <div className="text-3xl font-bold mb-2">8</div>
-                        <div className="text-purple-100">Reuniões agendadas</div>
+                        <div className="text-purple-100">{t.howItWorks.flowchart?.summary?.meetings || 'Scheduled meetings'}</div>
                       </motion.div>
                     </motion.div>
                   </div>
@@ -439,10 +356,10 @@ export function HowItWorks() {
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-4xl font-bold text-white mb-4">
-                Resultado Esperado
+                {t.howItWorks.timeline?.title || 'Expected Result'}
               </h3>
               <p className="text-white/80 text-xl max-w-2xl mx-auto">
-                Evolução da performance ao longo do tempo
+                {t.howItWorks.timeline?.subtitle || 'Performance evolution over time'}
               </p>
             </div>
 
@@ -471,8 +388,8 @@ export function HowItWorks() {
                         </motion.div>
                         
                         <div className="mb-6">
-                          <h4 className="text-xl font-bold text-gray-900 mb-3">Semana 1–2</h4>
-                          <p className="text-gray-600 leading-relaxed">Primeiras respostas e reuniões</p>
+                          <h4 className="text-xl font-bold text-gray-900 mb-3">{t.howItWorks.timeline?.week1to2?.title || 'Week 1–2'}</h4>
+                          <p className="text-gray-600 leading-relaxed">{t.howItWorks.timeline?.week1to2?.description || 'First responses and meetings'}</p>
                         </div>
 
                         {/* Progress Indicator */}
@@ -484,7 +401,7 @@ export function HowItWorks() {
                             transition={{ delay: 0.3, duration: 0.8 }}
                           />
                         </div>
-                        <p className="text-sm text-gray-500 font-medium">33% do processo</p>
+                        <p className="text-sm text-gray-500 font-medium">33% {t.howItWorks.timeline?.processLabel || 'of process'}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -510,8 +427,8 @@ export function HowItWorks() {
                         </motion.div>
                         
                         <div className="mb-6">
-                          <h4 className="text-xl font-bold text-gray-900 mb-3">Semana 3–6</h4>
-                          <p className="text-gray-600 leading-relaxed">Ritmo estável (20–30 reuniões/mês por perfil ativo)</p>
+                          <h4 className="text-xl font-bold text-gray-900 mb-3">{t.howItWorks.timeline?.week3to6?.title || 'Week 3–6'}</h4>
+                          <p className="text-gray-600 leading-relaxed">{t.howItWorks.timeline?.week3to6?.description || 'Stable pace (20–30 meetings/month per active profile)'}</p>
                         </div>
 
                         {/* Progress Indicator */}
@@ -523,7 +440,7 @@ export function HowItWorks() {
                             transition={{ delay: 0.5, duration: 0.8 }}
                           />
                         </div>
-                        <p className="text-sm text-gray-500 font-medium">66% do processo</p>
+                        <p className="text-sm text-gray-500 font-medium">66% {t.howItWorks.timeline?.processLabel || 'of process'}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -546,8 +463,8 @@ export function HowItWorks() {
                         </motion.div>
                         
                         <div className="mb-6">
-                          <h4 className="text-xl font-bold text-gray-900 mb-3">Mês 2–3</h4>
-                          <p className="text-gray-600 leading-relaxed">Escala e otimização (25–40 reuniões/mês no Growth)</p>
+                          <h4 className="text-xl font-bold text-gray-900 mb-3">{t.howItWorks.timeline?.month2to3?.title || 'Month 2–3'}</h4>
+                          <p className="text-gray-600 leading-relaxed">{t.howItWorks.timeline?.month2to3?.description || 'Scale and optimization (25–40 meetings/month in Growth)'}</p>
                         </div>
 
                         {/* Progress Indicator */}
@@ -559,7 +476,7 @@ export function HowItWorks() {
                             transition={{ delay: 0.7, duration: 0.8 }}
                           />
                         </div>
-                        <p className="text-sm text-gray-500 font-medium">100% do processo</p>
+                        <p className="text-sm text-gray-500 font-medium">100% {t.howItWorks.timeline?.processLabel || 'of process'}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -574,15 +491,15 @@ export function HowItWorks() {
                 >
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white transition-all duration-300 hover:shadow-xl">
                     <div className="text-3xl font-bold text-gray-900 mb-2">10-15</div>
-                    <div className="text-gray-600 text-sm">Reuniões/mês inicial</div>
+                    <div className="text-gray-600 text-sm">{t.howItWorks.timeline?.stats?.initial || 'Initial meetings/month'}</div>
                   </div>
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white transition-all duration-300 hover:shadow-xl">
                     <div className="text-3xl font-bold text-gray-900 mb-2">15-25</div>
-                    <div className="text-gray-600 text-sm">Reuniões/mês estável</div>
+                    <div className="text-gray-600 text-sm">{t.howItWorks.timeline?.stats?.stable || 'Stable meetings/month'}</div>
                   </div>
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white transition-all duration-300 hover:shadow-xl">
                     <div className="text-3xl font-bold text-gray-900 mb-2">25-40</div>
-                    <div className="text-gray-600 text-sm">Reuniões/mês otimizado</div>
+                    <div className="text-gray-600 text-sm">{t.howItWorks.timeline?.stats?.optimized || 'Optimized meetings/month'}</div>
                   </div>
                 </motion.div>
               </div>
@@ -618,7 +535,7 @@ export function HowItWorks() {
                 {/* Conteúdo do botão */}
                 <span className="relative flex items-center justify-center">
                   <span className="mr-3">🚀</span>
-                  Ver demonstração
+                  {t.howItWorks.cta?.button || 'View demo'}
                   <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </ContactButton>
@@ -633,15 +550,15 @@ export function HowItWorks() {
             >
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Demonstração gratuita</span>
+                <span>{t.howItWorks.cta?.trust?.demo || 'Free demo'}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Sem compromisso</span>
+                <span>{t.howItWorks.cta?.trust?.noCommitment || 'No commitment'}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Resultados em 7 dias</span>
+                <span>{t.howItWorks.cta?.trust?.results || 'Results in 7 days'}</span>
               </div>
             </motion.div>
           </motion.div>

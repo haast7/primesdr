@@ -8,6 +8,7 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ArrowRight, Linkedin, Brain, UserCheck, Shield, Zap, Target, BarChart3 } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -23,37 +24,30 @@ const staggerContainer = {
 };
 
 export function Differentiators() {
+  const { t } = useLanguage();
 
   const differentiators = [
     {
       icon: Linkedin,
-      title: 'LinkedIn-first de verdade',
-      description: 'Não é "mais um CRM com integração". Fomos desenhados 100% pro LinkedIn: limites seguros, aquecimento automático, cadências corretas. Zero risco de ban.',
-      features: ['Limites seguros respeitados', 'Aquecimento automático', 'Cadências otimizadas', 'Zero risco de ban'],
+      card: t.differentiators.cards.linkedinFirst,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50'
     },
     {
       icon: Brain,
-      title: 'Você monta. A gente executa.',
-      description: 'Você cria a cadência ideal ou usa nossos templates testados, define timing e ações, e nossa automação roda com precisão. Lead respondeu? Pausa automática e SDR humano assume.',
-      features: ['Mensagens personalizadas por cargo', 'Sequência adaptada por setor', 'Quando solicitar conexão ou curtir posts', 'Dias e horários de cada disparo'],
+      card: t.differentiators.cards.youBuild,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50'
     },
     {
       icon: UserCheck,
-      title: 'SDR humano que fecha',
-      description: 'Lead respondeu? SDR real assume em tempo real, qualifica e agenda. Nada de deixar esfriar. Nada de bot respondendo.',
-      features: ['Resposta em tempo real', 'Qualificação humana', 'Agendamento direto', 'Sem bots'],
+      card: t.differentiators.cards.humanSdr,
       color: 'text-green-600',
       bgColor: 'bg-green-50'
     },
     {
       icon: BarChart3,
-      title: 'Você no controle. Sempre.',
-      description: 'Pare de mandar mensagem no escuro sem saber o que funciona.',
-      features: ['Dashboard em tempo real', 'Testes A/B automatizados', 'Métricas que importam (não vaidade)', 'Decisões baseadas em dados'],
+      card: t.differentiators.cards.youControl,
       color: 'text-orange-600',
       bgColor: 'bg-orange-50'
     }
@@ -62,18 +56,15 @@ export function Differentiators() {
   const results = [
     {
       icon: Target,
-      title: 'Sua agenda enche',
-      description: 'Previsível. Escalável. Sem você mexer um dedo.'
+      result: t.differentiators.results.agendaFull
     },
     {
       icon: Zap,
-      title: 'Operação 24/7',
-      description: 'Automação inteligente + SDR humano sempre disponível.'
+      result: t.differentiators.results.operation247
     },
     {
       icon: Shield,
-      title: 'Garantia total',
-      description: '90 dias de teste. Sem ROI? Reembolso integral.'
+      result: t.differentiators.results.totalGuarantee
     }
   ];
 
@@ -90,10 +81,10 @@ export function Differentiators() {
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto">
             <h2 className="text-display font-bold text-gray-900 mb-6">
-              Os diferenciais que ninguém mais tem
+              {t.differentiators.headline}
             </h2>
             <p className="text-body text-gray-600 leading-relaxed">
-              Por que só a Prime SDR consegue resultados consistentes e escaláveis no LinkedIn
+              {t.differentiators.subtitle}
             </p>
           </motion.div>
 
@@ -104,7 +95,7 @@ export function Differentiators() {
           >
             {differentiators.map((item, index) => (
               <motion.div
-                key={item.title}
+                key={`differentiator-${index}-${item.card.title}`}
                 variants={fadeInUp}
                 transition={{ delay: index * 0.1 }}
               >
@@ -117,12 +108,12 @@ export function Differentiators() {
 
                     {/* Content */}
                     <div className="space-y-4">
-                      <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                      <h3 className="text-xl font-bold text-gray-900">{item.card.title}</h3>
+                      <p className="text-gray-600 leading-relaxed">{item.card.description}</p>
                       
                       {/* Features */}
                       <ul className="space-y-2">
-                        {item.features.map((feature, featureIndex) => (
+                        {item.card.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center space-x-2">
                             <div className="w-1.5 h-1.5 bg-primary-500 rounded-full"></div>
                             <span className="text-sm text-gray-600">{feature}</span>
@@ -140,23 +131,23 @@ export function Differentiators() {
           <motion.div variants={fadeInUp} className="bg-white rounded-2xl p-8 lg:p-12">
             <div className="text-center mb-12">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Automação para linkedin focada em resultados.
+                {t.differentiators.results.title}
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {results.map((result, index) => (
+              {results.map((item, index) => (
                 <motion.div
-                  key={result.title}
+                  key={item.result.title}
                   variants={fadeInUp}
                   transition={{ delay: index * 0.1 }}
                   className="text-center"
                 >
                   <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <result.icon className="w-6 h-6 text-primary-600" />
+                    <item.icon className="w-6 h-6 text-primary-600" />
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{result.title}</h4>
-                  <p className="text-gray-600">{result.description}</p>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.result.title}</h4>
+                  <p className="text-gray-600">{item.result.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -187,7 +178,7 @@ export function Differentiators() {
                   {/* Conteúdo do botão */}
                   <span className="relative flex items-center justify-center">
                     <span className="mr-3">🚀</span>
-                    Agendar demonstração (15 min)
+                    {t.differentiators.ctaButton.text}
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </ContactButton>
@@ -199,7 +190,7 @@ export function Differentiators() {
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                ⚡ Vagas limitadas esta semana
+                {t.differentiators.ctaButton.urgency}
               </motion.div>
             </div>
           </motion.div>

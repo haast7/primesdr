@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -51,106 +52,76 @@ const staggerContainer = {
 };
 
 export function AboutPage() {
+  const { t } = useLanguage();
+  
   const values = [
     {
       icon: Target,
-      title: 'Resultados acima de tudo',
-      description: 'Não vendemos promessas. Entregamos reuniões qualificadas ou devolvemos seu dinheiro. Simples assim.',
+      title: t.aboutPage.mission.values.results.title,
+      description: t.aboutPage.mission.values.results.description,
       color: 'from-red-500 to-red-600',
       bgColor: 'bg-red-50',
       iconBg: 'bg-red-100'
     },
     {
       icon: Eye,
-      title: 'Transparência radical',
-      description: 'Você vê cada métrica, cada mensagem enviada, cada resposta. Sem caixas-pretas. Sem "confia em mim".',
+      title: t.aboutPage.mission.values.transparency.title,
+      description: t.aboutPage.mission.values.transparency.description,
       color: 'from-blue-500 to-blue-600',
       bgColor: 'bg-blue-50',
       iconBg: 'bg-blue-100'
     },
     {
       icon: Scale,
-      title: 'Ética sempre',
-      description: 'Respeitamos limites do LinkedIn, privacidade de dados (LGPD) e nunca enviamos spam. Crescimento sustentável, não queima de imagem.',
+      title: t.aboutPage.mission.values.ethics.title,
+      description: t.aboutPage.mission.values.ethics.description,
       color: 'from-green-500 to-green-600',
       bgColor: 'bg-green-50',
       iconBg: 'bg-green-100'
     },
     {
       icon: UserPlus,
-      title: 'Parceria real',
-      description: 'Não somos fornecedor. Somos extensão do seu time comercial. Seu sucesso é nosso sucesso.',
+      title: t.aboutPage.mission.values.partnership.title,
+      description: t.aboutPage.mission.values.partnership.description,
       color: 'from-purple-500 to-purple-600',
       bgColor: 'bg-purple-50',
       iconBg: 'bg-purple-100'
     },
     {
       icon: Rocket,
-      title: 'Inovação constante',
-      description: 'Mercado muda. LinkedIn muda. Nós nos adaptamos. Sempre testando, sempre melhorando.',
+      title: t.aboutPage.mission.values.innovation.title,
+      description: t.aboutPage.mission.values.innovation.description,
       color: 'from-orange-500 to-orange-600',
       bgColor: 'bg-orange-50',
       iconBg: 'bg-orange-100'
     }
   ];
 
-  const differentiators = [
-    {
-      other: 'Automação genérica ("envie e torça")',
-      prime: 'Você monta a estratégia, automação executa com precisão',
-      icon: Target
-    },
-    {
-      other: 'Deixa você sozinho após venda',
-      prime: 'SDR humano qualifica e agenda reuniões pra você',
-      icon: Users
-    },
-    {
-      other: '"Resultados podem variar" (sem garantia)',
-      prime: '90 dias de garantia: não funcionar? Reembolso total',
-      icon: Shield
-    },
-    {
-      other: 'Dashboard confuso, métricas de vaidade',
-      prime: 'Métricas que importam: reuniões, pipeline, CPR',
-      icon: BarChart3
-    },
-    {
-      other: 'Suporte genérico, chatbot que não resolve',
-      prime: 'Suporte real, gente respondendo, ajustes em tempo real',
-      icon: Phone
-    },
-    {
-      other: 'Risco de ban (não respeitam limites)',
-      prime: '100% seguro: operamos há anos sem um único ban',
-      icon: CheckCircle
-    }
-  ];
 
   const stats = [
-    { number: '+2.000', label: 'Perfis LinkedIn ativos gerando conexões agora', icon: Users },
-    { number: '112', label: 'Reuniões geradas em média por cliente nos primeiros 45 dias', icon: Calendar },
-    { number: '39%', label: 'Taxa média de aceitação de conexão (3x acima da média do mercado)', icon: TrendingUp },
-    { number: '22%', label: 'Taxa média de resposta (leads engajados, não robôs)', icon: Mail },
-    { number: '95%', label: 'Clientes com ROI positivo em até 90 dias', icon: DollarSign },
-    { number: '0', label: 'Banimentos do LinkedIn em 2+ anos de operação', icon: Shield }
+    { number: '+2.000', label: t.aboutPage.stats.stats.profiles, icon: Users },
+    { number: '112', label: t.aboutPage.stats.stats.meetings, icon: Calendar },
+    { number: '39%', label: t.aboutPage.stats.stats.acceptanceRate, icon: TrendingUp },
+    { number: '22%', label: t.aboutPage.stats.stats.responseRate, icon: Mail },
+    { number: '95%', label: t.aboutPage.stats.stats.roi, icon: DollarSign },
+    { number: '0', label: t.aboutPage.stats.stats.bans, icon: Shield }
   ];
 
   const segments = [
-    { icon: Building2, title: 'SaaS & Tech', description: 'Plataformas, softwares, fintechs, HRtechs, marktechs' },
-    { icon: Briefcase, title: 'Consultorias', description: 'Estratégia, transformação digital, gestão, RH' },
-    { icon: Zap, title: 'Agências', description: 'Marketing, performance, branding, desenvolvimento' },
-    { icon: Wrench, title: 'Indústria', description: 'Fornecedores B2B, equipamentos, soluções industriais' },
-    { icon: GraduationCap, title: 'Educação corporativa', description: 'Treinamentos, capacitação, desenvolvimento de líderes' },
-    { icon: Gavel, title: 'Serviços profissionais', description: 'Jurídico, contábil, auditoria, facilities' }
+    { icon: Building2, title: t.aboutPage.segments.segments.saas.title, description: t.aboutPage.segments.segments.saas.description },
+    { icon: Briefcase, title: t.aboutPage.segments.segments.consulting.title, description: t.aboutPage.segments.segments.consulting.description },
+    { icon: Zap, title: t.aboutPage.segments.segments.agencies.title, description: t.aboutPage.segments.segments.agencies.description },
+    { icon: Wrench, title: t.aboutPage.segments.segments.industry.title, description: t.aboutPage.segments.segments.industry.description },
+    { icon: GraduationCap, title: t.aboutPage.segments.segments.education.title, description: t.aboutPage.segments.segments.education.description },
+    { icon: Gavel, title: t.aboutPage.segments.segments.services.title, description: t.aboutPage.segments.segments.services.description }
   ];
 
   const commitments = [
-    { icon: Eye, title: 'Transparência total', description: 'Você acompanha tudo: mensagens enviadas, taxas de aceitação, respostas, reuniões. Dashboard atualizado em tempo real.' },
-    { icon: Shield, title: 'Conformidade com LGPD', description: 'Tratamos dados pessoais com responsabilidade. Política de privacidade clara, sem letra miúda.' },
-    { icon: CheckCircle, title: 'Segurança no LinkedIn', description: 'Respeitamos todos os limites (30-40 convites/dia), variamos cadências, aquecemos perfis. Zero risco de ban.' },
-    { icon: Phone, title: 'Suporte real', description: 'Gente de verdade respondendo, ajustando campanhas, otimizando resultados. Não é chatbot, é parceria.' },
-    { icon: Award, title: 'Garantia de 90 dias', description: 'Não gerou reuniões qualificadas? Reembolso integral. Sem burocracia, sem desculpas.' }
+    { icon: Eye, title: t.aboutPage.commitments.commitments.transparency.title, description: t.aboutPage.commitments.commitments.transparency.description },
+    { icon: Shield, title: t.aboutPage.commitments.commitments.lgpd.title, description: t.aboutPage.commitments.commitments.lgpd.description },
+    { icon: CheckCircle, title: t.aboutPage.commitments.commitments.security.title, description: t.aboutPage.commitments.commitments.security.description },
+    { icon: Phone, title: t.aboutPage.commitments.commitments.support.title, description: t.aboutPage.commitments.commitments.support.description },
+    { icon: Award, title: t.aboutPage.commitments.commitments.guarantee.title, description: t.aboutPage.commitments.commitments.guarantee.description }
   ];
 
   return (
@@ -172,15 +143,15 @@ export function AboutPage() {
             <motion.div variants={fadeInUp} className="space-y-8">
               <div className="inline-flex items-center px-6 py-3 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
                 <Heart className="w-5 h-5 mr-2" />
-                Nossa História
+                {t.aboutPage.hero.badge}
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-                Cansamos de ver vendas travarem por falta de leads qualificados.
+                {t.aboutPage.hero.title}
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-                A Prime SDR nasceu de uma frustração real: times comerciais talentosos desperdiçando tempo com prospecção manual enquanto decisores estavam a um clique de distância no LinkedIn. Criamos a solução que queríamos ter.
+                {t.aboutPage.hero.subtitle}
               </p>
             </motion.div>
           </motion.div>
@@ -205,53 +176,53 @@ export function AboutPage() {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                      De onde veio a Prime SDR
+                      {t.aboutPage.story.title}
                     </h2>
                   </div>
                 </div>
                 
                 <div className="prose prose-gray max-w-none space-y-6">
                   <p>
-                    Em 2023, trabalhávamos em diferentes empresas B2B enfrentando o mesmo problema: <strong>pipelines vazios, times sobrecarregados e dependência cara de mídia paga.</strong>
+                    {t.aboutPage.story.content.paragraph1}
                   </p>
                   
-                  <p>A rotina era sempre a mesma:</p>
+                  <p>{t.aboutPage.story.content.paragraph2}</p>
                   <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    <li>Segunda de manhã: "Precisamos de mais leads"</li>
-                    <li>Quarta à tarde: "Esses leads são péssimos"</li>
-                    <li>Sexta à noite: "Vamos aumentar o budget de ads"</li>
+                    {t.aboutPage.story.content.list.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
                   </ul>
                   
                   <p>
-                    Testamos tudo: cold call (ninguém atendia), email frio (direto pro spam), SDRs internos (turnover alto, resultados inconsistentes).
+                    {t.aboutPage.story.content.paragraph3}
                   </p>
                   
                   <div className="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500">
                     <p className="text-primary-800 font-semibold text-lg">
-                      Até olharmos pro LinkedIn de forma diferente.
+                      {t.aboutPage.story.content.highlight1}
                     </p>
                   </div>
                   
                   <p>
-                    Decisores estavam lá. Ativos. Postando. Interagindo. Mas acessá-los de forma escalável e ética parecia impossível.
+                    {t.aboutPage.story.content.paragraph4}
                   </p>
                   
                   <p>
-                    <strong>Então construímos a Prime SDR:</strong> uma operação que combina automação inteligente (respeitando limites do LinkedIn) + SDR humano (que entra quando o lead responde) + transparência total (você vê tudo em tempo real).
+                    {t.aboutPage.story.content.paragraph5}
                   </p>
                   
                   <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
                     <p className="text-green-800">
-                      <strong>O primeiro teste:</strong> 112 reuniões em 45 dias. R$ 6,3M em pipeline. Payback em 13 dias.
+                      {t.aboutPage.story.content.highlight2}
                     </p>
                   </div>
                   
                   <p>
-                    Pensamos: "Se funciona pra gente, funciona pra todo B2B."
+                    {t.aboutPage.story.content.paragraph6}
                   </p>
                   
                   <p className="text-lg font-semibold text-gray-900">
-                    E aqui estamos.
+                    {t.aboutPage.story.content.paragraph7}
                   </p>
                 </div>
               </Card>
@@ -272,7 +243,7 @@ export function AboutPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Por que fazemos o que fazemos
+                {t.aboutPage.mission.title}
               </h2>
             </motion.div>
 
@@ -283,10 +254,10 @@ export function AboutPage() {
                     <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
                       <Target className="w-6 h-6 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">Missão</h3>
+                    <h3 className="text-xl font-bold text-gray-900">{t.aboutPage.mission.missionTitle}</h3>
                   </div>
                   <p className="text-gray-700 leading-relaxed">
-                    Transformar o LinkedIn em um motor de receita previsível para empresas B2B — sem depender de sorte, sem queimar budget e sem sobrecarregar times.
+                    {t.aboutPage.mission.missionDescription}
                   </p>
                 </Card>
               </motion.div>
@@ -297,17 +268,17 @@ export function AboutPage() {
                     <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
                       <Eye className="w-6 h-6 text-purple-600" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">Visão</h3>
+                    <h3 className="text-xl font-bold text-gray-900">{t.aboutPage.mission.visionTitle}</h3>
                   </div>
                   <p className="text-gray-700 leading-relaxed">
-                    Ser a plataforma líder em prospecção B2B no LinkedIn na América Latina, conhecida por resultados reais e transparência total.
+                    {t.aboutPage.mission.visionDescription}
                   </p>
                 </Card>
               </motion.div>
             </div>
 
             <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Valores</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t.aboutPage.mission.valuesTitle}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {values.map((value, index) => (
                   <motion.div
@@ -346,7 +317,7 @@ export function AboutPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                O que nos torna únicos no mercado
+                {t.aboutPage.differentiators.title}
               </h2>
             </motion.div>
 
@@ -356,12 +327,19 @@ export function AboutPage() {
                   <table className="min-w-full">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-gray-900">Outras ferramentas de automação</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-primary-600">Prime SDR</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-gray-900">{t.aboutPage.differentiators.otherTools}</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-primary-600">{t.aboutPage.differentiators.primeSdr}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {differentiators.map((item, index) => (
+                      {[
+                        { other: t.aboutPage.differentiators.items.automation.other, prime: t.aboutPage.differentiators.items.automation.prime, icon: Target },
+                        { other: t.aboutPage.differentiators.items.support.other, prime: t.aboutPage.differentiators.items.support.prime, icon: Users },
+                        { other: t.aboutPage.differentiators.items.guarantee.other, prime: t.aboutPage.differentiators.items.guarantee.prime, icon: Shield },
+                        { other: t.aboutPage.differentiators.items.dashboard.other, prime: t.aboutPage.differentiators.items.dashboard.prime, icon: BarChart3 },
+                        { other: t.aboutPage.differentiators.items.supportGeneric.other, prime: t.aboutPage.differentiators.items.supportGeneric.prime, icon: Phone },
+                        { other: t.aboutPage.differentiators.items.banRisk.other, prime: t.aboutPage.differentiators.items.banRisk.prime, icon: CheckCircle }
+                      ].map((item, index) => (
                         <tr key={index} className="border-b border-gray-100">
                           <td className="py-4 px-6 text-sm text-gray-600">
                             {item.other}
@@ -395,10 +373,10 @@ export function AboutPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Números que comprovam
+                {t.aboutPage.stats.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Resultados reais de quem usa Prime SDR
+                {t.aboutPage.stats.subtitle}
               </p>
             </motion.div>
 
@@ -439,10 +417,10 @@ export function AboutPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Para quem servimos
+                {t.aboutPage.segments.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Empresas B2B que confiam na Prime SDR
+                {t.aboutPage.segments.subtitle}
               </p>
             </motion.div>
 
@@ -483,10 +461,10 @@ export function AboutPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Nossos compromissos
+                {t.aboutPage.commitments.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Garantias que você pode cobrar
+                {t.aboutPage.commitments.subtitle}
               </p>
             </motion.div>
 
@@ -537,7 +515,7 @@ export function AboutPage() {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                      Onde estamos
+                      {t.aboutPage.location.title}
                     </h2>
                   </div>
                 </div>
@@ -547,37 +525,37 @@ export function AboutPage() {
                     <div className="flex items-center space-x-3">
                       <Building2 className="w-5 h-5 text-primary-600" />
                       <div>
-                        <p className="font-semibold text-gray-900">Prime SDR</p>
-                        <p className="text-gray-600">CNPJ: 60.782.822/0001-01</p>
-                        <p className="text-gray-600">São Paulo, Brasil</p>
+                        <p className="font-semibold text-gray-900">{t.aboutPage.location.company}</p>
+                        <p className="text-gray-600">{t.aboutPage.location.cnpj}</p>
+                        <p className="text-gray-600">{t.aboutPage.location.city}</p>
                       </div>
                     </div>
                     
                     <div className="flex items-center space-x-3">
                       <Globe className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">Todo Brasil, América e Europa (operação 100% remota)</span>
+                      <span className="text-gray-700">{t.aboutPage.location.region}</span>
                     </div>
                     
                     <div className="flex items-center space-x-3">
                       <Clock className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">Segunda a sexta, 9h–18h (São Paulo)</span>
+                      <span className="text-gray-700">{t.aboutPage.location.schedule}</span>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">contato@primesdr.com</span>
+                      <span className="text-gray-700">{t.aboutPage.location.email}</span>
                     </div>
                     
                     <div className="flex items-center space-x-3">
                       <Phone className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">+55 11 93200-1771 (WhatsApp)</span>
+                      <span className="text-gray-700">{t.aboutPage.location.phone}</span>
                     </div>
                     
                     <div className="flex items-center space-x-3">
                       <Globe className="w-5 h-5 text-primary-600" />
-                      <span className="text-gray-700">https://primesdr.com</span>
+                      <span className="text-gray-700">{t.aboutPage.location.website}</span>
                     </div>
                   </div>
                 </div>
@@ -599,11 +577,11 @@ export function AboutPage() {
           >
             <motion.div variants={fadeInUp} className="space-y-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Pronto para encher sua agenda?
+                {t.aboutPage.cta.title}
               </h2>
               
               <p className="text-xl text-primary-100 leading-relaxed">
-                Mais de 2.000 perfis já estão gerando reuniões com a Prime SDR. Teste 90 dias sem risco.
+                {t.aboutPage.cta.subtitle}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -612,7 +590,7 @@ export function AboutPage() {
                   size="lg" 
                   className="bg-white text-primary-600 hover:bg-gray-100"
                 >
-                  Agendar demonstração (15 min)
+                  {t.aboutPage.cta.primaryButton}
                 </ContactButton>
                 <ContactButton 
                   source="about-cta-secondary"
@@ -620,7 +598,7 @@ export function AboutPage() {
                   variant="outline" 
                   className="border-white text-white hover:bg-white hover:text-primary-600"
                 >
-                  Ver casos de sucesso
+                  {t.aboutPage.cta.secondaryButton}
                 </ContactButton>
               </div>
             </motion.div>

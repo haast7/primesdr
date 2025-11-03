@@ -10,6 +10,7 @@ import { Section } from '@/components/ui/Section';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 import { ArrowRight, Shield, TrendingUp, Users, Calendar, CheckCircle } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -147,11 +148,12 @@ function LogoCarousel() {
 }
 
 export function SocialProof() {
+  const { t, language } = useLanguage();
   const handleCTAClick = () => {
     trackEvent('cta_click', {
       cta_type: 'specialist_conversation',
       cta_location: 'social_proof_section',
-      cta_text: 'Conversar com especialista'
+      cta_text: t.socialProof.guarantee.cta
     });
   };
 
@@ -160,7 +162,7 @@ export function SocialProof() {
       icon: Users,
       number: 2347,
       suffix: '',
-      title: 'Perfis ativos gerando conexões agora',
+      title: t.socialProof.metrics.activeProfiles,
       color: 'text-white',
       bgGradient: 'from-blue-500 to-blue-600',
       iconBg: 'bg-white/20'
@@ -169,7 +171,7 @@ export function SocialProof() {
       icon: Calendar,
       number: 37148,
       prefix: '',
-      title: 'Reuniões agendadas com decisores B2B',
+      title: t.socialProof.metrics.meetings,
       color: 'text-white',
       bgGradient: 'from-emerald-500 to-emerald-600',
       iconBg: 'bg-white/20'
@@ -178,7 +180,7 @@ export function SocialProof() {
       icon: TrendingUp,
       number: 94,
       suffix: '%',
-      title: 'Clientes com ROI positivo em até 90 dias',
+      title: t.socialProof.metrics.roi,
       color: 'text-white',
       bgGradient: 'from-orange-500 to-orange-600',
       iconBg: 'bg-white/20'
@@ -186,20 +188,23 @@ export function SocialProof() {
     {
       icon: Shield,
       number: 90,
-      suffix: ' dias',
-      title: 'Garantia de reembolso total se não gerar resultado',
+      suffix: language === 'pt' ? ' dias' : language === 'es' ? ' días' : ' days',
+      title: t.socialProof.metrics.guarantee,
       color: 'text-white',
       bgGradient: 'from-purple-500 to-purple-600',
       iconBg: 'bg-white/20'
     }
   ];
 
-  const categories = [
-    { name: 'SaaS', color: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg' },
-    { name: 'Consultorias', color: 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg' },
-    { name: 'Indústrias', color: 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg' },
-    { name: 'Agências', color: 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg' }
-  ];
+  const categories = t.socialProof.logos.categories.map((name, index) => {
+    const colors = [
+      'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg',
+      'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg',
+      'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg',
+      'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
+    ];
+    return { name, color: colors[index] || colors[0] };
+  });
 
   return (
     <Section background="white" padding="xl" className="relative overflow-hidden">
@@ -225,13 +230,13 @@ export function SocialProof() {
               className="text-center max-w-5xl mx-auto space-y-8"
             >
             <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-100 to-accent-100 rounded-full text-primary-700 font-semibold text-sm mb-4">
-              ✨ Resultados comprovados
+              {t.socialProof.header.badge}
             </div>
             <h2 className="text-display font-bold bg-gradient-to-r from-gray-900 via-primary-600 to-accent-600 bg-clip-text text-transparent leading-tight">
-              Empresas reais enchendo suas agendas com o Prime SDR agora.
+              {t.socialProof.header.title}
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Mais de 2.000 perfis ativos gerando reuniões todos os dias, de startups a grandes corporações.
+              {t.socialProof.header.subtitle}
             </p>
           </motion.div>
 
@@ -277,10 +282,10 @@ export function SocialProof() {
           >
             <div className="text-center space-y-6">
               <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-100 to-primary-100 rounded-full text-accent-700 font-semibold text-sm mb-4">
-                🏆 Parceiros de sucesso
+                {t.socialProof.logos.badge}
               </div>
               <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-primary-600 bg-clip-text text-transparent">
-                Empresas que confiam no Prime SDR
+                {t.socialProof.logos.title}
               </h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {categories.map((category) => (
@@ -303,7 +308,7 @@ export function SocialProof() {
                   whileHover={{ scale: 1.05 }}
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  +2.000 empresas confiam na Prime SDR
+                  {t.socialProof.logos.trustMessage}
                 </motion.span>
               </div>
             </div>
@@ -331,11 +336,11 @@ export function SocialProof() {
               </div>
               
               <h3 className="text-3xl md:text-4xl font-bold leading-tight">
-                🛡️ Garantia Prime: resultados em 90 dias ou reembolso total.
+                {t.socialProof.guarantee.title}
               </h3>
               
               <p className="text-xl md:text-2xl text-white/90 font-medium">
-                📈 Resultados previsíveis. Zero risco.
+                {t.socialProof.guarantee.subtitle}
               </p>
 
               <div className="pt-6">
@@ -348,7 +353,7 @@ export function SocialProof() {
                     size="lg"
                     className="bg-white text-primary-600 hover:bg-gray-50 group text-xl px-12 py-6 shadow-2xl font-bold rounded-2xl"
                   >
-                    Conversar com especialista
+                    {t.socialProof.guarantee.cta}
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </ContactButton>
                 </motion.div>

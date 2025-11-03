@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 interface ThankYouScreenProps {
   formData: any;
@@ -10,6 +11,7 @@ interface ThankYouScreenProps {
 }
 
 export function ThankYouScreen({ formData, onClose }: ThankYouScreenProps) {
+  const { t } = useLanguage();
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 }
@@ -36,20 +38,20 @@ export function ThankYouScreen({ formData, onClose }: ThankYouScreenProps) {
           <CheckCircle className="w-10 h-10 text-green-600" />
         </div>
         <h2 className="text-2xl font-bold text-gray-900">
-          Obrigado por se cadastrar! 🎉
+          {t.thankYouScreen.title}
         </h2>
         <p className="text-lg text-gray-600">
-          Agora vamos agendar uma conversa estratégica para entender melhor suas necessidades.
+          {t.thankYouScreen.message}
         </p>
       </motion.div>
 
       {/* Google Calendar Widget */}
       <motion.div variants={fadeInUp} className="space-y-4">
         <h3 className="text-xl font-semibold text-gray-900 text-center">
-          Escolha o melhor horário para você:
+          {t.thankYouScreen.calendar.title}
         </h3>
         <p className="text-gray-600 text-center">
-          Reunião de 45 minutos • Sem compromisso • Resultados garantidos
+          {t.thankYouScreen.calendar.subtitle}
         </p>
         
         {/* Google Calendar Widget */}
@@ -69,16 +71,16 @@ export function ThankYouScreen({ formData, onClose }: ThankYouScreenProps) {
       {/* Alternative CTA */}
       <motion.div variants={fadeInUp} className="text-center space-y-4">
         <p className="text-gray-600">
-          Prefere conversar por WhatsApp?
+          {t.thankYouScreen.whatsapp.label}
         </p>
         <button
           onClick={() => {
-            window.open('https://w.app/primesdr?text=Olá! Concluí o quiz e gostaria de agendar uma conversa.', '_blank');
+            window.open('https://api.whatsapp.com/send/?phone=5511932001771&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+os+servi%C3%A7os+do+PrimeSDR.&type=phone_number&app_absent=0', '_blank');
           }}
           className="inline-flex items-center space-x-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
         >
           <span>💬</span>
-          <span>Conversar no WhatsApp</span>
+          <span>{t.thankYouScreen.whatsapp.button}</span>
         </button>
       </motion.div>
     </motion.div>

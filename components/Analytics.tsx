@@ -7,6 +7,7 @@ import { GoogleAds } from './tracking/GoogleAds';
 import { GoogleAnalytics } from './tracking/GoogleAnalytics';
 import { AutoTracking } from './tracking/AutoTracking';
 import { WhatsAppTracking } from './tracking/WhatsAppTracking';
+import { MetaPixel } from './tracking/MetaPixel';
 
 // IDs fixos para garantir funcionamento no Vercel
 const GTM_ID = 'GTM-N7FSD6VV';
@@ -55,7 +56,7 @@ export function Analytics() {
           src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
           height="0"
           width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
+          className="hidden invisible"
         />
       </noscript>
 
@@ -78,7 +79,8 @@ export function Analytics() {
         }}
       />
 
-      {/* Meta Pixel - Carregado via GTM para evitar duplicação */}
+      {/* Meta Pixel - Carregado com consentimento */}
+      {META_PIXEL_ID && <MetaPixel pixelId={META_PIXEL_ID} />}
 
       {/* Google Ads - Sempre carregado, mas com consentimento */}
       {GOOGLE_ADS_ID && <GoogleAds googleAdsId={GOOGLE_ADS_ID} />}

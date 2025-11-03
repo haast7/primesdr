@@ -22,7 +22,7 @@ export function TrackingPixels() {
   useEffect(() => {
     if (LINKEDIN_INSIGHT_ID && consent?.marketing && typeof window !== 'undefined') {
       // LinkedIn Insight Tag já é carregado via GTM
-      console.log('LinkedIn Insight Tag ativado');
+      // Log removido para não poluir o console
     }
   }, [consent?.marketing]);
 
@@ -30,7 +30,7 @@ export function TrackingPixels() {
   useEffect(() => {
     if (TIKTOK_PIXEL_ID && consent?.marketing && typeof window !== 'undefined') {
       // TikTok Pixel já é carregado via GTM
-      console.log('TikTok Pixel ativado');
+      // Log removido para não poluir o console
     }
   }, [consent?.marketing]);
 
@@ -38,7 +38,7 @@ export function TrackingPixels() {
   useEffect(() => {
     if (CLARITY_ID && consent?.analytics && typeof window !== 'undefined') {
       // Microsoft Clarity já é carregado via GTM
-      console.log('Microsoft Clarity ativado');
+      // Log removido para não poluir o console
     }
   }, [consent?.analytics]);
 
@@ -46,7 +46,7 @@ export function TrackingPixels() {
   useEffect(() => {
     if (HOTJAR_ID && consent?.analytics && typeof window !== 'undefined') {
       // Hotjar já é carregado via GTM
-      console.log('Hotjar ativado');
+      // Log removido para não poluir o console
     }
   }, [consent?.analytics]);
 
@@ -54,7 +54,7 @@ export function TrackingPixels() {
   useEffect(() => {
     if (INTERCOM_APP_ID && consent?.functional && typeof window !== 'undefined') {
       // Intercom já é carregado via GTM
-      console.log('Intercom ativado');
+      // Log removido para não poluir o console
     }
   }, [consent?.functional]);
 
@@ -62,7 +62,7 @@ export function TrackingPixels() {
   useEffect(() => {
     if (CRISP_WEBSITE_ID && consent?.functional && typeof window !== 'undefined') {
       // Crisp já é carregado via GTM
-      console.log('Crisp Chat ativado');
+      // Log removido para não poluir o console
     }
   }, [consent?.functional]);
 

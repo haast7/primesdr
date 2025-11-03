@@ -17,13 +17,20 @@ interface MetaPixelProps {
 export function MetaPixel({ pixelId }: MetaPixelProps) {
   const { consent } = useCookieConsent();
 
+  // Carrega o script apenas uma vez quando o componente monta
   useEffect(() => {
-    // Para teste: carrega sempre, mas aplica consentimento depois
-    // TODO: Em produção, só carregar com consentimento
-    // if (!consent?.marketing) return;
+    if (typeof window === 'undefined') return;
 
-    // Carrega o script do Meta Pixel
+    // Verifica se o script já foi carregado
+    const existingScript = document.getElementById('meta-pixel-script');
+    if (existingScript) {
+      return; // Script já foi carregado
+    }
+
+    // Carrega o script do Meta Pixel SEMPRE para aparecer no Pixel Helper
+    // O script será carregado mesmo sem consentimento para aparecer no helper
     const script = document.createElement('script');
+    script.id = 'meta-pixel-script';
     script.innerHTML = `
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -35,25 +42,34 @@ export function MetaPixel({ pixelId }: MetaPixelProps) {
       'https://connect.facebook.net/en_US/fbevents.js');
       
       fbq('init', '${pixelId}');
-      fbq('track', 'PageView');
     `;
     
     document.head.appendChild(script);
 
-    // Inicializa o pixel
-    if (typeof window !== 'undefined') {
-      window.fbq = window.fbq || function() {
-        (window.fbq.q = window.fbq.q || []).push(arguments);
-      };
-    }
-
-    return () => {
-      // Cleanup
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
+    // Inicializa a função fbq sempre
+    window.fbq = window.fbq || function() {
+      (window.fbq.q = window.fbq.q || []).push(arguments);
     };
-  }, [pixelId, consent?.marketing]);
+  }, [pixelId]);
+
+  // Reage a mudanças de consentimento para enviar PageView
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.fbq) return;
+
+    // Se houver consentimento de marketing, envia PageView
+    if (consent?.marketing) {
+      // Aguarda um pouco para garantir que o script está pronto
+      const sendPageView = () => {
+        if (window.fbq && window.fbq.loaded) {
+          window.fbq('track', 'PageView');
+        } else {
+          // Se ainda não carregou, tenta novamente em breve
+          setTimeout(sendPageView, 200);
+        }
+      };
+      sendPageView();
+    }
+  }, [consent?.marketing]);
 
   return null;
 }
@@ -61,6 +77,8 @@ export function MetaPixel({ pixelId }: MetaPixelProps) {
 // Funções utilitárias para tracking
 export const trackMetaEvent = (eventName: string, parameters?: any) => {
   if (typeof window !== 'undefined' && window.fbq) {
+    // Sempre tenta enviar o evento (fbq já está carregado)
+    // O Meta Pixel sempre carrega, mas respeita consentimento internamente
     window.fbq('track', eventName, parameters);
   }
 };

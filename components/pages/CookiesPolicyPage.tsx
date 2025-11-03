@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -43,6 +44,7 @@ const staggerContainer = {
 };
 
 export function CookiesPolicyPage() {
+  const { t } = useLanguage();
   const sections = [
     {
       id: 'introducao',
@@ -703,21 +705,21 @@ export function CookiesPolicyPage() {
             <motion.div variants={fadeInUp} className="space-y-6">
               <div className="inline-flex items-center px-6 py-3 bg-primary-100 rounded-full text-primary-700 font-semibold text-sm mb-6">
                 <Cookie className="w-5 h-5 mr-2" />
-                Política de Cookies
+                {t.cookiesPolicyPage.hero.badge}
               </div>
               
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Política de Cookies
+                {t.cookiesPolicyPage.hero.title}
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed">
-                Saiba como utilizamos cookies e tecnologias similares para melhorar sua experiência de navegação.
+                {t.cookiesPolicyPage.hero.subtitle}
               </p>
               
               <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
                 <div className="flex items-center space-x-2">
                   <Cookie className="w-4 h-4" />
-                  <span>Última atualização: 13 de outubro de 2025</span>
+                  <span>{t.cookiesPolicyPage.hero.lastUpdate}</span>
                 </div>
               </div>
             </motion.div>

@@ -36,7 +36,7 @@ export default function ContactPage() {
   };
 
   const handleWhatsAppClick = () => {
-    window.open('https://w.app/primesdr?text=Olá! Gostaria de saber mais sobre o Prime SDR.', '_blank');
+    window.open('https://api.whatsapp.com/send/?phone=5511932001771&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+os+servi%C3%A7os+do+PrimeSDR.&type=phone_number&app_absent=0', '_blank');
   };
 
   return (

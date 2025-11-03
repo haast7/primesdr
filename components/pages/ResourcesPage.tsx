@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { ComingSoonModal } from '@/components/ui/ComingSoonModal';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { 
   Search, 
@@ -46,65 +47,67 @@ const staggerContainer = {
 };
 
 export function ResourcesPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [isComingSoonModalOpen, setIsComingSoonModalOpen] = useState(false);
+  const [selectedResource, setSelectedResource] = useState<string | null>(null);
 
   const filters = [
-    { id: 'all', label: 'Todos', icon: Grid },
-    { id: 'tools', label: 'Ferramentas', icon: Calculator },
-    { id: 'guides', label: 'Guias', icon: BookOpen },
-    { id: 'videos', label: 'Vídeos', icon: Play },
-    { id: 'cases', label: 'Cases', icon: TrendingUp },
+    { id: 'all', label: t.resourcesPage.filters.all, icon: Grid },
+    { id: 'tools', label: t.resourcesPage.filters.tools, icon: Calculator },
+    { id: 'guides', label: t.resourcesPage.filters.guides, icon: BookOpen },
+    { id: 'videos', label: t.resourcesPage.filters.videos, icon: Play },
+    { id: 'cases', label: t.resourcesPage.filters.cases, icon: TrendingUp },
   ];
 
   const tools = [
     {
       id: 'roi-calculator',
-      title: 'Calculadora de ROI de Prospecção',
-      description: 'Descubra quantas reuniões e quanto pipeline você pode gerar investindo em prospecção no LinkedIn.',
+      title: t.resources.tools.roiCalculator.title,
+      description: t.resources.tools.roiCalculator.description,
       icon: Calculator,
       category: 'tools',
-      badge: 'GRÁTIS',
+      badge: t.resourcesPage.badges.free,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Calcular meu ROI',
+      cta: t.resources.tools.roiCalculator.cta,
       features: ['Investimento estimado', 'Reuniões esperadas', 'Pipeline projetado', 'ROI em %'],
       downloads: '2.341 downloads'
     },
     {
       id: 'profile-analyzer',
-      title: 'Analisador de Perfil LinkedIn',
-      description: 'Cole a URL do seu perfil e receba análise instantânea com pontos de melhoria.',
+      title: t.resources.tools.profileAnalyzer.title,
+      description: t.resources.tools.profileAnalyzer.description,
       icon: User,
       category: 'tools',
-      badge: 'GRÁTIS',
+      badge: t.resourcesPage.badges.free,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Analisar meu perfil',
+      cta: t.resources.tools.profileAnalyzer.cta,
       features: ['Foto profissional', 'Headline otimizada', 'Sobre com proposta de valor', 'Experiências detalhadas'],
       downloads: '1.892 downloads'
     },
     {
       id: 'headline-generator',
-      title: 'Gerador de Headline de LinkedIn',
-      description: 'Responda 3 perguntas e receba 5 opções de headline testadas.',
+      title: t.resources.tools.headlineGenerator.title,
+      description: t.resources.tools.headlineGenerator.description,
       icon: FileText,
       category: 'tools',
-      badge: 'GRÁTIS',
+      badge: t.resourcesPage.badges.free,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Gerar minha headline',
+      cta: t.resources.tools.headlineGenerator.cta,
       features: ['5 opções personalizadas', 'Templates testados', 'Por persona', 'Taxa de conversão'],
       downloads: '1.567 downloads'
     },
     {
       id: 'qualification-quiz',
-      title: 'Quiz de Qualificação',
-      description: '5 perguntas, 60 segundos, resultado personalizado com plano de ação.',
+      title: t.resources.tools.qualificationQuiz.title,
+      description: t.resources.tools.qualificationQuiz.description,
       icon: Target,
       category: 'tools',
-      badge: 'NOVO',
+      badge: t.resourcesPage.badges.new,
       badgeColor: 'bg-purple-100 text-purple-800',
-      cta: 'Fazer o quiz',
+      cta: t.resources.tools.qualificationQuiz.cta,
       features: ['5 perguntas rápidas', 'Resultado personalizado', 'Plano de ação', '60 segundos'],
       downloads: '3.124 downloads'
     }
@@ -113,38 +116,38 @@ export function ResourcesPage() {
   const guides = [
     {
       id: 'complete-playbook',
-      title: 'O Playbook Completo de Prospecção no LinkedIn (2025)',
-      description: 'Método passo a passo para gerar 100+ reuniões/mês usando LinkedIn. ICP, mensagens, cadências, métricas e automação segura.',
+      title: t.resources.guides.completePlaybook.title,
+      description: t.resources.guides.completePlaybook.description,
       icon: BookOpen,
       category: 'guides',
-      badge: 'MAIS BAIXADO',
+      badge: t.resourcesPage.badges.mostDownloaded,
       badgeColor: 'bg-blue-100 text-blue-800',
-      cta: 'Baixar guia grátis',
+      cta: t.resources.guides.completePlaybook.cta,
       features: ['42 páginas', 'Planilha de acompanhamento', 'Templates inclusos', 'Métricas detalhadas'],
       downloads: '8.742 downloads',
       pages: '42 páginas'
     },
     {
       id: 'fatal-errors',
-      title: '7 Erros Fatais que Matam Sua Taxa de Resposta no LinkedIn',
-      description: 'Descubra os erros mais comuns (e como corrigi-los) que fazem decisores ignorarem suas mensagens.',
+      title: t.resources.guides.fatalErrors.title,
+      description: t.resources.guides.fatalErrors.description,
       icon: Zap,
       category: 'guides',
-      badge: 'GRÁTIS',
+      badge: t.resourcesPage.badges.free,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Baixar checklist',
+      cta: t.resources.guides.fatalErrors.cta,
       features: ['7 erros identificados', 'Soluções práticas', 'Checklist de verificação', 'Casos reais'],
       downloads: '5.231 downloads'
     },
     {
       id: 'decision-makers',
-      title: 'Como Acessar Decisores que Não Atendem Cold Call',
-      description: 'CEOs, Diretores e VPs não atendem telefone. Mas eles respondem no LinkedIn — se você souber como.',
+      title: t.resources.guides.decisionMakers.title,
+      description: t.resources.guides.decisionMakers.description,
       icon: Users,
       category: 'guides',
-      badge: 'GRÁTIS',
+      badge: t.resourcesPage.badges.free,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Baixar guia',
+      cta: t.resources.guides.decisionMakers.cta,
       features: ['Estratégias C-level', 'Gatilhos de timing', 'Abordagem consultiva', 'Casos reais'],
       downloads: '3.891 downloads'
     }
@@ -154,39 +157,39 @@ export function ResourcesPage() {
   const videos = [
     {
       id: 'webinar-100-meetings',
-      title: 'Como Gerar 100+ Reuniões/Mês no LinkedIn (sem ser chato)',
-      description: 'Método completo (ICP → mensagem → follow-up) com demonstração ao vivo da plataforma.',
+      title: t.resources.videos.webinar100Meetings.title,
+      description: t.resources.videos.webinar100Meetings.description,
       icon: Play,
       category: 'videos',
-      badge: 'WEBINAR',
+      badge: t.resourcesPage.badges.webinar,
       badgeColor: 'bg-red-100 text-red-800',
-      cta: 'Assistir agora',
+      cta: t.resources.videos.webinar100Meetings.cta,
       features: ['47 minutos', 'Demonstração ao vivo', 'Q&A com casos reais', 'Método completo'],
       downloads: '2.456 visualizações',
       duration: '47 min'
     },
     {
       id: '5-messages',
-      title: '5 Mensagens que Decisores SEMPRE Respondem',
-      description: 'Análise de mensagens com maior taxa de resposta e por que funcionam.',
+      title: t.resources.videos.fiveMessages.title,
+      description: t.resources.videos.fiveMessages.description,
       icon: Play,
       category: 'videos',
-      badge: 'GRÁTIS',
+      badge: t.resourcesPage.badges.free,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Assistir',
+      cta: t.resources.videos.fiveMessages.cta,
       features: ['8 minutos', '5 mensagens testadas', 'Análise detalhada', 'Por que funcionam'],
       downloads: '4.123 visualizações',
       duration: '8 min'
     },
     {
       id: 'behind-scenes',
-      title: 'Bastidores: Como Geramos R$ 6,3M em Pipeline em 60 Dias',
-      description: 'Case real com métricas, estratégias e lições aprendidas.',
+      title: t.resources.videos.behindScenes.title,
+      description: t.resources.videos.behindScenes.description,
       icon: Play,
       category: 'videos',
-      badge: 'CASE REAL',
+      badge: t.resourcesPage.badges.caseReal,
       badgeColor: 'bg-blue-100 text-blue-800',
-      cta: 'Assistir',
+      cta: t.resources.videos.behindScenes.cta,
       features: ['12 minutos', 'Métricas reais', 'Estratégias detalhadas', 'Lições aprendidas'],
       downloads: '3.789 visualizações',
       duration: '12 min'
@@ -196,37 +199,37 @@ export function ResourcesPage() {
   const cases = [
     {
       id: 'saas-case',
-      title: 'SaaS B2B → R$ 6,3M em pipeline (60 dias)',
-      description: 'Como transformamos o LinkedIn em máquina de leads para uma SaaS de gestão.',
+      title: t.resources.cases.saasCase.title,
+      description: t.resources.cases.saasCase.description,
       icon: TrendingUp,
       category: 'cases',
-      badge: 'DESTAQUE',
+      badge: t.resourcesPage.badges.highlight,
       badgeColor: 'bg-green-100 text-green-800',
-      cta: 'Ver case completo',
+      cta: t.resources.cases.saasCase.cta,
       features: ['R$ 6,3M pipeline', '60 dias', '112 reuniões', '12 clientes'],
       downloads: '1.234 visualizações'
     },
     {
       id: 'agency-case',
-      title: 'Agência → 403 leads em 90 dias',
-      description: 'Estratégia de prospecção para agência de marketing digital.',
+      title: t.resources.cases.agencyCase.title,
+      description: t.resources.cases.agencyCase.description,
       icon: TrendingUp,
       category: 'cases',
-      badge: 'CASE',
+      badge: t.resourcesPage.badges.case,
       badgeColor: 'bg-blue-100 text-blue-800',
-      cta: 'Ver case completo',
+      cta: t.resources.cases.agencyCase.cta,
       features: ['403 leads', '90 dias', 'Agência B2B', 'ROI 1.800%'],
       downloads: '987 visualizações'
     },
     {
       id: 'tech-case',
-      title: 'Tech → 87 reuniões em 30 dias',
-      description: 'Prospecção para empresa de tecnologia com ticket alto.',
+      title: t.resources.cases.techCase.title,
+      description: t.resources.cases.techCase.description,
       icon: TrendingUp,
       category: 'cases',
-      badge: 'CASE',
+      badge: t.resourcesPage.badges.case,
       badgeColor: 'bg-blue-100 text-blue-800',
-      cta: 'Ver case completo',
+      cta: t.resources.cases.techCase.cta,
       features: ['87 reuniões', '30 dias', 'Ticket alto', 'Tech B2B'],
       downloads: '756 visualizações'
     }
@@ -242,15 +245,16 @@ export function ResourcesPage() {
   });
 
   const handleResourceClick = (resource: any) => {
-    // Aqui você pode implementar a lógica específica para cada recurso
-    console.log('Resource clicked:', resource);
+    // Abre o modal de "em breve" quando clicar em qualquer CTA de recurso
+    setSelectedResource(resource.title);
+    setIsComingSoonModalOpen(true);
   };
 
   const resourceStats = [
-    { number: '25.000+', label: 'Downloads totais', icon: Download, color: 'from-blue-500 to-blue-600' },
-    { number: '42', label: 'Páginas no playbook', icon: BookOpen, color: 'from-green-500 to-green-600' },
-    { number: '100%', label: 'Recursos gratuitos', icon: Award, color: 'from-purple-500 to-purple-600' },
-    { number: '24/7', label: 'Acesso disponível', icon: Clock, color: 'from-orange-500 to-orange-600' }
+    { number: '25.000+', label: t.resourcesPage.stats.totalDownloads, icon: Download, color: 'from-blue-500 to-blue-600' },
+    { number: '42', label: t.resourcesPage.stats.playbookPages, icon: BookOpen, color: 'from-green-500 to-green-600' },
+    { number: '100%', label: t.resourcesPage.stats.freeResources, icon: Award, color: 'from-purple-500 to-purple-600' },
+    { number: '24/7', label: t.resourcesPage.stats.availableAccess, icon: Clock, color: 'from-orange-500 to-orange-600' }
   ];
 
   return (
@@ -278,7 +282,7 @@ export function ResourcesPage() {
               className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-semibold text-sm mb-8 border border-white/20"
             >
               <Sparkles className="w-5 h-5 mr-2" />
-              Recursos Gratuitos
+              {t.resourcesPage.hero.badge}
             </motion.div>
 
             {/* Título Principal */}
@@ -287,11 +291,7 @@ export function ResourcesPage() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight"
             >
-              Aprenda a dominar{' '}
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
-                prospecção B2B
-              </span>{' '}
-              no LinkedIn
+              {t.resourcesPage.hero.title}
             </motion.h1>
 
             {/* Subtítulo */}
@@ -300,8 +300,7 @@ export function ResourcesPage() {
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
               className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-12 leading-relaxed max-w-5xl mx-auto"
             >
-              Ferramentas gratuitas, playbooks testados, templates prontos e casos reais. 
-              Tudo o que você precisa para encher sua agenda de reuniões qualificadas.
+              {t.resourcesPage.hero.subtitle}
             </motion.p>
 
             {/* Resource Stats */}
@@ -335,7 +334,7 @@ export function ResourcesPage() {
               <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/60 h-6 w-6" />
               <input
                 type="text"
-                placeholder="Buscar recursos... ex: 'sequência de mensagens', 'taxa de conversão'"
+                placeholder={t.resourcesPage.hero.searchPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-16 pr-6 py-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl focus:ring-2 focus:ring-white/30 focus:border-white/30 text-lg text-white placeholder-white/60 transition-all duration-300"
@@ -409,14 +408,14 @@ export function ResourcesPage() {
         <Container size="lg">
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {activeFilter === 'all' ? 'Todos os Recursos' : 
-               activeFilter === 'tools' ? 'Ferramentas Gratuitas' :
-               activeFilter === 'guides' ? 'Guias & Playbooks' :
-               activeFilter === 'videos' ? 'Webinars & Vídeos' :
-               activeFilter === 'cases' ? 'Cases de Sucesso' : 'Recursos'}
+              {activeFilter === 'all' ? t.resourcesPage.resourceTypes.all : 
+               activeFilter === 'tools' ? t.resourcesPage.resourceTypes.tools :
+               activeFilter === 'guides' ? t.resourcesPage.resourceTypes.guides :
+               activeFilter === 'videos' ? t.resourcesPage.resourceTypes.videos :
+               activeFilter === 'cases' ? t.resourcesPage.resourceTypes.cases : t.resourcesPage.resourceTypes.all}
             </h2>
             <p className="text-gray-600">
-              {filteredResources.length} recursos encontrados
+              {filteredResources.length} {language === 'pt' ? 'recursos encontrados' : language === 'es' ? 'recursos encontrados' : 'resources found'}
             </p>
           </div>
 
@@ -491,10 +490,10 @@ export function ResourcesPage() {
             <div className="text-center py-12">
               <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Nenhum recurso encontrado
+                {t.resourcesPage.noResults.title}
               </h3>
               <p className="text-gray-600">
-                Tente ajustar sua busca ou filtros para encontrar o que procura.
+                {t.resourcesPage.noResults.message}
               </p>
             </div>
           )}
@@ -506,23 +505,32 @@ export function ResourcesPage() {
         <Container size="lg">
           <div className="text-center text-white">
             <h2 className="text-3xl font-bold mb-4">
-              Pronto para colocar em prática?
+              {t.resourcesPage.finalCta.title}
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Você tem o conhecimento. Agora falta a execução.<br />
-              A Prime SDR faz isso por você.
+              {t.resourcesPage.finalCta.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="secondary" size="lg">
-                Agendar demonstração (15 min)
+                {t.resourcesPage.finalCta.primaryCta}
               </Button>
               <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-primary-600">
-                Testar 30 dias sem risco
+                {t.resourcesPage.finalCta.secondaryCta}
               </Button>
             </div>
           </div>
         </Container>
       </Section>
+
+      {/* Coming Soon Modal */}
+      <ComingSoonModal
+        isOpen={isComingSoonModalOpen}
+        onClose={() => {
+          setIsComingSoonModalOpen(false);
+          setSelectedResource(null);
+        }}
+        resourceTitle={selectedResource || undefined}
+      />
     </div>
   );
 }

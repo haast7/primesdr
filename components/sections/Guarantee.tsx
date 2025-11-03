@@ -9,6 +9,7 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { ArrowRight, Shield, Target, Clock, CheckCircle, TrendingUp } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -24,40 +25,32 @@ const staggerContainer = {
 };
 
 export function Guarantee() {
+  const { t } = useLanguage();
+  
   const handleCTAClick = () => {
     trackEvent('cta_click', {
       cta_type: 'guarantee',
       cta_location: 'guarantee_section',
-      cta_text: 'Começar teste de 90 dias'
+      cta_text: t.guarantee.cta
     });
   };
 
   const guaranteeSteps = [
     {
       icon: Target,
-      title: 'Definimos as metas no kickoff',
-      description: 'Ex: 400 MQLs ou X reuniões/mês',
-      step: '1'
+      step: t.guarantee.steps.step1,
+      stepNumber: '1'
     },
     {
       icon: Clock,
-      title: 'Rodamos a operação por 90 dias',
-      description: 'Automação + SDR humano trabalhando',
-      step: '2'
+      step: t.guarantee.steps.step2,
+      stepNumber: '2'
     },
     {
       icon: CheckCircle,
-      title: 'Não bateu? Reembolso integral',
-      description: 'Sem letra miúda. Sem "depende"',
-      step: '3'
+      step: t.guarantee.steps.step3,
+      stepNumber: '3'
     }
-  ];
-
-  const transparencyFeatures = [
-    'Transparência total via dashboard',
-    'Métricas em tempo real',
-    'Relatórios semanais',
-    'Acesso completo aos dados'
   ];
 
   return (
@@ -74,14 +67,13 @@ export function Guarantee() {
           <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-medium mb-6">
               <Shield className="w-4 h-4 mr-2" />
-              Garantia Brutal
+              {t.guarantee.badge}
             </div>
             <h2 className="text-display font-bold text-gray-900 mb-6">
-              Teste 90 dias. Se não tiver ROI, você não paga nada.
+              {t.guarantee.headline}
             </h2>
             <p className="text-body text-gray-600 leading-relaxed">
-              Por que fazemos isso? Porque sabemos que funciona. E se não funcionar pra você, 
-              não merecemos seu dinheiro.
+              {t.guarantee.subtitle}
             </p>
           </motion.div>
 
@@ -89,7 +81,7 @@ export function Guarantee() {
           <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {guaranteeSteps.map((step, index) => (
               <motion.div
-                key={step.title}
+                key={`guarantee-step-${index}-${step.step.title}`}
                 variants={fadeInUp}
                 transition={{ delay: index * 0.1 }}
                 className="relative"
@@ -97,7 +89,7 @@ export function Guarantee() {
                 <Card className="h-full text-center relative overflow-hidden">
                   {/* Step Number */}
                   <div className="absolute top-4 right-4 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    {step.step}
+                    {step.stepNumber}
                   </div>
                   
                   <div className="space-y-4">
@@ -105,8 +97,8 @@ export function Guarantee() {
                       <step.icon className="w-8 h-8 text-primary-600" />
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-900">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900">{step.step.title}</h3>
+                    <p className="text-gray-600">{step.step.description}</p>
                   </div>
                 </Card>
 
@@ -130,13 +122,13 @@ export function Guarantee() {
                       <TrendingUp className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900">Transparência total via dashboard</h3>
-                      <p className="text-gray-600">Acompanhe tudo em tempo real</p>
+                      <h3 className="text-xl font-bold text-gray-900">{t.guarantee.transparency.title}</h3>
+                      <p className="text-gray-600">{t.guarantee.transparency.subtitle}</p>
                     </div>
                   </div>
 
                   <ul className="space-y-3">
-                    {transparencyFeatures.map((feature, index) => (
+                    {t.guarantee.transparency.features.map((feature, index) => (
                       <li key={index} className="flex items-center space-x-3">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                         <span className="text-gray-700">{feature}</span>
@@ -167,18 +159,18 @@ export function Guarantee() {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-primary-50 rounded-lg p-3">
                           <div className="text-lg font-bold text-primary-600">89</div>
-                          <div className="text-xs text-gray-600">Reuniões</div>
+                          <div className="text-xs text-gray-600">{t.guarantee.transparency.dashboard.meetings}</div>
                         </div>
                         <div className="bg-green-50 rounded-lg p-3">
                           <div className="text-lg font-bold text-green-600">23%</div>
-                          <div className="text-xs text-gray-600">Taxa</div>
+                          <div className="text-xs text-gray-600">{t.guarantee.transparency.dashboard.rate}</div>
                         </div>
                       </div>
 
                       {/* Progress Bar */}
                       <div className="space-y-2">
                         <div className="flex justify-between text-xs text-gray-600">
-                          <span>Meta: 100 reuniões</span>
+                          <span>{t.guarantee.transparency.dashboard.meta}</span>
                           <span>89%</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
@@ -209,7 +201,7 @@ export function Guarantee() {
                 {/* Conteúdo do botão */}
                 <span className="relative flex items-center justify-center">
                   <span className="mr-3">🚀</span>
-                  Começar teste de 90 dias
+                  {t.guarantee.cta}
                   <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </ContactButton>
