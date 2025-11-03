@@ -98,11 +98,94 @@ export default function HomePage() {
     ]
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.primesdr.com'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Nossa História e Missão',
+        item: 'https://www.primesdr.com/sobre'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Como Funciona',
+        item: 'https://www.primesdr.com/como-funciona'
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Preços',
+        item: 'https://www.primesdr.com/precos'
+      },
+      {
+        '@type': 'ListItem',
+        position: 5,
+        name: 'Recursos',
+        item: 'https://www.primesdr.com/recursos'
+      }
+    ]
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Prime SDR',
+    url: 'https://www.primesdr.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.primesdr.com/recursos?search={search_term_string}'
+      },
+      'query-input': 'required name=search_term_string'
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Nossa História e Missão',
+          url: 'https://www.primesdr.com/sobre'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Como Funciona',
+          url: 'https://www.primesdr.com/como-funciona'
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Preços',
+          url: 'https://www.primesdr.com/precos'
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          name: 'Recursos',
+          url: 'https://www.primesdr.com/recursos'
+        }
+      ]
+    }
+  };
+
   return (
     <>
       <JsonLd json={organizationSchema} />
       <JsonLd json={serviceSchema} />
       <JsonLd json={faqSchema} />
+      <JsonLd json={breadcrumbSchema} />
+      <JsonLd json={websiteSchema} />
       
       <Hero />
       <CaseStudy />

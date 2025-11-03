@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     title: 'Recursos - Ferramentas Gratuitas, Guias e Templates | Prime SDR',
     description: 'Aprenda a dominar prospecção B2B no LinkedIn. Ferramentas gratuitas, playbooks testados, templates prontos e casos reais.',
     type: 'website',
-    url: 'https://primesdr.com/recursos',
+    url: 'https://www.primesdr.com/recursos',
   },
   alternates: {
-    canonical: '/recursos',
+    canonical: 'https://www.primesdr.com/recursos',
   },
 };
 

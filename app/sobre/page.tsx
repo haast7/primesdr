@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: 'Conheça a história da Prime SDR, nossa missão de transformar o LinkedIn em motor de receita previsível para empresas B2B e como nascemos de uma frustração real.',
   },
   alternates: {
-    canonical: '/sobre',
+    canonical: 'https://www.primesdr.com/sobre',
   },
 };
 

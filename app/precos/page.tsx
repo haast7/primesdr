@@ -9,10 +9,14 @@ export const metadata: Metadata = {
     title: 'Preços - Planos Prime SDR',
     description: 'Escolha o plano ideal para sua empresa. Garantia de 90 dias, sem taxa de setup e ROI positivo em até 90 dias.',
     type: 'website',
+    url: 'https://www.primesdr.com/precos',
   },
   twitter: {
     title: 'Preços - Planos Prime SDR',
     description: 'Escolha o plano ideal para sua empresa. Garantia de 90 dias, sem taxa de setup e ROI positivo em até 90 dias.',
+  },
+  alternates: {
+    canonical: 'https://www.primesdr.com/precos',
   },
 };
 

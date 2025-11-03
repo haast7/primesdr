@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/private/', '/admin/'],
       },
     ],
-    sitemap: 'https://primesdr.com/sitemap.xml',
+    sitemap: 'https://www.primesdr.com/sitemap.xml',
   };
 }
 

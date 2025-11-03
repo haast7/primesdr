@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Como Funciona - Prime SDR | De configuração a resultados em 7 dias',
     description: 'Veja exatamente como a Prime SDR transforma seu LinkedIn em um motor de reuniões previsíveis, passo a passo.',
     type: 'website',
-    url: 'https://primesdr.com/como-funciona',
+    url: 'https://www.primesdr.com/como-funciona',
     images: [
       {
         url: 'https://primesdr.com/og-como-funciona.jpg',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     images: ['https://primesdr.com/og-como-funciona.jpg']
   },
   alternates: {
-    canonical: 'https://primesdr.com/como-funciona'
+    canonical: 'https://www.primesdr.com/como-funciona'
   }
 };
 
@@ -155,6 +155,7 @@ export default function ComoFuncionaPage() {
     </>
   );
 }
+
 
 
 
