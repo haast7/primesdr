@@ -27,13 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
           lastModified: new Date(),
           changeFrequency: route.changeFrequency,
           priority: route.priority,
-          alternates: {
-            languages: {
-              'pt-BR': `${baseUrl}${routes.pt[route.key]}`,
-              'en-US': `${baseUrl}${routes.en[route.key]}`,
-              'es-ES': `${baseUrl}${routes.es[route.key]}`,
-            },
-          },
         });
       }
     });
