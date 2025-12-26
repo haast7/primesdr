@@ -7,6 +7,7 @@ import { Section } from '@/components/ui/Section';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ComingSoonModal } from '@/components/ui/ComingSoonModal';
+import { ResourceFormModal } from '@/components/forms/ResourceFormModal';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { 
   Search, 
@@ -52,7 +53,10 @@ export function ResourcesPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isComingSoonModalOpen, setIsComingSoonModalOpen] = useState(false);
+  const [isResourceFormModalOpen, setIsResourceFormModalOpen] = useState(false);
   const [selectedResource, setSelectedResource] = useState<string | null>(null);
+  const [selectedResourceId, setSelectedResourceId] = useState<string | null>(null);
+  const [selectedResourceTitle, setSelectedResourceTitle] = useState<string | null>(null);
 
   const filters = [
     { id: 'all', label: t.resourcesPage.filters.all, icon: Grid },
@@ -245,9 +249,16 @@ export function ResourcesPage() {
   });
 
   const handleResourceClick = (resource: any) => {
-    // Abre o modal de "em breve" quando clicar em qualquer CTA de recurso
-    setSelectedResource(resource.title);
-    setIsComingSoonModalOpen(true);
+    // Se for a calculadora de ROI, abre o formulário de captura
+    if (resource.id === 'roi-calculator') {
+      setSelectedResourceId(resource.id);
+      setSelectedResourceTitle(resource.title);
+      setIsResourceFormModalOpen(true);
+    } else {
+      // Para outros recursos, mantém o modal "em breve"
+      setSelectedResource(resource.title);
+      setIsComingSoonModalOpen(true);
+    }
   };
 
   const resourceStats = [
@@ -428,8 +439,8 @@ export function ResourcesPage() {
               const Icon = resource.icon;
               return (
                 <Card key={resource.id} hover className="relative">
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${resource.badgeColor}`}>
+                  <div className="absolute -top-2 -right-2 z-10">
+                    <span className={`px-2 py-1 text-xs font-semibold rounded-full shadow-md ${resource.badgeColor}`}>
                       {resource.badge}
                     </span>
                   </div>
@@ -530,6 +541,23 @@ export function ResourcesPage() {
           setSelectedResource(null);
         }}
         resourceTitle={selectedResource || undefined}
+      />
+
+      {/* Resource Form Modal */}
+      <ResourceFormModal
+        isOpen={isResourceFormModalOpen}
+        onClose={() => {
+          setIsResourceFormModalOpen(false);
+          setSelectedResourceId(null);
+          setSelectedResourceTitle(null);
+        }}
+        onSuccess={() => {
+          setIsResourceFormModalOpen(false);
+          // Redirecionar será feito dentro do modal após sucesso
+        }}
+        resourceId={selectedResourceId || ''}
+        resourceTitle={selectedResourceTitle || ''}
+        redirectUrl="/calculadora-roi"
       />
     </div>
   );

@@ -8,6 +8,9 @@ interface WebhookData {
   data_entrada: string;
   horario_entrada: string;
   fonte: string;
+  form_id?: string;
+  material_id?: string;
+  material_nome?: string;
 }
 
 export async function sendToWebhook(data: WebhookData): Promise<boolean> {

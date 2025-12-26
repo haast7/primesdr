@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
@@ -10,8 +11,11 @@ import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { IMAGE_URLS } from '@/lib/imageLoader';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
+import { getLocaleFromPath, getLocalizedRoute } from '@/lib/routes';
 
 export function Header() {
+  const pathname = usePathname();
+  const currentLocale = getLocaleFromPath(pathname);
   const { language, setLanguage, t, availableLanguages } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -26,6 +30,13 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Sync language with URL locale
+  useEffect(() => {
+    if (currentLocale !== language) {
+      // Language will be updated by LanguageContext from pathname
+    }
+  }, [currentLocale, language]);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -39,11 +50,15 @@ export function Header() {
     setLanguageMenuOpen(false);
   };
 
+  // Navigation com rotas localizadas
   const navigation = [
-    { name: t.nav.howItWorks, href: '/como-funciona' },
-    { name: t.nav.pricing, href: '/precos' },
-    { name: t.nav.resources, href: '/recursos' },
-  ];
+    { name: t.nav.howItWorks, routeKey: 'como-funciona' },
+    { name: t.nav.pricing, routeKey: 'precos' },
+    { name: t.nav.resources, routeKey: 'recursos' },
+  ].map(item => ({
+    ...item,
+    href: getLocalizedRoute(item.routeKey, currentLocale),
+  }));
 
   return (
     <header className={cn(
@@ -55,7 +70,7 @@ export function Header() {
       <Container>
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href={getLocalizedRoute('home', currentLocale)} className="flex items-center space-x-3 group">
             <div className="relative">
               <ImageWithFallback
                 src={IMAGE_URLS.logo}

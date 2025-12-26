@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { 
   Check, 
   Star, 
@@ -57,81 +58,43 @@ const staggerContainer = {
 };
 
 export function PricingPage() {
+  const { t } = useLanguage();
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
 
   const plans = [
     {
-      name: 'Starter',
-      badge: 'PARA COMEÇAR',
-      description: 'Para quem quer provar que funciona antes de escalar.',
-      features: [
-        'Até 3 perfis LinkedIn ativos',
-        '2 campanhas simultâneas por perfil',
-        'IA de personalização por cargo/setor',
-        'Templates prontos (10+ indústrias)',
-        'Dashboard com métricas em tempo real',
-        'Integração CRM (HubSpot, Pipedrive, RD)',
-        'Suporte via chat (resposta em 24h)',
-        '7 dias grátis'
-      ],
-      idealFor: 'Fundadores e pequenos times testando prospecção sistemática',
-      proof: 'Payback no primeiro mês. Ou reembolso integral.',
-      cta: {
-        primary: 'Começar teste grátis',
-        secondary: 'Falar com especialista'
-      },
+      name: t.pricing.plans.starter.name,
+      badge: t.pricing.plans.starter.badge,
+      description: t.pricing.plans.starter.description,
+      features: t.pricing.plans.starter.features,
+      idealFor: t.pricing.plans.starter.idealFor,
+      proof: t.pricing.plans.starter.proof,
+      cta: t.pricing.plans.starter.cta,
       color: 'blue',
       icon: Users
     },
     {
-      name: 'Growth',
-      badge: 'MELHOR CUSTO-BENEFÍCIO',
+      name: t.pricing.plans.growth.name,
+      badge: t.pricing.plans.growth.badge,
       popular: true,
-      description: 'Para times que querem resultados previsíveis sem depender de mídia paga.',
-      features: [
-        'Tudo do Starter, mais:',
-        'Até 10 perfis LinkedIn ativos',
-        '4 campanhas simultâneas por perfil',
-        'SDR compartilhado (qualifica e agenda reuniões)',
-        'Revisão quinzenal de performance',
-        'Testes A/B automatizados',
-        'Relatórios executivos semanais',
-        'Suporte prioritário (resposta em 6h)',
-        'Onboarding guiado (7 dias)'
-      ],
-      idealFor: 'Operações comerciais que precisam encher agenda todo mês',
-      proof: 'Cliente agência: 480k em pipeline, 8 clientes, ticket alto/mês',
-      cta: {
-        primary: 'Começar teste grátis',
-        secondary: 'Ver cases do meu segmento'
-      },
+      description: t.pricing.plans.growth.description,
+      features: t.pricing.plans.growth.features,
+      idealFor: t.pricing.plans.growth.idealFor,
+      proof: t.pricing.plans.growth.proof,
+      cta: t.pricing.plans.growth.cta,
       color: 'green',
       icon: Zap
     },
     {
-      name: 'Scale',
-      badge: 'SOLUÇÃO CUSTOMIZADA',
-      description: 'Para empresas que precisam de uma solução sob medida.',
+      name: t.pricing.plans.scale.name,
+      badge: t.pricing.plans.scale.badge,
+      description: t.pricing.plans.scale.description,
       isCustom: true,
-      customMessage: 'Plano personalizado',
-      features: [
-        'Tudo do Growth, mais:',
-        'Perfis LinkedIn ilimitados',
-        '8+ campanhas simultâneas por perfil',
-        'SDR dedicado (exclusivo pra sua operação)',
-        'Copy personalizada por ICP',
-        'Listas curadas + enriquecimento de dados',
-        'Playbooks avançados do seu segmento',
-        'Garantia de X reuniões/mês (definida no kickoff)',
-        'Account Manager dedicado',
-        'Onboarding VIP (3 dias + consultoria estratégica)',
-        'Acesso antecipado a novos recursos'
-      ],
-      idealFor: 'Empresas que querem transformar LinkedIn em motor de receita previsível',
-      cta: {
-        primary: 'Falar com consultor',
-        secondary: 'Agendar reunião estratégica'
-      },
+      customMessage: t.pricing.plans.scale.customMessage,
+      freeConsultation: t.pricing.plans.scale.freeConsultation,
+      features: t.pricing.plans.scale.features,
+      idealFor: t.pricing.plans.scale.idealFor,
+      cta: t.pricing.plans.scale.cta,
       color: 'purple',
       icon: Crown
     }
@@ -191,15 +154,15 @@ export function PricingPage() {
             <motion.div variants={fadeInUp} className="space-y-8">
               <div className="inline-flex items-center px-6 py-3 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
                 <Sparkles className="w-5 h-5 mr-2" />
-                Planos e Preços
+                {t.nav.pricing}
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-                Escolha o plano ideal para sua empresa
+                {t.pricing.headline}
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-                Garantia de 90 dias, sem taxa de setup e ROI positivo em até 90 dias. Teste sem risco.
+                {t.pricing.subtitle}
               </p>
             </motion.div>
           </motion.div>
@@ -234,7 +197,7 @@ export function PricingPage() {
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-10">
                       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-xl">
                         <Star className="w-4 h-4 mr-2" />
-                        MAIS POPULAR
+                        {t.pricing.plans.growth.popular}
                       </div>
                     </div>
                   )}
@@ -269,7 +232,7 @@ export function PricingPage() {
                                 <div className="flex items-center justify-center space-x-2 mt-4">
                                   <Sparkles className="w-5 h-5 text-purple-500" />
                                   <span className="text-purple-600 font-semibold">
-                                    Consultoria gratuita incluída
+                                    {plan.freeConsultation || t.pricing.plans.scale.freeConsultation}
                                   </span>
                                 </div>
                               </div>
@@ -372,10 +335,10 @@ export function PricingPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Números que comprovam
+                {t.aboutPage.stats.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Resultados reais de quem usa Prime SDR
+                {t.aboutPage.stats.subtitle}
               </p>
             </motion.div>
 
@@ -416,10 +379,10 @@ export function PricingPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Para quem servimos
+                {t.aboutPage.segments.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Empresas B2B que confiam na Prime SDR
+                {t.aboutPage.segments.subtitle}
               </p>
             </motion.div>
 
@@ -460,10 +423,10 @@ export function PricingPage() {
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Nossos compromissos
+                {t.aboutPage.commitments.title}
               </h2>
               <p className="text-xl text-gray-600">
-                Garantias que você pode cobrar
+                {t.aboutPage.commitments.subtitle}
               </p>
             </motion.div>
 
@@ -508,19 +471,19 @@ export function PricingPage() {
           >
             <motion.div variants={fadeInUp} className="space-y-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Pronto para encher sua agenda?
+                {t.finalCta.headline}
               </h2>
               
               <p className="text-xl text-primary-100 leading-relaxed">
-                Mais de 2.000 perfis já estão gerando reuniões com a Prime SDR. Teste 90 dias sem risco.
+                {t.finalCta.subtitle}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
-                  Agendar demonstração (15 min)
+                  {t.finalCta.primaryButton}
                 </Button>
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
-                  Ver casos de sucesso
+                  {t.finalCta.secondaryButton}
                 </Button>
               </div>
             </motion.div>

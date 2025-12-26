@@ -8,6 +8,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { ArrowRight, Calendar, Clock, Target, Zap, Sparkles, CheckCircle, Users, TrendingUp } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -23,24 +24,26 @@ const staggerContainer = {
 };
 
 export function HowItWorksHero() {
+  const { t } = useLanguage();
+
   const handleCTAClick = () => {
     trackEvent('cta_click', {
       cta_type: 'schedule_demo',
       cta_location: 'how_it_works_hero',
-      cta_text: 'Agendar demonstração'
+      cta_text: t.howItWorks.cta?.button || 'Agendar demonstração'
     });
   };
 
   const trustIndicators = [
-    { icon: Clock, text: 'Configuração em 7 dias', highlight: 'Rápido' },
+    { icon: Clock, text: t.howItWorks.cta?.trust?.results || 'Resultados em 7 dias', highlight: 'Rápido' },
     { icon: Target, text: 'Resultados previsíveis', highlight: 'Confiável' },
     { icon: Zap, text: 'Automação 24/7', highlight: 'Eficiente' }
   ];
 
   const proofPoints = [
-    { number: '112', label: 'Reuniões em 45 dias', icon: Calendar },
-    { number: '39%', label: 'Taxa de aceitação', icon: TrendingUp },
-    { number: '0', label: 'Bans em 2+ anos', icon: CheckCircle }
+    { number: '112', label: t.caseStudy.stats.meetings || 'Reuniões em 45 dias', icon: Calendar },
+    { number: '39%', label: t.finalCta.stats?.acceptanceRate || t.aboutPage.stats.stats.acceptanceRate || 'Taxa de aceitação', icon: TrendingUp },
+    { number: '0', label: t.finalCta.stats?.bans || t.aboutPage.stats.stats.bans || 'Bans em 2+ anos', icon: CheckCircle }
   ];
 
   return (
@@ -66,7 +69,7 @@ export function HowItWorksHero() {
             className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-semibold text-sm mb-8 border border-white/20"
           >
             <Sparkles className="w-5 h-5 mr-2" />
-            Como Funciona
+            {t.nav.howItWorks}
           </motion.div>
 
           {/* Título Principal */}
@@ -75,10 +78,7 @@ export function HowItWorksHero() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight"
           >
-            Da configuração a resultados{' '}
-            <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
-              em 7 dias
-            </span>
+            {t.howItWorks.headline}
           </motion.h1>
 
           {/* Subtítulo */}
@@ -87,7 +87,7 @@ export function HowItWorksHero() {
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
             className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-12 leading-relaxed max-w-5xl mx-auto"
           >
-            Veja exatamente como a Prime SDR transforma seu LinkedIn em um motor de reuniões previsíveis, passo a passo.
+            {t.howItWorks.subtitle}
           </motion.p>
 
           {/* Proof Points */}
@@ -135,7 +135,7 @@ export function HowItWorksHero() {
               {/* Conteúdo do botão */}
               <span className="relative flex items-center justify-center">
                 <span className="mr-3 text-2xl">🚀</span>
-                Agendar demonstração (15 min)
+                {t.howItWorks.cta?.button || t.finalCta.primaryButton}
                 <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
               </span>
               </ContactButton>
@@ -174,15 +174,15 @@ export function HowItWorksHero() {
           >
             <div className="flex items-center space-x-2">
               <CheckCircle className="w-5 h-5 text-green-400" />
-              <span>Demonstração gratuita</span>
+              <span>{t.howItWorks.cta?.trust?.demo || 'Demonstração gratuita'}</span>
             </div>
             <div className="flex items-center space-x-2">
               <CheckCircle className="w-5 h-5 text-green-400" />
-              <span>Sem compromisso</span>
+              <span>{t.howItWorks.cta?.trust?.noCommitment || 'Sem compromisso'}</span>
             </div>
             <div className="flex items-center space-x-2">
               <CheckCircle className="w-5 h-5 text-green-400" />
-              <span>Resultados em 7 dias</span>
+              <span>{t.howItWorks.cta?.trust?.results || 'Resultados em 7 dias'}</span>
             </div>
           </motion.div>
         </motion.div>

@@ -2,21 +2,28 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { ContactButton } from '@/components/ui/ContactButton';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { IMAGE_URLS } from '@/lib/imageLoader';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
+import { getLocaleFromPath, getLocalizedRoute } from '@/lib/routes';
 
 export function Footer() {
+  const pathname = usePathname();
+  const currentLocale = getLocaleFromPath(pathname);
   const { t } = useLanguage();
 
   const footerLinks = {
-    institucional: t.footer.sections.company.map((name, index) => ({
-      name,
-      href: ['/sobre', '/contato', '/termos', '/privacidade', '/cookies'][index] || '#'
-    })),
+    institucional: t.footer.sections.company.map((name, index) => {
+      const routeKeys = ['sobre', 'contato', 'termos', 'privacidade', 'cookies'];
+      return {
+        name,
+        href: getLocalizedRoute(routeKeys[index] || 'home', currentLocale)
+      };
+    }),
     recursos: t.footer.sections.resources.map((name, index) => ({
       name,
       href: ['/blog', '/cases', '/playbooks', '/faq'][index] || '#'
@@ -38,7 +45,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Logo and Description */}
             <div className="lg:col-span-1">
-              <Link href="/" className="flex items-center space-x-2 mb-4">
+              <Link href={getLocalizedRoute('home', currentLocale)} className="flex items-center space-x-2 mb-4">
                 <ImageWithFallback
                   src={IMAGE_URLS.logoWhite}
                   alt="Prime SDR"

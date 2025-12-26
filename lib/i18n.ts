@@ -2561,6 +2561,53 @@ export const translations: Record<Language, Translations> = {
     howItWorks: {
       headline: 'De kickoff a resultados - en 7 días',
       subtitle: 'Nuestro proceso comprobado para transformar tu LinkedIn en máquina de leads.',
+      flowchart: {
+        title: 'Flujo de Automatización Inteligente',
+        subtitle: 'Ve en la práctica, cómo Prime trabaja 24/7 para generar reuniones',
+        dailyFlow: {
+          d1: {
+            time: 'D1',
+            action: 'Automatización envía 120 invitaciones',
+            detail: '3 perfiles x 40/día'
+          },
+          d3: {
+            time: 'D3',
+            action: '49 aceptaciones llegan',
+            detail: 'Tasa de aceptación: 49%'
+          },
+          d5: {
+            time: 'D5',
+            action: 'Mensaje post-aceptación',
+            detail: 'Vía Automatización'
+          },
+          d7: {
+            time: 'D7',
+            action: '20 leads responden',
+            detail: 'Con interés real - 33,9% de los conectados respondieron.'
+          },
+          instant: {
+            time: 'En el momento',
+            action: 'SDR entra en la conversación',
+            detail: 'Notificación instantánea'
+          },
+          d10: {
+            time: 'D10',
+            action: 'SDR agenda 8 reuniones',
+            detail: '40% de los que respondieron marcaron reunión.'
+          },
+          conversion: {
+            time: 'Conversión',
+            action: '¡Tú Cierras!',
+            detail: '¡La tasa de conversión es tuya, pero el lead calificado es con nosotros!'
+          }
+        },
+        summary: {
+          invites: 'Invitaciones enviadas',
+          acceptances: 'Aceptaciones',
+          responses: 'Respuestas',
+          meetings: 'Reuniones agendadas'
+        }
+      },
       steps: [
         {
           title: 'Kickoff',

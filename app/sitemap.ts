@@ -1,64 +1,45 @@
 import { MetadataRoute } from 'next';
+import { routes } from '@/lib/routes';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.primesdr.com';
-  
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/sobre`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/como-funciona`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/precos`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/recursos`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/contato`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/termos`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
-    {
-      url: `${baseUrl}/privacidade`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
-    {
-      url: `${baseUrl}/cookies`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
+  const routesList = [
+    { key: 'home', changeFrequency: 'daily' as const, priority: 1.0 },
+    { key: 'sobre', changeFrequency: 'monthly' as const, priority: 0.9 },
+    { key: 'como-funciona', changeFrequency: 'monthly' as const, priority: 0.9 },
+    { key: 'precos', changeFrequency: 'monthly' as const, priority: 0.9 },
+    { key: 'recursos', changeFrequency: 'weekly' as const, priority: 0.9 },
+    { key: 'contato', changeFrequency: 'monthly' as const, priority: 0.5 },
+    { key: 'termos', changeFrequency: 'yearly' as const, priority: 0.1 },
+    { key: 'privacidade', changeFrequency: 'yearly' as const, priority: 0.1 },
+    { key: 'cookies', changeFrequency: 'yearly' as const, priority: 0.1 },
   ];
+
+  const sitemapEntries: MetadataRoute.Sitemap = [];
+
+  // Adicionar todas as rotas para todos os idiomas
+  ['pt', 'en', 'es'].forEach((locale) => {
+    routesList.forEach((route) => {
+      const routePath = routes[locale as 'pt' | 'en' | 'es'][route.key];
+      if (routePath) {
+        sitemapEntries.push({
+          url: `${baseUrl}${routePath}`,
+          lastModified: new Date(),
+          changeFrequency: route.changeFrequency,
+          priority: route.priority,
+          alternates: {
+            languages: {
+              'pt-BR': `${baseUrl}${routes.pt[route.key]}`,
+              'en-US': `${baseUrl}${routes.en[route.key]}`,
+              'es-ES': `${baseUrl}${routes.es[route.key]}`,
+            },
+          },
+        });
+      }
+    });
+  });
+
+  return sitemapEntries;
 }
 
 

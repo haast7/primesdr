@@ -1,7 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { Language, translations, getLanguageFromCode, getLanguageName, getLanguageFlag } from '@/lib/i18n';
+import { getLocaleFromPath, getRouteKey, getLocalizedRoute } from '@/lib/routes';
 
 interface LanguageContextType {
   language: Language;
@@ -17,22 +19,38 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [language, setLanguageState] = useState<Language>('pt');
 
-  // Load language from localStorage on mount
+  // Load language from URL on mount and when pathname changes
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('prime-sdr-language');
-    if (savedLanguage) {
-      setLanguageState(getLanguageFromCode(savedLanguage));
-    }
-  }, []);
+    const localeFromPath = getLocaleFromPath(pathname);
+    setLanguageState(localeFromPath);
+    
+    // Update document language
+    document.documentElement.lang = localeFromPath;
+    
+    // Save to localStorage for consistency
+    localStorage.setItem('prime-sdr-language', localeFromPath);
+  }, [pathname]);
 
   const setLanguage = (newLanguage: Language) => {
+    // Get current route key
+    const currentRouteKey = getRouteKey(pathname);
+    
+    // Get localized route for new language
+    const newRoute = getLocalizedRoute(currentRouteKey, newLanguage);
+    
+    // Update state
     setLanguageState(newLanguage);
     localStorage.setItem('prime-sdr-language', newLanguage);
     
     // Update document language
     document.documentElement.lang = newLanguage;
+    
+    // Navigate to new route with locale
+    router.push(newRoute);
     
     // Dispatch custom event for other components
     window.dispatchEvent(new CustomEvent('languageChanged', { 
