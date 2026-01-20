@@ -65,3 +65,7 @@ export default function LocalePricingPage({
   return <PricingPage />;
 }
 
+
+
+
+

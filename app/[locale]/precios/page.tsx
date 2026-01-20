@@ -10,3 +10,7 @@ export default function PreciosRedirect({
   redirect(`/${params.locale}/pricing`);
 }
 
+
+
+
+

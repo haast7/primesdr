@@ -484,6 +484,24 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
         console.error('Erro ao enviar para Google Ads API:', error);
       }
       
+      // Enviar para RD Station Marketing
+      try {
+        await fetch('/api/rd-station/lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formData: { ...formData },
+            formSource: 'TypeformModal',
+            formIdentifier: 'formulario-quiz-fit-score',
+            tags: ['quiz', 'fit-score', 'site', `fit-score-${fitScore >= 75 ? 'alto' : fitScore >= 50 ? 'medio' : 'baixo'}`]
+          }),
+        });
+      } catch (error) {
+        console.error('Erro ao enviar para RD Station:', error);
+      }
+      
       // Here you would integrate with your backend/CRM
       console.log('Form submitted:', { formData, fitScore });
       

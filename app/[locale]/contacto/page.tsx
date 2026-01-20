@@ -8,3 +8,7 @@ export default function ContactoRedirect({
   redirect(`/${params.locale}/contact`);
 }
 
+
+
+
+

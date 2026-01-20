@@ -218,6 +218,24 @@ export function ResourceFormModal({
         console.error('Erro ao enviar para Google Ads API:', error);
       }
 
+      // Enviar para RD Station Marketing
+      try {
+        await fetch('/api/rd-station/lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formData: { ...formData },
+            formSource: 'ResourceFormModal',
+            formIdentifier: `recurso-${resourceId}`,
+            tags: ['recurso', 'material', 'download', resourceId]
+          }),
+        });
+      } catch (error) {
+        console.error('Erro ao enviar para RD Station:', error);
+      }
+
       // Enviar para webhook do Make.com (não bloqueia o fluxo se falhar)
       try {
         const { data, horario } = getCurrentDateTime();

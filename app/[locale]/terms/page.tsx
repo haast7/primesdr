@@ -65,3 +65,7 @@ export default function LocaleTermsPage({
   return <TermsOfUsePage />;
 }
 
+
+
+
+

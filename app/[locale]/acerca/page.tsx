@@ -14,3 +14,7 @@ export default function AcercaRedirect({
   redirect(`/${params.locale}/about`);
 }
 
+
+
+
+

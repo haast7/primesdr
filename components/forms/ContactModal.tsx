@@ -238,6 +238,24 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         console.error('Erro ao enviar para Google Ads API:', error);
       }
       
+      // Enviar para RD Station Marketing
+      try {
+        await fetch('/api/rd-station/lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formData: { ...formData },
+            formSource: 'ContactModal',
+            formIdentifier: 'formulario-contato-modal',
+            tags: ['contato', 'modal', 'site']
+          }),
+        });
+      } catch (error) {
+        console.error('Erro ao enviar para RD Station:', error);
+      }
+      
       console.log('Contact form submitted:', formData);
       
       // Enviar para webhook do Make.com

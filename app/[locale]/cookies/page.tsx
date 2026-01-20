@@ -64,3 +64,7 @@ export default function LocaleCookiesPage({
   return <CookiesPolicyPage />;
 }
 
+
+
+
+

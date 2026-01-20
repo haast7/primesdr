@@ -54,3 +54,7 @@ feat: implementa calculadora ROI e sistema de captura de leads para recursos
     Write-Host "Nenhuma mudança detectada para commitar." -ForegroundColor Yellow
 }
 
+
+
+
+

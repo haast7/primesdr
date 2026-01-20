@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -136,6 +137,12 @@ export default function RootLayout({
             </TypeformProvider>
           </LanguageProvider>
         </CookieConsentProvider>
+        {/* RD Station Marketing Script */}
+        <Script
+          id="rd-station-loader"
+          strategy="afterInteractive"
+          src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/4f200a9d-f5c6-447a-ae31-6893da4d4e04-loader.js"
+        />
       </body>
     </html>
   );

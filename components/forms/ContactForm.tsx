@@ -59,6 +59,24 @@ export function ContactForm({
     });
 
     try {
+      // Enviar para RD Station Marketing
+      try {
+        await fetch('/api/rd-station/lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formData: { ...formData },
+            formSource: 'ContactForm',
+            formIdentifier: 'formulario-contato-pagina',
+            tags: ['contato', 'pagina-contato', 'site']
+          }),
+        });
+      } catch (error) {
+        console.error('Erro ao enviar para RD Station:', error);
+      }
+
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 2000));
       
