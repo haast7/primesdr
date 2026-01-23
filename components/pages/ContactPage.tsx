@@ -79,8 +79,8 @@ export function ContactPage() {
         body: JSON.stringify({
           formData: { ...formData },
           formSource: 'ContactPage',
-          formIdentifier: 'formulario-contato-pagina-completa',
-          tags: ['contato', 'pagina-contato', 'site']
+          formIdentifier: 'Prime-contact-1',
+          tags: ['contato', 'pagina-contato', 'site', 'contact-page']
         }),
       });
     } catch (error) {

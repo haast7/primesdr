@@ -51,6 +51,7 @@ interface FormData {
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  source?: string;
 }
 
 // contactFields será criado dinamicamente com traduções dentro do componente
@@ -83,7 +84,37 @@ const validateURL = (url: string) => {
   }
 };
 
-export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+// Função auxiliar para gerar nome do formulário baseado no source
+const getFormIdentifier = (source?: string): string => {
+  if (!source) return 'Prime-homepage-1';
+  
+  // Mapear sources para nomes de formulários
+  const sourceMap: { [key: string]: string } = {
+    'hero-main': 'Prime-homepage-1',
+    'pricing': 'Prime-pricing-1',
+    'pricing-starter': 'Prime-pricing-starter',
+    'pricing-growth': 'Prime-pricing-growth',
+    'pricing-scale': 'Prime-pricing-scale',
+    'how-it-works': 'Prime-how-it-works-1',
+    'final-cta': 'Prime-homepage-cta',
+    'faq': 'Prime-homepage-faq',
+    'social-proof': 'Prime-homepage-social',
+    'guarantee': 'Prime-homepage-guarantee',
+    'differentiators': 'Prime-homepage-differentiators',
+    'case-study': 'Prime-homepage-case-study',
+  };
+  
+  // Se o source já está no formato correto ou não está mapeado, usar o padrão
+  if (sourceMap[source]) {
+    return sourceMap[source];
+  }
+  
+  // Tentar gerar nome baseado no source
+  const normalizedSource = source.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  return `Prime-${normalizedSource}-1`;
+};
+
+export function ContactModal({ isOpen, onClose, source }: ContactModalProps) {
   const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -97,6 +128,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  
+  const formIdentifier = getFormIdentifier(source);
 
   // Hook para captura de dados parciais
   const { updateFormData, markFormSubmitted } = usePartialFormCapture({
@@ -248,8 +281,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           body: JSON.stringify({
             formData: { ...formData },
             formSource: 'ContactModal',
-            formIdentifier: 'formulario-contato-modal',
-            tags: ['contato', 'modal', 'site']
+            formIdentifier: formIdentifier,
+            tags: ['contato', 'modal', 'site', source || 'homepage']
           }),
         });
       } catch (error) {

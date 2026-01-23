@@ -218,6 +218,25 @@ export function ResourceFormModal({
         console.error('Erro ao enviar para Google Ads API:', error);
       }
 
+      // Função auxiliar para gerar nome do formulário baseado no recurso
+      const getResourceFormIdentifier = (resourceId: string, resourceTitle: string): string => {
+        // Normalizar o nome do recurso para usar como identificador
+        const normalizedTitle = resourceTitle
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        
+        return `Prime-${normalizedTitle || resourceId}`;
+      };
+      
+      // Normalizar título do recurso para usar nas tags
+      const normalizedTitle = resourceTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      
+      const resourceFormIdentifier = getResourceFormIdentifier(resourceId, resourceTitle);
+      
       // Enviar para RD Station Marketing
       try {
         await fetch('/api/rd-station/lead', {
@@ -228,8 +247,8 @@ export function ResourceFormModal({
           body: JSON.stringify({
             formData: { ...formData },
             formSource: 'ResourceFormModal',
-            formIdentifier: `recurso-${resourceId}`,
-            tags: ['recurso', 'material', 'download', resourceId]
+            formIdentifier: resourceFormIdentifier,
+            tags: ['recurso', 'material', 'download', resourceId, normalizedTitle || resourceId]
           }),
         });
       } catch (error) {

@@ -494,8 +494,8 @@ export function TypeformModal({ isOpen, onClose }: TypeformModalProps) {
           body: JSON.stringify({
             formData: { ...formData },
             formSource: 'TypeformModal',
-            formIdentifier: 'formulario-quiz-fit-score',
-            tags: ['quiz', 'fit-score', 'site', `fit-score-${fitScore >= 75 ? 'alto' : fitScore >= 50 ? 'medio' : 'baixo'}`]
+            formIdentifier: 'Prime-homepage-quiz',
+            tags: ['quiz', 'fit-score', 'site', 'homepage', `fit-score-${fitScore >= 75 ? 'alto' : fitScore >= 50 ? 'medio' : 'baixo'}`]
           }),
         });
       } catch (error) {

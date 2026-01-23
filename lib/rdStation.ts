@@ -48,6 +48,7 @@ export async function sendLeadToRDStation(
   leadData: RDStationLeadData
 ): Promise<RDStationResponse> {
   const publicToken = process.env.RD_STATION_PUBLIC_TOKEN;
+  const privateToken = process.env.RD_STATION_PRIVATE_TOKEN; // Disponível para operações futuras
   const formIdentifier = process.env.RD_STATION_FORM_IDENTIFIER;
 
   if (!publicToken) {
