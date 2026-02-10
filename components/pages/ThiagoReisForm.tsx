@@ -306,7 +306,7 @@ export function ThiagoReisForm() {
                 </>
               ) : (
                 <>
-                  Garantir Minha Vaga
+                  Garantir meu acesso
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </>
               )}

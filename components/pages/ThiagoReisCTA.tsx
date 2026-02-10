@@ -67,7 +67,7 @@ export function ThiagoReisCTA() {
               className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-bold text-lg md:text-xl rounded-2xl shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105"
             >
               <TrendingUp className="w-6 h-6" />
-              <span>Garantir Minha Vaga Agora</span>
+              <span>Garantir meu acesso</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity -z-10"></div>
             </button>

@@ -85,7 +85,7 @@ export function ThiagoReisHero() {
               className="group relative inline-flex items-center gap-3 px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-bold text-base md:text-lg rounded-2xl shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105"
             >
               <TrendingUp className="w-5 h-5 md:w-6 md:h-6" />
-              <span>Garantir Minha Vaga Agora</span>
+              <span>Garantir meu acesso</span>
               <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity -z-10"></div>
             </button>
