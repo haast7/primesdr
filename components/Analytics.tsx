@@ -8,6 +8,7 @@ import { GoogleAnalytics } from './tracking/GoogleAnalytics';
 import { AutoTracking } from './tracking/AutoTracking';
 import { WhatsAppTracking } from './tracking/WhatsAppTracking';
 import { MetaPixel } from './tracking/MetaPixel';
+import { RDStation } from './tracking/RDStation';
 
 // IDs fixos para garantir funcionamento no Vercel
 const GTM_ID = 'GTM-N7FSD6VV';
@@ -93,6 +94,9 @@ export function Analytics() {
 
       {/* WhatsApp Tracking */}
       <WhatsAppTracking />
+
+      {/* RD Station Marketing Tracking */}
+      <RDStation />
     </>
   );
 }

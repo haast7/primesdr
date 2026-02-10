@@ -424,6 +424,7 @@ export function ResourceFormModal({
                         <input
                           type="email"
                           id="email"
+                          name="email"
                           value={formData.email}
                           onChange={(e) => handleFieldChange('email', e.target.value)}
                           required

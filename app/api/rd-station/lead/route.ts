@@ -26,8 +26,17 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { formData, formSource, formIdentifier, tags } = body;
 
+    // Log para debug
+    console.log('RD Station API - Recebendo lead:', {
+      email: formData?.email,
+      formSource,
+      formIdentifier,
+      tags
+    });
+
     // Validação básica
     if (!formData || !formData.email) {
+      console.error('RD Station API - Erro: Email é obrigatório');
       return NextResponse.json(
         { 
           success: false, 
@@ -44,8 +53,20 @@ export async function POST(request: NextRequest) {
       tags: tags || [],
     });
 
+    console.log('RD Station API - Dados formatados:', {
+      email: rdStationData.email,
+      formIdentifier: rdStationData.cf_formulario,
+      tags: rdStationData.tags
+    });
+
     // Enviar para o RD Station
     const result = await sendLeadToRDStation(rdStationData);
+    
+    console.log('RD Station API - Resultado:', {
+      success: result.success,
+      contact_id: result.contact_id,
+      error: result.error
+    });
 
     if (result.success) {
       return NextResponse.json(

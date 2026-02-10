@@ -417,12 +417,15 @@ function ContactForm({
     { id: 'linkedin', label: `${t.contactModal.form.linkedin} *`, type: 'url', required: true }
   ];
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isFormValid() && !isSubmitting) {
+      onSubmit();
+    }
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-6"
-    >
+    <form onSubmit={handleFormSubmit} className="space-y-6">
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-gray-900 mb-4">
           {t.contactModal.form.heading}
@@ -435,7 +438,7 @@ function ContactForm({
       <div className="space-y-6">
         {contactFields.map((field) => (
           <div key={field.id}>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor={field.id} className="block text-sm font-semibold text-gray-700 mb-2">
               {field.label}
             </label>
             
@@ -457,6 +460,7 @@ function ContactForm({
                       {countryCodes.map((country) => (
                         <button
                           key={country.code + country.country}
+                          type="button"
                           onClick={() => handleCountrySelect(country)}
                           className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center space-x-2"
                         >
@@ -471,6 +475,8 @@ function ContactForm({
                 
                 <input
                   type="tel"
+                  id={field.id}
+                  name={field.id}
                   value={formData.phone}
                   onChange={(e) => onPhoneChange(e.target.value)}
                   placeholder={t.contactModal.form.phone}
@@ -480,9 +486,12 @@ function ContactForm({
             ) : (
               <input
                 type={field.type}
+                id={field.id}
+                name={field.id === 'email' ? 'email' : field.id}
                 value={formData[field.id as keyof FormData]}
                 onChange={(e) => onFieldChange(field.id, e.target.value)}
                 placeholder={field.type === 'url' ? t.contactModal.form.linkedinPlaceholder : ''}
+                required={field.required}
                 className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
               />
             )}
@@ -491,8 +500,8 @@ function ContactForm({
       </div>
 
       <div className="flex justify-end space-x-4 pt-6">
-        <Button
-          onClick={onSubmit}
+        <button
+          type="submit"
           disabled={!isFormValid() || isSubmitting}
           className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
         >
@@ -507,8 +516,8 @@ function ContactForm({
               <ArrowRight className="w-4 h-4" />
             </>
           )}
-        </Button>
+        </button>
       </div>
-    </motion.div>
+    </form>
   );
 }

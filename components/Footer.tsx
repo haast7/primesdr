@@ -29,12 +29,10 @@ export function Footer() {
       href: ['/blog', '/cases', '/playbooks', '/faq'][index] || '#'
     })),
     social: [
-      { name: 'LinkedIn', href: 'https://linkedin.com/company/prime-sdr', external: true },
-      { name: 'YouTube', href: 'https://youtube.com/@prime-sdr', external: true },
-      { name: 'Instagram', href: 'https://instagram.com/primesdr', external: true },
-      { name: 'Facebook', href: 'https://facebook.com/primesdr', external: true },
-      { name: 'Twitter', href: 'https://twitter.com/primesdr', external: true },
-      { name: 'TikTok', href: 'https://tiktok.com/@primesdr', external: true },
+      { name: 'LinkedIn', href: 'https://www.linkedin.com/company/primesdr/', external: true },
+      { name: 'YouTube', href: 'https://www.youtube.com/@primesdr', external: true },
+      { name: 'Instagram', href: 'https://www.instagram.com/primesdr', external: true },
+      { name: 'Facebook', href: 'https://www.instagram.com/primesdr', external: true },
     ],
   };
 

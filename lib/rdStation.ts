@@ -123,9 +123,12 @@ export async function sendLeadToRDStation(
 
   try {
     // URL da API do RD Station
-    const apiUrl = formIdentifier
-      ? `https://api.rd.services/platform/contacts?token=${publicToken}&identifier=${formIdentifier}`
-      : `https://api.rd.services/platform/contacts?token=${publicToken}`;
+    // IMPORTANTE: O RD Station usa o token público na query string
+    // O identifier é usado apenas se você tiver um formulário específico criado no RD Station
+    const apiUrl = `https://api.rd.services/platform/contacts?token=${publicToken}`;
+
+    console.log('RD Station - Enviando lead para:', apiUrl.replace(publicToken, 'TOKEN_OCULTO'));
+    console.log('RD Station - Payload:', JSON.stringify(rdStationPayload, null, 2));
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -135,22 +138,33 @@ export async function sendLeadToRDStation(
       body: JSON.stringify(rdStationPayload),
     });
 
+    const responseText = await response.text();
+    console.log('RD Station - Status:', response.status);
+    console.log('RD Station - Response:', responseText);
+
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error('RD Station API Error:', response.status, errorData);
+      console.error('RD Station API Error:', response.status, responseText);
       
       return {
         success: false,
         error: `RD Station API Error: ${response.status}`,
-        message: errorData
+        message: responseText
       };
     }
 
-    const responseData = await response.json();
+    let responseData;
+    try {
+      responseData = JSON.parse(responseText);
+    } catch (e) {
+      // Se não for JSON, usar o texto como resposta
+      responseData = { message: responseText };
+    }
+    
+    console.log('RD Station - Lead enviado com sucesso:', responseData);
     
     return {
       success: true,
-      contact_id: responseData.id || responseData.uuid,
+      contact_id: responseData.id || responseData.uuid || responseData.contact?.uuid,
       message: 'Lead enviado com sucesso para o RD Station'
     };
 
