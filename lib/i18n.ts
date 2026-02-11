@@ -1752,7 +1752,7 @@ export const translations: Record<Language, Translations> = {
         resources: ['Blog', 'Cases', 'Playbooks', 'FAQ'],
         legal: ['Termos de uso', 'Política de privacidade', 'Cookies', 'LGPD']
       },
-      copyright: '© 2024 Prime SDR. Todos os direitos reservados.',
+      copyright: '© 2026 Prime SDR. Todos os direitos reservados.',
       cta: 'Teste 90 dias sem risco',
       social: 'Social'
     },
@@ -2932,7 +2932,7 @@ export const translations: Record<Language, Translations> = {
         resources: ['Blog', 'Casos', 'Playbooks', 'FAQ'],
         legal: ['Términos de uso', 'Política de privacidad', 'Cookies', 'LGPD']
       },
-      copyright: '© 2024 Prime SDR. Todos los derechos reservados.',
+      copyright: '© 2026 Prime SDR. Todos los derechos reservados.',
       cta: 'Prueba 90 días sin riesgo',
       social: 'Social'
     },
@@ -4073,7 +4073,7 @@ export const translations: Record<Language, Translations> = {
         resources: ['Blog', 'Cases', 'Playbooks', 'FAQ'],
         legal: ['Terms of use', 'Privacy policy', 'Cookies', 'LGPD']
       },
-      copyright: '© 2024 Prime SDR. All rights reserved.',
+      copyright: '© 2026 Prime SDR. All rights reserved.',
       cta: 'Try 90 days risk-free',
       social: 'Social'
     },

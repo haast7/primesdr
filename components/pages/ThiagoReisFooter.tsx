@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import Link from 'next/link';
 import Image from 'next/image';
-import { IMAGE_URLS } from '@/lib/imageLoader';
-import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -17,22 +15,22 @@ const socialLinks = [
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/company/primesdr/',
-    icon: '/icons/linkedin.png'
+    icon: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/linkedin.png?alt=media&token=e3426cc5-9274-4119-af6f-bcd826684c02'
   },
   {
     name: 'YouTube',
     href: 'https://www.youtube.com/@primesdr',
-    icon: '/icons/youtube.png'
+    icon: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/youtube.png?alt=media&token=6caadc54-f09f-470f-93fb-18e37fd91e2d'
   },
   {
     name: 'Instagram',
     href: 'https://www.instagram.com/primesdr',
-    icon: '/icons/instagram.png'
+    icon: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/instagram.png?alt=media&token=dce40dcd-15c5-4d11-9fff-4c5cdcb0e157'
   },
   {
     name: 'Facebook',
     href: 'https://www.instagram.com/primesdr',
-    icon: '/icons/facebook.png'
+    icon: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/facebook.png?alt=media&token=d935d2d2-c61b-48e1-8de5-41af09caa183'
   }
 ];
 
@@ -67,13 +65,13 @@ export function ThiagoReisFooter() {
           {/* Logo */}
           <motion.div variants={fadeInUp} className="flex justify-center">
             <Link href="/" className="flex items-center space-x-3 group">
-              <ImageWithFallback
-                src={IMAGE_URLS.logoWhite}
+              <Image
+                src="https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/logo_light.png?alt=media&token=4a6699f4-f27c-422e-a7dd-38056b04e128"
                 alt="Prime SDR"
                 width={120}
                 height={40}
                 className="h-10 w-auto transition-opacity group-hover:opacity-80"
-                fallback="/logocompletabranca.png"
+                unoptimized
               />
             </Link>
           </motion.div>
@@ -98,6 +96,7 @@ export function ThiagoReisFooter() {
                   width={24}
                   height={24}
                   className="w-6 h-6 object-contain"
+                  unoptimized
                 />
               </motion.a>
             ))}
