@@ -50,15 +50,15 @@ export function Header() {
     setLanguageMenuOpen(false);
   };
 
-  // Navigation com rotas localizadas
+  // Navigation com rotas localizadas + Blog (rota fixa /blog)
   const navigation = [
     { name: t.nav.howItWorks, routeKey: 'como-funciona' },
     { name: t.nav.pricing, routeKey: 'precos' },
     { name: t.nav.resources, routeKey: 'recursos' },
-  ].map(item => ({
-    ...item,
-    href: getLocalizedRoute(item.routeKey, currentLocale),
-  }));
+    { name: t.nav.blog, href: '/blog' },
+  ].map((item) =>
+    'href' in item ? item : { ...item, href: getLocalizedRoute(item.routeKey, currentLocale) }
+  );
 
   return (
     <header className={cn(

@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
+import { getSiteUrl } from '@/lib/getSiteUrl';
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = getSiteUrl().replace(/\/$/, '');
   return {
     rules: [
       {
@@ -9,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/private/', '/admin/'],
       },
     ],
-    sitemap: 'https://www.primesdr.com/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
 

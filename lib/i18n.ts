@@ -13,6 +13,7 @@ export interface Translations {
     howItWorks: string;
     pricing: string;
     resources: string;
+    blog: string;
   };
 
   // Hero Section
@@ -937,7 +938,8 @@ export const translations: Record<Language, Translations> = {
     nav: {
       howItWorks: 'Como Funciona',
       pricing: 'Preços',
-      resources: 'Recursos'
+      resources: 'Recursos',
+      blog: 'Blog'
     },
     hero: {
       badge: 'Mais de 2.000 perfis ativos gerando reuniões agora',
@@ -2117,7 +2119,8 @@ export const translations: Record<Language, Translations> = {
     nav: {
       howItWorks: 'Cómo funciona',
       pricing: 'Precios',
-      resources: 'Recursos'
+      resources: 'Recursos',
+      blog: 'Blog'
     },
     hero: {
       badge: 'Más de 2.000 perfiles activos generando reuniones ahora',
@@ -3297,7 +3300,8 @@ export const translations: Record<Language, Translations> = {
     nav: {
       howItWorks: 'How It Works',
       pricing: 'Pricing',
-      resources: 'Resources'
+      resources: 'Resources',
+      blog: 'Blog'
     },
     hero: {
       badge: 'Over 2,000 active profiles generating meetings now',

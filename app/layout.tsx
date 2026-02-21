@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
@@ -102,11 +102,12 @@ export const metadata: Metadata = {
     ],
     shortcut: process.env.NEXT_PUBLIC_FAVICON_URL || 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/favicon.ico.png?alt=media&token=9a716efd-67d9-4aa1-9688-abad42c347dd',
   },
+};
+
+export const viewport: Viewport = {
   themeColor: '#2563eb',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -116,7 +117,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <CookieConsentProvider>
           <LanguageProvider>
             <TypeformProvider>

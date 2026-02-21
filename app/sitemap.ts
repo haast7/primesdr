@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next';
 import { routes } from '@/lib/routes';
+import { getSiteUrl } from '@/lib/getSiteUrl';
+import { getAllPostSlugsForSitemap, getAllCategorySlugsForSitemap } from '@/lib/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.primesdr.com';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = getSiteUrl().replace(/\/$/, '');
   const routesList = [
     { key: 'home', changeFrequency: 'daily' as const, priority: 1.0 },
     { key: 'sobre', changeFrequency: 'monthly' as const, priority: 0.9 },
@@ -17,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  // Adicionar todas as rotas para todos os idiomas
+  // Rotas estáticas para todos os idiomas
   ['pt', 'en', 'es'].forEach((locale) => {
     routesList.forEach((route) => {
       const routePath = routes[locale as 'pt' | 'en' | 'es'][route.key];
@@ -32,10 +34,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
+  // Blog: índice e posts/categorias (se WordPress disponível)
+  try {
+    sitemapEntries.push({
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    });
+
+    const postSlugs = await getAllPostSlugsForSitemap();
+    postSlugs.forEach(({ slug, lastModified }) => {
+      sitemapEntries.push({
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    });
+
+    const categorySlugs = await getAllCategorySlugsForSitemap();
+    categorySlugs.forEach((slug) => {
+      sitemapEntries.push({
+        url: `${baseUrl}/blog/categoria/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
+  } catch (_e) {
+    // Se WORDPRESS_GRAPHQL_URL não estiver configurado ou API falhar, apenas não inclui blog
+  }
+
   return sitemapEntries;
 }
-
-
-
-
-

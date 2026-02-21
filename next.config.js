@@ -33,6 +33,12 @@ const nextConfig = {
         port: '',
         pathname: '/v0/b/prime-sdr.firebasestorage.app/o/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'blog.primesdr.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   
