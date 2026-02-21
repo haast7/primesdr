@@ -77,6 +77,14 @@ export async function getRecentPosts(count: number, excludeSlug?: string): Promi
   return list;
 }
 
+/** Tipo da resposta da query ALL_POST_SLUGS_AND_DATES (para sitemap). */
+interface AllPostSlugsResponse {
+  posts?: {
+    pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
+    nodes?: { slug: string; modified?: string | null; date?: string }[];
+  };
+}
+
 /** Para sitemap: todos os slugs de posts com data de modificação. */
 export async function getAllPostSlugsForSitemap(): Promise<
   { slug: string; lastModified: Date }[]
@@ -86,12 +94,10 @@ export async function getAllPostSlugsForSitemap(): Promise<
   const pageSize = 100;
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const data = await fetchGraphQL<{
-      posts?: {
-        pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
-        nodes?: { slug: string; modified?: string | null; date?: string }[];
-      };
-    }>(ALL_POST_SLUGS_AND_DATES, { first: pageSize, after });
+    const data: AllPostSlugsResponse = await fetchGraphQL<AllPostSlugsResponse>(
+      ALL_POST_SLUGS_AND_DATES,
+      { first: pageSize, after }
+    );
     const nodes = data?.posts?.nodes ?? [];
     for (const n of nodes) {
       const d = n.modified || n.date;
