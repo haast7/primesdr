@@ -90,7 +90,7 @@ export function Header() {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={item.href ?? '/'}
                 className="relative text-gray-600 hover:text-primary-600 font-medium transition-all duration-200 group"
               >
                 {item.name}
@@ -201,7 +201,7 @@ export function Header() {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  href={item.href}
+                  href={item.href ?? '/'}
                   className="block px-4 py-3 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all duration-200 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
