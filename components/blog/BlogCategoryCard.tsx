@@ -6,8 +6,21 @@ import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 import type { BlogCategory } from '@/types/blog';
 
-/** Pasta pública onde ficam as capas (slug.jpg ou slug.webp). */
+/** Pasta pública onde ficam as capas (fallback quando não houver link Firebase). */
 export const BLOG_CATEGORY_COVERS_PATH = '/images/blog-categories';
+
+/** URLs das capas de categoria no Firebase Storage (slug do arquivo → URL). */
+const BLOG_CATEGORY_COVER_URLS: Record<string, string> = {
+  'prospecao-linkedin':
+    'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/prospecao-linkedin.png?alt=media&token=f59c8a94-9db7-4b79-b5cb-a47f3db98894',
+  'geracao-de-leads':
+    'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/geracao-de-leads.png?alt=media&token=9f90ca1b-ac04-4cb0-a4fe-777469d3c1c0',
+  'conteudo-agregador':
+    'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/conteudo-agregador.png?alt=media&token=a533d8a2-98e4-44c8-b7b5-23c40ad983f2',
+  'automacao-linkedin':
+    'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/automacao-linkedin.png?alt=media&token=326241f0-df22-4286-8542-6991b418e85b',
+  sdr: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/sdr.png?alt=media&token=f9fb948a-0728-478c-a9b7-cfdcac1ac62d',
+};
 
 function stripHtml(html: string): string {
   if (!html) return '';
@@ -34,6 +47,8 @@ function slugToCoverFilename(slug: string): string {
 
 function getCoverSrc(slug: string): string {
   const file = slugToCoverFilename(slug);
+  const firebaseUrl = BLOG_CATEGORY_COVER_URLS[file];
+  if (firebaseUrl) return firebaseUrl;
   return `${BLOG_CATEGORY_COVERS_PATH}/${file}.png`;
 }
 

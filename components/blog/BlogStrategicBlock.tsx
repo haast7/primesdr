@@ -3,8 +3,9 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { ArrowRight } from 'lucide-react';
 
-/** Imagem do ebook (guia) — em public/guia-prospeccao-ebook.png */
-const EBOOK_IMAGE_SRC = '/guia-prospeccao-ebook.png';
+/** Imagem do ebook (guia) — hospedada no Firebase Storage */
+const EBOOK_IMAGE_SRC =
+  'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/guia-prospeccao-ebook.png?alt=media&token=bfd1e9e1-1c96-47cb-acb9-b24aefe2282d';
 
 interface BlogStrategicBlockProps {
   /** Título do bloco (ex.: "Guia definitivo") */
