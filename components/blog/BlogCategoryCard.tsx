@@ -13,6 +13,8 @@ export const BLOG_CATEGORY_COVERS_PATH = '/images/blog-categories';
 const BLOG_CATEGORY_COVER_URLS: Record<string, string> = {
   'prospecao-linkedin':
     'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/prospecao-linkedin.png?alt=media&token=f59c8a94-9db7-4b79-b5cb-a47f3db98894',
+  'prospecção-linkedin':
+    'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/prospecao-linkedin.png?alt=media&token=f59c8a94-9db7-4b79-b5cb-a47f3db98894',
   'geracao-de-leads':
     'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/geracao-de-leads.png?alt=media&token=9f90ca1b-ac04-4cb0-a4fe-777469d3c1c0',
   'conteudo-agregador':
@@ -37,11 +39,13 @@ function getDescription(cat: BlogCategory): string {
 
 /** Normaliza slug para o nome do arquivo (remove acentos/cedilha para bater com os .png). */
 function slugToCoverFilename(slug: string): string {
+  if (!slug) return '';
   const map: Record<string, string> = {
     ç: 'c', á: 'a', à: 'a', ã: 'a', â: 'a', é: 'e', ê: 'e', í: 'i', ó: 'o', ô: 'o', õ: 'o', ú: 'u',
   };
   return slug
     .toLowerCase()
+    .trim()
     .replace(/[çáàãâéêíóôõú]/g, (c) => map[c] ?? c);
 }
 
@@ -75,6 +79,7 @@ export function BlogCategoryCard({ category }: BlogCategoryCardProps) {
               className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               onError={() => setCoverError(true)}
+              unoptimized={coverSrc.startsWith('http')}
             />
           ) : null}
         </div>
