@@ -11,6 +11,8 @@ export const BLOG_CATEGORY_COVERS_PATH = '/images/blog-categories';
 
 /** URLs das capas de categoria no Firebase Storage (slug do arquivo → URL). */
 const BLOG_CATEGORY_COVER_URLS: Record<string, string> = {
+  'prospeccao-linkedin':
+    'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/prospecao-linkedin.png?alt=media&token=f59c8a94-9db7-4b79-b5cb-a47f3db98894',
   'prospecao-linkedin':
     'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/prospecao-linkedin.png?alt=media&token=f59c8a94-9db7-4b79-b5cb-a47f3db98894',
   'prospecção-linkedin':
@@ -50,9 +52,17 @@ function slugToCoverFilename(slug: string): string {
 }
 
 function getCoverSrc(slug: string): string {
+  // Primeiro tenta com o slug original (para casos como "prospeccao-linkedin")
+  const originalSlug = slug.toLowerCase().trim();
+  if (BLOG_CATEGORY_COVER_URLS[originalSlug]) {
+    return BLOG_CATEGORY_COVER_URLS[originalSlug];
+  }
+  
+  // Depois tenta com o slug normalizado
   const file = slugToCoverFilename(slug);
   const firebaseUrl = BLOG_CATEGORY_COVER_URLS[file];
   if (firebaseUrl) return firebaseUrl;
+  
   return `${BLOG_CATEGORY_COVERS_PATH}/${file}.png`;
 }
 
