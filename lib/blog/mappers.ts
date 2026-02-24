@@ -2,12 +2,13 @@
  * Mapeia respostas brutas do WPGraphQL para tipos do domínio (types/blog.ts).
  */
 
-import type { BlogCategory, BlogPostListItem, BlogPost, PageInfo } from '@/types/blog';
+import type { BlogCategory, BlogPostListItem, BlogPost, PageInfo, BlogCategoryWithPosts } from '@/types/blog';
 
 interface WpCategory {
   slug: string;
   name: string;
   count?: number;
+  description?: string | null;
 }
 
 interface WpImageNode {
@@ -29,7 +30,7 @@ interface WpPostNode {
 
 function mapCategories(nodes: WpCategory[] | undefined): BlogCategory[] {
   if (!nodes || !Array.isArray(nodes)) return [];
-  return nodes.map((n) => ({ slug: n.slug, name: n.name, count: n.count }));
+  return nodes.map((n) => ({ slug: n.slug, name: n.name, count: n.count, description: n.description ?? undefined }));
 }
 
 function mapPostNode(node: WpPostNode, includeContent = false): BlogPostListItem | BlogPost {
@@ -78,7 +79,7 @@ export function mapCategoriesList(data: {
   categories?: { nodes?: WpCategory[] } | null;
 }): BlogCategory[] {
   const nodes = data?.categories?.nodes ?? [];
-  return nodes.map((n) => ({ slug: n.slug, name: n.name, count: n.count }));
+  return nodes.map((n) => ({ slug: n.slug, name: n.name, count: n.count, description: n.description ?? undefined }));
 }
 
 export function mapPostsByCategory(data: {
@@ -103,4 +104,25 @@ export function mapPostsByCategory(data: {
 export function mapRecentPosts(data: { posts?: { nodes?: WpPostNode[] } | null }): BlogPostListItem[] {
   const nodes = data?.posts?.nodes ?? [];
   return nodes.map((n) => mapPostNode(n) as BlogPostListItem);
+}
+
+interface WpCategoryWithPostsNode {
+  slug: string;
+  name: string;
+  count?: number;
+  posts?: { nodes?: WpPostNode[] } | null;
+}
+
+export function mapCategoriesWithPosts(data: {
+  categories?: { nodes?: WpCategoryWithPostsNode[] } | null;
+}): BlogCategoryWithPosts[] {
+  const nodes = data?.categories?.nodes ?? [];
+  return nodes
+    .filter((c) => (c.posts?.nodes?.length ?? 0) > 0)
+    .map((c) => ({
+      slug: c.slug,
+      name: c.name,
+      count: c.count,
+      posts: (c.posts?.nodes ?? []).map((n) => mapPostNode(n) as BlogPostListItem),
+    }));
 }

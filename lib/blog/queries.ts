@@ -67,6 +67,7 @@ export const LIST_CATEGORIES = `
         slug
         name
         count
+        description
       }
     }
   }
@@ -141,6 +142,40 @@ export const RECENT_POSTS = `
           nodes {
             slug
             name
+          }
+        }
+      }
+    }
+  }
+`;
+
+/** Categorias com até 3 posts cada (para Content Hub). */
+export const LIST_CATEGORIES_WITH_POSTS = `
+  query ListCategoriesWithPosts($postsPerCategory: Int!) {
+    categories(first: 100, where: { hideEmpty: true }) {
+      nodes {
+        slug
+        name
+        count
+        posts(first: $postsPerCategory, where: { status: PUBLISH }) {
+          nodes {
+            id
+            slug
+            title
+            excerpt
+            date
+            featuredImage {
+              node {
+                sourceUrl
+                altText
+              }
+            }
+            categories {
+              nodes {
+                slug
+                name
+              }
+            }
           }
         }
       }

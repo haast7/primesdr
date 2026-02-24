@@ -10,6 +10,7 @@ import {
   LIST_CATEGORIES,
   POSTS_BY_CATEGORY_SLUG,
   RECENT_POSTS,
+  LIST_CATEGORIES_WITH_POSTS,
   ALL_POST_SLUGS_AND_DATES,
   ALL_CATEGORY_SLUGS,
 } from './queries';
@@ -19,8 +20,9 @@ import {
   mapCategoriesList,
   mapPostsByCategory,
   mapRecentPosts,
+  mapCategoriesWithPosts,
 } from './mappers';
-import type { BlogPost, BlogPostListItem, BlogCategory } from '@/types/blog';
+import type { BlogPost, BlogPostListItem, BlogCategory, BlogCategoryWithPosts } from '@/types/blog';
 import type { PageInfo } from '@/types/blog';
 
 const DEFAULT_PAGE_SIZE = 12;
@@ -75,6 +77,16 @@ export async function getRecentPosts(count: number, excludeSlug?: string): Promi
     list = list.slice(0, count);
   }
   return list;
+}
+
+const POSTS_PER_CATEGORY = 3;
+
+/** Categorias com até 3 posts cada (para Content Hub). */
+export async function listCategoriesWithPosts(): Promise<BlogCategoryWithPosts[]> {
+  const data = await fetchGraphQL<unknown>(LIST_CATEGORIES_WITH_POSTS, {
+    postsPerCategory: POSTS_PER_CATEGORY,
+  });
+  return mapCategoriesWithPosts(data as Parameters<typeof mapCategoriesWithPosts>[0]);
 }
 
 /** Tipo da resposta da query ALL_POST_SLUGS_AND_DATES (para sitemap). */

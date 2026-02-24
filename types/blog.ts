@@ -7,6 +7,7 @@ export interface BlogCategory {
   slug: string;
   name: string;
   count?: number;
+  description?: string | null;
 }
 
 export interface BlogPostListItem {
@@ -36,4 +37,9 @@ export interface ListPostsResponse {
 
 export interface ListCategoriesResponse {
   categories: BlogCategory[];
+}
+
+/** Categoria com seus primeiros N posts (para Content Hub). */
+export interface BlogCategoryWithPosts extends BlogCategory {
+  posts: BlogPostListItem[];
 }
