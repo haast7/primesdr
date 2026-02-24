@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 /** Imagem do ebook (guia) — hospedada no Firebase Storage */
 const EBOOK_IMAGE_SRC =
-  'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/guia-prospeccao-ebook.png?alt=media&token=bfd1e9e1-1c96-47cb-acb9-b24aefe2282d';
+  'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/ebook.png?alt=media&token=0a499c95-7d96-4a82-897f-077169923747';
 
 interface BlogStrategicBlockProps {
   /** Título do bloco (ex.: "Guia definitivo") */
