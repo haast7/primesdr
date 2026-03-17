@@ -1,0 +1,439 @@
+# API Key Authentication
+
+<aside>
+⚠️
+
+If you don’t see an **API keys** section in your workspace settings, please contact us.
+
+</aside>
+
+1. Generate a new API key from your workspace settings. Generated keys have admin level permissions to your workspace.
+    1. They have access to records within the workspace and can read, write, and delete data
+    2. They only have access to redacted email metadata, sensitive fields like bodies are not available
+    3. They have the same permissions for viewing meeting data as other users. If your workspace is setup to share meeting details, recordings, and summaries with all users the API key has access as well. Otherwise only redacted meeting information will be available
+2. Include this API key in the `Authorization` header with the `api-key` scheme
+    
+    ```bash
+    curl --header "Authorization: api-key $APIKEY"\
+    	https://api.clarify.ai/v1/workspaces/$WORKSPACE_SLUG[/](https://api.clarify.ai/v1/workspaces/{slug}/*)schemas
+    ```
+    
+
+# Partner OAuth 2.0 Authentication
+
+Clarify uses OAuth and currently supports the Authorization Code, Authorization Code with Proof Key for Code Exchange (PKCE) and Refresh Token grants. We create OAuth apps for trusted partners, please reach out [support@clarify.ai](mailto:support@clarify.ai) to get one created for you.
+
+Clarify support will ask you a few questions and provide the following information:
+
+- Client ID
+- Client Secret if you requested private application (i.e. one that can securely store the client secret)
+- Scopes `openid profile email offline_access`
+- Authorization endpoint https://auth1.clarify.ai/oauth2/authorize
+- Token endpoint https://auth1.clarify.ai/oauth2/token
+- Refresh token endpoint https://auth1.clarify.ai/oauth2/token
+
+A typical, complete OAuth flow looks something like the following.
+
+<aside>
+⚠️
+
+Replace `{your-redirect-uri}`, and `{your-code}` in the actual HTTP request.
+
+</aside>
+
+First, get your authorization code grant:
+
+```jsx
+GET https://auth1.clarify.ai/oauth2/authorize?response_type=code&client_id={your_client_id}&scope=openid%20profile%20email%20offline_access&redirect_uri={your_redirect_url}
+
+// no headers
+// no body
+```
+
+Second, get your tokens:
+
+```tsx
+POST https://auth1.clarify.ai/oauth2/token
+
+// headers
+Content-Type: application/x-www-form-urlencoded
+
+// request body
+grant_type: "authorization_code"
+code: "{your-code}"
+redirect_uri: "{your_redirect_uri}"
+client_id: "{your_client_id}"
+client_secret: "{your_client_secret}"
+```
+
+Then, in actual API calls to Clarify, add the `Authorization: Bearer {access-token}` header to all authenticated API calls.
+
+# Root URL
+
+https://api.clarify.ai/v1/workspaces/{slug}/*
+
+Slug is the workspace ID assigned to the customer’s organization. You can find it in the URL when logging in or by clicking your avatar in the application:
+
+![image.png](attachment:54afe561-49e3-4d33-aac9-d0c59aa87424:image.png)
+
+# API Structure
+
+Our API follows the JSON API [spec](https://jsonapi.org/).
+
+## Pagination
+
+Clarify APIs return paginated results with the maximum response size set at 1000 items.
+
+To control pagination, pass the `page` query parameter in the request URL. The parameter supports the following forms:
+
+- `page[limit]={number}` — the maximum number of items to return in a single page
+
+The API’s response will return three key fields related to pagination:
+
+- `data` — the array of returned items
+- `meta` — pagination metadata: the total number of records as `total_records`, the total number of pages as `total_pages`, the current response’s offset as `offset`, and the page size as `limit`
+- `links` — URL references to the previous page as `prev`, if available, and the next page as `next`, if available
+
+## Ordering
+
+When returning multiple records, the Clarify API can order requested records by a specified field. To explicitly control record order, pass the `sortOrder` query parameter in the request URL. The parameter supports the following forms:
+
+- `sortOrder[column]` — the name of the field to order by
+- `sortOrder[dir]` — the direction of the order, e.g. `ASC` or `DESC`
+
+## Filtering
+
+<aside>
+⚠️
+
+**The filtering API is under active development.**
+
+</aside>
+
+When returning multiple records, the Clarify API can filter requested records by one or more specified fields. To specify filters, pass one or more `filter` query parameters in the request URL. Filter conditions are always AND, OR is not currently supported. The parameter supports the following forms:
+
+- `filter[{field_name}]={field_value}` — only match records with the specified value in the specified field
+
+A more advanced version of the `filter` parameter allows callers to specify other operators other than “equals” in the following form:
+
+- `filter[{field_name}][{operator}]={field_value}`
+
+- The Clarify API currently supports the following operators:
+    
+    For **Text** and **Multiline Text:**
+    
+    - `Is`
+    - `Is not`
+    - `Contains`
+    - `Does not contain`
+    - `Starts with`
+    - `Ends with`
+    
+    For **Number** and **Currency**:
+    
+    - `Is`
+    - `Greater than`
+    - `Less than`
+    - `Greater than or equal`
+    - `Less than or equal`
+    
+    For **Dates**:
+    
+    - `Is`
+    - `Is after`
+    - `Is before`
+    - `Is on or after`
+    - `Is on or before`
+    
+    For **Single select**:
+    
+    - `Is`
+    - `Is not`
+    - `One of`
+    - `Not one of`
+    
+    For **Multi select**:
+    
+    - `Contains`
+    - `Does not contain`
+    
+    For **Checkbox**:
+    
+    - `Is`
+    - `Is not`
+    
+    For **Location** (and other complex fields):
+    
+    - `Contains`
+    - `Does not contain`
+    
+    For record IDs:
+    
+    - `Is`
+    - `Is not`
+    
+    For collections (fields like Email addresses and Domains):
+    
+    - `Contains`
+    - `Does not contain`
+
+# Get Objects & Schemas
+
+https://api.clarify.ai/swagger#/default/getSchemas
+
+GET `/schemas`
+
+## Request
+
+N/A
+
+## Response
+
+`data` is an array of schema JSONs.
+
+- `core/*` — internal schemas referenced in other schemas
+- `entities/*` — objects available in the system (currently company, deal, meeting, meeting_recording, person, task, and user)
+
+Each entity (aka Object) has its standards JSON Schema definition in the `attributes` field.
+
+# Get Records
+
+https://api.clarify.ai/swagger#/default/getResources
+
+GET `/objects/{object}/resources` 
+
+## Request
+
+`sortOrder` — the field to order by, with optional direction (see Ordering above)
+
+`filters` — one or more criteria to filter down the object records to return (see Filtering above)
+
+`include` — comma-separated list of relationship fields to include in the response
+
+## Response
+
+Requested records.
+
+# Get Record
+
+https://api.clarify.ai/swagger#/default/getRecord
+
+GET `/objects/{object}/records/{id}`
+
+## Request
+
+`include` — comma-separated list of relationship fields to include in the response.
+
+## Response
+
+Requested record.
+
+# Create Record
+
+https://api.clarify.ai/swagger#/default/createRecord
+
+POST `/objects/{object}/records`
+
+When upserting records, we’ll consider each object’s unique field to decide whether to create or update:
+
+| Object | Unique Field |
+| --- | --- |
+| Person | `email_addresses` — any one |
+| Company | `domains` — any one |
+| Deal | `name` |
+| Meeting | N/A |
+| Meeting Recording | N/A |
+| User | N/A |
+
+## Request
+
+```jsx
+{
+  "data": {
+    "type": "{object}",
+    "attributes": {
+      "{field-name}": "{field-value}"
+    }
+  }
+}
+```
+
+## Response
+
+Created record.
+
+# Update Record
+
+https://api.clarify.ai/swagger#/default/updateRecord
+
+PATCH `/objects/{object}/records/{id}`
+
+## Request
+
+```jsx
+{
+  "data": {
+    "id": "{id}",
+    "type": "{object}",
+    "attributes": { "{field-name}": "{field-value}" }
+  }
+}
+```
+
+## Response
+
+Created record.
+
+# Delete Record
+
+https://api.clarify.ai/swagger#/default/deleteRecord
+
+DELETE `/objects/{object}/records/{id}`
+
+## Request
+
+N/A
+
+## Response
+
+N/A
+
+# Bulk Create Records
+
+https://api.clarify.ai/swagger#/default/createBulkRecords
+
+POST `/objects/{object}/records/bulk`
+
+## Request
+
+```jsx
+{
+  "data": [{
+    "type": "{entity}",
+    "attributes": {
+      "{field-name}": "{field-value}"
+    }
+  }]
+}
+```
+
+## Response
+
+Created records.
+
+# Bulk Update Records
+
+https://api.clarify.ai/swagger#/default/updateRecords
+
+PATCH `/objects/{object}/records`
+
+## Request
+
+```jsx
+{
+  "data": [{
+    "type": "{entity}",
+    "id": "{id}",
+    "attributes": {
+      "{field-name}": "{field-value}"
+    }
+  }]
+}
+```
+
+## Response
+
+Updated records.
+
+# Bulk Delete Records
+
+https://api.clarify.ai/swagger#/default/deleteRecords
+
+DELETE `/objects/{object}/records`
+
+## Request
+
+```jsx
+{
+  "items": [
+    "{id}"
+  ]
+}
+```
+
+## Response
+
+Deleted records.
+
+# Set Relationship
+
+https://api.clarify.ai/swagger#/default/updateRecordRelationship
+
+PATCH `/objects/{object}/records/{id}/relationships/{field-name}`
+
+## Request
+
+```jsx
+{
+  "data": [
+    {
+      "id": "{id-of-record-to-associate}",
+      "type": "{object}"
+    }
+  ]
+}
+```
+
+## Response
+
+```json
+{}
+```
+
+# Unset Relationship
+
+https://api.clarify.ai/swagger#/default/deleteRecordRelationship
+
+DELETE `/objects/{object}/records/{id}/relationships/{field-name}`
+
+## Request
+
+```jsx
+{
+  "data": [
+    {
+      "id": "{id-of-record-to-disassociate}",
+      "type": "{object}"
+    }
+  ]
+}
+```
+
+## Response
+
+```json
+{}
+```
+
+# Get Recording Artifacts
+
+https://api.clarify.ai/swagger#/default/getRecordingArtifacts
+
+POST `/meetings/{id}/recordings/{id}/artifacts`
+
+## Request
+
+```json
+{}
+```
+
+## Response
+
+```json
+{
+  "data": {
+    "videoUrl": "{signed-video-url}",
+    "transcriptionUrl": "{signed-transcription-url}"
+  }
+}
+```

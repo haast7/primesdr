@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendLeadToRDStation, formatFormDataForRDStation } from '@/lib/rdStation';
+import { sendLeadToClarify } from '@/lib/clarify';
 
 /**
- * API Route para enviar leads ao RD Station Marketing
+ * API Route para enviar leads para a Clarify
  * 
  * POST /api/rd-station/lead
  * 
@@ -26,8 +26,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { formData, formSource, formIdentifier, tags } = body;
 
-    // Log para debug
-    console.log('RD Station API - Recebendo lead:', {
+    console.log('Clarify API - Recebendo lead:', {
       email: formData?.email,
       formSource,
       formIdentifier,
@@ -36,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     // Validação básica
     if (!formData || !formData.email) {
-      console.error('RD Station API - Erro: Email é obrigatório');
+      console.error('Clarify API - Erro: Email é obrigatório');
       return NextResponse.json(
         { 
           success: false, 
@@ -46,26 +45,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Formatar dados para o RD Station
-    const rdStationData = formatFormDataForRDStation(formData, {
-      formSource: formSource || 'Website',
+    // Domínio: campo do form ou derivado do email (para criar Company na Clarify)
+    const domain = formData.domain || (formData.email?.includes('@') ? formData.email.split('@')[1] : undefined);
+    const clarifyPayload = {
+      email: formData.email,
+      name: formData.name,
+      phone: formData.phone,
+      company: formData.company,
+      domain,
+      role: formData.role,
+      linkedin: formData.linkedin,
+      source: formSource || 'Website',
       formIdentifier: formIdentifier,
       tags: tags || [],
-    });
+    };
 
-    console.log('RD Station API - Dados formatados:', {
-      email: rdStationData.email,
-      formIdentifier: rdStationData.cf_formulario,
-      tags: rdStationData.tags
-    });
+    const result = await sendLeadToClarify(clarifyPayload);
 
-    // Enviar para o RD Station
-    const result = await sendLeadToRDStation(rdStationData);
-    
-    console.log('RD Station API - Resultado:', {
+    console.log('Clarify API - Resultado:', {
       success: result.success,
-      contact_id: result.contact_id,
-      error: result.error
+      external_id: result.external_id,
+      error: result.error,
+      statusCode: result.statusCode,
+      message: result.message,
     });
 
     if (result.success) {
@@ -73,14 +75,13 @@ export async function POST(request: NextRequest) {
         {
           success: true,
           message: result.message,
-          contact_id: result.contact_id,
+          external_id: result.external_id,
         },
         { status: 200 }
       );
     } else {
       // Mesmo com erro, retornamos 200 para não quebrar o fluxo do usuário
-      // O erro será logado mas não impedirá o envio para outros sistemas
-      console.error('Erro ao enviar para RD Station:', result.error);
+      console.error('Erro ao enviar para Clarify:', result.error);
       
       return NextResponse.json(
         {
@@ -92,7 +93,7 @@ export async function POST(request: NextRequest) {
       );
     }
   } catch (error) {
-    console.error('Erro na API RD Station:', error);
+    console.error('Erro na API Clarify:', error);
     
     return NextResponse.json(
       {

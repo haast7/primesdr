@@ -24,6 +24,7 @@ const BLOG_CATEGORY_COVER_URLS: Record<string, string> = {
   'automacao-linkedin':
     'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/automacao-linkedin.png?alt=media&token=326241f0-df22-4286-8542-6991b418e85b',
   sdr: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/sdr.png?alt=media&token=f9fb948a-0728-478c-a9b7-cfdcac1ac62d',
+  chat: 'https://firebasestorage.googleapis.com/v0/b/prime-sdr.firebasestorage.app/o/chat.png?alt=media&token=COLE_AQUI_O_TOKEN_DO_FIREBASE',
 };
 
 function stripHtml(html: string): string {

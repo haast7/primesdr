@@ -68,7 +68,8 @@ const validatePhone = (phone: string) => {
 };
 
 const validateURL = (url: string) => {
-  if (!url || url.trim() === '') return false;
+  // Campo opcional: se estiver vazio, considera válido
+  if (!url || url.trim() === '') return true;
   
   // Adicionar http:// se não tiver protocolo
   let urlToValidate = url.trim();
@@ -414,7 +415,8 @@ function ContactForm({
     { id: 'phone', label: `${t.contactModal.form.phone} *`, type: 'phone', required: true },
     { id: 'company', label: `${t.contactModal.form.company} *`, type: 'text', required: true },
     { id: 'role', label: `${t.contactModal.form.role} *`, type: 'text', required: true },
-    { id: 'linkedin', label: `${t.contactModal.form.linkedin} *`, type: 'url', required: true }
+    // LinkedIn é opcional, sem asterisco de obrigatório
+    { id: 'linkedin', label: t.contactModal.form.linkedin, type: 'url', required: false }
   ];
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
