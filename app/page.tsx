@@ -1,8 +1,7 @@
 import React from 'react';
 import { Hero } from '@/components/sections/Hero';
-import { CaseStudy } from '@/components/sections/CaseStudy';
+import { ProblemSection } from '@/components/sections/ProblemSection';
 import { Differentiators } from '@/components/sections/Differentiators';
-import { Guarantee } from '@/components/sections/Guarantee';
 import { Pricing } from '@/components/sections/Pricing';
 import { HowItWorks } from '@/components/sections/HowItWorks';
 import { FAQ } from '@/components/sections/FAQ';
@@ -10,13 +9,16 @@ import { SocialProof } from '@/components/sections/SocialProof';
 import { JsonLd } from '@/components/JsonLd';
 
 export default function HomePage() {
+  const seoDescription =
+    'Transforme o LinkedIn em uma máquina de leads para o seu time comercial. Mais lead qualificado é mais vendas no seu pipeline.';
+
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Prime SDR',
     url: 'https://primesdr.com',
     logo: 'https://primesdr.com/logoazul.png',
-    description: 'Transformamos LinkedIn em motor de receita previsível para empresas B2B. Automação inteligente + SDR humano = resultados garantidos.',
+    description: seoDescription,
     sameAs: [
       'https://linkedin.com/company/prime-sdr',
       'https://youtube.com/@prime-sdr'
@@ -32,7 +34,7 @@ export default function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Prospecção LinkedIn Automatizada',
-    description: 'Serviço de prospecção B2B que combina automação inteligente com SDR humano para gerar reuniões qualificadas no LinkedIn.',
+    description: seoDescription,
     provider: {
       '@type': 'Organization',
       name: 'Prime SDR'
@@ -186,15 +188,14 @@ export default function HomePage() {
       <JsonLd json={faqSchema} />
       <JsonLd json={breadcrumbSchema} />
       <JsonLd json={websiteSchema} />
-      
+
       <Hero />
-      <CaseStudy />
+      <ProblemSection />
       <Differentiators />
-      <Guarantee />
       <Pricing />
       <HowItWorks />
-      <FAQ />
       <SocialProof />
+      <FAQ />
     </>
   );
 }

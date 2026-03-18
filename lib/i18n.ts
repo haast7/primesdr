@@ -42,6 +42,13 @@ export interface Translations {
     };
   };
 
+  // Problem Section (home)
+  problemSection: {
+    headline: string;
+    body: string;
+    result: string;
+  };
+
   // Case Study
   caseStudy: {
     headline: string;
@@ -163,6 +170,7 @@ export interface Translations {
         title: string;
         description: string;
       };
+      resultsFourth?: { title: string; description: string };
     };
     ctaButton: {
       text: string;
@@ -446,6 +454,9 @@ export interface Translations {
       description: string;
       points: string[];
     }[];
+    /** Home: 6 steps list (Defina cliente ideal, Importe leads, etc.) */
+    stepItems?: { title: string; description: string }[];
+    sectionTitle?: string;
   };
 
   // FAQ
@@ -942,28 +953,33 @@ export const translations: Record<Language, Translations> = {
       blog: 'Blog'
     },
     hero: {
-      badge: 'Mais de 2.000 perfis ativos gerando reuniões agora',
-      headline: 'Seu time não tem tempo pra prospectar.',
-      headlineHighlight: 'A gente faz isso por você.',
-      subtitle: '112 reuniões em 45 dias no calendário do seu comercial — sem contratar SDR, sem perder tempo com cadências e sem depender de mídia paga que queima budget.',
+      badge: '',
+      headline: 'Transforme o LinkedIn em uma máquina de leads qualificados',
+      headlineHighlight: 'Para o seu time comercial.',
+      subtitle: 'O Prime SDR ajuda sua empresa a gerar mais conversas com decisores, aumentar o pipeline e criar novas oportunidades de venda todos os meses com prospecção estruturada e automação inteligente no linkedin',
       proofPoints: {
         responseRate: 'Taxa média de resposta: 22%',
         roi: 'ROI médio: 2.100% em 60 dias',
         guarantee: 'Garantia de 90 dias'
       },
       cta: {
-        primary: 'Quero 100+ reuniões em 45 dias',
-        secondary: 'Ver caso completo (2 min)'
+        primary: 'Criar conta gratuita',
+        secondary: 'Ver demonstração'
       },
       trust: 'Confiam em nós:',
       mainHeadline: {
-        line1: 'Leads qualificados do LinkedIn na sua agenda.',
-        line2: 'Ou seu dinheiro de volta.'
+        line1: 'Transforme o LinkedIn em uma máquina de leads',
+        line2: 'para o seu time comercial.'
       },
       bulletPoints: {
-        desktop: ['Sem contratar SDR.', 'Sem cadências manuais.', 'Sem queimar budget em ads.'],
-        mobile: ['Sem contratar SDR ou inflar a equipe.', 'Sem perder tempo com cadências manuais.', 'Sem gastar com mídia paga que queima seu budget.']
+        desktop: [] as string[],
+        mobile: [] as string[]
       }
+    },
+    problemSection: {
+      headline: 'O problema não é falta de produto.',
+      body: 'É falta de conversas com os clientes certos. A maioria das empresas B2B depende de indicação ou marketing passivo para gerar oportunidades. Isso torna o crescimento imprevisível. Enquanto isso, o time comercial perde tempo buscando leads, enviando mensagens manualmente e esquecendo follow-ups importantes.',
+      result: 'Resultado: poucas conversas, poucas reuniões e um pipeline inconsistente.'
     },
     caseStudy: {
       headline: 'R$ 6,3 milhões em pipeline. 112 reuniões. 45 dias.',
@@ -1025,8 +1041,8 @@ export const translations: Record<Language, Translations> = {
       }
     },
     differentiators: {
-      headline: 'A tríade que ninguém mais tem',
-      subtitle: 'Combinamos três elementos únicos que garantem resultados consistentes.',
+      headline: 'Transforme o LinkedIn em um canal previsível de geração de oportunidades.',
+      subtitle: 'O Prime SDR automatiza a prospecção e organiza seu processo comercial para que sua empresa consiga:',
       features: {
         intelligence: {
           title: 'Inteligência de mercado',
@@ -1076,47 +1092,51 @@ export const translations: Record<Language, Translations> = {
           }
         ]
       },
-      cta: 'Quero agendar uma reunião',
+      cta: 'Criar conta gratuita',
       cards: {
         linkedinFirst: {
-          title: 'LinkedIn-first de verdade',
-          description: 'Não é "mais um CRM com integração". Fomos desenhados 100% pro LinkedIn: limites seguros, aquecimento automático, cadências corretas. Zero risco de ban.',
-          features: ['Limites seguros respeitados', 'Aquecimento automático', 'Cadências otimizadas', 'Zero risco de ban']
+          title: 'Encontrar decisores ideais',
+          description: 'Filtre por cargo, setor, empresa ou localização e encontre exatamente quem você quer alcançar.',
+          features: []
         },
         youBuild: {
-          title: 'Você monta. A gente executa.',
-          description: 'Você cria a cadência ideal ou usa nossos templates testados, define timing e ações, e nossa automação roda com precisão. Lead respondeu? Pausa automática e SDR humano assume.',
-          features: ['Mensagens personalizadas por cargo', 'Sequência adaptada por setor', 'Quando solicitar conexão ou curtir posts', 'Dias e horários de cada disparo']
+          title: 'Iniciar novas conversas todos os dias',
+          description: 'Conecte-se com as pessoas certas, no momento certo.',
+          features: []
         },
         humanSdr: {
-          title: 'SDR humano que fecha',
-          description: 'Lead respondeu? SDR real assume em tempo real, qualifica e agenda. Nada de deixar esfriar. Nada de bot respondendo.',
-          features: ['Resposta em tempo real', 'Qualificação humana', 'Agendamento direto', 'Sem bots']
+          title: 'Gerar reuniões qualificadas',
+          description: 'Aumente as respostas e gere mais oportunidades.',
+          features: []
         },
         youControl: {
-          title: 'Você no controle. Sempre.',
-          description: 'Pare de mandar mensagem no escuro sem saber o que funciona.',
-          features: ['Dashboard em tempo real', 'Testes A/B automatizados', 'Métricas que importam (não vaidade)', 'Decisões baseadas em dados']
+          title: 'Alimentar o pipeline de vendas de forma constante',
+          description: 'Tenha um fluxo constante de novas negociações e cresça com consistência e controle.',
+          features: []
         }
       },
       results: {
-        title: 'Automação para linkedin focada em resultados.',
+        title: 'Mais conversas qualificadas geram mais vendas.',
         agendaFull: {
-          title: 'Sua agenda enche',
-          description: 'Previsível. Escalável. Sem você mexer um dedo.'
+          title: 'Mais leads qualificados',
+          description: 'Conecte-se com pessoas certas, no momento certo.'
         },
         operation247: {
-          title: 'Operação 24/7',
-          description: 'Automação inteligente + SDR humano sempre disponível.'
+          title: 'Mais reuniões comerciais',
+          description: 'Aumente as respostas e gere mais oportunidades.'
         },
         totalGuarantee: {
-          title: 'Garantia total',
-          description: '90 dias de teste. Sem ROI? Reembolso integral.'
+          title: 'Mais pipeline',
+          description: 'Tenha um fluxo constante de novas negociações.'
+        },
+        resultsFourth: {
+          title: 'Mais previsibilidade',
+          description: 'Cresça com consistência e controle.'
         }
       },
       ctaButton: {
-        text: 'Agendar demonstração (15 min)',
-        urgency: '⚡ Vagas limitadas esta semana'
+        text: 'Criar conta gratuita',
+        urgency: ''
       }
     },
     guarantee: {
@@ -1169,8 +1189,8 @@ export const translations: Record<Language, Translations> = {
       cta: 'Começar teste de 90 dias'
     },
     pricing: {
-      headline: 'Escolha seu plano. Domine seu mercado.',
-      subtitle: 'Planos flexíveis para empresas de todos os tamanhos.',
+      headline: 'Escolha o plano ideal para escalar sua prospecção',
+      subtitle: 'Comece estruturando sua geração de leads e evolua conforme seu processo cresce.',
       toggle: {
         monthly: 'Mensal',
         annual: 'Anual'
@@ -1381,8 +1401,17 @@ export const translations: Record<Language, Translations> = {
       seeAllFeatures: 'Ver todos os recursos'
     },
     howItWorks: {
-      headline: 'De kickoff a resultados - em 7 dias',
-      subtitle: 'Nosso processo comprovado para transformar seu LinkedIn em máquina de leads.',
+      headline: 'Como o Prime SDR gera novas oportunidades para sua empresa',
+      subtitle: '',
+      sectionTitle: 'Como o Prime SDR gera novas oportunidades para sua empresa',
+      stepItems: [
+        { title: 'Defina seu cliente ideal', description: 'Filtre por cargo, setor, empresa ou localização e encontre exatamente quem você quer alcançar.' },
+        { title: 'Importe leads de múltiplas fontes', description: 'Busque diretamente no LinkedIn ou use links de pesquisas prontas para importar listas completas de prospects em segundos. Você também pode subir listas próprias ou trabalhar com bases já existentes.' },
+        { title: 'Crie fluxos de prospecção automatizados', description: 'Monte sequências com conexões, mensagens, follow-ups e interações — tudo adaptado ao seu processo comercial.' },
+        { title: 'Ative campanhas inteligentes', description: 'Dispare campanhas baseadas em ações reais, como mudanças de cargo, aniversários ou interações com conteúdos. Também é possível prospectar diretamente pessoas que interagiram com posts específicos.' },
+        { title: 'Centralize e acompanhe tudo', description: 'Gerencie conversas, respostas e oportunidades em um único inbox organizado.' },
+        { title: 'Analise e otimize', description: 'Acompanhe métricas, respostas, performance de campanhas e evolução do pipeline em dashboards completos.' }
+      ],
       flowchart: {
         title: 'Fluxo de Automação Inteligente',
         subtitle: 'Veja na prática, como o Prime trabalha 24/7 para gerar reuniões',
@@ -1566,9 +1595,9 @@ export const translations: Record<Language, Translations> = {
       contact: 'Fale com a gente',
       badge: 'FAQ',
       ctaSection: {
-        title: 'Saber se Prime SDR é para você',
-        subtitle: '60 segundos para saber se sua operação pode gerar 30+ reuniões por mês no LinkedIn.',
-        button: 'Começar agora'
+        title: 'Pare de depender apenas de indicação ou marketing passivo.',
+        subtitle: 'Comece a gerar novas conversas com clientes ideais todos os dias e aumente o pipeline do seu time comercial com consistência.',
+        button: 'Criar conta gratuita'
       }
     },
     finalCta: {
@@ -1624,15 +1653,15 @@ export const translations: Record<Language, Translations> = {
     },
     socialProof: {
       header: {
-        badge: '✨ Resultados comprovados',
-        title: 'Empresas reais enchendo suas agendas com o Prime SDR agora.',
-        subtitle: 'Mais de 2.000 perfis ativos gerando reuniões todos os dias, de startups a grandes corporações.'
+        badge: 'Resultados comprovados',
+        title: 'Empresas estão transformando o LinkedIn em um canal de geração de pipeline.',
+        subtitle: 'Mais leads sendo gerados todos os dias. Mais mensagens iniciando conversas reais. Mais oportunidades entrando no funil. Mais previsibilidade no crescimento.'
       },
       metrics: {
-        activeProfiles: 'Perfis ativos gerando conexões agora',
-        meetings: 'Reuniões agendadas com decisores B2B',
-        roi: 'Clientes com ROI positivo em até 90 dias',
-        guarantee: 'Garantia de reembolso total se não gerar resultado'
+        activeProfiles: 'Mais leads sendo gerados todos os dias',
+        meetings: 'Mais mensagens iniciando conversas reais',
+        roi: 'Mais oportunidades entrando no funil',
+        guarantee: 'Mais previsibilidade no crescimento'
       },
       logos: {
         badge: '🏆 Parceiros de sucesso',
@@ -1742,7 +1771,7 @@ export const translations: Record<Language, Translations> = {
     footer: {
       company: {
         title: 'Prime SDR',
-        description: 'Transformamos LinkedIn em motor de receita previsível para empresas B2B. Automação inteligente + SDR humano = resultados garantidos.'
+        description: 'Transformando o LinkedIn em uma máquina de leads para o seu time comercial. Mais lead qualificado é mais vendas no seu pipeline.'
       },
       links: {
         company: 'Empresa',
@@ -2123,28 +2152,33 @@ export const translations: Record<Language, Translations> = {
       blog: 'Blog'
     },
     hero: {
-      badge: 'Más de 2.000 perfiles activos generando reuniones ahora',
-      headline: 'Tu equipo no tiene tiempo para prospectar.',
-      headlineHighlight: 'Nosotros lo hacemos por ti.',
-      subtitle: '112 reuniones en 45 días en el calendario de tu comercial — sin contratar SDR, sin perder tiempo con cadencias y sin depender de medios pagados que queman presupuesto.',
+      badge: '',
+      headline: 'Convierte LinkedIn en una máquina predecible de generación de leads calificados',
+      headlineHighlight: 'para tu equipo comercial.',
+      subtitle: 'Prime SDR ayuda a tu empresa a generar más conversaciones con decisores, aumentar el pipeline y crear nuevas oportunidades de venta todos los meses con prospección estructurada y automatización inteligente.',
       proofPoints: {
         responseRate: 'Tasa promedio de respuesta: 22%',
         roi: 'ROI promedio: 2.100% en 60 días',
         guarantee: 'Garantía de 90 días'
       },
       cta: {
-        primary: 'Quiero 100+ reuniones en 45 días',
-        secondary: 'Ver caso completo (2 min)'
+        primary: 'Crear cuenta gratis',
+        secondary: 'Ver demostración'
       },
       trust: 'Confían en nosotros:',
       mainHeadline: {
-        line1: 'Leads calificados de LinkedIn en tu agenda.',
-        line2: 'O tu dinero de vuelta.'
+        line1: 'Convierte LinkedIn en una máquina predecible de generación de leads calificados',
+        line2: 'para tu equipo comercial.'
       },
       bulletPoints: {
-        desktop: ['Sin contratar SDR.', 'Sin cadencias manuales.', 'Sin quemar presupuesto en ads.'],
-        mobile: ['Sin contratar SDR o inflar el equipo.', 'Sin perder tiempo con cadencias manuales.', 'Sin gastar en medios pagados que queman tu presupuesto.']
+        desktop: [] as string[],
+        mobile: [] as string[]
       }
+    },
+    problemSection: {
+      headline: 'El problema no es la falta de producto.',
+      body: 'Es la falta de conversaciones con los clientes correctos. La mayoría de las empresas B2B dependen de referidos o marketing pasivo para generar oportunidades. Eso hace el crecimiento impredecible. Mientras tanto, el equipo comercial pierde tiempo buscando leads, enviando mensajes manualmente y olvidando follow-ups importantes.',
+      result: 'Resultado: pocas conversaciones, pocas reuniones y un pipeline inconsistente.'
     },
     caseStudy: {
       headline: 'R$ 6,3 millones en pipeline. 112 reuniones. 45 días.',
@@ -2206,8 +2240,8 @@ export const translations: Record<Language, Translations> = {
       }
     },
     differentiators: {
-      headline: 'La tríada que nadie más tiene',
-      subtitle: 'Combinamos tres elementos únicos que garantizan resultados consistentes.',
+      headline: 'Convierte LinkedIn en un canal predecible de generación de oportunidades.',
+      subtitle: 'Prime SDR automatiza la prospección y organiza tu proceso comercial para que tu empresa logre:',
       features: {
         intelligence: {
           title: 'Inteligencia de mercado',
@@ -2257,47 +2291,48 @@ export const translations: Record<Language, Translations> = {
           }
         ]
       },
-      cta: 'Quiero agendar una reunión',
+      cta: 'Crear cuenta gratis',
       cards: {
         linkedinFirst: {
-          title: 'LinkedIn-first de verdad',
-          description: 'No es "otro CRM con integración". Fuimos diseñados 100% para LinkedIn: límites seguros, calentamiento automático, cadencias correctas. Cero riesgo de ban.',
-          features: ['Límites seguros respetados', 'Calentamiento automático', 'Cadencias optimizadas', 'Cero riesgo de ban']
+          title: 'Encontrar decisores ideales',
+          description: 'Filtra por cargo, sector, empresa o ubicación y encuentra exactamente a quién quieres alcanzar.',
+          features: []
         },
         youBuild: {
-          title: 'Tú montas. Nosotros ejecutamos.',
-          description: 'Tú creas la cadencia ideal o usas nuestros templates probados, defines timing y acciones, y nuestra automatización corre con precisión. ¿Lead respondió? Pausa automática y SDR humano asume.',
-          features: ['Mensajes personalizados por cargo', 'Secuencia adaptada por sector', 'Cuándo solicitar conexión o dar like a posts', 'Días y horarios de cada envío']
+          title: 'Iniciar nuevas conversaciones todos los días',
+          description: 'Conéctate con las personas correctas, en el momento correcto.',
+          features: []
         },
         humanSdr: {
-          title: 'SDR humano que cierra',
-          description: '¿Lead respondió? SDR real asume en tiempo real, califica y agenda. Nada de dejar enfriar. Nada de bot respondiendo.',
-          features: ['Respuesta en tiempo real', 'Calificación humana', 'Agendamiento directo', 'Sin bots']
+          title: 'Generar reuniones calificadas',
+          description: 'Aumenta las respuestas y genera más oportunidades.',
+          features: []
         },
         youControl: {
-          title: 'Tú en control. Siempre.',
-          description: 'Deja de mandar mensajes a ciegas sin saber qué funciona.',
-          features: ['Dashboard en tiempo real', 'Pruebas A/B automatizadas', 'Métricas que importan (no vanidad)', 'Decisiones basadas en datos']
+          title: 'Alimentar el pipeline de ventas de forma constante',
+          description: 'Mantén un flujo constante de nuevas negociaciones y crece con consistencia y control.',
+          features: []
         }
       },
       results: {
-        title: 'Automatización para LinkedIn enfocada en resultados.',
+        title: 'Más conversaciones calificadas generan más ventas.',
         agendaFull: {
-          title: 'Tu agenda se llena',
-          description: 'Predecible. Escalable. Sin que muevas un dedo.'
+          title: 'Más leads calificados',
+          description: 'Conéctate con las personas correctas, en el momento correcto.'
         },
         operation247: {
-          title: 'Operación 24/7',
-          description: 'Automatización inteligente + SDR humano siempre disponible.'
+          title: 'Más reuniones comerciales',
+          description: 'Aumenta las respuestas y genera más oportunidades.'
         },
         totalGuarantee: {
-          title: 'Garantía total',
-          description: '90 días de prueba. ¿Sin ROI? Reembolso integral.'
-        }
+          title: 'Más pipeline',
+          description: 'Mantén un flujo constante de nuevas negociaciones.'
+        },
+        resultsFourth: { title: 'Más previsibilidad', description: 'Crece con consistencia y control.' }
       },
       ctaButton: {
-        text: 'Agendar demostración (15 min)',
-        urgency: '⚡ Plazas limitadas esta semana'
+        text: 'Crear cuenta gratis',
+        urgency: ''
       }
     },
     guarantee: {
@@ -2350,8 +2385,8 @@ export const translations: Record<Language, Translations> = {
       cta: 'Comenzar prueba de 90 días'
     },
     pricing: {
-      headline: 'Elige tu plan. Domina tu mercado.',
-      subtitle: 'Planes flexibles para empresas de todos los tamaños.',
+      headline: 'Elige el plan ideal para escalar tu prospección',
+      subtitle: 'Empieza estructurando tu generación de leads y evoluciona a medida que tu proceso crece.',
       toggle: {
         monthly: 'Mensual',
         annual: 'Anual'
@@ -2562,8 +2597,17 @@ export const translations: Record<Language, Translations> = {
       seeAllFeatures: 'Ver todos los recursos'
     },
     howItWorks: {
-      headline: 'De kickoff a resultados - en 7 días',
-      subtitle: 'Nuestro proceso comprobado para transformar tu LinkedIn en máquina de leads.',
+      headline: 'Cómo Prime SDR genera nuevas oportunidades para tu empresa',
+      subtitle: '',
+      sectionTitle: 'Cómo Prime SDR genera nuevas oportunidades para tu empresa',
+      stepItems: [
+        { title: 'Define tu cliente ideal', description: 'Filtra por cargo, sector, empresa o ubicación y encuentra exactamente a quién quieres alcanzar.' },
+        { title: 'Importa leads de múltiples fuentes', description: 'Busca directamente en LinkedIn o usa enlaces de búsquedas listas para importar listas completas de prospects en segundos. También puedes subir listas propias o trabajar con bases existentes.' },
+        { title: 'Crea flujos automatizados de prospección', description: 'Arma secuencias con conexiones, mensajes, follow-ups e interacciones — todo adaptado a tu proceso comercial.' },
+        { title: 'Activa campañas inteligentes', description: 'Lanza campañas basadas en acciones reales, como cambios de cargo, cumpleaños o interacciones con contenidos. También puedes prospectar directamente a personas que interactuaron con posts específicos.' },
+        { title: 'Centraliza y acompaña todo', description: 'Gestiona conversaciones, respuestas y oportunidades en un único inbox organizado.' },
+        { title: 'Analiza y optimiza', description: 'Sigue métricas, respuestas, performance de campañas y evolución del pipeline en dashboards completos.' }
+      ],
       flowchart: {
         title: 'Flujo de Automatización Inteligente',
         subtitle: 'Ve en la práctica, cómo Prime trabaja 24/7 para generar reuniones',
@@ -2747,9 +2791,9 @@ export const translations: Record<Language, Translations> = {
       contact: 'Habla con nosotros',
       badge: 'FAQ',
       ctaSection: {
-        title: 'Saber si Prime SDR es para ti',
-        subtitle: '60 segundos para saber si tu operación puede generar 30+ reuniones por mes en LinkedIn.',
-        button: 'Comenzar ahora'
+        title: 'Deja de depender solo de referidos o marketing pasivo.',
+        subtitle: 'Empieza a generar nuevas conversaciones con clientes ideales todos los días y aumenta el pipeline de tu equipo comercial con consistencia.',
+        button: 'Crear cuenta gratis'
       }
     },
     finalCta: {
@@ -2805,15 +2849,15 @@ export const translations: Record<Language, Translations> = {
     },
     socialProof: {
       header: {
-        badge: '✨ Resultados comprobados',
-        title: 'Empresas reales llenando sus agendas con Prime SDR ahora.',
-        subtitle: 'Más de 2.000 perfiles activos generando reuniones todos los días, desde startups hasta grandes corporaciones.'
+        badge: 'Resultados comprobados',
+        title: 'Las empresas están convirtiendo LinkedIn en un canal de generación de pipeline.',
+        subtitle: 'Más leads generados todos los días. Más mensajes iniciando conversaciones reales. Más oportunidades entrando al embudo. Más previsibilidad en el crecimiento.'
       },
       metrics: {
-        activeProfiles: 'Perfiles activos generando conexiones ahora',
-        meetings: 'Reuniones agendadas con decisores B2B',
-        roi: 'Clientes con ROI positivo en hasta 90 días',
-        guarantee: 'Garantía de reembolso total si no genera resultado'
+        activeProfiles: 'Más leads generados todos los días',
+        meetings: 'Más mensajes iniciando conversaciones reales',
+        roi: 'Más oportunidades entrando al embudo',
+        guarantee: 'Más previsibilidad en el crecimiento'
       },
       logos: {
         badge: '🏆 Socios de éxito',
@@ -2923,7 +2967,7 @@ export const translations: Record<Language, Translations> = {
     footer: {
       company: {
         title: 'Prime SDR',
-        description: 'Transformamos LinkedIn en motor de ingresos predecible para empresas B2B. Automatización inteligente + SDR humano = resultados garantizados.'
+        description: 'Convirtiendo LinkedIn en una máquina de leads para tu equipo comercial. Más leads calificados es más ventas en tu pipeline.'
       },
       links: {
         company: 'Empresa',
@@ -3305,27 +3349,32 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       badge: 'Over 2,000 active profiles generating meetings now',
-      headline: 'Your team doesn\'t have time to prospect.',
-      headlineHighlight: 'We do it for you.',
-      subtitle: '112 meetings in 45 days in your sales calendar — without hiring SDRs, without wasting time on cadences, and without depending on paid media that burns budget.',
+      headline: 'Turn LinkedIn into a predictable machine for generating qualified leads',
+      headlineHighlight: 'for your sales team.',
+      subtitle: 'Prime SDR helps your company start more conversations with decision-makers, grow pipeline, and create new sales opportunities every month with structured prospecting and smart automation.',
       proofPoints: {
         responseRate: 'Average response rate: 22%',
         roi: 'Average ROI: 2,100% in 60 days',
         guarantee: '90-day guarantee'
       },
       cta: {
-        primary: 'I want 100+ meetings in 45 days',
-        secondary: 'See full case study (2 min)'
+        primary: 'Create free account',
+        secondary: 'See demo'
       },
       trust: 'Trusted by:',
       mainHeadline: {
-        line1: 'Qualified LinkedIn leads in your calendar.',
-        line2: 'Or your money back.'
+        line1: 'Turn LinkedIn into a predictable machine for generating qualified leads',
+        line2: 'for your sales team.'
       },
       bulletPoints: {
-        desktop: ['Without hiring SDRs.', 'Without manual cadences.', 'Without burning budget on ads.'],
-        mobile: ['Without hiring SDRs or inflating the team.', 'Without wasting time on manual cadences.', 'Without spending on paid media that burns your budget.']
+        desktop: [] as string[],
+        mobile: [] as string[]
       }
+    },
+    problemSection: {
+      headline: 'The problem isn\'t lack of product.',
+      body: 'It\'s lack of conversations with the right customers. Most B2B companies rely on referrals or passive marketing to generate opportunities. That makes growth unpredictable. Meanwhile, the sales team wastes time chasing leads, sending messages manually, and missing important follow-ups.',
+      result: 'Result: few conversations, few meetings, and an inconsistent pipeline.'
     },
     caseStudy: {
       headline: 'R$ 6.3 million in pipeline. 112 meetings. 45 days.',
@@ -3474,7 +3523,8 @@ export const translations: Record<Language, Translations> = {
         totalGuarantee: {
           title: 'Total guarantee',
           description: '90-day test. No ROI? Full refund.'
-        }
+        },
+        resultsFourth: { title: 'More predictability', description: 'Grow with consistency and control.' }
       },
       ctaButton: {
         text: 'Schedule demo (15 min)',
@@ -3531,8 +3581,8 @@ export const translations: Record<Language, Translations> = {
       cta: 'Start 90-day test'
     },
     pricing: {
-      headline: 'Choose your plan. Dominate your market.',
-      subtitle: 'Flexible plans for companies of all sizes.',
+      headline: 'Choose the ideal plan to scale your prospecting',
+      subtitle: 'Start by structuring your lead generation and evolve as your process grows.',
       toggle: {
         monthly: 'Monthly',
         annual: 'Annual'
@@ -3743,8 +3793,17 @@ export const translations: Record<Language, Translations> = {
       seeAllFeatures: 'See all features'
     },
     howItWorks: {
-      headline: 'From kickoff to results - in 7 days',
-      subtitle: 'Our proven process to transform your LinkedIn into a lead machine.',
+      headline: 'How Prime SDR generates new opportunities for your company',
+      subtitle: '',
+      sectionTitle: 'How Prime SDR generates new opportunities for your company',
+      stepItems: [
+        { title: 'Define your ideal customer', description: 'Filter by role, industry, company, or location and find exactly who you want to reach.' },
+        { title: 'Import leads from multiple sources', description: 'Search directly on LinkedIn or use saved search links to import full prospect lists in seconds. You can also upload your own lists or work with existing databases.' },
+        { title: 'Create automated prospecting flows', description: 'Build sequences with connection requests, messages, follow-ups, and interactions — tailored to your sales process.' },
+        { title: 'Activate smart campaigns', description: 'Launch campaigns based on real actions like job changes, birthdays, or content engagement. You can also prospect people who interacted with specific posts.' },
+        { title: 'Centralize and track everything', description: 'Manage conversations, replies, and opportunities in a single organized inbox.' },
+        { title: 'Analyze and optimize', description: 'Track metrics, replies, campaign performance, and pipeline evolution with complete dashboards.' }
+      ],
       steps: [
         {
           title: 'Kickoff',
@@ -3889,9 +3948,9 @@ export const translations: Record<Language, Translations> = {
       contact: 'Talk to us',
       badge: 'FAQ',
       ctaSection: {
-        title: 'Find out if Prime SDR is for you',
-        subtitle: '60 seconds to know if your operation can generate 30+ meetings per month on LinkedIn.',
-        button: 'Start now'
+        title: 'Stop relying only on referrals or passive marketing.',
+        subtitle: 'Start generating new conversations with ideal customers every day and grow your sales pipeline with consistency.',
+        button: 'Create free account'
       }
     },
     finalCta: {
@@ -3947,15 +4006,15 @@ export const translations: Record<Language, Translations> = {
     },
     socialProof: {
       header: {
-        badge: '✨ Proven Results',
-        title: 'Real companies filling their calendars with Prime SDR now.',
-        subtitle: 'Over 2,000 active profiles generating meetings every day, from startups to large corporations.'
+        badge: 'Proven results',
+        title: 'Companies are turning LinkedIn into a pipeline generation channel.',
+        subtitle: 'More leads generated every day. More messages starting real conversations. More opportunities entering the funnel. More predictability in growth.'
       },
       metrics: {
-        activeProfiles: 'Active profiles generating connections now',
-        meetings: 'Meetings scheduled with B2B decision makers',
-        roi: 'Clients with positive ROI within 90 days',
-        guarantee: 'Full refund guarantee if it doesn\'t generate results'
+        activeProfiles: 'More leads generated every day',
+        meetings: 'More messages starting real conversations',
+        roi: 'More opportunities entering the funnel',
+        guarantee: 'More predictability in growth'
       },
       logos: {
         badge: '🏆 Success Partners',
@@ -4065,7 +4124,7 @@ export const translations: Record<Language, Translations> = {
     footer: {
       company: {
         title: 'Prime SDR',
-        description: 'We transform LinkedIn into a predictable revenue engine for B2B companies. Smart automation + human SDR = guaranteed results.'
+        description: 'Turning LinkedIn into a lead machine for your sales team. More qualified leads means more sales in your pipeline.'
       },
       links: {
         company: 'Company',

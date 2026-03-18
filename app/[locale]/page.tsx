@@ -1,11 +1,10 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { locales, defaultLocale } from '@/lib/routes';
-import { Language } from '@/lib/i18n';
+import { Language, translations } from '@/lib/i18n';
 import { Hero } from '@/components/sections/Hero';
-import { CaseStudy } from '@/components/sections/CaseStudy';
+import { ProblemSection } from '@/components/sections/ProblemSection';
 import { Differentiators } from '@/components/sections/Differentiators';
-import { Guarantee } from '@/components/sections/Guarantee';
 import { Pricing } from '@/components/sections/Pricing';
 import { HowItWorks } from '@/components/sections/HowItWorks';
 import { FAQ } from '@/components/sections/FAQ';
@@ -29,14 +28,17 @@ export default function LocaleHomePage({
     notFound();
   }
 
-  // Schema JSON-LD será gerado dinamicamente baseado no locale
+  const lang = locale as Language;
+  const t = translations[lang];
+  const seoDescription = `${t.hero.headline} ${t.hero.headlineHighlight}`.trim();
+
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Prime SDR',
     url: 'https://primesdr.com',
     logo: 'https://primesdr.com/logoazul.png',
-    description: 'Transformamos LinkedIn em motor de receita previsível para empresas B2B. Automação inteligente + SDR humano = resultados garantidos.',
+    description: seoDescription,
     sameAs: [
       'https://linkedin.com/company/prime-sdr',
       'https://youtube.com/@prime-sdr'
@@ -52,13 +54,12 @@ export default function LocaleHomePage({
     <>
       <JsonLd json={organizationSchema} />
       <Hero />
-      <CaseStudy />
+      <ProblemSection />
       <Differentiators />
-      <Guarantee />
       <Pricing />
       <HowItWorks />
-      <FAQ />
       <SocialProof />
+      <FAQ />
     </>
   );
 }

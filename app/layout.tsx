@@ -22,10 +22,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Prime SDR - Seu time não tem tempo pra prospectar. A gente faz isso por você.',
+    default: 'Prime SDR - Máquina previsível de leads no LinkedIn',
     template: '%s | Prime SDR',
   },
-  description: '112 reuniões em 45 dias no calendário do seu comercial — sem contratar SDR, sem perder tempo com cadências e sem depender de mídia paga que queima budget.',
+  description: 'Transforme o LinkedIn em uma máquina previsível de geração de leads qualificados para o seu time comercial.',
   keywords: ['SDR', 'prospecção', 'LinkedIn', 'automação', 'vendas', 'B2B', 'SaaS'],
   authors: [{ name: 'Prime SDR' }],
   creator: 'Prime SDR',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'pt-BR': '/pt',
+      'pt-BR': '/',
       'es-ES': '/es',
       'en-US': '/en',
     },
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: 'https://primesdr.com',
-    title: 'Prime SDR - Seu time não tem tempo pra prospectar. A gente faz isso por você.',
-    description: '112 reuniões em 45 dias no calendário do seu comercial — sem contratar SDR, sem perder tempo com cadências e sem depender de mídia paga que queima budget.',
+    title: 'Prime SDR - Máquina previsível de leads no LinkedIn',
+    description: 'Transforme o LinkedIn em uma máquina previsível de geração de leads qualificados para o seu time comercial.',
     siteName: 'Prime SDR',
     images: [
       {
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prime SDR - Seu time não tem tempo pra prospectar. A gente faz isso por você.',
-    description: '112 reuniões em 45 dias no calendário do seu comercial — sem contratar SDR, sem perder tempo com cadências e sem depender de mídia paga que queima budget.',
+    title: 'Prime SDR - Máquina previsível de leads no LinkedIn',
+    description: 'Transforme o LinkedIn em uma máquina previsível de geração de leads qualificados para o seu time comercial.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -76,9 +76,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
   },
   icons: {
     icon: [

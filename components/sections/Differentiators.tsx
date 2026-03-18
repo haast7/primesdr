@@ -6,7 +6,7 @@ import { ContactButton } from '@/components/ui/ContactButton';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
-import { ArrowRight, Linkedin, Brain, UserCheck, Shield, Zap, Target, BarChart3 } from 'lucide-react';
+import { ArrowRight, Linkedin, Brain, UserCheck, Shield, Zap, Target, BarChart3, TrendingUp } from 'lucide-react';
 import { trackEvent } from '@/components/Analytics';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 
@@ -53,20 +53,15 @@ export function Differentiators() {
     }
   ];
 
-  const results = [
-    {
-      icon: Target,
-      result: t.differentiators.results.agendaFull
-    },
-    {
-      icon: Zap,
-      result: t.differentiators.results.operation247
-    },
-    {
-      icon: Shield,
-      result: t.differentiators.results.totalGuarantee
-    }
+  const resultsBase = [
+    { icon: Target, result: t.differentiators.results.agendaFull },
+    { icon: Zap, result: t.differentiators.results.operation247 },
+    { icon: Shield, result: t.differentiators.results.totalGuarantee }
   ];
+  const resultsFourth = t.differentiators.results.resultsFourth;
+  const results = resultsFourth
+    ? [...resultsBase, { icon: TrendingUp, result: resultsFourth }]
+    : resultsBase;
 
   return (
     <Section background="gray" padding="lg">
@@ -111,15 +106,17 @@ export function Differentiators() {
                       <h3 className="text-xl font-bold text-gray-900">{item.card.title}</h3>
                       <p className="text-gray-600 leading-relaxed">{item.card.description}</p>
                       
-                      {/* Features */}
-                      <ul className="space-y-2">
-                        {item.card.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center space-x-2">
-                            <div className="w-1.5 h-1.5 bg-primary-500 rounded-full"></div>
-                            <span className="text-sm text-gray-600">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {/* Features - só exibe se houver itens */}
+                      {item.card.features && item.card.features.length > 0 && (
+                        <ul className="space-y-2">
+                          {item.card.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-center space-x-2">
+                              <div className="w-1.5 h-1.5 bg-primary-500 rounded-full"></div>
+                              <span className="text-sm text-gray-600">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 </Card>
@@ -135,7 +132,7 @@ export function Differentiators() {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={`grid grid-cols-1 gap-8 ${results.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
               {results.map((item, index) => (
                 <motion.div
                   key={item.result.title}
@@ -156,42 +153,33 @@ export function Differentiators() {
           {/* CTA */}
           <motion.div variants={fadeInUp} className="text-center">
             <div className="relative inline-block">
-              {/* Efeito de brilho pulsante */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-75 animate-pulse"></div>
-              
-              
-              {/* Botão principal */}
+              {t.differentiators.ctaButton.urgency && (
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-75 animate-pulse" aria-hidden />
+              )}
               <motion.div
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
-                }}
+                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(59, 130, 246, 0.4)' }}
                 whileTap={{ scale: 0.95 }}
               >
                 <ContactButton
                   source="differentiators-cta"
                   className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group overflow-hidden"
                 >
-                  {/* Efeito de brilho interno */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  
-                  {/* Conteúdo do botão */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" aria-hidden />
                   <span className="relative flex items-center justify-center">
-                    <span className="mr-3">🚀</span>
                     {t.differentiators.ctaButton.text}
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </ContactButton>
               </motion.div>
-              
-              {/* Texto de urgência */}
-              <motion.div 
-                className="mt-3 text-sm text-gray-600 font-medium"
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                {t.differentiators.ctaButton.urgency}
-              </motion.div>
+              {t.differentiators.ctaButton.urgency && (
+                <motion.div
+                  className="mt-3 text-sm text-gray-600 font-medium"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  {t.differentiators.ctaButton.urgency}
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </motion.div>

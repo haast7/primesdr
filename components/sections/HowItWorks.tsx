@@ -134,6 +134,9 @@ export function HowItWorks() {
     };
   };
 
+  const stepItems = t.howItWorks.stepItems;
+  const useSimpleSteps = stepItems && stepItems.length > 0;
+
   return (
     <>
       <Section background="white" padding="lg">
@@ -151,12 +154,42 @@ export function HowItWorks() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="text-center max-w-4xl mx-auto"
             >
-              <p className="text-body text-gray-900 font-bold leading-relaxed">
-                {t.howItWorks.subtitle}
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                {t.howItWorks.sectionTitle || t.howItWorks.headline}
+              </h2>
+              {t.howItWorks.subtitle ? (
+                <p className="text-body text-gray-600 leading-relaxed">
+                  {t.howItWorks.subtitle}
+                </p>
+              ) : null}
             </motion.div>
 
-            {/* Interactive Flowchart */}
+            {/* 6 steps (home variant) */}
+            {useSimpleSteps && (
+              <motion.div variants={fadeInUp} className="space-y-6 max-w-4xl mx-auto">
+                {stepItems.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.08, duration: 0.4 }}
+                    viewport={{ once: true }}
+                    className="flex gap-4 items-start rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 text-primary-600 font-bold flex items-center justify-center">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1">{step.title}</h3>
+                      <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Interactive Flowchart (when no stepItems) */}
+            {!useSimpleSteps && (
             <motion.div 
               variants={fadeInUp}
               transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -332,11 +365,13 @@ export function HowItWorks() {
                 </div>
               </Card>
             </motion.div>
+            )}
           </motion.div>
         </Container>
       </Section>
 
-      {/* Expected Results - Full Width Section */}
+      {/* Expected Results - Full Width Section (only when not using simple 6 steps) */}
+      {!useSimpleSteps && (
       <section className="relative overflow-hidden">
         {/* Full Width Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"></div>
@@ -507,6 +542,7 @@ export function HowItWorks() {
           </motion.div>
         </Container>
       </section>
+      )}
 
       {/* CTA Section */}
       <Section background="white" padding="lg">
