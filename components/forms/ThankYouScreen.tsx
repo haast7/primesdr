@@ -75,7 +75,7 @@ export function ThankYouScreen({ formData, onClose }: ThankYouScreenProps) {
         </p>
         <button
           onClick={() => {
-            window.open('https://api.whatsapp.com/send/?phone=5511932001771&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+os+servi%C3%A7os+do+PrimeSDR.&type=phone_number&app_absent=0', '_blank');
+            window.open('https://api.whatsapp.com/send/?phone=5511920859210&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+os+servi%C3%A7os+do+PrimeSDR.&type=phone_number&app_absent=0', '_blank');
           }}
           className="inline-flex items-center space-x-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
         >

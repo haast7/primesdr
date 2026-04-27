@@ -38,7 +38,7 @@ export function WhatsAppButton({
     }
 
     // Create WhatsApp URL - Novo formato
-    const whatsappUrl = `https://api.whatsapp.com/send/?phone=5511932001771&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
+    const whatsappUrl = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
     
     // Open WhatsApp
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');

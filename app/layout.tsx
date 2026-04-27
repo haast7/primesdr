@@ -128,7 +128,7 @@ export default function RootLayout({
               <Footer />
               <CookieBanner />
               <WhatsAppButton 
-                phone="5511932001771" 
+                phone="5511920859210" 
                 message="Olá! Gostaria de saber mais sobre o Prime SDR."
               />
               </ContactModalProvider>

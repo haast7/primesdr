@@ -78,9 +78,9 @@ function extractPhoneNumber(href: string): string {
     }
   }
   
-  // Fallback: se contém 5511932001771, retorna esse número
-  if (href.includes('5511932001771')) {
-    return '5511932001771';
+  // Fallback: se contém 5511920859210, retorna esse número
+  if (href.includes('5511920859210')) {
+    return '5511920859210';
   }
   
   return 'unknown';
