@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 
+const GOOGLE_CALENDAR_CLOSE_LINK = 'https://calendar.app.google/35XaCWbz45ax8Jg46';
+
 interface ThankYouScreenProps {
   formData: any;
   onClose: () => void;
@@ -57,7 +59,7 @@ export function ThankYouScreen({ formData, onClose }: ThankYouScreenProps) {
         {/* Google Calendar Widget */}
         <div className="bg-white rounded-xl shadow-lg p-4">
           <iframe 
-            src="https://calendar.google.com/calendar/embed?src=c_fdd9a2fb30183077eeba4c03db10260b67b2f4bf7f2cd42035395927ce878984%40group.calendar.google.com&ctz=America%2FBahia" 
+            src={GOOGLE_CALENDAR_CLOSE_LINK}
             style={{ border: 0 }} 
             width="100%" 
             height="600" 
@@ -65,6 +67,14 @@ export function ThankYouScreen({ formData, onClose }: ThankYouScreenProps) {
             scrolling="no"
             className="rounded-lg"
           />
+        </div>
+        <div className="text-center">
+          <button
+            onClick={() => window.open(GOOGLE_CALENDAR_CLOSE_LINK, '_blank', 'noopener,noreferrer')}
+            className="text-sm text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
+          >
+            Se a agenda nao carregar aqui, clique para abrir em nova aba
+          </button>
         </div>
       </motion.div>
 
